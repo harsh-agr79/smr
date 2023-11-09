@@ -28,4 +28,13 @@ Route::get('/logout', function(){
 
 Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
+
+    Route::get('/admins', [AdminController::class, 'admins']);
+
+    //AJAX ADMIN
+    Route::get('/admin/getdata/{id}', [AdminController::class, 'getadmin']);
+    Route::get('/admin/getadmindata', [AdminController::class, 'getadmindata']);
+    Route::post('/admin/editadmin', [AdminController::class, 'editadmin']);
+    Route::post('/admin/addadmin', [AdminController::class, 'addadmin']);
+    Route::get('/admin/deladmin/{id}', [AdminController::Class, 'deladmin']);
 });

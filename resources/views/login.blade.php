@@ -23,6 +23,7 @@
     <style>
         body {
             font-family: 'Barlow Condensed', sans-serif;
+            background: white;
         }
     </style>
 

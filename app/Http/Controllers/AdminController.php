@@ -26,4 +26,70 @@ class AdminController extends Controller
             'type'=>"superuser"
         ]);
     }
+    public function admins(){
+        $result['data'] = Admin::whereNot('type', 'superuser')->get();
+        return view('admin.admins',$result);
+    }
+    public function getadmin($id){
+        $admin = Admin::where('id', $id)->first();
+        return response()->json($admin, 200);
+    }
+    public function editadmin(Request $request){
+        $request->validate([
+            'userid'=>'required|unique:admins,userid,'.$request->post('id'),           
+        ]);
+
+        $name = $request->post('name');
+        $email = $request->post('email');
+        $userid = $request->post('userid');
+        $password = $request->post('password');
+        $id = $request->post('id');
+
+        if($password == NULL){
+            $password = Admin::where('id', $id)->first()->password;
+        }
+        else{
+            $password = Hash::make($password);
+        }
+        DB::table('admins')->where('id', $id)->update([
+            'name'=>$name,
+            'email'=>$email,
+            'userid'=>$userid,
+            'password'=>$password,
+        ]);
+        return response()->json($request->post(), 200);
+    }
+    public function getadmindata(){
+        $admin = Admin::whereNot('type', 'superuser')->get();
+        return response()->json($admin, 200);
+    }
+    public function addadmin(Request $request){
+        $request->validate([
+            'userid'=>'required|unique:admins,userid,',           
+        ]);
+        $name = $request->post('name');
+        $email = $request->post('email');
+        $userid = $request->post('userid');
+        $password = $request->post('password');
+        $id = $request->post('id');
+
+        DB::table('admins')->insert([
+            'name'=>$name,
+            'email'=>$email,
+            'userid'=>$userid,
+            'password'=>Hash::make($password),
+            'type'=>"admin"
+        ]);
+        return response()->json($request->post('id'), 200);
+    }
+    public function deladmin($id){
+        $admin = DB::table('admins')->where('id', $id)->first();
+        if($admin->type == 'superuser'){
+            return response()->json("Doesn't Exist.", 200);
+        }
+        else{
+            Admin::where('id', $id)->delete();
+            return response()->json("Admin Deleted!", 200);
+        }
+    }
 }

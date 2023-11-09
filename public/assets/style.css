@@ -3,6 +3,7 @@
 
 body {
     font-family: 'Barlow Condensed', sans-serif;
+    background: #f1f1f1;
 }
 
 .login-form {
@@ -64,4 +65,28 @@ input:focus {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 99, 38);
+}
+
+td{
+    font-size: 11px;
+    padding: 4px !important;
+}
+th{
+    font-size: 10px;
+    padding: 6px !important;
+}
+.mp-card{
+    padding: 5px;
+    background: white;
+    border-radius: 10px;
+}
+main{
+    margin-right: 2%;
+    margin-left: 2%;
+}
+.modal{
+    border: none;
+    outline: none;
+    background: white !important;
+    border-radius: 10px !important;
 }

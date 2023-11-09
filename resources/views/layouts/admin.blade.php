@@ -14,7 +14,7 @@
   <title>Admin</title>
   <link rel="manifest" href="{{ asset('manifest.json') }}">
   <link rel="icon" href="{{ asset('/assets/light.png') }}">
-  {{-- <link rel="stylesheet" href="{{ asset('/assets/' . $admin->mode . '.css') }}"> --}}
+  <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
   <link rel="icon" href="{{ asset('icons/favicon-32x32.png') }}">
   <link rel="shortcut icon" href="{{ asset('icons/favicon.ico') }}" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-touch-icon.png') }}">
@@ -110,7 +110,7 @@
     </header>
     
     <main>
-      
+        @yield('main')
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
