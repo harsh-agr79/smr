@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [AdminController::class, 'login']);
+// Route::get('/adduser', [AdminController::class, 'superuser']);
+
+Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
+
+Route::get('/logout', function(){
+    session()->flush();
+    session()->flash('error','Logged Out');
+    return redirect('/');
+});
+
+Route::group(['middleware'=>'AdminAuth'], function(){
+    Route::get('/dashboard', [LoginController::class, 'dashboard']);
 });
