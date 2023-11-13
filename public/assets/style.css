@@ -90,3 +90,36 @@ main{
     background: white !important;
     border-radius: 10px !important;
 }
+.rmenu{
+    /* background: var(--bg-content); */
+    /* border-radius: 5px; */
+    width: 100px;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    /* box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.168); */
+    display: none;
+}
+.rmenu ul{
+    border-radius: 10px;
+    box-shadow: 1px 1px 7px rgba(128, 128, 128, 0.456);
+    background: white;
+    /* border: 0.5px solid var(--textcol) */
+}
+.rmenu li {
+    /* background: var(--bg-content); */
+    text-align: center;
+    padding: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    /* color: var(--textcol); */
+    /* border-bottom: 1px solid var(--textcol); */
+    /* border-top: 1px solid var(--textcol); */
+}
+label {
+    font-weight: 700 !important;
+    color: rgb(89, 89, 89) !important;
+}
+.page-form-row div{
+    padding: 0.45% !important;
+}

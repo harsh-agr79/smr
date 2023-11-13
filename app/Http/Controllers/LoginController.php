@@ -13,6 +13,7 @@ class LoginController extends Controller
         $password = $request->post('password');
 
         $admin = DB::table('admins')->where(['userid'=>$userid])->first();
+        $customer = DB::table('customers')->where('userid',$userid)->first();
         if($admin!=NULL){
             if (Hash::check($request->post('password'), $admin->password)) {
                 $request->session()->put('ADMIN_LOGIN', true);
@@ -26,6 +27,19 @@ class LoginController extends Controller
                 $request->session()->flash('error','please enter valid login details');
                 return redirect('/');
             }
+        }
+        elseif($customer!=NULL){
+            if (Hash::check($request->post('password'), $customer->password)) {
+                $request->session()->put('USER_LOGIN', true);
+                $request->session()->put('USER_ID', $customer->id);
+                $request->session()->put('USER_TIME', time() );
+    
+                return redirect('/');
+                }
+                else{
+                    $request->session()->flash('error','please enter valid login details');
+                    return redirect('/');
+                }
         }
         else{
             $request->session()->flash('error','please enter valid login details');

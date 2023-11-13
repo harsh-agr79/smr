@@ -13,6 +13,9 @@ class AdminController extends Controller
         if(session()->has('ADMIN_LOGIN')){
             return redirect('/dashboard');
         }
+        elseif(session()->has('USER_LOGIN')){
+            return redirect('/user/home');
+        }
         else{
             return view('login');
         }
@@ -36,7 +39,8 @@ class AdminController extends Controller
     }
     public function editadmin(Request $request){
         $request->validate([
-            'userid'=>'required|unique:admins,userid,'.$request->post('id'),           
+            'userid'=>'required|unique:admins,userid|unique:customers,userid'.$request->post('id'),           
+            'email'=>'required|unique:admins,email|unique:customers,email'.$request->post('id'),         
         ]);
 
         $name = $request->post('name');

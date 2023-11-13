@@ -18,13 +18,11 @@
                 </thead>
                 <tbody id="admin-tbody">
                     @foreach ($data as $item)
-                        <tr>
+                        <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td >{{ $item->name }}</td>
                             <td >{{ $item->email }}</td>
                             <td >{{ $item->userid }}</td>
                             <td >{{ $item->type }}</td>
-                            <td><span onclick="editadmin({{$item->id}})" class="green darken-3 white-text btn-small"><i class="material-icons">edit</i></span></td>
-                            <td><span onclick="deladmin({{$item->id}})" class="red btn-small white-text"><i class="material-icons">delete</i></span></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -73,8 +71,51 @@
             </form>
         </div>
     </div>
+    <div id="delmodal" class="modal">
+        <div class="modal-content center">
+            <h5>Are you you sure you want to delete?</h5>
+            <div class="row">
+                <div class="col s6 center">
+                    <button class="btn red darken-3" id="delconfirm" onclick="delconfirm()">Confirm</button>
+                </div>
+                <div class="col s6 center">
+                    <button class="btn green darken-3" onclick="$('#delmodal').modal('close')">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rightmenu" class="rmenu">
+        <ul>
+            <a id="rmeditlink" onclick="edadmin()">
+                <li>Edit</li>
+            </a>
+            <a id="rmdeletelink" onclick="deleteadmin()">
+                <li>Delete</li>
+            </a>
+        </ul>
+    </div>
 
     <script>
+        function edadmin(){
+            a = $('#rmeditlink').attr('data-value');
+            editadmin(parseInt(a));
+            // console.log(parseInt(a));
+        }
+        function deleteadmin(){
+            a = $('#rmdeletelink').attr('data-value');
+            // deladmin(parseInt(a));
+            // console.log(parseInt(a));
+            $('#delmodal').modal('open')
+            $('#delconfirm').attr('data-value', a)
+        }
+        function delconfirm(){
+            a = $('#delconfirm').attr('data-value');
+            deladmin(parseInt(a));
+            $('#delmodal').modal('close')
+            $('#rmdeletelink').removeAttr('data-value');
+            $('#delconfirm').removeAttr('data-value');
+        }
         function getadmindata(){
             $.ajax({
                 url: "/admin/getadmindata",
@@ -84,13 +125,11 @@
                     $('#admin-tbody').text('');
                     $.each(response, function(key, item){
                         $('#admin-tbody').append(`
-                        <tr>
+                        <tr oncontextmenu="rightmenu(${ item.id }); return false;">
                             <td>${item.name}</td>
                             <td>${item.email}</td>
                             <td>${item.userid}</td>
                             <td>${item.type}</td>
-                            <td><span onclick="editadmin(${item.id})" class="green darken-3 white-text btn-small"><i class="material-icons">edit</i></span></td>
-                            <td><span onclick="deladmin(${item.id})" class="red btn-small white-text"><i class="material-icons">delete</i></span></td>
                         </tr>
                         `)
                     })
@@ -112,7 +151,6 @@
                 }
             })
         }
-
         $('#editadmin').on('submit', (e) => {
             e.preventDefault();
             let formData = new FormData($("#editadmin")[0]);
@@ -174,6 +212,45 @@
                 }
             })
         }
-    
+
+        function rightmenu(id) {
+            // console.log(orderid)
+            var rmenu = document.getElementById("rightmenu");
+                rmenu.style.display = 'block';
+                rmenu.style.top = mouseY(event) + 'px';
+                rmenu.style.left = mouseX(event) + 'px';
+                $('#rmeditlink').attr('data-value', id);
+                $('#rmdeletelink').attr('data-value', id);
+        }
+
+        $(document).bind("click", function(event) {
+            var rmenu = document.getElementById("rightmenu");
+            rmenu.style.display = 'none';
+        });
+
+        function mouseX(evt) {
+            if (evt.pageX) {
+                return evt.pageX;
+            } else if (evt.clientX) {
+                return evt.clientX + (document.documentElement.scrollLeft ?
+                    document.documentElement.scrollLeft :
+                    document.body.scrollLeft);
+            } else {
+                return null;
+            }
+        }
+
+        // Set Top Style Proparty
+        function mouseY(evt) {
+            if (evt.pageY) {
+                return evt.pageY;
+            } else if (evt.clientY) {
+                return evt.clientY + (document.documentElement.scrollTop ?
+                    document.documentElement.scrollTop :
+                    document.body.scrollTop);
+            } else {
+                return null;
+            }
+        }
     </script>
 @endsection
