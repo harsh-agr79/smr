@@ -23,7 +23,12 @@
                     @foreach ($data as $item)
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td>{{$a = $a + 1}}</td>
-                            <td><img src="{{asset($item->profileimg)}}" style="border-radius:50%; height: 60px;" alt=""></td>
+                            <td>
+                                @if ($item->profileimg == NULL)
+                                <img src="{{asset('images/user.png')}}" style="border-radius:50%; height: 60px;" alt="">
+                                @else
+                                <img src="{{asset($item->profileimg)}}" style="border-radius:50%; height: 60px;" alt="">
+                                @endif</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->shopname}}</td>
                             <td>{{$item->userid}}</td>
