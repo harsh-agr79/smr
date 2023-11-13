@@ -24,6 +24,7 @@
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td>{{$a = $a + 1}}</td>
                             <td>
+                                
                                 @if ($item->profileimg == NULL)
                                 <img src="{{asset('images/user.png')}}" style="border-radius:50%; height: 60px;" alt="">
                                 @else
