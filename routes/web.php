@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomerViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
 Route::group(['middleware'=>'CustomerAuth'], function(){
     Route::get('/user/home', [HomeController::class, 'home']);
+
+    Route::get('/user/profile', [CustomerViewController::class, 'profile']);
+    Route::post('/user/updateprofile', [CustomerViewController::class, 'updateprofile'])->name('editprofile');
 });
 
 

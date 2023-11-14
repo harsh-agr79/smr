@@ -1,1 +1,5 @@
-welcome user login successful
+@extends('layouts.customer')
+
+@section('main')
+    
+@endsection

@@ -41,7 +41,7 @@
                     <a href="#!" class="brand-logo grey-text text-darken-4" style="padding-top: 10px;"><img
                             src="{{ asset('logo/logo2.png') }}" style="height: 40px;" alt=""></a>
                     <ul id="nav-mobile" class="right">
-                        <li class="hide-on-med-and-down">{{ getNepaliDate(date('Y-m-d')) }}</li>
+                        {{-- <li class="hide-on-med-and-down">{{ getNepaliDate(date('Y-m-d')) }}</li> --}}
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
                                 class="dropdown-trigger waves-effect"><i class="material-icons">notifications</i></a>
                             <div id="dropdown1" class="dropdown-content notifications" tabindex="0">
@@ -70,10 +70,19 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger waves-effect"><i
-                                    class="material-icons">settings</i></a>
+                        <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger waves-effect">
+                                @if ($user->profileimg !== null)
+                                    <i class="valign-wrapper">
+                                        <img src="{{ asset($user->profileimg) }}" class="circle"
+                                            alt="" style="height: 45px;">
+                                    </i>
+                                @else
+                                    <i class="material-icons textcol">face</i>
+                                @endif
+                            </a>
                             <ul id='settings-dropdown' class='dropdown-content center'>
-                                <li class="center"><a class="center" href="#!">Profile</a></li>
+                                <li class="center"><a class="center" href="{{ url('/user/profile') }}">Profile</a>
+                                </li>
                                 <li class="center"><a class="center" href="{{ url('/logout') }}">Logout</a></li>
                             </ul>
                         </li>
@@ -83,34 +92,14 @@
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed white" style="transform: translateX(0%);">
-            <li><a href="/pages/admin-dashboard" class="logo-container">{{ $admin->name }}<i
+            <li><a href="/pages/admin-dashboard" class="logo-container">{{ $user->name }}<i
                         class="material-icons left">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <li><a href="{{url('dashboard')}}" class="waves-effect active">Dashboard<i
-                                class="material-icons">web</i></a></li>
-                    <li class="bold waves-effect green"><a class="collapsible-header" tabindex="0">Company<i
-                                class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body" style="">
-                            <ul>
-                                <li><a href="{{ url('admins') }}" class="waves-effect active">Admins<i
-                                            class="material-symbols-outlined">
-                                            shield_person
-                                        </i></a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="bold waves-effect"><a class="collapsible-header" tabindex="0">Customers<i
-                                class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body" style="">
-                            <ul>
-                                <li><a href="{{ url('customers') }}" class="waves-effect active">List<i
-                                            class="material-symbols-outlined">group</i></a></li>
-                                <li><a href="{{ url('customers/add') }}" class="waves-effect active">Add Customers<i
-                                            class="material-symbols-outlined">person_add</i></a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    <li><a href="{{ url('/') }}" class="waves-effect active">Home<i
+                                class="material-icons">home</i></a></li>
+                    <li><a href="" class="waves-effect active">Home<i class="material-icons">home</i></a></li>
+
                 </ul>
             </li>
         </ul>
