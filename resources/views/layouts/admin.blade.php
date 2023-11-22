@@ -72,6 +72,7 @@
                         </li>
                         <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger waves-effect"><i
                                     class="material-icons">settings</i></a>
+                                    
                             <ul id='settings-dropdown' class='dropdown-content center'>
                                 <li class="center"><a class="center" href="{{url('/admin/profile')}}">Profile</a></li>
                                 <li class="center"><a class="center" href="{{ url('/logout') }}">Logout</a></li>
