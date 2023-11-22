@@ -96,4 +96,29 @@ class AdminController extends Controller
             return response()->json("Admin Deleted!", 200);
         }
     }
+    public function profile(){
+        return view('admin/profile');
+    }
+    public function changepassword(Request $request){
+        $old = $request->post('old');
+        $new = $request->post('new');
+        $new2 = $request->post('newagain');
+        $admin = DB::table('admins')->where('id', session()->get('ADMIN_ID'))->first();
+
+        if(Hash::check($old, $admin->password)){
+            if($new == $new2){
+                DB::table('admins')->where('id', session()->get('ADMIN_ID'))->update([
+                    'password'=>Hash::make($new)
+                ]);
+                $msg = "Password Changed";
+            }
+            else{
+                $msg = "New passwords Dont Match";
+            }
+        }
+        else{
+            $msg = "Current Password In correct";
+        }
+        return response()->json($msg);
+    }
 }

@@ -32,6 +32,9 @@ Route::get('/logout', function(){
 Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 
+    Route::get('/admin/profile', [AdminController::class, 'profile']);
+    Route::post('/admin/changepassword', [AdminController::class, 'changepassword']);
+
     //Admins
     Route::get('/admins', [AdminController::class, 'admins']);
     //AJAX ADMIN

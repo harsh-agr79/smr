@@ -38,7 +38,7 @@
         <div class="navbar-fixed">
             <nav class="navbar white">
                 <div class="nav-wrapper">
-                    <a href="#!" class="brand-logo grey-text text-darken-4" style="padding-top: 10px;"><img
+                    <a href="{{url('/')}}" class="brand-logo grey-text text-darken-4" style="padding-top: 10px;"><img
                             src="{{ asset('logo/logo2.png') }}" style="height: 40px;" alt=""></a>
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down">{{ getNepaliDate(date('Y-m-d')) }}</li>
@@ -73,7 +73,7 @@
                         <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger waves-effect"><i
                                     class="material-icons">settings</i></a>
                             <ul id='settings-dropdown' class='dropdown-content center'>
-                                <li class="center"><a class="center" href="#!">Profile</a></li>
+                                <li class="center"><a class="center" href="{{url('/admin/profile')}}">Profile</a></li>
                                 <li class="center"><a class="center" href="{{ url('/logout') }}">Logout</a></li>
                             </ul>
                         </li>
