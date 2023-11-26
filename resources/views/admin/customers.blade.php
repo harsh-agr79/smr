@@ -10,7 +10,7 @@
     <div>
         <h5 class="center">Customers List</h5>
 
-        <div class="mp-card">
+        <div class="mp-card" style="overflow-x: scroll;">
             <table>
                 <thead>
                     <th>SN</th>
