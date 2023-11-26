@@ -31,9 +31,9 @@
                             <td>{{$a = $a + 1}}</td>
                             <td>
                                 @if ($item->profileimg == NULL)
-                                <img src="{{asset('images/user.png')}}" class="materialboxed table-dp" style="border-radius:50%; height: 50px; !important">
+                                <img src="{{asset('images/user.png')}}" class="materialboxed table-dp">
                                 @else
-                                <img src="{{asset($item->profileimg)}}" class="materialboxed table-dp" style="border-radius:50%; height: 50px; !important">
+                                <img src="{{asset($item->profileimg)}}" class="materialboxed table-dp">
                                 @endif</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->shopname}}</td>
