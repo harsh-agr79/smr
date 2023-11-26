@@ -43,7 +43,7 @@
                     <ul id="nav-mobile" class="right">
                         {{-- <li class="hide-on-med-and-down">{{ getNepaliDate(date('Y-m-d')) }}</li> --}}
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
-                                class="dropdown-trigger waves-effect"><i class="material-icons">notifications</i></a>
+                                class="dropdown-trigger "><i class="material-icons">notifications</i></a>
                             <div id="dropdown1" class="dropdown-content notifications" tabindex="0">
                                 <div class="notifications-title" tabindex="0">notifications</div>
                                 <div class="card" tabindex="0">
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger waves-effect">
+                        <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger ">
                                 @if ($user->profileimg !== null)
                                     <i class="valign-wrapper">
                                         <img src="{{ asset($user->profileimg) }}" class="circle"
@@ -96,9 +96,9 @@
                         class="material-icons left">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <li><a href="{{ url('/') }}" class="waves-effect active">Home<i
+                    <li><a href="{{ url('/') }}" class=" active">Home<i
                                 class="material-icons">home</i></a></li>
-                    <li><a href="" class="waves-effect active">Home<i class="material-icons">home</i></a></li>
+                    <li><a href="" class=" active">Home<i class="material-icons">home</i></a></li>
 
                 </ul>
             </li>
