@@ -3,7 +3,7 @@
 @section('main')
 <style>
     .table-dp{
-        height: 60px !important;
+        height: 60px;
         border-radius: 50%;
     }
 </style>
