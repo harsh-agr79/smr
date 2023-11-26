@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('main')
+<style>
+    .table-dp{
+        height: 60px !important;
+        border-radius: 50%;
+    }
+</style>
     <div>
         <h5 class="center">Customers List</h5>
 
@@ -25,9 +31,9 @@
                             <td>{{$a = $a + 1}}</td>
                             <td>
                                 @if ($item->profileimg == NULL)
-                                <img src="{{asset('images/user.png')}}" class="materialboxed" style="border-radius:50%; height: 50px;">
+                                <img src="{{asset('images/user.png')}}" class="materialboxed table-dp" style="border-radius:50%; height: 50px; !important">
                                 @else
-                                <img src="{{asset($item->profileimg)}}" class="materialboxed" style="border-radius:50%; height: 50px;">
+                                <img src="{{asset($item->profileimg)}}" class="materialboxed table-dp" style="border-radius:50%; height: 50px; !important">
                                 @endif</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->shopname}}</td>
