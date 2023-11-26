@@ -127,3 +127,10 @@ label {
     height: 60px;
     border-radius: 50%;
 }
+tr{
+    user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -khtml-user-select: none;
+}
