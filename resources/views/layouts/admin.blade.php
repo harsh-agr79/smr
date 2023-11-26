@@ -44,7 +44,7 @@
                     <ul id="nav-mobile" class="right">
                         <li class="hide-on-med-and-down">{{ getNepaliDate(date('Y-m-d')) }}</li>
                         <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1"
-                                class="dropdown-trigger waves-effect"><i class="material-icons">notifications</i></a>
+                                class="dropdown-trigger "><i class="material-icons">notifications</i></a>
                             <div id="dropdown1" class="dropdown-content notifications" tabindex="0">
                                 <div class="notifications-title" tabindex="0">notifications</div>
                                 <div class="card" tabindex="0">
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger waves-effect"><i
+                        <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger "><i
                                     class="material-icons">settings</i></a>
 
                             <ul id='settings-dropdown' class='dropdown-content center'>
@@ -90,14 +90,14 @@
                         class="material-icons left">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <li><a href="{{ url('dashboard') }}" class="waves-effect active">Dashboard<i
+                    <li><a href="{{ url('dashboard') }}" class=" active">Dashboard<i
                                 class="material-icons">web</i></a></li>
-                    <li class="bold waves-effect green"><a class="collapsible-header" tabindex="0">Company<i
+                    <li class="bold  green"><a class="collapsible-header" tabindex="0">Company<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
                             <ul>
                                 @if (session()->get('ADMIN_TYPE') == 'superuser')
-                                    <li><a href="{{ url('admins') }}" class="waves-effect active">Admins<i
+                                    <li><a href="{{ url('admins') }}" class=" active">Admins<i
                                                 class="material-symbols-outlined">
                                                 shield_person
                                             </i></a></li>
@@ -105,13 +105,13 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="bold waves-effect"><a class="collapsible-header" tabindex="0">Customers<i
+                    <li class="bold "><a class="collapsible-header" tabindex="0">Customers<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
                             <ul>
-                                <li><a href="{{ url('customers') }}" class="waves-effect active">List<i
+                                <li><a href="{{ url('customers') }}" class=" active">List<i
                                             class="material-symbols-outlined">group</i></a></li>
-                                <li><a href="{{ url('customers/add') }}" class="waves-effect active">Add Customers<i
+                                <li><a href="{{ url('customers/add') }}" class=" active">Add Customers<i
                                             class="material-symbols-outlined">person_add</i></a></li>
                             </ul>
                         </div>
