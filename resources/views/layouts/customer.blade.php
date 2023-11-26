@@ -92,7 +92,7 @@
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed white" style="transform: translateX(0%);">
-            <li><a href="/pages/admin-dashboard" class="logo-container">{{ $user->name }}<i
+            <li><a href="{{url("/")}}" class="logo-container">{{ $user->name }}<i
                         class="material-icons left">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
