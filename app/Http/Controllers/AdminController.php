@@ -22,16 +22,22 @@ class AdminController extends Controller
     }
     public function superuser(){
         DB::table('admins')->insert([
-            'name'=>"Harsh",
-            'email'=>"agrharsh4321@gmail.com",
-            'userid'=>"adminharsh",
-            'password'=>Hash::make("7932yq4wy"),
+            'name'=>"samar",
+            'email'=>"samar@gmail.com",
+            'userid'=>"adminsamar",
+            'password'=>Hash::make("samar@#@963"),
             'type'=>"superuser"
         ]);
     }
     public function admins(){
-        $result['data'] = Admin::whereNot('type', 'superuser')->get();
-        return view('admin.admins',$result);
+        if(session()->get("ADMIN_TYPE") == "superuser"){
+            $result['data'] = Admin::whereNot('type', 'superuser')->get();
+            return view('admin.admins',$result);
+        }
+        else{
+            return redirect("/");
+        }
+      
     }
     public function getadmin($id){
         $admin = Admin::where('id', $id)->first();
