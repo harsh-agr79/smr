@@ -123,3 +123,7 @@ label {
 .page-form-row div{
     padding: 0.45% !important;
 }
+.table-dp{
+    height: 60px;
+    border-radius: 50%;
+}
