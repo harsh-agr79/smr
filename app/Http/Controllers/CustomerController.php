@@ -108,4 +108,8 @@ class CustomerController extends Controller
         
            return redirect('/customers');
     }
+    public function deletecustomer($id){
+            Customer::where('id', $id)->delete();
+            return redirect('/customers');
+    }
 }

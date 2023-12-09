@@ -8,19 +8,19 @@
     }
 </style>
     <div>
-        <h5 class="center">Customers List</h5>
+        <h5 class="center">Products List</h5>
 
         <div class="mp-card" style="overflow-x: scroll;">
             <table>
                 <thead>
                     <th>SN</th>
-                    <th>DP</th>
                     <th>Name</th>
-                    <th>Shopname</th>
-                    <th>User ID</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Contact</th>
+                    <th>Brand</th>
+                    <th>Category</th>
+                    <th>Out of Stock</th>
+                    <th>Hidden</th>
+                    <th>featured</th>
+                    <th>Price</th>
                 </thead>
                 <tbody>
                     @php
@@ -29,18 +29,13 @@
                     @foreach ($data as $item)
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td>{{$a = $a + 1}}</td>
-                            <td>
-                                @if ($item->profileimg == NULL)
-                                <img src="{{asset('images/user.png')}}" class="materialboxed table-dp">
-                                @else
-                                <img src="{{asset($item->profileimg)}}" class="materialboxed table-dp">
-                                @endif</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->shopname}}</td>
-                            <td>{{$item->userid}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{$item->address}}</td>
-                            <td>{{$item->contact}}</td>
+                            <td>{{$item->brand}}</td>
+                            <td>{{$item->category}}</td>
+                            <td>{{$item->stock}}</td>
+                            <td>{{$item->hidden}}</td>
+                            <td>{{$item->featured}}</td>
+                            <td>{{$item->price}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -65,8 +60,8 @@
                 rmenu.style.display = 'block';
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';
-                $('#rmeditlink').attr('href', "/customers/edit/"+id);
-                $('#rmdeletelink').attr('href', "/customers/delcust/"+id);
+                $('#rmeditlink').attr('href', "/products/edit/"+id);
+                $('#rmdeletelink').attr('href', "/products/delprod/"+id);
         }
 
         $(document).bind("click", function(event) {
