@@ -86,7 +86,7 @@
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed white" style="transform: translateX(0%);">
-            <li><a href="{{url('/')}}" class="logo-container">{{ $admin->name }}<i
+            <li><a href="{{ url('/') }}" class="logo-container">{{ $admin->name }}<i
                         class="material-icons left">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
@@ -113,6 +113,21 @@
                                             class="material-symbols-outlined">group</i></a></li>
                                 <li><a href="{{ url('customers/add') }}" class=" active">Add Customers<i
                                             class="material-symbols-outlined">person_add</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold "><a class="collapsible-header" tabindex="0">Inventory<i
+                                class="material-icons chevron">chevron_left</i></a>
+                        <div class="collapsible-body" style="">
+                            <ul>
+                                <li><a href="{{ url('brands') }}" class=" active">Brands<i
+                                            class="material-symbols-outlined">store</i></a></li>
+                                <li><a href="{{ url('category') }}" class=" active">Categories<i
+                                            class="material-symbols-outlined">category</i></a></li>
+                                            <li><a href="{{ url('products') }}" class=" active">Products<i
+                                                class="material-symbols-outlined">inventory</i></a></li>
+                                                <li><a href="{{ url('products/add') }}" class=" active">Add Product<i
+                                                    class="material-symbols-outlined">add_circle</i></a></li>
                             </ul>
                         </div>
                     </li>
