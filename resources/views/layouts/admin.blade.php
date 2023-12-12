@@ -124,10 +124,10 @@
                                             class="material-symbols-outlined">store</i></a></li>
                                 <li><a href="{{ url('category') }}" class=" active">Categories<i
                                             class="material-symbols-outlined">category</i></a></li>
-                                            <li><a href="{{ url('products') }}" class=" active">Products<i
-                                                class="material-symbols-outlined">inventory</i></a></li>
-                                                <li><a href="{{ url('products/add') }}" class=" active">Add Product<i
-                                                    class="material-symbols-outlined">add_circle</i></a></li>
+                                <li><a href="{{ url('products') }}" class=" active">Products<i
+                                            class="material-symbols-outlined">inventory</i></a></li>
+                                <li><a href="{{ url('products/add') }}" class=" active">Add Product<i
+                                            class="material-symbols-outlined">add_circle</i></a></li>
                             </ul>
                         </div>
                     </li>
@@ -150,6 +150,11 @@
     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"
         integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ asset('/assets/script.js') }}"></script>
+    <script src="{{ asset('/assets/select.js') }}"></script>
+    
 </body>
 
 </html>
