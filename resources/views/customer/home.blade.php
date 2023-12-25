@@ -61,9 +61,8 @@
             var formData = $('#filterform').serializeArray()
             if (formData.length > 0) {
                 for (let i = 0; i < formData.length; i++) {
-                    clsnames += "." + formData[i].name
+                    $(`.${formData[i].name}`).show();
                 }
-                $(`${clsnames}`).show();
             } else {
                 $('.prod-box').show();
             }
