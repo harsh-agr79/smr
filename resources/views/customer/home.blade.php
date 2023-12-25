@@ -34,7 +34,12 @@
         @foreach ($prods as $item)
             <div class="prod-box center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
                 <div>
+                    @if ($item->images != "" || $item->images != NULL)
                     <img class="prod-img" src="{{ asset(explode('|', $item->images)[0]) }}" alt="">
+                    @else
+                    <img class="prod-img" src="{{ asset('images/prod.jpg') }}" alt="">
+                    @endif
+
                 </div>
                 <div class="prod-det">
                     <span style="font-weight: 600; font-size: 15px">{{ $item->name }}</span><br>
