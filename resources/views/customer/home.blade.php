@@ -13,7 +13,7 @@
                 <span style="margin-right: 10px">
                     <label>
                         <input type="checkbox" name="{{ $item->id }}brd" value="{{ $item->id }}brd"
-                            onclick="Filter('{{ $item->id }}brd')" />
+                            onclick="Filter()" />
                         <span>{{ $item->name }}</span>
                     </label>
                 </span>
@@ -25,7 +25,7 @@
                 <span style="margin-right: 10px">
                     <label>
                         <input type="checkbox" name="{{ $item->id }}cat" value="{{ $item->id }}cat"
-                            onclick="Filter('{{ $item->id }}cat')" />
+                            onclick="Filter()" />
                         <span>{{ $item->category }}</span>
                     </label>
                 </span>
@@ -34,7 +34,7 @@
     </div>
     <div class="product-container">
         @foreach ($prods as $item)
-            <div class="prod-box center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
+            <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
                 <div>
                     @if ($item->images != "" || $item->images != NULL)
                     <img class="prod-img" src="{{ asset(explode('|', $item->images)[0]) }}" alt="">
@@ -57,8 +57,9 @@
     </div>
 
     <script>
-        function Filter(cat) {
-            $('.prod-box').hide();
+        function Filter() {
+            $('.prod-box').hide()
+            $('.prod-box').removeClass('searchable');
             clsnames = "";
             var formData = $('#filterform').serializeArray()
             var formData2 = $('#filformcat').serializeArray()
@@ -69,20 +70,24 @@
                             clsname = ""
                             clsname = "."+formData[i].name + "."+formData2[j].name
                             // console.log(clsname)
+                            $(`${clsname}`).addClass('searchable')
                             $(`${clsname}`).show();
                         }
                     }
                     else{
+                        $(`.${formData[i].name}`).addClass('searchable')
                         $(`.${formData[i].name}`).show();
                     }
                 }
             } else {
                 if(formData2.length > 0){
                     for (let j = 0; j < formData2.length; j++) {
+                            $(`.${formData2[j].name}`).addClass('searchable')
                             $(`.${formData2[j].name}`).show();
                         }
                 }
                 else{
+                    $('.prod-box').addClass('searchable')
                     $('.prod-box').show();
                 }
             }
@@ -93,7 +98,7 @@
             const a = document.getElementById('search');
             const clsBtn = document.getElementById('close-search');
             let cont = document.getElementsByClassName('product-container');
-            var prod = $('.prod-box')
+            var prod = $('.searchable')
             if (filter === '') {
                 $('#cs-icon').text('search')
             } else {
