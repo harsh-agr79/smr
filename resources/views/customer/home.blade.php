@@ -18,7 +18,9 @@
                     </label>
                 </span>
             @endforeach
+        </form>
             <br>
+        <form id="filformcat">
             @foreach ($category as $item)
                 <span style="margin-right: 10px">
                     <label>
@@ -28,7 +30,7 @@
                     </label>
                 </span>
             @endforeach
-        </form>
+      <form>
     </div>
     <div class="product-container">
         @foreach ($prods as $item)
@@ -59,9 +61,19 @@
             $('.prod-box').hide();
             clsnames = "";
             var formData = $('#filterform').serializeArray()
+            var formData2 = $('#filformcat').serializeArray()
             if (formData.length > 0) {
                 for (let i = 0; i < formData.length; i++) {
-                    $(`.${formData[i].name}`).show();
+                    if(formData2.length > 0){
+                        for (let j = 0; j < formData2.length; j++) {
+                            clsname = ""
+                            clsname = "."+formData[i] + "."+formData2[j]
+                            $(`${clsname}`).show();
+                        }
+                    }
+                    else{
+                        $(`.${formData[i].name}`).show();
+                    }
                 }
             } else {
                 $('.prod-box').show();
