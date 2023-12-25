@@ -17,7 +17,8 @@ class CustomerController extends Controller
         return view('admin.customers',$result);
     }
     public function addcustomer(){
-        return view('admin/addcustomers');
+        $result['brands'] = DB::table('brands')->get();
+        return view('admin/addcustomers', $result);
     }
     public function addcus_process(Request $request){
         $request->validate([
@@ -46,15 +47,18 @@ class CustomerController extends Controller
         'tax_type'=>$request->post('tax_type'),
         'tax_number'=>$request->post('tax_number'),
         'type'=>$request->post('type'),
+        'brands'=>implode("|", $request->post('brands', []))
        ]);
        return redirect('/customers');
     }
     public function editcustomer($id){
         $result['cus'] = DB::table('customers')->where('id', $id)->first();
+        $result['brands'] = DB::table('brands')->get();
 
         return view('admin/editcustomer', $result);
     }
     public function editcus_process(Request $request){
+        // dd($request->post());
         $request->validate([
             'userid'=>'required|unique:admins,userid|unique:customers,userid,'.$request->post('id'),           
             'email'=>'required|unique:admins,email|unique:customers,email,'.$request->post('id'), 
@@ -85,7 +89,7 @@ class CustomerController extends Controller
         else{
             $password = Hash::make($request->post('password'));
         }
-
+        $brands = $request->post('brands', []);
         DB::table('customers')->where('id', $request->post('id'))->where('uniqueid', $request->post('uniqueid'))->update([
             'name'=>$request->post('name'),
             'shopname'=>$request->post('shopname'),
@@ -104,6 +108,7 @@ class CustomerController extends Controller
             'tax_type'=>$request->post('tax_type'),
             'tax_number'=>$request->post('tax_number'),
             'type'=>$request->post('type'),
+            'brands'=>implode("|", $brands)
            ]);
         
            return redirect('/customers');

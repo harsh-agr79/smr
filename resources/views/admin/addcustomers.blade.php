@@ -7,7 +7,7 @@
             <div class="red-text">{{ $message }}</div>
         @enderror
         <div class="mp-card">
-            <form action="{{ route('addcust') }}" method="POST">
+            <form action="{{ route('addcust') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     
@@ -98,6 +98,17 @@
                             <option value="retailer">Retailer</option>
                         </select>
                     </div>
+                    <div class="col s12 center">
+                        <h4>Brands Allowed</h4>
+                    </div>
+                        @foreach ($brands as $item)
+                        <div class="col m6 s12">
+                            <label>
+                                <input type="checkbox" name="brands[]" value="{{$item->id}}"/>
+                                <span>{{ $item->name }}</span>
+                            </label>
+                    </div>
+                        @endforeach
                 </div>
                 <div class="fixed-action-btn">
                     <button class="btn-large red">

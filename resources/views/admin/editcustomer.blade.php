@@ -2,7 +2,7 @@
 
 @section('main')
     <div>
-        <h5 class="center">Edit {{$cus->name}}</h5>
+        <h5 class="center">Edit {{ $cus->name }}</h5>
 
 
 
@@ -22,14 +22,14 @@
                     </div>
                     <div class="col s12 container">
                         {{-- <div class="container"> --}}
-                            <div class="file-field input-field row">
-                                <div class="col s4"></div>
-                                <div class="btn-large green darken-3 col m4 s12">
-                                    <span>Change DP</span>
-                                    <input type="file" name="dp">
-                                </div>
-                                <div class="col s4"></div>
+                        <div class="file-field input-field row">
+                            <div class="col s4"></div>
+                            <div class="btn-large green darken-3 col m4 s12">
+                                <span>Change DP</span>
+                                <input type="file" name="dp">
                             </div>
+                            <div class="col s4"></div>
+                        </div>
                         {{-- </div> --}}
 
                     </div>
@@ -148,6 +148,22 @@
                             <option value="retailer">Retailer</option>
                         </select>
                     </div>
+                    <div class="col s12 center">
+                        <h4>Brands Allowed</h4>
+                    </div>
+                    @php
+                        $brd = explode("|", $cus->brands)
+                    @endphp
+                        @foreach ($brands as $item)
+                        <div class="col m6 s12">
+                            <label>
+                                <input type="checkbox" name="brands[]" value="{{$item->id}}" @if (in_array($item->id, $brd))
+                                    checked
+                                @endif/>
+                                <span>{{ $item->name }}</span>
+                            </label>
+                    </div>
+                        @endforeach
                 </div>
                 <input type="hidden" value="{{ $cus->id }}" name="id">
                 <input type="hidden" value="{{ $cus->uniqueid }}" name="uniqueid">
