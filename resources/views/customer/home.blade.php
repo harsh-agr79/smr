@@ -67,7 +67,8 @@
                     if(formData2.length > 0){
                         for (let j = 0; j < formData2.length; j++) {
                             clsname = ""
-                            clsname = "."+formData[i] + "."+formData2[j]
+                            clsname = "."+formData[i].name + "."+formData2[j].name
+                            console.log(clsname)
                             $(`${clsname}`).show();
                         }
                     }
