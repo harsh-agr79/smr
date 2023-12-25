@@ -68,7 +68,7 @@
                         for (let j = 0; j < formData2.length; j++) {
                             clsname = ""
                             clsname = "."+formData[i].name + "."+formData2[j].name
-                            console.log(clsname)
+                            // console.log(clsname)
                             $(`${clsname}`).show();
                         }
                     }
@@ -77,7 +77,14 @@
                     }
                 }
             } else {
-                $('.prod-box').show();
+                if(formData2.length > 0){
+                    for (let j = 0; j < formData2.length; j++) {
+                            $(`.${formData2[j].name}`).show();
+                        }
+                }
+                else{
+                    $('.prod-box').show();
+                }
             }
 
         }
