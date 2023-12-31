@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="fixed-action-btn">
-        <a class="btn-floating btn-large waves-effect waves-light green accent-4"><i class="material-icons">shopping_cart</i></a>
+        <a class="btn-floating btn-large green accent-4"><i class="material-icons">shopping_cart</i></a>
     </div>
     <div class="product-container">
         @foreach ($prods as $item)
