@@ -98,7 +98,7 @@
                 <div class="add-to-cart container" style="margin-top: 5px;">
                     <div class="row container">
                             <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;" onclick="minus('{{$item->id}}')"><i class="material-icons">remove</i></span>
-                            <input type="text" class="col s6 browser-default inp" id="{{$item->id}}cartinp" style="height: 32px; text-align:center; border-radius:0;" value="0">
+                            <input type="number" class="col s6 browser-default inp" id="{{$item->id}}cartinp" style="height: 32px; text-align:center; border-radius:0;" value="0">
                             <span class="col s3 prod-btn" style="border-radius: 0 5px 5px 0; " onclick="plus('{{$item->id}}')"><i class="material-icons">add</i></span>
                     </div>
                 </div>
