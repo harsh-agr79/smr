@@ -145,11 +145,13 @@ tr{
 
 .prod-img{
     width: 15vw;
+    height: 15vw;
     border-radius: 5px 5px 0 0;
 }
 @media screen and (max-width: 750px) {
     .prod-img{
-        width: 35vw;
+        width: 40vw;
+        height: 40vw;
     }
 }
 .product-container{
@@ -175,4 +177,27 @@ span.field-icon {
     top: 14px;
     cursor: pointer;
     z-index: 2;
+}
+.prod-btn{
+    user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -khtml-user-select: none;
+
+    height: 32px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: white;
+}
+.company-title{
+    font-size: 9px;
+    background: green;
+    border-radius: 20px;
+    padding: 1px 3px;
+    width: 35%;
+    color: white;
 }

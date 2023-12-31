@@ -35,22 +35,28 @@
     <div class="product-container">
         @foreach ($prods as $item)
             <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
-                <div>
-                    @if ($item->images != "" || $item->images != NULL)
-                    <img class="prod-img" src="{{ asset(explode('|', $item->images)[0]) }}" alt="">
-                    @else
-                    <img class="prod-img" src="{{ asset('images/prod.jpg') }}" alt="">
-                    @endif
-
+                <div class="prod-img" style="background: url('@if($item->images != "" || $item->images != NULL){{ asset(explode('|', $item->images)[0]) }}@else{{ asset('images/prod.jpg') }}@endif') no-repeat center center; background-size: cover;">
+                    <div>
+                        <span class="company-title left" style="margin: 3px;">
+                            {{$item->brand}}
+                        </span>
+                        <span class="company-title right" style="margin: 3px;">
+                            {{$item->category}}
+                        </span>
+                    </div>
+                    
                 </div>
                 <div class="prod-det">
-                    <span style="font-weight: 600; font-size: 15px">{{ $item->name }}</span><br>
-                    <span style="font-weight: 600; font-size: 14px">Rs. {{ $item->price }}</span><br>
-                    <span style="font-size: 10px">{{ $item->brand }}</span>
-                    <span style="font-size: 10px">{{ $item->category }}</span>
+                    <div style="margin: 0; padding: 0; font-weight: 600; font-size: 15px">{{ $item->name }}</div>
+                    <div style="margin: 0; padding: 0; font-weight: 600; font-size: 12px">Rs. {{ $item->price }}</div>
+                    
                 </div>
-                <div class="add-to-cart">
-
+                <div class="add-to-cart container" style="margin-top: 5px;">
+                    <div class="row container">
+                            <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;" onclick="minus('{{$item->id}}')"><i class="material-icons">remove</i></span>
+                            <input type="text" class="col s6 browser-default inp" id="{{$item->id}}cartinp" style="height: 32px; text-align:center; border-radius:0;" value="0">
+                            <span class="col s3 prod-btn" style="border-radius: 0 5px 5px 0; " onclick="plus('{{$item->id}}')"><i class="material-icons">add</i></span>
+                    </div>
                 </div>
             </div>
         @endforeach
@@ -118,6 +124,18 @@
                         }
                     }
                 }
+            }
+        }
+        function plus(id){
+            a = parseInt($(`#${id}cartinp`).val())
+            a = a + 1
+            $(`#${id}cartinp`).val(a)
+        }
+        function minus(id){
+            a = parseInt($(`#${id}cartinp`).val())
+            if(a!=0){
+                a = a - 1
+                $(`#${id}cartinp`).val(a)
             }
         }
     </script>
