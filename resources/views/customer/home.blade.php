@@ -39,7 +39,7 @@
                 <span class="field-icon" id="close-search"><span class="material-icons" style="font-size: 15px;" id="cs-icon">search</span></span>
             </div>
         <div class="col s2">
-            <div class="btn green modal-trigger" href="#modal1" style="margin-top: 16px;"><i class="material-icons">filter_list</i></div>
+            <div class="btn green accent-4 modal-trigger" href="#modal1" style="margin-top: 16px;"><i class="material-icons">filter_list</i></div>
         </div>
     </div>
 
@@ -76,6 +76,9 @@
             </div>
         </div>
       </div>
+      <div class="fixed-action-btn">
+        <a class="btn-floating btn-large waves-effect waves-light green accent-4"><i class="material-icons">shopping_cart</i></a>
+    </div>
     <div class="product-container">
         @foreach ($prods as $item)
             <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
