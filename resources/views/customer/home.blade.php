@@ -1,7 +1,7 @@
 @extends('layouts.customer')
 
 @section('main')
-    <div class='input-field' style="margin-top:10px; padding: 5px;">
+    {{-- <div class='input-field' style="margin-top:10px; padding: 5px;">
         <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
             type='search' id='search' />
         <span class="field-icon" id="close-search"><span class="material-icons" id="cs-icon">search</span></span>
@@ -31,7 +31,51 @@
                 </span>
             @endforeach
       <form>
+    </div> --}}
+    <div class="row" style="margin: 0;">
+            <div class='col s10 input-field' style="margin-top: 14px;">
+                <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
+                    type='search' id='search' />
+                <span class="field-icon" id="close-search"><span class="material-icons" style="font-size: 15px;" id="cs-icon">search</span></span>
+            </div>
+        <div class="col s2">
+            <div class="btn green modal-trigger" href="#modal1" style="margin-top: 16px;"><i class="material-icons">filter_list</i></div>
+        </div>
     </div>
+
+    <div id="modal1" class="modal">
+        <div class="center">
+            <h5>Filter By company and category</h5>
+        </div>
+        <div class="row" style="padding: 10px;">
+            <div class="col s6">
+                <form id="filterform">
+                    @foreach ($brands as $item)
+                        <div>
+                            <label>
+                                <input type="checkbox" name="{{ $item->id }}brd" value="{{ $item->id }}brd"
+                                    onclick="Filter()" />
+                                <span>{{ $item->name }}</span>
+                            </label>
+                        </div>
+                    @endforeach
+                </form>
+            </div>
+            <div class="col s6">
+                <form id="filformcat">
+                    @foreach ($category as $item)
+                        <div>
+                            <label>
+                                <input type="checkbox" name="{{ $item->id }}cat" value="{{ $item->id }}cat"
+                                    onclick="Filter()" />
+                                <span>{{ $item->category }}</span>
+                            </label>
+                        </div>
+                    @endforeach
+              <form>
+            </div>
+        </div>
+      </div>
     <div class="product-container">
         @foreach ($prods as $item)
             <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
