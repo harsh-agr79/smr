@@ -47,8 +47,8 @@
                     
                 </div>
                 <div class="prod-det">
-                    <div style="margin: 0; padding: 0; font-weight: 600; font-size: 15px">{{ $item->name }}</div>
-                    <div style="margin: 0; padding: 0; font-weight: 600; font-size: 12px">Rs. {{ $item->price }}</div>
+                    <span style="margin: 0; padding: 0; font-weight: 600; font-size: 15px">{{ $item->name }}</span><br>
+                    <span style="margin: 0; padding: 0; font-weight: 600; font-size: 12px">Rs. {{ $item->price }}</span>
                     
                 </div>
                 <div class="add-to-cart container" style="margin-top: 5px;">
