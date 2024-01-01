@@ -117,4 +117,9 @@ class CustomerController extends Controller
             Customer::where('id', $id)->delete();
             return redirect('/customers');
     }
+
+    public function getcustomer(){
+        $c = DB::table('customers')->get();
+        return response()->json($c);
+    }
 }

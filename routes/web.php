@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerViewController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,17 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('/category/editcat', [CategoryController::class, 'editcategory']);
     Route::post('/category/addcat', [CategoryController::class, 'addcategory']);
     Route::get('/category/delcat/{id}', [CategoryController::Class, 'delcategory']);
+
+    //Payments CRUD
+    Route::get('payments', [PaymentController::class, 'index']);
+    Route::get('addpayment', [PaymentController::class, 'addpay']);
+    Route::get('editpayment/{id}', [PaymentController::class, 'addpay']);
+    Route::post('addpay', [PaymentController::class, 'addpay_process'])->name('addpay');
+    Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']);
+
+
+    //Ajax gets
+    Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function(){
