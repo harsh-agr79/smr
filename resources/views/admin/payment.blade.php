@@ -58,7 +58,6 @@
             {{ $data->appends(\Request::except('page'))->links('vendor.pagination.materializecss') }}
         </div>
     </div>
-
     <div id="rightmenu" class="rmenu">
         <ul>
             <a id="rmeditlink">
