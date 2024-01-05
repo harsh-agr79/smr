@@ -10,6 +10,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,9 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get('/user/profile', [CustomerViewController::class, 'profile']);
     Route::post('/user/updateprofile', [CustomerViewController::class, 'updateprofile'])->name('editprofile');
+    
+    Route::post('/user/updatecart', [CartController::class, 'updatecart']);
+    Route::get('/user/getcart', [CartController::class, 'getcart']);
 });
 
 

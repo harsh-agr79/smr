@@ -1,6 +1,12 @@
 @extends('layouts.customer')
 
 @section('main')
+@php
+    $cart = $user->cart;
+    $break = explode(":", $cart);
+    $prod = explode(",", $break[0]);
+    $qty = explode(",", $break[1]);
+@endphp
     {{-- <div class='input-field' style="margin-top:10px; padding: 5px;">
         <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
             type='search' id='search' />
@@ -33,13 +39,15 @@
       <form>
     </div> --}}
     <div class="row" style="margin: 0;">
-            <div class='col s10 input-field' style="margin-top: 14px;">
-                <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
-                    type='search' id='search' />
-                <span class="field-icon" id="close-search"><span class="material-icons" style="font-size: 15px;" id="cs-icon">search</span></span>
-            </div>
+        <div class='col s10 input-field' style="margin-top: 14px;">
+            <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
+                type='search' id='search' />
+            <span class="field-icon" id="close-search"><span class="material-icons" style="font-size: 15px;"
+                    id="cs-icon">search</span></span>
+        </div>
         <div class="col s2">
-            <div class="btn green accent-4 modal-trigger" href="#modal1" style="margin-top: 16px;"><i class="material-icons">filter_list</i></div>
+            <div class="btn green accent-4 modal-trigger" href="#modal1" style="margin-top: 16px;"><i
+                    class="material-icons">filter_list</i></div>
         </div>
     </div>
 
@@ -72,42 +80,87 @@
                             </label>
                         </div>
                     @endforeach
-              <form>
+                    <form>
             </div>
         </div>
-      </div>
-      <div class="fixed-action-btn">
-        <a class="btn-floating btn-large green accent-4"><i class="material-icons">shopping_cart</i></a>
     </div>
-    <div class="product-container">
-        @foreach ($prods as $item)
-            <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
-                <div class="prod-img" style="background: url('@if($item->images != "" || $item->images != NULL){{ asset(explode('|', $item->images)[0]) }}@else{{ asset('images/prod.jpg') }}@endif') no-repeat center center; background-size: cover;">
-                    <div>
-                        <span class="company-title left" style="margin: 3px;">
-                            {{$item->brand}}
-                        </span>
-                        <span class="company-title right" style="margin: 3px;">
-                            {{$item->category}}
-                        </span>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large green accent-4" onclick="getcart()"><i class="material-icons">shopping_cart</i></a>
+    </div>
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <h4>Cart</h4>
+            <table>
+                <thead>
+                    <th>SN</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </thead>
+                <tbody id="cart-table-body">
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: 600; font-size: 12px;">Total</td>
+                        <td style="font-weight: 600; font-size: 12px;" id="cart-total"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <form id="form-main-cart">
+        <div class="product-container">
+            @foreach ($prods as $item)
+                <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
+                    <div class="prod-img"
+                        style="background: url('@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[0]) }}@else{{ asset('images/prod.jpg') }} @endif') no-repeat center center; background-size: cover;">
+                        <div>
+                            <span class="company-title left" style="margin: 3px;">
+                                {{ $item->brand }}
+                            </span>
+                            <span class="company-title right" style="margin: 3px;">
+                                {{ $item->category }}
+                            </span>
+                        </div>  
+
                     </div>
-                    
-                </div>
-                <div class="prod-det">
-                    <span style="margin: 0; padding: 0; font-weight: 600; font-size: 13px">{{ $item->name }}</span><br>
-                    <span style="margin: 0; padding: 0; font-weight: 600; font-size: 11px">Rs. {{ $item->price }}</span>
-                    
-                </div>
-                <div class="add-to-cart container" style="margin-top: 5px;">
-                    <div class="row container">
-                            <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;" onclick="minus('{{$item->id}}')"><i class="material-icons">remove</i></span>
-                            <input type="number" class="col s6 browser-default inp" id="{{$item->id}}cartinp" style="height: 32px; text-align:center; border-radius:0;" value="0">
-                            <span class="col s3 prod-btn" style="border-radius: 0 5px 5px 0; " onclick="plus('{{$item->id}}')"><i class="material-icons">add</i></span>
+                    <div class="prod-det">
+                        <span
+                            style="margin: 0; padding: 0; font-weight: 600; font-size: 13px">{{ $item->name }}</span><br>
+                        <span style="margin: 0; padding: 0; font-weight: 600; font-size: 11px">Rs.
+                            {{ $item->price }}</span>
+
+                    </div>
+                    <div class="add-to-cart container" style="margin-top: 5px;">
+                        <div class="row container">
+                            <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;"
+                                onclick="minus('{{ $item->id }}')"><i class="material-icons">remove</i></span>
+                            <input type="hidden" class="prodids" name="prodid[]" value="{{ $item->id }}">
+                            <input type="number" class="col s6 browser-default inp qtys" id="{{ $item->id }}cartinp"
+                                onkeyup="updatecart()" style="height: 32px; text-align:center; border-radius:0;"
+                                name="qty[]" @if (in_array($item->id, $prod))
+                                    value="{{getqty($item->id, $prod, $qty)}}"
+                                @else
+                                    value="0"
+                                @endif>
+                            <span class="col s3 prod-btn" style="border-radius: 0 5px 5px 0; "
+                                onclick="plus('{{ $item->id }}')"><i class="material-icons">add</i></span>
+                        </div>
                     </div>
                 </div>
+            @endforeach
+            <div class="hide">
+                <button>Submit</button>
             </div>
-        @endforeach
-    </div>
+        </div>
+    </form>
 
     <script>
         function Filter() {
@@ -118,28 +171,26 @@
             var formData2 = $('#filformcat').serializeArray()
             if (formData.length > 0) {
                 for (let i = 0; i < formData.length; i++) {
-                    if(formData2.length > 0){
+                    if (formData2.length > 0) {
                         for (let j = 0; j < formData2.length; j++) {
                             clsname = ""
-                            clsname = "."+formData[i].name + "."+formData2[j].name
+                            clsname = "." + formData[i].name + "." + formData2[j].name
                             // console.log(clsname)
                             $(`${clsname}`).addClass('searchable')
                             $(`${clsname}`).show();
                         }
-                    }
-                    else{
+                    } else {
                         $(`.${formData[i].name}`).addClass('searchable')
                         $(`.${formData[i].name}`).show();
                     }
                 }
             } else {
-                if(formData2.length > 0){
+                if (formData2.length > 0) {
                     for (let j = 0; j < formData2.length; j++) {
-                            $(`.${formData2[j].name}`).addClass('searchable')
-                            $(`.${formData2[j].name}`).show();
-                        }
-                }
-                else{
+                        $(`.${formData2[j].name}`).addClass('searchable')
+                        $(`.${formData2[j].name}`).show();
+                    }
+                } else {
                     $('.prod-box').addClass('searchable')
                     $('.prod-box').show();
                 }
@@ -173,17 +224,81 @@
                 }
             }
         }
-        function plus(id){
+
+        function plus(id) {
             a = parseInt($(`#${id}cartinp`).val())
             a = a + 1
             $(`#${id}cartinp`).val(a)
+            updatecart()
         }
-        function minus(id){
+
+        function minus(id) {
             a = parseInt($(`#${id}cartinp`).val())
-            if(a!=0){
+            if (a != 0) {
                 a = a - 1
                 $(`#${id}cartinp`).val(a)
             }
+            updatecart()
+        }
+
+        function updatecart() {
+            var prodid = $('.prodids')
+            var qty = $('.qtys')
+            prod = []
+            qt = []
+            for (let i = 0; i < prodid.length; i++) {
+                prod.push(parseInt(prodid[i].value))
+                qt.push(parseInt(qty[i].value))
+            }
+            var formdata = new FormData()
+            formdata.append('prod', prod)
+            formdata.append('qt', qt)
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/user/updatecart",
+                data: formdata,
+                contentType: false,
+                processData: false,
+                type: "POST",
+                success: function(response) {
+                    console.log(response)
+                }
+            })
+        }
+
+        function getcart() {
+            $.ajax({
+                url: "/user/getcart",
+                type: "GET",
+                success: function(response) {
+                    $('#cart-modal').modal("open");
+                    $('#cart-table-body').text('');
+                    a = 0
+                    t = 0
+                    $.each(response, function(key, item) {
+                        if (item.image == null) {
+                            image = '/images/prod.jpg'
+                        } else {
+                            image = "/" + item.image
+                        }
+                        a = a + 1
+                        t = t + item.total
+                        $('#cart-table-body').append(`
+                        <tr>
+                            <td>${a}</td>
+                            <td><img src="${image}" class="table-dp"></td>
+                            <td>${item.name}</td>
+                            <td>${item.price}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.total}</td>
+                        </tr>
+                        `)
+                    })
+                    $('#cart-total').text(t);
+                }
+            })
         }
     </script>
 @endsection
