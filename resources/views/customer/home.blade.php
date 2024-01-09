@@ -3,9 +3,16 @@
 @section('main')
 @php
     $cart = $user->cart;
-    $break = explode(":", $cart);
-    $prod = explode(",", $break[0]);
-    $qty = explode(",", $break[1]);
+    if($cart != NULL){
+        $break = explode(":", $cart);
+        $prod = explode(",", $break[0]);
+        $qty = explode(",", $break[1]);
+    }
+    else{
+        $break = [];
+        $prod = [];
+        $qty = [];
+    }
 @endphp
     {{-- <div class='input-field' style="margin-top:10px; padding: 5px;">
         <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
@@ -113,6 +120,11 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="modal-footer">
+                <div class="right">
+                    <a href="{{url("/user/confirmcart")}}" class="btn-small green accent-4">Confirm Order</a>
+                </div>
+            </div>
         </div>
     </div>
     <form id="form-main-cart">

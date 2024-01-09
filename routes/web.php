@@ -11,6 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +92,16 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('addpay', [PaymentController::class, 'addpay_process'])->name('addpay');
     Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']);
 
+    //ORDER VIEW PAGES
+    Route::get('orders', [OrderAdminController::class, 'orders']);
+    Route::get('approvedorders', [OrderAdminController::class, 'approvedorders']);
+    Route::get('pendingorders', [OrderAdminController::class, 'pendingorders']);
+    Route::get('rejectedorders', [OrderAdminController::class, 'rejectedorders']);
+    Route::get('deliveredorders', [OrderAdminController::class, 'deliveredorders']);
+    Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
+
+    Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
+
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
@@ -103,6 +115,7 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     
     Route::post('/user/updatecart', [CartController::class, 'updatecart']);
     Route::get('/user/getcart', [CartController::class, 'getcart']);
+    Route::get('/user/confirmcart', [OrderController::class, 'confirmcart']);
 });
 
 
