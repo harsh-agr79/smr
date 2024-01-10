@@ -1,19 +1,18 @@
 @extends('layouts.customer')
 
 @section('main')
-@php
-    $cart = $user->cart;
-    if($cart != NULL){
-        $break = explode(":", $cart);
-        $prod = explode(",", $break[0]);
-        $qty = explode(",", $break[1]);
-    }
-    else{
-        $break = [];
-        $prod = [];
-        $qty = [];
-    }
-@endphp
+    @php
+        $cart = $user->cart;
+        if ($cart != null) {
+            $break = explode(':', $cart);
+            $prod = explode(',', $break[0]);
+            $qty = explode(',', $break[1]);
+        } else {
+            $break = [];
+            $prod = [];
+            $qty = [];
+        }
+    @endphp
     {{-- <div class='input-field' style="margin-top:10px; padding: 5px;">
         <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
             type='search' id='search' />
@@ -125,12 +124,12 @@
 
                 </div>
                 <div class="col s3">
-                    <a href="{{url("/user/savecart")}}" class="btn-small amber darken-2">Save Basket</a>
+                    <a href="{{ url('/user/savecart') }}" class="btn-small amber darken-2">Save Basket</a>
                 </div>
                 <div class="col s3">
-                    <a href="{{url("/user/confirmcart")}}" class="btn-small green accent-4">Confirm Order</a>
+                    <a href="{{ url('/user/confirmcart') }}" class="btn-small green accent-4">Confirm Order</a>
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -138,8 +137,7 @@
         <div class="product-container">
             @foreach ($prods as $item)
                 <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
-                    <div class="prod-img"
-                    onclick="details({{ $item->id }})"
+                    <div class="prod-img" onclick="details({{ $item->id }})"
                         style="background: url('@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[0]) }}@else{{ asset('images/prod.jpg') }} @endif') no-repeat center center; background-size: cover;">
                         <div>
                             <span class="company-title left" style="margin: 3px;">
@@ -148,7 +146,7 @@
                             <span class="company-title right" style="margin: 3px;">
                                 {{ $item->category }}
                             </span>
-                        </div>  
+                        </div>
 
                     </div>
                     <div class="prod-det">
@@ -165,11 +163,10 @@
                             <input type="hidden" class="prodids" name="prodid[]" value="{{ $item->id }}">
                             <input type="number" class="col s6 browser-default inp qtys" id="{{ $item->id }}cartinp"
                                 onkeyup="updatecart()" style="height: 32px; text-align:center; border-radius:0;"
-                                name="qty[]" @if (in_array($item->id, $prod))
-                                    value="{{getqty($item->id, $prod, $qty)}}"
+                                name="qty[]"
+                                @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}"
                                 @else
-                                    value="0"
-                                @endif>
+                                    value="0" @endif>
                             <span class="col s3 prod-btn" style="border-radius: 0 5px 5px 0; "
                                 onclick="plus('{{ $item->id }}')"><i class="material-icons">add</i></span>
                         </div>
@@ -184,12 +181,8 @@
     <div id="details" class="modal bottom-sheet bg-content">
         <div class="modal-content bg-content">
             <div class="row bg-content">
-                <div class="row col s12">
-                    <div class="col s6">
-                        <img id="mod-img1" class="materialboxed" height="100" src="" alt="">
-                    </div>
-                    <div class="col s6">
-                        <img id="mod-img2" class="materialboxed" height="100" src="" alt="">
+                <div class="row col s12" style="margin:0; padding: 0 30px 30px 30px; height: 30% !important;">
+                    <div class="carousel carousel-slider" id="mod-caro">
                     </div>
                 </div>
                 <div class="col s12">
@@ -200,9 +193,6 @@
                 </div>
                 <div class="col s6">
                     <span id="mod-category" style="font-weight: 600;"></span>
-                </div>
-                <div class="col s6" style="margin-top: 10px;">
-                    <span style="font-weight: 600;">Tags:</span> <span id="mod-tags"></span>
                 </div>
                 <div class="col s12" style="margin-top: 10px;">
                     <span style="font-weight: 600;">Details:</span>
@@ -350,23 +340,37 @@
                 }
             })
         }
+
         function details(id) {
             $.ajax({
                 type: "GET",
                 url: "/user/finditem/" + id,
                 dataType: "json",
                 success: function(response) {
+                    $("#mod-caro").text("")
+                    var images = response.images.split("|")
+                    for (let i = 0; i < images.length; i++) {
+                        $("#mod-caro").append(
+                            `<a class="carousel-item" href="#one!"><img src="/${images[i]}"></a>`)
+                    }
                     $('#mod-name').text(response.name)
-                    $('#mod-price').text('Rs.'+response.price)
+                    $('#mod-price').text('Rs.' + response.price)
                     $('#mod-category').text(response.category)
-                    $('#mod-tags').text(response.subcat)
                     $('#mod-details').text(response.details)
                     $('#mod-img1').attr('src', '/storage/media/' + response.img)
                     $('#mod-img2').attr('src', '/storage/media/' + response.img2)
                     $('#details').modal('open');
                     history.pushState(null, document.title, location.href);
+                    $('.carousel.carousel-slider').carousel({
+                        fullWidth: true
+                    });
                 }
             })
         }
+        $(document).ready(function() {
+            $('.carousel.carousel-slider').carousel({
+                fullWidth: true
+            });
+        });
     </script>
 @endsection
