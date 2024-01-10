@@ -189,7 +189,7 @@
         <div class="modal-content bg-content">
             <div class="row bg-content">
                 <div class="row col s12" style="margin:0; padding: 0 30px 30px 30px; height: 30% !important;">
-                    <div class="carousel carousel-slider" id="mod-caro">
+                    <div class="carousel carousel-slider responsive-img" id="mod-caro">
                     </div>
                 </div>
                 <div class="col s12">
@@ -369,14 +369,16 @@
                     $('#details').modal('open');
                     history.pushState(null, document.title, location.href);
                     $('.carousel.carousel-slider').carousel({
-                        fullWidth: true
+                        fullWidth: true,
+                        indicators: true
                     });
                 }
             })
         }
         $(document).ready(function() {
             $('.carousel.carousel-slider').carousel({
-                fullWidth: true
+                fullWidth: true,
+                indicators: true
             });
         });
     </script>
