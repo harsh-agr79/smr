@@ -37,7 +37,7 @@
                         <a class="btn green accent-4" href="{{ url('user/oldorders') }}">clear</a>
                     </div>
                     <div class="col m4 s6" style="margin-top: 20px">
-                        @if ($page == 'old')
+                        @if ($page == 'All Orders')
                             @php
                                 $u = 'Saved Baskets';
                                 $l = 'saved';
