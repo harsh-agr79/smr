@@ -120,10 +120,17 @@
                     </tr>
                 </tfoot>
             </table>
-            <div class="modal-footer">
-                <div class="right">
+            <div class="modal-footer row" style="margin: 0; padding: 0;">
+                <div class="col s6">
+
+                </div>
+                <div class="col s3">
+                    <a href="{{url("/user/savecart")}}" class="btn-small amber darken-2">Save Basket</a>
+                </div>
+                <div class="col s3">
                     <a href="{{url("/user/confirmcart")}}" class="btn-small green accent-4">Confirm Order</a>
                 </div>
+               
             </div>
         </div>
     </div>

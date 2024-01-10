@@ -132,6 +132,17 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     Route::post('/user/updatecart', [CartController::class, 'updatecart']);
     Route::get('/user/getcart', [CartController::class, 'getcart']);
     Route::get('/user/confirmcart', [OrderController::class, 'confirmcart']);
+    Route::get('/user/savecart', [OrderController::class, 'savecart']);
+    Route::get('/user/confirmorder/{id}', [OrderController::class, 'confirm']);
+
+    Route::get('/user/oldorders', [OrderController::class, 'oldorders']);
+    Route::get('/user/savedorders', [OrderController::class, 'savedorders']);
+    Route::get('/user/detail/{id}', [OrderController::class, 'detail']);
+    Route::post('/user/editdetail', [OrderController::class, 'detailedit'])->name('user.detailedit');
+    Route::get('/user/recieve/{id}',[OrderController::class, 'recieveorder']);
+
+    Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
+    Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);
 });
 
 

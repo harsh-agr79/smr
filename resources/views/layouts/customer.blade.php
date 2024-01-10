@@ -73,8 +73,8 @@
                         <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger ">
                                 @if ($user->profileimg !== null)
                                     <i class="valign-wrapper">
-                                        <img src="{{ asset($user->profileimg) }}" class="circle"
-                                            alt="" style="height: 45px;">
+                                        <img src="{{ asset($user->profileimg) }}" class="circle" alt=""
+                                            style="height: 45px;">
                                     </i>
                                 @else
                                     <i class="material-icons textcol">face</i>
@@ -92,14 +92,16 @@
             </nav>
         </div>
         <ul id="sidenav-left" class="sidenav sidenav-fixed white" style="transform: translateX(0%);">
-            <li><a href="{{url("/")}}" class="logo-container">{{ $user->name }}<i
+            <li><a href="{{ url('/') }}" class="logo-container">{{ $user->name }}<i
                         class="material-icons left">spa</i></a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <li><a href="{{ url('/') }}" class=" active">Home<i
-                                class="material-icons">home</i></a></li>
-                    <li><a href="" class=" active">Home<i class="material-icons">home</i></a></li>
-
+                    <li><a href="{{ url('/') }}" class=" active">Home<i class="material-icons">home</i></a>
+                    </li>
+                    <li><a href="{{ url('/user/oldorders') }}" class=" active">Orders<i class="material-icons">shopping_basket</i></a>
+                    </li>
+                    <li><a href="{{ url('/user/savedorders') }}" class=" active">Saved Baskets<i class="material-icons">save</i></a>
+                    </li>
                 </ul>
             </li>
         </ul>

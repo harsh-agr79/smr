@@ -60,7 +60,7 @@ class PaymentController extends Controller
             DB::table('payments')->insert([
                 'date'=>$request->post('date'),
                 'name'=>$request->post('name'),
-                'cusuni_id'=>DB::table('customers')->where('name', $request->post('name'))->first()->id,
+                'user_id'=>DB::table('customers')->where('name', $request->post('name'))->first()->id,
                 'paymentid'=>date('ymdhis'),
                 'amount'=>$request->post('amount'),
                 'voucher'=>$request->post('voucher'),
