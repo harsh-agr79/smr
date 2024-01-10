@@ -1,6 +1,13 @@
 @extends('layouts.customer')
 
 @section('main')
+<style>
+    .bottom-sheet{
+    max-height: 90vh !important;
+    padding: 5px;
+    border-radius:20px 20px 0px 0px !important; 
+  }
+</style>
     @php
         $cart = $user->cart;
         if ($cart != null) {
