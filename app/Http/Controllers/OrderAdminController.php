@@ -143,4 +143,69 @@ class OrderAdminController extends Controller
             return redirect($request->post('previous'));
         }
     }
+
+    public function seenupdate(Request $request){
+        $orderid = $request->post('order_id');
+        $admin = $request->post('admin');
+
+        DB::table('orders')->where('order_id',$orderid)->update([
+            'seen'=>'seen',
+            'seenby'=>$admin,
+        ]);
+
+        return response()->json('200');
+    }
+    public function updatedeliver(Request $request){
+        $orderid = $request->post('order_id');
+        $delivered = $request->post('delivered');
+        if($delivered == 'on'){
+            $packorder = 'delivered';
+        }
+        else{
+            $packorder = 'packorder';
+        }
+        DB::table('orders')->where('order_id',$orderid)->update([
+            'delivered'=>$delivered,
+            'clnstatus'=>$packorder
+        ]);
+        updateMainStatus($orderid);
+        return response()->json($request->all());
+    }
+
+    public function save($orderid){
+        $result['data'] = DB::table('orders')->where('order_id',$orderid)->where('status', 'approved')->get();
+        return view('admin/saveorder', $result);
+    }
+    public function print($orderid){
+        $result['data'] = DB::table('orders')->where('order_id',$orderid)->where('status', 'approved')->get();
+        return view('admin/printorder', $result);
+    }
+    public function bprintindex(Request $request){
+        $query = DB::table('orders')->where('deleted_at', NULL)->where('save', NULL)->orderBy('date', 'DESC')->groupBy('order_id');
+        $result['date'] = '';
+        $result['date2'] =  '';
+        $result['name'] =  '';
+        if($request->get('date')){
+            $query = $query->where('date', '>=', $request->get('date'));
+            $result['date'] =  $request->get('date');
+        }
+        if($request->get('date2')){
+            $query = $query->where('date', '<=', $request->get('date2'));
+            $result['date2'] =  $request->get('date2');
+        }
+        if($request->get('name')){
+            $query = $query->where('name', $request->get('name'));
+            $result['name'] =  $request->get('name');
+        }
+        $query = $query->paginate(45);
+        $result['data'] = $query;
+
+        return view('admin/bprintindex', $result);
+    }
+
+    public function bulkprint(Request $request){
+        $result['orderids'] = $request->post('order_id',[]);
+
+        return view('admin/bulkprint', $result);
+    }
 }

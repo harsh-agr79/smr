@@ -92,6 +92,48 @@
                 <ul class="collapsible collapsible-accordion">
                     <li><a href="{{ url('dashboard') }}" class=" active">Dashboard<i
                                 class="material-icons">web</i></a></li>
+                    
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Orders<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    
+                                        <li><a href="{{ url('/orders') }}" class="textcol">View Orders<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                    
+                                        <li class="amber darken-1"><a href="{{ url('/approvedorders') }}"
+                                                class="textcol">Approved Orders<i
+                                                    class="material-icons textcol">check</i></a></li>
+                                    
+                                        <li class="blue"><a href="{{ url('/pendingorders') }}"
+                                                class="textcol">Pending
+                                                Orders<i class="material-icons textcol">warning</i></a></li>
+                                    
+                                        <li class="red"><a href="{{ url('/rejectedorders') }}"
+                                                class="textcol">Rejected Orders<i
+                                                    class="material-icons textcol">clear</i></a></li>
+                                    
+                                        <li class="green"><a href="{{ url('/deliveredorders') }}"
+                                                class="textcol">Delivered Orders<i
+                                                    class="material-icons textcol">local_shipping</i></a></li>
+                                    
+                                        <li class="deep-purple"><a href="{{ url('/chalan') }}"
+                                                class="textcol">Chalan<i class="material-icons textcol">check</i></a>
+                                        </li>
+                                    
+                                        <li class="cyan ligthen-3"><a href="{{ url('/bulkprintorders') }}"
+                                                class="black-text">Bulk Print<i
+                                                    class="material-icons black-text">print</i></a>
+                                        </li>
+                                    
+                                        <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
+                                                class="black-text">Create Order<i
+                                                    class="material-icons black-text">add</i></a>
+                                        </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
                     <li class="bold  green"><a class="collapsible-header" tabindex="0">Company<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
@@ -154,7 +196,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ asset('/assets/script.js') }}"></script>
     <script src="{{ asset('/assets/select.js') }}"></script>
-    
+
 </body>
 
 </html>

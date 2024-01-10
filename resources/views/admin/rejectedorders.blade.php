@@ -38,26 +38,24 @@
             <a id="rmeditlink">
                 <li>Edit</li>
             </a>
-            @if ($admin->type == 'admin')
+          
             <a id="rmdeletelink">
                 <li class="border-top">Delete</li>
             </a>
-            @endif
+           
         </ul>
     </div>
-    {{-- <script>
+    <script>
         function rightmenu(order_id) {
             // console.log(order_id)
             var rmenu = document.getElementById("rightmenu");
-            var perms = @json($perms);
-            var admintype = `{{ $admin->type }}`;
-            if (admintype == "admin" || jQuery.inArray("editorder/{id}", perms) > -1) {
+         
                 rmenu.style.display = 'block';
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';
                 $('#rmeditlink').attr('href', '/editorder/' + order_id);
                 $('#rmdeletelink').attr('href', '/deleteorder/' + order_id);
-            }
+            
         }
 
         $(document).bind("click", function(event) {
@@ -91,14 +89,9 @@
         }
 
         function opendetail(order_id, seen) {
-            var perms = @json($perms);
-            var admintype = `{{ $admin->type }}`;
-            // console.log(seen);
-            if (admintype == "admin" || jQuery.inArray("detail/{id}", perms) > -1) {
-                if (admintype == "admin" || seen == 'seen' || jQuery.inArray("firstorderview", perms) > -1) {
+            
                     window.open('/detail/' + order_id, "_self");
-                }
-            }
+
         }
-    </script> --}}
+    </script>
 @endsection

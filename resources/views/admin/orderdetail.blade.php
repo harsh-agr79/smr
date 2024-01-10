@@ -31,13 +31,13 @@
                 ($data[0]->mainstatus != 'blue' && $admin->type == 'admin') ||
                     ($data[0]->mainstatus != 'blue'))
                 <div style="margin: 2px 0;">
-                    <a onclick="printorder('{{ $data[0]->order_id }}');" target="_blank" class="btn-small amber white-text">
+                    <a onclick="printorder('{{ $data[0]->order_id }}');" target="_blank" class="btn-small green accent-4 white-text">
                         Img <i class="material-icons right">file_download</i>
                     </a>
                 </div>
                 <div>
                     <a href="{{ url('printorder/' . $data[0]->order_id) }}" target="_blank"
-                        class="btn-small amber white-text">
+                        class="btn-small green accent-4 white-text">
                         PDF <i class="material-icons right">picture_as_pdf</i>
                     </a>
                 </div>
@@ -58,7 +58,7 @@
         <div class="hide">
             <form id="seenupdate">
                 <input type="hidden" value="{{ $data[0]->order_id }}" name="order_id">
-                <input type="hidden" value="{{ $admin->email }}" name="admin">
+                <input type="hidden" value="{{ $admin->name }}" name="admin">
             </form>
         </div>
 

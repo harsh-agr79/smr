@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderAdminController;
+use App\Http\Controllers\ChalanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,10 +102,25 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
 
     Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
+    Route::post('seenupdate', [OrderAdminController::class, 'seenupdate']);
+    Route::post('updatecln', [ChalanController::class, 'updatechalan']);
+    Route::post('updatedeliver', [OrderAdminController::class, 'updatedeliver']);
+
+    //CHALAN PAGES
+    Route::get('chalan', [ChalanController::class, 'chalan']);
+    Route::get('chalandetail/{id}', [ChalanController::class, 'chalandetail']);
+
+    //PRINT ORDERS
+    Route::get('saveorder/{id}', [OrderAdminController::class, 'save']);
+    Route::get('printorder/{id}', [OrderAdminController::class, 'print']);
+
+    Route::get('bulkprintorders', [OrderAdminController::class, 'bprintindex']);
+    Route::post('bulkprint', [OrderAdminController::class, 'bulkprint'])->name('bulkprint');
 
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
+    Route::get('finditem', [ProductController::class, 'getproduct']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function(){

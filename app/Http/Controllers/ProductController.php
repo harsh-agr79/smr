@@ -11,6 +11,10 @@ use Image;
 
 class ProductController extends Controller
 {
+    public function getproduct(){
+        $c = DB::table('products')->get();
+        return response()->json($c);
+    }
     public function products(){
         $result['data'] = Product::get();
         return view('admin.products',$result);
