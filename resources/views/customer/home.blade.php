@@ -139,6 +139,7 @@
             @foreach ($prods as $item)
                 <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
                     <div class="prod-img"
+                    onclick="details({{ $item->id }})"
                         style="background: url('@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[0]) }}@else{{ asset('images/prod.jpg') }} @endif') no-repeat center center; background-size: cover;">
                         <div>
                             <span class="company-title left" style="margin: 3px;">
@@ -180,6 +181,36 @@
             </div>
         </div>
     </form>
+    <div id="details" class="modal bottom-sheet bg-content">
+        <div class="modal-content bg-content">
+            <div class="row bg-content">
+                <div class="row col s12">
+                    <div class="col s6">
+                        <img id="mod-img1" class="materialboxed" height="100" src="" alt="">
+                    </div>
+                    <div class="col s6">
+                        <img id="mod-img2" class="materialboxed" height="100" src="" alt="">
+                    </div>
+                </div>
+                <div class="col s12">
+                    <h5 id="mod-name"></h5>
+                </div>
+                <div class="col s6">
+                    <span id="mod-price" style="font-weight: 600;"></span>
+                </div>
+                <div class="col s6">
+                    <span id="mod-category" style="font-weight: 600;"></span>
+                </div>
+                <div class="col s6" style="margin-top: 10px;">
+                    <span style="font-weight: 600;">Tags:</span> <span id="mod-tags"></span>
+                </div>
+                <div class="col s12" style="margin-top: 10px;">
+                    <span style="font-weight: 600;">Details:</span>
+                    <div style="white-space: pre-wrap" id="mod-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         function Filter() {
@@ -316,6 +347,24 @@
                         `)
                     })
                     $('#cart-total').text(t);
+                }
+            })
+        }
+        function details(id) {
+            $.ajax({
+                type: "GET",
+                url: "/user/finditem/" + id,
+                dataType: "json",
+                success: function(response) {
+                    $('#mod-name').text(response.name)
+                    $('#mod-price').text('Rs.'+response.price)
+                    $('#mod-category').text(response.category)
+                    $('#mod-tags').text(response.subcat)
+                    $('#mod-details').text(response.details)
+                    $('#mod-img1').attr('src', '/storage/media/' + response.img)
+                    $('#mod-img2').attr('src', '/storage/media/' + response.img2)
+                    $('#details').modal('open');
+                    history.pushState(null, document.title, location.href);
                 }
             })
         }

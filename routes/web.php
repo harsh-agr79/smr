@@ -135,6 +135,8 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     Route::get('/user/savecart', [OrderController::class, 'savecart']);
     Route::get('/user/confirmorder/{id}', [OrderController::class, 'confirm']);
 
+    Route::get('user/finditem/{id}', [ProductController::class, 'getproductdetail']);
+
     Route::get('/user/oldorders', [OrderController::class, 'oldorders']);
     Route::get('/user/savedorders', [OrderController::class, 'savedorders']);
     Route::get('/user/detail/{id}', [OrderController::class, 'detail']);

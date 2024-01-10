@@ -15,6 +15,10 @@ class ProductController extends Controller
         $c = DB::table('products')->get();
         return response()->json($c);
     }
+    public function getproductdetail(Request $request, $id){
+        $c = DB::table('products')->where('id', $id)->first();
+        return response()->json($c);
+    }
     public function products(){
         $result['data'] = Product::get();
         return view('admin.products',$result);
