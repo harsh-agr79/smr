@@ -67,7 +67,7 @@
                             <th>Amount</th>
                             <th>Delivered</th>
                             <th>recieved</th>
-                            @if ($page == 'saved')
+                            @if ($page == 'Saved Baskets')
                                 <th>Confirm</th>
                             @endif
                         </tr>
@@ -105,7 +105,7 @@
                                         <span></span>
                                       </label>
                                 </td>
-                                @if ($page == 'saved')
+                                @if ($page == 'Saved Baskets')
                                     <td>
                                         <a href="{{url('user/confirmorder/'.$item->order_id)}}" class="btn green accent-4">
                                             Send
