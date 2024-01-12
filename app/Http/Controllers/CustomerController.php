@@ -114,8 +114,14 @@ class CustomerController extends Controller
            return redirect('/customers');
     }
     public function deletecustomer($id){
+        $orders = DB::table("orders")->where("user_id", $id)->get();
+        if(count($orders)>0){
+            return redirect('/customers');
+        }
+        else{
             Customer::where('id', $id)->delete();
             return redirect('/customers');
+        }      
     }
 
     public function getcustomer(){
