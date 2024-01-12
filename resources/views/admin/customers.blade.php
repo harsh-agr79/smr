@@ -9,7 +9,8 @@
 </style>
     <div>
         <h5 class="center">Customers List</h5>
-
+        <span class="red-text center"
+        style="font-size: 20px; font-weight:500; text-align:center;">{{ session('error') }}</span>
         <div class="mp-card" style="overflow-x: scroll;">
             <table>
                 <thead>
