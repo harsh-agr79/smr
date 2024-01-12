@@ -113,7 +113,7 @@ class CustomerController extends Controller
         
            return redirect('/customers');
     }
-    public function deletecustomer($id){
+    public function deletecustomer(Request $request,$id){
         $orders = DB::table("orders")->where("user_id", $id)->get();
         if(count($orders)>0){
             $request->session()->flash('error','Cannot Delete Customer Other Data Exists');
