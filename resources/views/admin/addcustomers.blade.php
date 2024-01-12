@@ -6,11 +6,20 @@
         @error('userid')
             <div class="red-text">{{ $message }}</div>
         @enderror
+        @error('email')
+            <div class="red-text">{{ $message }}</div>
+        @enderror
+        @error('contact')
+            <div class="red-text">{{ $message }}</div>
+        @enderror
+        @error('tax_number')
+            <div class="red-text">{{ $message }}</div>
+        @enderror
         <div class="mp-card">
             <form action="{{ route('addcust') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    
+
                     <div class="col m6 s12">
                         <label>Name :</label><input name="name" type="text" class="browser-default inp"
                             placeholder="Name" required>
@@ -101,14 +110,14 @@
                     <div class="col s12 center">
                         <h4>Brands Allowed</h4>
                     </div>
-                        @foreach ($brands as $item)
+                    @foreach ($brands as $item)
                         <div class="col m6 s12">
                             <label>
-                                <input type="checkbox" name="brands[]" value="{{$item->id}}"/>
+                                <input type="checkbox" name="brands[]" value="{{ $item->id }}" />
                                 <span>{{ $item->name }}</span>
                             </label>
-                    </div>
-                        @endforeach
+                        </div>
+                    @endforeach
                 </div>
                 <div class="fixed-action-btn">
                     <button class="btn-large red">
