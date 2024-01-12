@@ -33,7 +33,7 @@
 
         .prod-admin-price {
             padding: 3px 10px;
-            background: rgb(255, 195, 66);
+            background: rgb(0, 194, 0);
             border-radius: 5px;
             color: black;
         }
