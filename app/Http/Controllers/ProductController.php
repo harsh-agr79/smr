@@ -119,14 +119,23 @@ class ProductController extends Controller
            return redirect('/products');
     }
     public function deleteproduct($id){
-        $prod = Product::where('id', $id)->first();
-        $imgs = explode("|", $prod->images);
-        foreach($imgs as $item){
-            if(File::exists($item)){
-                File::delete($item);
+        $orders = DB::table("orders")->where("product_id", $id)->get();
+        if (count($orders) == 0){
+            $prod = Product::where('id', $id)->first();
+            $imgs = explode("|", $prod->images);
+            foreach($imgs as $item){
+                if(File::exists($item)){
+                    File::delete($item);
+                }
             }
+            Product::where('id', $id)->delete();
+            $request->session()->flash('error','Cannot Delete Product Other Data Exists');
+            return redirect('/products');
         }
-        Product::where('id', $id)->delete();
-        return redirect('/products');
+        else{
+            $request->session()->flash('error','Product Deleted');
+            return redirect('/products');
+        }
+        
 }
 }
