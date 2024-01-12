@@ -150,7 +150,7 @@
                             <td></td>
                             <td></td>
                             <td style="font-weight: 700">Discount</td>
-                            <td><input type="text" {{ $dis }} name="discount"
+                            <td><input type="number" min="0" max="100" {{ $dis }} name="discount"
                                     value="{{ $data[0]->discount }}"></td>
                         </tr>
                         <tr>
