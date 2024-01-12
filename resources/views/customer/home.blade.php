@@ -1,13 +1,13 @@
 @extends('layouts.customer')
 
 @section('main')
-<style>
-    .bottom-sheet{
-    max-height: 85vh !important;
-    padding: 5px;
-    border-radius:20px 20px 0px 0px !important; 
-  }
-</style>
+    <style>
+        .bottom-sheet {
+            max-height: 85vh !important;
+            padding: 5px;
+            border-radius: 20px 20px 0px 0px !important;
+        }
+    </style>
     @php
         $cart = $user->cart;
         if ($cart != null) {
@@ -93,7 +93,7 @@
                             </label>
                         </div>
                     @endforeach
-                    <form>
+                </form>
             </div>
         </div>
     </div>
@@ -213,6 +213,7 @@
             clsnames = "";
             var formData = $('#filterform').serializeArray()
             var formData2 = $('#filformcat').serializeArray()
+            console.log(formData)
             if (formData.length > 0) {
                 for (let i = 0; i < formData.length; i++) {
                     if (formData2.length > 0) {

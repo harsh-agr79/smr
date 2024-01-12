@@ -123,7 +123,7 @@
                                             class="material-icons black-text">print</i></a>
                                 </li>
 
-                                <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
+                                <li class="amber lighten-4"><a href="{{ url('/addorder') }}"
                                         class="black-text">Create Order<i
                                             class="material-icons black-text">add</i></a>
                                 </li>

@@ -101,6 +101,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('deliveredorders', [OrderAdminController::class, 'deliveredorders']);
     Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
 
+    Route::get('/addorder', [OrderAdminController::class, 'addorder']);
+    Route::post('/addorder/add', [OrderAdminController::class, 'createorder'])->name("createorder");
+
     Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
     Route::post('seenupdate', [OrderAdminController::class, 'seenupdate']);
     Route::post('updatecln', [ChalanController::class, 'updatechalan']);

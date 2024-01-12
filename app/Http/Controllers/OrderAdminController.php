@@ -208,4 +208,43 @@ class OrderAdminController extends Controller
 
         return view('admin/bulkprint', $result);
     }
+
+    public function addorder(Request $request){
+        $result['brands'] = DB::table('brands')->get();
+        $result['category'] = DB::table('categories')->get();
+        $result['data'] = DB::table('products')->orderBy('brand', 'DESC')->get();
+        return view("admin.addorder", $result);
+    }
+    public function createorder(Request $request){
+        $user = DB::table('customers')->where("name",$request->post("name"))->first();
+        $products = $request->post("prodid",[]);
+        $qty = $request->post("quantity", []);
+        for ($i=0; $i < count($products); $i++) {
+            if($qty[$i] > 0){
+                $prod = DB::table('products')->where("id", $products[$i])->first();
+                DB::table("orders")->insert([
+                    'date'=>date('Y-m-d H:i:s'),
+                    'order_id'=>$user->id.getNepaliDay(date('Y-m-d H:i:s')).getNepaliMonth(date('Y-m-d H:i:s')).getNepaliYear(date('Y-m-d H:i:s')).date("His"),
+                    'name'=>$user->name,
+                    'user_id'=>$user->id,
+                    'item'=>$prod->name,
+                    'product_id'=>$prod->id,
+                    'brand'=>$prod->brand,
+                    'brand_id'=>$prod->brand_id,
+                    'category'=>$prod->category,
+                    'category_id'=>$prod->category_id,
+                    'price'=>$prod->price,
+                    'quantity'=>$qty[$i],
+                    'approvedquantity'=>"0",
+                    'mainstatus'=>"blue",
+                    'status'=>"pending",
+                    'discount'=>"0",
+                    'nepday'=>getNepaliDay(date('Y-m-d H:i:s')),
+                    'nepmonth'=>getNepaliMonth(date('Y-m-d H:i:s')),
+                    'nepyear'=>getNepaliYear(date('Y-m-d H:i:s'))
+                ]);
+            }   
+        }
+        return redirect("/pendingorders");
+    }
 }
