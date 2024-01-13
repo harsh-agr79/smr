@@ -111,6 +111,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('updatecln', [ChalanController::class, 'updatechalan']);
     Route::post('updatedeliver', [OrderAdminController::class, 'updatedeliver']);
 
+    Route::get('/deleteorder/{id}', [OrderAdminController::class, 'deleteorder']);
+
     //CHALAN PAGES
     Route::get('chalan', [ChalanController::class, 'chalan']);
     Route::get('chalandetail/{id}', [ChalanController::class, 'chalandetail']);
@@ -153,6 +155,8 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get("/user/editorder/{id}", [OrderController::class, 'editorder']);
     Route::post('/user/order/edit', [OrderController::class, 'editorder_process'])->name("user.editorder");
+
+    Route::get('/user/deleteorder/{id}', [OrderController::class, 'deleteorder']);
 });
 
 

@@ -268,5 +268,15 @@ class OrderController extends Controller
         updateMainStatus($orderid);
         return redirect("/user/oldorders");
     }
+    public function deleteorder(Request $request,$orderid){
+        $order = DB::table('orders')->where("order_id",$orderid)->first();
+        if($order->mainstatus !== "blue"){
+            return redirect("/");
+        }
+        else{
+            DB::table("orders")->where("order_id",$orderid)->delete();
+            return redirect("/user/oldorders");
+        }
+    }
 }
 
