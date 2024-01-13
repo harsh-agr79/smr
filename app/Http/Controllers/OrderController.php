@@ -161,5 +161,112 @@ class OrderController extends Controller
         ]);
         return redirect('user/oldorders');
     }
+    public function editorder(Request $request, $orderid){
+        $order = DB::table('orders')->where("order_id",$orderid)->first();
+        if($order->mainstatus !== "blue"){
+            return redirect("/");
+        }
+        else{
+            $result[ 'brands' ] = DB::table( 'brands' )->get();
+            $result[ 'category' ] = DB::table( 'categories' )->get();
+            $result[ 'order' ] = DB::table( 'orders' )->where( 'order_id', $orderid )
+            ->join( 'products', 'products.id', '=', 'orders.product_id' )
+            ->selectRaw( 'orders.*, products.images, products.hide, products.stock, products.brand, products.brand_id, products.category, products.category_id' )
+            ->get();
+            $result[ 'data' ] = DB::table( 'products' )
+            ->whereNotIn( 'name', DB::table( 'orders' )->where( 'order_id', $orderid )->pluck( 'item' )->toArray() )
+            ->orderBy( 'category', 'ASC' )->get();
+    
+            return view( 'customer/editorder', $result );
+        }  
+    }
+    public function editorder_process(Request $request){
+        $orderid = $request->post( 'orderid' );
+        $order = DB::table( 'orders' )->where( 'order_id', $orderid )->get();
+        $user = DB::table( 'customers' )->where( 'id', session()->get("USER_ID") )->first();
+        $products = $request->post( 'prodid', [] );
+        $qty = $request->post( 'quantity', [] );
+        $ids = $request->post( 'id', [] );
+        $date = $request->post( 'date' );
+        for ( $i = 0; $i < count( $ids );
+        $i++ ) {
+            if ( $qty[ $i ] !== '0' && $qty[ $i ] !== NULL && $qty[ $i ] !== "" ) {
+                if ( $ids[ $i ] === 'newitem' ) {
+                    $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    DB::table( 'orders' )->insert( [
+                        'date'=>$date.' '.date( 'H:i:s' ),
+                        'order_id'=>$orderid,
+                        'name'=>$user->name,
+                        'user_id'=>$user->id,
+                        'item'=>$prod->name,
+                        'product_id'=>$prod->id,
+                        'brand'=>$prod->brand,
+                        'brand_id'=>$prod->brand_id,
+                        'category'=>$prod->category,
+                        'category_id'=>$prod->category_id,
+                        'price'=>$prod->price,
+                        'quantity'=>$qty[ $i ],
+                        'approvedquantity'=>'0',
+                        'mainstatus'=>'blue',
+                        'status'=>'pending',
+                        'discount'=>$order[0]->discount,
+                        'nepday'=>getNepaliDay( $date ),
+                        'nepmonth'=>getNepaliMonth( $date ),
+                        'nepyear'=>getNepaliYear( $date ),
+                        'clnstatus'=>$order[0]->clnstatus,
+                        'delivered'=>$order[0]->delivered,
+                        'received'=>$order[0]->received,
+                        'receiveddate'=>$order[0]->receiveddate,
+                        'seen'=>$order[0]->seen,
+                        'seenby'=>$order[0]->seenby,
+                        'refname'=>$order[0]->refname,
+                        'reftype'=>$order[0]->reftype,
+                        'remarks'=>$order[0]->remarks,
+                        'userremarks'=>$order[0]->userremarks,
+                        'cartoons'=>$order[0]->cartoons,
+                        'transport'=>$order[0]->transport,
+                        'refid'=>$order[0]->refid,
+                    ] );
+                } else {
+                    $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    $o =  DB::table( 'orders' )->where( 'id', $ids[$i] )->first();
+                    if($qty[$i] == $o->approvedquantity && $o->status == 'approved'){
+                    }
+                    elseif($qty[$i] == $o->quantity && $o->status == "pending"){
+                    } 
+                     elseif($o->status == "rejected"){
+                    }
+                    else{
+                        DB::table( 'orders' )->where( 'id', $ids[ $i ] )->update( [
+                            'date'=>$date.' '.date( 'H:i:s' ),
+                            'name'=>$user->name,
+                            'user_id'=>$user->id,
+                            'item'=>$prod->name,
+                            'product_id'=>$prod->id,
+                            'brand'=>$prod->brand,
+                            'brand_id'=>$prod->brand_id,
+                            'category'=>$prod->category,
+                            'category_id'=>$prod->category_id,
+                            'price'=>$prod->price,
+                            'quantity'=>$qty[ $i ],
+                            'approvedquantity'=>'0',
+                            'mainstatus'=>'blue',
+                            'status'=>'pending',
+                            'discount'=>'0',
+                            'nepday'=>getNepaliDay( $date ),
+                            'nepmonth'=>getNepaliMonth( $date ),
+                            'nepyear'=>getNepaliYear( $date )
+                        ] );
+                    }   
+                }
+            }
+            elseif ($qty[$i] == NULL || $qty[$i] == '0' || $qty[$i] == '' && $id[$i] !== NULL) {
+                DB::table('orders')->where('id', $ids[$i])->delete();
+            }
+            
+        }
+        updateMainStatus($orderid);
+        return redirect("/user/oldorders");
+    }
 }
 

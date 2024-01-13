@@ -103,6 +103,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     Route::get('/addorder', [OrderAdminController::class, 'addorder']);
     Route::post('/addorder/add', [OrderAdminController::class, 'createorder'])->name("createorder");
+    Route::get('/editorder/{id}', [OrderAdminController::class, 'editorder']);
+    Route::post('/order/edit', [OrderAdminController::class, 'editorder_process'])->name("editorder");
 
     Route::post('/detailupdate', [OrderAdminController::class, 'detailupdate'])->name('detailupdate');
     Route::post('seenupdate', [OrderAdminController::class, 'seenupdate']);
@@ -148,6 +150,9 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
     Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);
+
+    Route::get("/user/editorder/{id}", [OrderController::class, 'editorder']);
+    Route::post('/user/order/edit', [OrderController::class, 'editorder_process'])->name("user.editorder");
 });
 
 

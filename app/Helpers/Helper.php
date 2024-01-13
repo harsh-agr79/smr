@@ -33,19 +33,31 @@ function updateMainStatus( $orderid ) {
             $rc = $rc + 1;
         }
     }
-    if ( $order[ 0 ]->delivered == 'on' ) {
+    if ( $order[ 0 ]->delivered == 'on' && $tc !== $rc && $tc == $cc + $rc) {
         $result = 'green';
-    } elseif ( $order[ 0 ]->clnstatus == 'packorder' ) {
+        $del = "on";
+        $cln = "delivered";
+    } elseif ( $order[ 0 ]->clnstatus == 'packorder' && $tc !== $rc && $tc == $cc + $rc) {
         $result = 'deep-purple';
+        $del = NULL;
+        $cln = "packorder";
     } elseif ( $tc == $cc && $tc == $rc ) {
         $result = 'red';
+        $del = NULL;
+        $cln = NULL;
     } elseif ( $tc == $cc ) {
         $result = 'amber darken-1';
+        $del = NULL;
+        $cln = NULL;
     } else {
         $result = 'blue';
+        $del = NULL;
+        $cln = NULL;
     }
     DB::table( 'orders' )->where( 'order_id', $orderid )->update( [
         'mainstatus'=>$result,
+        'delivered'=>$del,
+        'clnstatus'=>$cln
     ] );
 }
 function money($money){
