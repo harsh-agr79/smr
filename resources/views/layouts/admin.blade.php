@@ -91,8 +91,8 @@
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <li><a href="{{ url('dashboard') }}" class=" active">Dashboard<i
-                                class="material-icons">web</i></a></li>
-
+                                class="material-icons">web</i></a>
+                    </li>
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Orders<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
@@ -144,7 +144,6 @@
                             </ul>
                         </div>
                     </li>
-
                     <li class="bold "><a class="collapsible-header" tabindex="0">Customers<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
@@ -160,10 +159,35 @@
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                    <li><a href="{{ url('/payments') }}" class="textcol">View Payments<i
-                                                class="material-icons textcol">attach_money</i></a></li>
-                                    <li><a href="{{ url('/addpayment') }}" class="textcol">Add Payment<i
-                                                class="material-icons textcol">add</i></a></li>
+                                <li><a href="{{ url('/payments') }}" class="textcol">View Payments<i
+                                            class="material-icons textcol">attach_money</i></a></li>
+                                <li><a href="{{ url('/addpayment') }}" class="textcol">Add Payment<i
+                                            class="material-icons textcol">add</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Sales Return<i
+                                class="material-icons chevron textcol">chevron_left</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="{{ url('/slr') }}" class="textcol">View Sales Return<i
+                                            class="material-icons textcol">autorenew</i></a></li>
+                                <li><a href="{{ url('/createslr') }}" class="textcol">Add Sales Return<i
+                                            class="material-icons textcol">add</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Expenses<i
+                                class="material-icons chevron textcol">chevron_left</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+
+                                <li><a href="{{ url('/expenses') }}" class="textcol">View Expenses<i
+                                            class="material-icons textcol">credit_card</i></a></li>
+
+                                <li><a href="{{ url('/addexpense') }}" class="textcol">Add Expense<i
+                                            class="material-icons textcol">add</i></a></li>
+
                             </ul>
                         </div>
                     </li>

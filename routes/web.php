@@ -14,6 +14,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\ChalanController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SalesReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +126,22 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('bulkprintorders', [OrderAdminController::class, 'bprintindex']);
     Route::post('bulkprint', [OrderAdminController::class, 'bulkprint'])->name('bulkprint');
 
+     //expenses CRUD
+     Route::get('expenses', [ExpenseController::class, 'index']);
+     Route::get('addexpense', [ExpenseController::class, 'addexp']);
+     Route::get('editexpense/{id}', [ExpenseController::class, 'addexp']);
+     Route::post('addexp', [ExpenseController::class, 'addexp_process'])->name('addexp');
+     Route::get('deleteexpense/{id}',[ExpenseController::class, 'deleteexp']);
+
+     //SALESRETURN CRUD
+    Route::get('slr', [SalesReturnController::class, 'index']);
+    Route::get('slrdetail/{id}',[SalesReturnController::class, 'detail']);
+    Route::get('createslr', [SalesReturnController::class, 'createslr']);
+    Route::post('admin/addslr', [SalesReturnController::class, 'addslr'])->name('admin.addslr');
+    Route::post('admin/editslr', [SalesReturnController::class, 'editslr_process'])->name('admin.editslr');
+    Route::post('admin/editslrdet', [SalesReturnController::class, 'editslrdet_process'])->name('admin.editslrdet');
+    Route::get('deleteslr/{id}',[SalesReturnController::class, 'deleteslr']);
+    Route::get('editslr/{id}', [SalesReturnController::class, 'editslr']);
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
