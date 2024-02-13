@@ -3,7 +3,7 @@
 @section('main')
     <div>
         <div class="right">
-            <span class="btn green darken-3" onclick="$('#addmodal').modal('open')">Add Categpry</span>
+            <span class="btn green darken-3" onclick="$('#addmodal').modal('open')">Add Category</span>
         </div>
         <div class="center">
             <h4>Category List</h4>
