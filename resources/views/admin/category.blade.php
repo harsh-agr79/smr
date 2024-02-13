@@ -178,7 +178,7 @@
                 }
             })
         })
-        function deladmin(id){
+        function delcat(id){
             $.ajax({
                 url: "/category/delcat/"+id,
                 type: "GET",
