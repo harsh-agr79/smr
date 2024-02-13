@@ -134,6 +134,7 @@ class OrderAdminController extends Controller {
             ] );
         }
         updateMainStatus( $request->post( 'order_id' ) );
+        updatebalance(DB::table("orders")->where('order_id', $request->post( 'order_id' ))->first()->user_id);
 
         if ( $request->post( 'previous' ) == url( 'editorder/'.DB::table( 'orders' )->where( 'id', $id[ 0 ] )->first()->order_id ) ) {
             return redirect( 'dashboard' );
@@ -353,6 +354,7 @@ class OrderAdminController extends Controller {
             
         }
         updateMainStatus($orderid);
+        updatebalance($user->id);
         return redirect("/");
     }
     public function deleteorder(Request $request,$orderid){
@@ -362,6 +364,7 @@ class OrderAdminController extends Controller {
         }
         else{
             DB::table("orders")->where("order_id",$orderid)->delete();
+            updatebalance($order->user_id);
             return redirect("/orders");
         }
     }

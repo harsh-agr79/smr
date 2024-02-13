@@ -67,7 +67,7 @@ class PaymentController extends Controller
                 'remarks'=>$request->post('remarks'),
                 'entry_by'=>$admin->email,
             ]);
-
+            updatebalance(DB::table('customers')->where('name', $request->post('name'))->first()->id);
             return redirect('addpayment');
         }
         else{
@@ -78,15 +78,18 @@ class PaymentController extends Controller
                 'voucher'=>$request->post('voucher'),
                 'remarks'=>$request->post('remarks'),
             ]);
+            updatebalance(DB::table('customers')->where('name', $request->post('name'))->first()->id);
             return redirect('payments');
         }
     } 
 
     public function deletepay(Request $request, $id){
+        $userid = DB::table('payments')->where('paymentid', $id)->first()->user_id;
         DB::table('payments')->where('paymentid', $id)->update([
             'deleted'=>'on',
             'deleted_at'=>date('Y-m-d H:i:s')
         ]);
+        updatebalance($userid);
         return redirect('/payments');
     }
 }

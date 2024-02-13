@@ -67,6 +67,7 @@ class SalesReturnController extends Controller
                 ] );
             }
         }
+        updatebalance($user->id);
         return redirect('slr');
     }
 
@@ -155,6 +156,7 @@ class SalesReturnController extends Controller
             }
             
         }
+        updatebalance($user->id);
         return redirect('slrdetail/'.$returnid);
     }
     public function editslrdet_process(Request $request){
@@ -168,10 +170,14 @@ class SalesReturnController extends Controller
                 'remarks'=>$request->post('remarks'),
             ]);
         }
+        $userid = DB::table('salesreturns')->where('returnid', $returnid)->first()->user_id;
+        updatebalance($userid);
         return redirect('slrdetail/'.$returnid);
     }
     public function deleteslr(Request $request, $id){
+        $userid = DB::table('salesreturns')->where('returnid', $id)->first()->user_id;
         DB::table('salesreturns')->where('returnid', $id)->delete();
+        updatebalance($userid);
         return redirect('/slr');
     }
 

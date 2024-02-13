@@ -58,6 +58,7 @@ class ExpenseController extends Controller
                 'amount'=>$request->post('amount'),
                 'particular'=>$request->post('particular'),
             ]);
+            updatebalance(DB::table('customers')->where('name', $request->post('name'))->first()->id);
             return redirect('addexpense');
         }
         else{
@@ -68,12 +69,15 @@ class ExpenseController extends Controller
                 'amount'=>$request->post('amount'),
                 'particular'=>$request->post('particular'),
             ]);
+            updatebalance(DB::table('customers')->where('name', $request->post('name'))->first()->id);
             return redirect('expenses');
         }
     } 
 
     public function deleteexp(Request $request, $id){
+        $userid = DB::table('expenses')->where('expenseid', $id)->first()->user_id;
         DB::table('expenses')->where('expenseid', $id)->delete();
+        updatebalance($userid);
         return redirect('/expenses');
     }
 }

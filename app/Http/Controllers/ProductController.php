@@ -118,7 +118,7 @@ class ProductController extends Controller
         
            return redirect('/products');
     }
-    public function deleteproduct($id){
+    public function deleteproduct(Request $request, $id){
         $orders = DB::table("orders")->where("product_id", $id)->get();
         if (count($orders) == 0){
             $prod = Product::where('id', $id)->first();

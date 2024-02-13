@@ -59,6 +59,7 @@ function updateMainStatus( $orderid ) {
         'delivered'=>$del,
         'clnstatus'=>$cln
     ] );
+    updatebalance($order[0]->user_id);
 }
 function money($money){
     $decimal = (string)($money - floor($money));

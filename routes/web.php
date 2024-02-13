@@ -16,6 +16,7 @@ use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\ChalanController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SalesReturnController;
+use App\Http\Controllers\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,6 +143,11 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('admin/editslrdet', [SalesReturnController::class, 'editslrdet_process'])->name('admin.editslrdet');
     Route::get('deleteslr/{id}',[SalesReturnController::class, 'deleteslr']);
     Route::get('editslr/{id}', [SalesReturnController::class, 'editslr']);
+
+
+    //Analytics
+    Route::get('statements', [AnalyticsController::class,'statement']);
+    Route::get('balancesheet/{id}', [AnalyticsController::class, 'balancesheet']);
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
