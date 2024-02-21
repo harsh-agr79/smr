@@ -271,7 +271,7 @@
                     </div>
                     <div class="row col s12 price-line" style="padding: 0;  margin: 0;">
                         <div class="col s4 center" style="margin-top: 5px;"><span class="prod-admin-price">Rs.{{ $item->price }}</span></div>
-                        <div class="col s6 add-to-cart container right">
+                        <div class="col s7 add-to-cart container right">
                             <div class="row container">
                                 <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;"
                                     onclick="minus('{{ $item->id }}')"><i class="material-icons">remove</i></span>
