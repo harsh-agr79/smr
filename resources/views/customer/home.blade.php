@@ -8,6 +8,74 @@
             border-radius: 20px 20px 0px 0px !important;
         }
     </style>
+    <style>
+        .prod-admin-img {
+            height: 10vh;
+        }
+
+        .prod-admin-title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .prod-admin-det {
+            font-size: 12px;
+            padding: 10px;
+            font-weight: 500;
+        }
+
+        .price-line {
+            position: relative;
+            top: 7px;
+        }
+
+        .prod-admin-price {
+            padding: 3px 10px;
+            background: rgb(0, 194, 0);
+            border-radius: 5px;
+            color: black;
+        }
+
+        .prod-admin-inp {
+            color: black;
+            outline: none;
+            padding: 5px;
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid rgb(170, 170, 170);
+            width: 10vh;
+        }
+
+        .prod-admin-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .prod-admin-container {
+            margin-left: 20vw;
+            margin-right: 20vw;
+            height: 65vh;
+            overflow-y: scroll;
+            margin-top: 10px;
+        }
+
+        @media screen and (max-width: 720px) {
+            .prod-admin-container {
+                margin: 0;
+            }
+
+            .mp-caro-item {
+                height: 56vw;
+                width: 100vw;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .mp-caro-item {
+                height: 50vh;
+                width: 100vw;
+            }
+        }
+    </style>
     @php
         $cart = $user->cart;
         if ($cart != null) {
@@ -139,7 +207,7 @@
     </div>
     <form id="form-main-cart">
         <div class="product-container">
-            @foreach ($prods as $item)
+            {{-- @foreach ($prods as $item)
                 <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
                     <div class="prod-img" onclick="details({{ $item->id }})"
                         style="background: url('@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[0]) }}@else{{ asset('images/prod.jpg') }} @endif') no-repeat center center; background-size: cover;">
@@ -165,7 +233,7 @@
                             <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;"
                                 onclick="minus('{{ $item->id }}')"><i class="material-icons">remove</i></span>
                             <input type="hidden" class="prodids" name="prodid[]" value="{{ $item->id }}">
-                            <input type="number" class="col s6 browser-default inp qtys" id="{{ $item->id }}cartinp"
+                            <input type="number" class="col s6 browser-default inp qtys" id="{{ $item->id }}cartip"
                                 onkeyup="updatecart()" style="height: 32px; text-align:center; border-radius:0;"
                                 name="qty[]"
                                 @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}"
@@ -176,6 +244,51 @@
                         </div>
                     </div>
                 </div>
+            @endforeach --}}
+            @foreach($prods as $item)
+            <div class="mp-card row prod-admin searchable {{ $item->brand_id }}brd {{ $item->category_id }}cat"
+                style="margin: 3px; padding: 10px;">
+                <div class="col s4" style="padding: 0;  margin: 0;">
+                    @php
+                        $a = explode('|', $item->images);
+                    @endphp
+                    <img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a)-1]) }}@else{{ asset('images/prod.jpg') }} @endif" class="prod-admin-img materialboxed"
+                        alt="">
+                </div>
+                <div class="col s8 row" style="padding: 0; margin: 0;">
+                    <div class="col s12" style=" margin: 0; padding: 0;" onclick="details({{ $item->id }})">
+                        <span class="prod-admin-title">{{ $item->name }}</span>
+                    </div>
+                    <div class="col s12 row" style="padding: 0;  margin: 0;" onclick="details({{ $item->id }})">
+                        <span class="prod-admin-det col s6">{{ $item->brand }} {{ $item->category }}</span>
+                        <span class="prod-admin-det col s6">
+                            @if ($item->stock == 'on')
+                                <span class="red-text right">Out of Stock</span>
+                            @else
+                                <span class="green-text right">In Stock</span>
+                            @endif
+                        </span>
+                    </div>
+                    <div class="row col s12 price-line" style="padding: 0;  margin: 0;">
+                        <div class="col s4 center" style="margin-top: 5px;"><span class="prod-admin-price">Rs.{{ $item->price }}</span></div>
+                        <div class="col s6 add-to-cart container right">
+                            <div class="row container">
+                                <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;"
+                                    onclick="minus('{{ $item->id }}')"><i class="material-icons">remove</i></span>
+                                <input type="hidden" class="prodids" name="prodid[]" value="{{ $item->id }}">
+                                <input type="number" class="col s6 browser-default inp qtys" id="{{ $item->id }}cartinp"
+                                    onkeyup="updatecart()" style="height: 32px; text-align:center; border-radius:0;"
+                                    name="qty[]"
+                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}"
+                                    @else
+                                        value="0" @endif>
+                                <span class="col s3 prod-btn" style="border-radius: 0 5px 5px 0; "
+                                    onclick="plus('{{ $item->id }}')"><i class="material-icons">add</i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endforeach
             <div class="hide">
                 <button>Submit</button>
@@ -185,9 +298,8 @@
     <div id="details" class="modal bottom-sheet bg-content">
         <div class="modal-content bg-content">
             <div class="row bg-content">
-                <div class="row col s12" style="margin:0; padding: 0 30px 30px 30px; height: 30% !important;">
-                    <div class="carousel carousel-slider responsive-img" id="mod-caro">
-                    </div>
+                <div id="mod-caro" style="width: 100%; overflow-x: scroll; display:flex;">
+
                 </div>
                 <div class="col s12">
                     <h5 id="mod-name"></h5>
@@ -208,8 +320,8 @@
 
     <script>
         function Filter() {
-            $('.prod-box').hide()
-            $('.prod-box').removeClass('searchable');
+            $('.prod-admin').hide()
+            $('.prod-admin').removeClass('searchable');
             clsnames = "";
             var formData = $('#filterform').serializeArray()
             var formData2 = $('#filformcat').serializeArray()
@@ -236,8 +348,8 @@
                         $(`.${formData2[j].name}`).show();
                     }
                 } else {
-                    $('.prod-box').addClass('searchable')
-                    $('.prod-box').show();
+                    $('.prod-admin').addClass('searchable')
+                    $('.prod-admin').show();
                 }
             }
 
@@ -356,7 +468,7 @@
                     var images = response.images.split("|")
                     for (let i = 0; i < images.length; i++) {
                         $("#mod-caro").append(
-                            `<a class="carousel-item" href="#one!"><img src="/${images[i]}"></a>`)
+                            `<div><img style="height:200px; margin: 10px;" src="/${images[i]}"></div>`)
                     }
                     $('#mod-name').text(response.name)
                     $('#mod-price').text('Rs.' + response.price)
@@ -370,6 +482,7 @@
                         fullWidth: true,
                         indicators: true
                     });
+                    $('.materialboxed').materialbox();
                 }
             })
         }

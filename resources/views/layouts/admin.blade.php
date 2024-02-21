@@ -153,8 +153,7 @@
                                 @endif
                             </ul>
                         </div>
-                    </li>
-                    
+                    </li>                  
                     <li class="bold "><a class="collapsible-header" tabindex="0">Customers<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
