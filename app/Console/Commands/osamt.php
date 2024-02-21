@@ -11,7 +11,7 @@ class osamt extends Command {
     *
     * @var string
     */
-    protected $signature = 'app:osamt';
+    protected $signature = 'cron:osamt';
 
     /**
     * The console command description.

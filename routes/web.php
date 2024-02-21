@@ -82,7 +82,6 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //category
     Route::get('/category', [CategoryController::class, 'index']);
-    //AJAX BRANDS
     Route::get('/category/getdata/{id}', [CategoryController::class, 'getcategory']);
     Route::get('/category/getcatdata', [CategoryController::class, 'getcategorydata']);
     Route::post('/category/editcat', [CategoryController::class, 'editcategory']);

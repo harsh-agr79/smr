@@ -131,6 +131,16 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Statements<i
+                                class="material-icons chevron textcol">chevron_left</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+
+                                <li><a href="{{ url('/statements') }}" class="textcol">Statements<i
+                                            class="material-icons textcol">account_balance</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="bold  green"><a class="collapsible-header" tabindex="0">Company<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
