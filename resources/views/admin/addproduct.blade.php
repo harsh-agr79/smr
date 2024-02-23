@@ -61,7 +61,7 @@
                     </div>
                     <div class="col s12" style="margin-top: 20px;">
                         <label>Details :</label>
-                        <textarea name="details" class="browser-default inp" style="resize: vertical;" placeholder="Details" required></textarea>
+                        <textarea name="details" class="browser-default inp" style="resize: vertical;" placeholder="Details"></textarea>
                     </div>
                     <div class="col s12 file-field input-field">
                         <div class="btn">
