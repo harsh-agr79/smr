@@ -64,7 +64,7 @@
                     <div class="col s12" style="margin-top: 20px;">
                         <label>Details :</label>
                         <textarea name="details" class="browser-default inp" value="{{ $prod->details }}" style="resize: vertical;"
-                            placeholder="Details" required>{{ $prod->details }}</textarea>
+                            placeholder="Details">{{ $prod->details }}</textarea>
                     </div>
                     <div class="col s12 file-field input-field">
                         <div class="btn">
