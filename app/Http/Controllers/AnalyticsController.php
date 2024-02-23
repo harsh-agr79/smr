@@ -182,7 +182,7 @@ class AnalyticsController extends Controller
             $data[] = [
                 'name'=>$item->name,
                 'created'=>$item->date,
-                'ent_id'=>$item->orderid,
+                'ent_id'=>$item->order_id,
                 'debit'=>$item->sum - $item->dis,
                 'nar'=>$item->remarks,
                 'vou'=>'',
