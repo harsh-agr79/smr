@@ -181,7 +181,7 @@ class AnalyticsController extends Controller
             else{
             $data[] = [
                 'name'=>$item->name,
-                'created'=>$item->created_at,
+                'created'=>$item->date,
                 'ent_id'=>$item->orderid,
                 'debit'=>$item->sum - $item->dis,
                 'nar'=>$item->remarks,
