@@ -146,20 +146,36 @@ class ProductController extends Controller {
         $contents = File::get(base_path('/try.json'));
         $json = json_decode(json: $contents, associative: true);
         // dd($json);
-        foreach($json as $item){
-            DB::table( 'products' )->insert( [
-                'name'=>$item['name'],
-                'category_id'=>$item['category_id'],
-                'category'=>$item['category'],
-                'brand_id'=>"8",
-                'brand'=>"MYPOWER",
-                'stock'=>NULL,
-                'hide'=>NULL,
-                'price'=>$item['price'],
-                'featured'=>NULL,
-                'details'=>$item['details'],
-                'images'=>implode( '|', ["product/".$item['img2'],"product/".$item['img']] )
-            ] );
-        }
+        // foreach($json as $item){
+        //     DB::table( 'products' )->insert( [
+        //         'name'=>$item['name'],
+        //         'category_id'=>$item['category_id'],
+        //         'category'=>$item['category'],
+        //         'brand_id'=>"8",
+        //         'brand'=>"MYPOWER",
+        //         'stock'=>NULL,
+        //         'hide'=>NULL,
+        //         'price'=>$item['price'],
+        //         'featured'=>NULL,
+        //         'details'=>$item['details'],
+        //         'images'=>implode( '|', ["product/".$item['img2'],"product/".$item['img']] )
+        //     ] );
+        // }
+        DB::table('products')->where("category", "powerbank")->update([
+            'category'=>"POWERBANK",
+            'category_id'=>"1"
+        ]);
+        DB::table('products')->where("category", "earphone")->update([
+            'category'=>"EARPHONE",
+            'category_id'=>"10",
+        ]);
+        DB::table('products')->where("category", "charger")->update([
+            'category'=>"CHARGER",
+            'category_id'=>"2",
+        ]);
+        DB::table('products')->where("category", "cable")->update([
+            'category'=>"DATACABLE",
+            'category_id'=>"3",
+        ]);
     }
 }
