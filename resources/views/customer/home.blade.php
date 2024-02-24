@@ -11,6 +11,7 @@
     <style>
         .prod-admin-img {
             height: 10vh;
+            z-index: -1;
         }
 
         .prod-admin-title {
