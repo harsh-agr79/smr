@@ -21,7 +21,8 @@
 
         .prod-admin-det {
             font-size: 10px;
-            padding: 10px;
+            padding:0 !important;
+            margin: 0 !important;
             font-weight: 500;
         }
 
