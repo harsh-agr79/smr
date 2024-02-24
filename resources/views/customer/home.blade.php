@@ -20,8 +20,8 @@
         }
 
         .prod-admin-det {
-            font-size: 12px;
-            padding: 10px;
+            font-size: 10px;
+            padding: 5px;
             font-weight: 500;
         }
 
