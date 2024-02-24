@@ -11,18 +11,20 @@
     <style>
         .prod-admin-img {
             height: 10vh;
-            z-index: -1;
+            z-index: 0;
         }
 
         .prod-admin-title {
             font-size: 15px;
             font-weight: 600;
+            z-index: 1;
         }
 
         .prod-admin-det {
             font-size: 12px;
             padding: 10px;
             font-weight: 500;
+            z-index: 1;
         }
 
         .price-line {
