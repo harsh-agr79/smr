@@ -190,7 +190,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-admin-container">
+    <div style="height: 65vh; overflow-y: scroll;" class="prod-admin-container">
         @foreach ($data as $item)
             <div class="mp-card row prod-admin searchable {{ $item->brand_id }}brd {{ $item->category_id }}cat"
                 style="margin: 3px; padding: 10px;">

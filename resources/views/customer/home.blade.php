@@ -207,7 +207,7 @@
         </div>
     </div>
     <form id="form-main-cart">
-        <div class="product-container">
+        <div style="height: 75vh; overflow-y: scroll; margin-top: 10px;" class="prod-admin-container">
             {{-- @foreach ($prods as $item)
                 <div class="prod-box searchable center {{ $item->brand_id }}brd {{ $item->category_id }}cat">
                     <div class="prod-img" onclick="details({{ $item->id }})"
