@@ -15,7 +15,7 @@
         }
 
         .prod-admin-title {
-            font-size: 15px;
+            font-size: 12px;
             font-weight: 600;
         }
 
