@@ -10,7 +10,7 @@
     </style>
     <style>
         .prod-admin-img {
-            max-height: 12vh;
+            max-height: 10vh;
         }
 
         .prod-admin-title {
