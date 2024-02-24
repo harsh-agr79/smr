@@ -70,7 +70,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::get('/products/edit/{id}', [ProductController::class, 'editproduct']);
      Route::post('products/editprod', [ProductController::class, 'editprod_process'])->name('editprod');
      Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']);
-    //  Route::get("/addmp", [ProductController::class, 'addmp']);
+     Route::get("/addmp", [ProductController::class, 'addmp']);
 
     //brands
     Route::get('/brands', [BrandController::class, 'index']);

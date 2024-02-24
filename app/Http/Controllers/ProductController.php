@@ -143,8 +143,8 @@ class ProductController extends Controller {
 
     }
     public function addmp(){
-        $contents = File::get(base_path('/try.json'));
-        $json = json_decode(json: $contents, associative: true);
+        // $contents = File::get(base_path('/try.json'));
+        // $json = json_decode(json: $contents, associative: true);
         // dd($json);
         // foreach($json as $item){
         //     DB::table( 'products' )->insert( [
@@ -161,21 +161,36 @@ class ProductController extends Controller {
         //         'images'=>implode( '|', ["product/".$item['img2'],"product/".$item['img']] )
         //     ] );
         // }
-        DB::table('products')->where("category", "powerbank")->update([
-            'category'=>"POWERBANK",
-            'category_id'=>"1"
-        ]);
-        DB::table('products')->where("category", "earphone")->update([
-            'category'=>"EARPHONE",
-            'category_id'=>"10",
-        ]);
-        DB::table('products')->where("category", "charger")->update([
-            'category'=>"CHARGER",
-            'category_id'=>"2",
-        ]);
-        DB::table('products')->where("category", "cable")->update([
-            'category'=>"DATACABLE",
-            'category_id'=>"3",
-        ]);
+        // DB::table('products')->where("category", "powerbank")->update([
+        //     'category'=>"POWERBANK",
+        //     'category_id'=>"1"
+        // ]);
+        // DB::table('products')->where("category", "earphone")->update([
+        //     'category'=>"EARPHONE",
+        //     'category_id'=>"10",
+        // ]);
+        // DB::table('products')->where("category", "charger")->update([
+        //     'category'=>"CHARGER",
+        //     'category_id'=>"2",
+        // ]);
+        // DB::table('products')->where("category", "cable")->update([
+        //     'category'=>"DATACABLE",
+        //     'category_id'=>"3",
+        // ]);
+        $prod = DB::table("products")->get();
+        foreach($prod as $item){
+            $new = [];
+            $img = explode("|", $item->images);
+            foreach($img as $item2){
+                $imgs = explode("/", $item2);
+                if($imgs[1] != NULL){
+                    $new[] = $item2;
+                }
+            }
+            DB::table("products")->where("id", $item->id)->update([
+                'images'=>implode("|", $new)
+            ]);
+            // print_r(implode("|", $new));
+        }
     }
 }
