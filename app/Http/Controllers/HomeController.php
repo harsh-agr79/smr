@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function home(){
         $user = DB::table('customers')->where('id', session()->get("USER_ID"))->first();
-        $result['prods'] = DB::table('products')->whereIn('brand_id', explode('|', $user->brands))->get();
+        $result['prods'] = DB::table('products')->whereIn('brand_id', explode('|', $user->brands))->orderBy("brand", 'DESC')->orderBy("category_id", 'DESC')->get();
         $result['brands'] = DB::table('brands')->whereIn('id', explode('|', $user->brands))->get();
         $result['category'] = DB::table('categories')->get();
         return view('customer/home', $result);
