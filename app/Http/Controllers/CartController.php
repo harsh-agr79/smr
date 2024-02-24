@@ -10,7 +10,16 @@ class CartController extends Controller
     public function updatecart(Request $request){
         $prod = $request->post('prod',[]);
         $qt = $request->post('qt', []);
-        $cart = $prod.":".$qt;
+        $dqt = [];
+        foreach($qt as $item){
+            if($item == NULL){
+                $dqt[] = "0";
+            }
+            else{
+                $dqt[] = $item;
+            }
+        }
+        $cart = $prod.":".$dqt;
         DB::table('customers')->where("id", session()->get('USER_ID'))->update([
             'cart'=>$cart
         ]);
