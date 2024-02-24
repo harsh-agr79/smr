@@ -88,7 +88,9 @@ class ProductController extends Controller {
                 $ext = $file->getClientOriginalExtension();
                 $image_name = time().$a.'prod'.'.'.$ext;
                 $image_resize = Image::make( $file->getRealPath() );
-                $image_resize->fit( 500 );
+                $image_resize->resize(750, 750, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
                 $image_resize->save( 'product/'.$image_name );
                 array_push( $image, 'product/'.$image_name );
             }
