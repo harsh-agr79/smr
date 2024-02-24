@@ -277,7 +277,7 @@
                                 <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;"
                                     onclick="minus('{{ $item->id }}')"><i class="material-icons">remove</i></span>
                                 <input type="hidden" class="prodids" name="prodid[]" value="{{ $item->id }}">
-                                <input type="number" class="col s6 browser-default inp qtys" id="{{ $item->id }}cartinp"
+                                <input type="number" min="0" class="col s6 browser-default inp qtys" id="{{ $item->id }}cartinp"
                                     onkeyup="updatecart()" style="height: 32px; text-align:center; border-radius:0;"
                                     name="qty[]"
                                     @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}"
