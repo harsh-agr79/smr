@@ -213,7 +213,7 @@ class OrderAdminController extends Controller {
     public function addorder( Request $request ) {
         $result[ 'brands' ] = DB::table( 'brands' )->get();
         $result[ 'category' ] = DB::table( 'categories' )->get();
-        $result[ 'data' ] = DB::table( 'products' )->orderBy( 'brand', 'DESC' )->get();
+        $result[ 'data' ] = DB::table( 'products' )->orderBy( 'brand', 'DESC' )->orderBy("category",'DESC')->get();
         return view( 'admin.addorder', $result );
     }
 
