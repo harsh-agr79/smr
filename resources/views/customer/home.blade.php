@@ -305,10 +305,13 @@
                 <div class="col s12">
                     <h5 id="mod-name"></h5>
                 </div>
-                <div class="col s6">
+                <div class="col s4">
                     <span id="mod-price" style="font-weight: 600;"></span>
                 </div>
-                <div class="col s6">
+                <div class="col s4">
+                    <span id="mod-brand" style="font-weight: 600;"></span>
+                </div>
+                <div class="col s4">
                     <span id="mod-category" style="font-weight: 600;"></span>
                 </div>
                 <div class="col s12" style="margin-top: 10px;">
@@ -474,6 +477,7 @@
                     $('#mod-name').text(response.name)
                     $('#mod-price').text('Rs.' + response.price)
                     $('#mod-category').text(response.category)
+                    $('#mod-brand').text(response.brand)
                     $('#mod-details').text(response.details)
                     $('#mod-img1').attr('src', '/storage/media/' + response.img)
                     $('#mod-img2').attr('src', '/storage/media/' + response.img2)
