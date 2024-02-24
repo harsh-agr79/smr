@@ -36,6 +36,7 @@
             background: rgb(0, 194, 0);
             border-radius: 5px;
             color: black;
+            font-size: 10px;
         }
 
         .prod-admin-inp {
