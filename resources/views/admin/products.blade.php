@@ -17,7 +17,7 @@
         <h5 class="center">Products List</h5>
 
         <div class="mp-card" style="overflow-x: scroll;">
-            <table>
+            <table class="sortable">
                 <thead>
                     <th>SN</th>
                     <th>Name</th>
