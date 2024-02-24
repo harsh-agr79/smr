@@ -21,7 +21,7 @@
 
         .prod-admin-det {
             font-size: 10px;
-            padding: 5px;
+            padding: 10px;
             font-weight: 500;
         }
 
@@ -261,8 +261,8 @@
                         <span class="prod-admin-title">{{ $item->name }}</span>
                     </div>
                     <div class="col s12 row" style="padding: 0;  margin: 0;" onclick="details({{ $item->id }})">
-                        <span class="prod-admin-det col s6">{{ $item->brand }} {{ $item->category }}</span>
-                        <span class="prod-admin-det col s6">
+                        <span class="prod-admin-det col s8">{{ $item->brand }} {{ $item->category }}</span>
+                        <span class="prod-admin-det col s4">
                             @if ($item->stock == 'on')
                                 <span class="red-text right">Out of Stock</span>
                             @else
