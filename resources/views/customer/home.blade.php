@@ -3,7 +3,7 @@
 @section('main')
     <style>
         .bottom-sheet {
-            max-height: 85vh !important;
+            max-height: 65vh !important;
             padding: 5px;
             border-radius: 20px 20px 0px 0px !important;
         }
