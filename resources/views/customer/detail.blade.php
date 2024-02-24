@@ -69,7 +69,9 @@
                     @foreach ($data as $item)
                         <tr>
                             <td @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
-                                {{ $item->item }}</td>
+                                {{ $item->item }}
+                            <br>
+                        <span style="font-size: 7px;">{{$item->brand}} {{$item->category}}</span></td>
                             <td class="center">{{ $item->status }}</td>
                             <td class="center">{{ $item->quantity }}</td>
                             <td class="center">{{ $item->approvedquantity }}</td>
