@@ -11,6 +11,7 @@
     <style>
         .prod-admin-img {
             max-height: 10vh;
+            max-width: 15vh;
         }
 
         .prod-admin-title {
