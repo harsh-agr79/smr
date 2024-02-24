@@ -116,7 +116,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="cart" class="modal">
             <div class="modal-content bg-content">
                 <div class="right">
@@ -195,8 +195,11 @@
             <div class="mp-card row prod-admin searchable {{ $item->brand_id }}brd {{ $item->category_id }}cat"
                 style="margin: 3px; padding: 10px;">
                 <div class="col s4" style="padding: 0;  margin: 0;">
-                    <img src="{{ asset(explode('|', $item->images)[0]) }}" class="prod-admin-img materialboxed"
-                        alt="">
+                    @php
+                        $a = explode('|', $item->images);
+                    @endphp
+                    <img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif"
+                        class="prod-admin-img materialboxed" alt="">
                 </div>
                 <div class="col s8 row" style="padding: 0; margin: 0;">
                     <div class="col s12" style=" margin: 0; padding: 0;">
