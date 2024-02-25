@@ -481,7 +481,7 @@
                             <td><img src="${image}" class="table-prod"></td>
                             <td>${item.name}
                                 <br>
-                        <span style="font-size: 6px; margin-top:-10px;">
+                        <span style="font-size: 5px; margin-top:-10px;">
                             ${item.brand} ${item.category}</span></td>
                             <td>${item.price}</td>
                             <td class="center"><input type="number" id="${item.id}cartlist"
