@@ -3,8 +3,8 @@
 function getqty( $i, $products, $qty ) {
     $a = array_search( $i, $products );
     $b = $qty[ $a ];
-    if($b == "NaN"){
-        $b = 0;
+    if($b == "NaN" || $b == "0"){
+        $b = "";
     }
     return $b;
 }

@@ -298,7 +298,7 @@
                                 <input type="number" id="{{ $item->id }}cartinp" inputmode="numeric" pattern="[0-9]*"
                                     name="qty[]" onkeyup="updatecart()" placeholder="Quantity"
                                     class="browser-default prod-admin-inp right qtys"
-                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}"@endif>
+                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}" @endif>
                             </div>
                         </div>
                     </div>
