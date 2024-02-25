@@ -21,7 +21,7 @@
 
         .prod-admin-det {
             font-size: 10px;
-            padding:0 !important;
+            padding: 0 !important;
             margin: 0 !important;
             font-weight: 500;
         }
@@ -248,33 +248,34 @@
                     </div>
                 </div>
             @endforeach --}}
-            @foreach($prods as $item)
-            <div class="mp-card row prod-admin searchable {{ $item->brand_id }}brd {{ $item->category_id }}cat"
-                style="margin: 3px; padding: 10px;">
-                <div class="col s4" style="padding: 0;  margin: 0;">
-                    @php
-                        $a = explode('|', $item->images);
-                    @endphp
-                    <img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a)-1]) }}@else{{ asset('images/prod.jpg') }} @endif" class="prod-admin-img materialboxed"
-                        alt="">
-                </div>
-                <div class="col s8 row" style="padding: 0; margin: 0;">
-                    <div class="col s12" style=" margin: 0; padding: 0;" onclick="details({{ $item->id }})">
-                        <span class="prod-admin-title">{{ $item->name }}</span>
+            @foreach ($prods as $item)
+                <div class="mp-card row prod-admin searchable {{ $item->brand_id }}brd {{ $item->category_id }}cat"
+                    style="margin: 3px; padding: 10px;">
+                    <div class="col s4" style="padding: 0;  margin: 0;">
+                        @php
+                            $a = explode('|', $item->images);
+                        @endphp
+                        <img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif"
+                            class="prod-admin-img materialboxed" alt="">
                     </div>
-                    <div class="col s12 row" style="padding: 0;  margin: 0;" onclick="details({{ $item->id }})">
-                        <span class="prod-admin-det col s8">{{ $item->brand }} {{ $item->category }}</span>
-                        <span class="prod-admin-det col s4">
-                            @if ($item->stock == 'on')
-                                <span class="red-text right">Out of Stock</span>
-                            @else
-                                <span class="green-text right">In Stock</span>
-                            @endif
-                        </span>
-                    </div>
-                    <div class="row col s12 price-line" style="padding: 0;  margin: 0;">
-                        <div class="col s4 center" style="margin-top: 5px;"><span class="prod-admin-price">Rs.{{ $item->price }}</span></div>
-                        <div class="col s7 add-to-cart container right">
+                    <div class="col s8 row" style="padding: 0; margin: 0;">
+                        <div class="col s12" style=" margin: 0; padding: 0;" onclick="details({{ $item->id }})">
+                            <span class="prod-admin-title">{{ $item->name }}</span>
+                        </div>
+                        <div class="col s12 row" style="padding: 0;  margin: 0;" onclick="details({{ $item->id }})">
+                            <span class="prod-admin-det col s8">{{ $item->brand }} {{ $item->category }}</span>
+                            <span class="prod-admin-det col s4">
+                                @if ($item->stock == 'on')
+                                    <span class="red-text right">Out of Stock</span>
+                                @else
+                                    <span class="green-text right">In Stock</span>
+                                @endif
+                            </span>
+                        </div>
+                        <div class="row col s12 price-line" style="padding: 0;  margin: 0;">
+                            <div class="col s4 center" style="margin-top: 5px;"><span
+                                    class="prod-admin-price">Rs.{{ $item->price }}</span></div>
+                            {{-- <div class="col s7 add-to-cart container right">
                             <div class="row container">
                                 <span class="col s3 prod-btn" style="border-radius: 5px 0 0 5px;"
                                     onclick="minus('{{ $item->id }}')"><i class="material-icons">remove</i></span>
@@ -288,10 +289,19 @@
                                 <span class="col s3 prod-btn" style="border-radius: 0 5px 5px 0; "
                                     onclick="plus('{{ $item->id }}')"><i class="material-icons">add</i></span>
                             </div>
+                        </div> --}}
+                            <div class="col s8">
+                                <input type="hidden" class="prodids" name="prodid[]" value="{{ $item->id }}">
+                                <input type="number" id="{{ $item->id }}cartinp" inputmode="numeric" pattern="[0-9]*"
+                                    name="qty[]" onkeyup="updatecart()" placeholder="Quantity"
+                                    class="browser-default prod-admin-inp right qtys" min="0"
+                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}"
+                            @else
+                                value="0" @endif>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
             <div class="hide">
                 <button>Submit</button>
@@ -304,17 +314,17 @@
                 <div id="mod-caro" style="width: 100%; overflow-x: scroll; display:flex;">
 
                 </div>
-                <div class="col s12">
+                <div class="col s6">
                     <h5 id="mod-name"></h5>
                 </div>
-                <div class="col s4">
-                    <span id="mod-price" style="font-weight: 600;"></span>
-                </div>
-                <div class="col s4">
+                <div class="col s3">
                     <span id="mod-brand" style="font-weight: 600;"></span>
                 </div>
-                <div class="col s4">
+                <div class="col s3">
                     <span id="mod-category" style="font-weight: 600;"></span>
+                </div>
+                <div class="col s12">
+                    <span id="mod-price" style="font-weight: 600;"></span>
                 </div>
                 <div class="col s12" style="margin-top: 10px;">
                     <span style="font-weight: 600;">Details:</span>
