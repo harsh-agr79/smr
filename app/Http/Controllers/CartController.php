@@ -39,4 +39,18 @@ class CartController extends Controller
         }
         return response()->json($data);
     }
+    public function gettotal(){
+        $cart = DB::table('customers')->where("id", session()->get('USER_ID'))->first()->cart;
+        $break = explode(":", $cart);
+        $products = explode(",", $break[0]);
+        $qty = explode(",", $break[1]);
+        $total = 0;
+        for ($i=0; $i < count($products); $i++) {
+            if($qty[$i] > 0 && $qty[$i] != "NaN"){
+                $prod = DB::table('products')->where("id", $products[$i])->first();
+                $total= $total + $prod->price * $qty[$i];
+            }   
+        }
+        return response()->json($total);
+    }
 }

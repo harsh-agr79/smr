@@ -162,6 +162,7 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     
     Route::post('/user/updatecart', [CartController::class, 'updatecart']);
     Route::get('/user/getcart', [CartController::class, 'getcart']);
+    Route::get('/user/gettotal', [CartController::class, 'gettotal']);
     Route::get('/user/confirmcart', [OrderController::class, 'confirmcart']);
     Route::get('/user/savecart', [OrderController::class, 'savecart']);
     Route::get('/user/confirmorder/{id}', [OrderController::class, 'confirm']);

@@ -133,6 +133,9 @@
             <div class="btn green accent-4 modal-trigger" href="#modal1" style="margin-top: 16px;"><i
                     class="material-icons">filter_list</i></div>
         </div>
+        <div class="col s12 center">
+            <span>Bill Amount: <span id="totalamtout">0</span></span>
+        </div>
     </div>
 
     <div id="modal1" class="modal">
@@ -297,7 +300,7 @@
                                     class="browser-default prod-admin-inp right qtys" min="0"
                                     @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}"
                             @else
-                                value="0" @endif>
+                                value="" @endif>
                             </div>
                         </div>
                     </div>
@@ -315,7 +318,7 @@
 
                 </div>
                 <div class="col s12">
-                    <h6 id="mod-name"></h6>
+                    <h6 id="mod-name" style="font-weight: 600;"></h6>
                 </div>
                 <div class="col s4">
                     <span id="mod-brand" style="font-weight: 600;"></span>
@@ -335,6 +338,7 @@
     </div>
 
     <script>
+        gettotal();
         function Filter() {
             $('.prod-admin').hide()
             $('.prod-admin').removeClass('searchable');
@@ -437,6 +441,17 @@
                 type: "POST",
                 success: function(response) {
                     console.log(response)
+                    gettotal();
+                }
+            })
+        }
+        function gettotal(){
+            $.ajax({
+                url: "/user/gettotal",
+                type: "GET",
+                success: function(response) {
+                    console.log(response)
+                    $("#totalamtout").text(response)
                 }
             })
         }
