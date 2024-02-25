@@ -189,14 +189,14 @@
     <div id="cart-modal" class="modal cart-m"
         style="padding: 0 !important; margin: 0 !important; max-width: 95vw !important;">
         <div class="modal-content" style="padding: 5px !important;">
-            <h4>Cart</h4>
+            <h4 class="center">Cart</h4>
             <table>
                 <thead>
                     <th>SN</th>
                     <th>Image</th>
                     <th>Name</th>
-                    <th>Price</th>
                     <th>Quantity</th>
+                    <th>Price</th>
                     <th>Total</th>
                 </thead>
                 <tbody id="cart-table-body">
@@ -495,12 +495,13 @@
                                 <br>
                         <span style="font-size: 7px; margin-top:-10px;">
                             ${item.brand} ${item.category}</span></td>
-                            <td>${item.price}</td>
+                           
                             <td class="center"><input type="number" id="${item.id}cartlist"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
                                         onkeyup="changequantity(${item.id})" min="0" onchange="changequantity(${item.id})"
                                         onfocusout="changequantity2({{ $item->id }})" style="width: 7vh !important;" value="${item.quantity}"></td>
+                                        <td>${item.price}</td>
                             <td>${item.total}</td>
                         </tr>
                         `)
