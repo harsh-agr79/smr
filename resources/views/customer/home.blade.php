@@ -177,7 +177,7 @@
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large green accent-4" onclick="getcart()"><i class="material-icons">shopping_cart</i></a>
     </div>
-    <div id="cart-modal" class="modal" style="padding: 0 !important; min-width: 95vw !important;">
+    <div id="cart-modal" class="modal" style="padding: 0 !important; width: 95vw !important;">
         <div class="modal-content" style="padding: 5px !important;">
             <h4>Cart</h4>
             <table>
@@ -479,7 +479,7 @@
                         <tr id="${item.id}carttd">
                             <td>${a}</td>
                             <td><img src="${image}" class="table-prod"></td>
-                            <td>${item.name}
+                            <td style="font-size: 8px;">${item.name}
                                 <br>
                         <span style="font-size: 5px; margin-top:-10px;">
                             ${item.brand} ${item.category}</span></td>
