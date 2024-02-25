@@ -78,8 +78,17 @@
                 width: 100vw;
             }
         }
-        .table-prod{
+
+        .table-prod {
             height: 30px;
+        }
+
+        .cart-m {
+            width: 95vw !important;
+        }
+
+        .cart-m ::-webkit-scrollbar {
+            width: 15px;
         }
     </style>
     @php
@@ -177,7 +186,8 @@
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large green accent-4" onclick="getcart()"><i class="material-icons">shopping_cart</i></a>
     </div>
-    <div id="cart-modal" class="modal" style="padding: 0 !important; margin: 0 !important; max-width: 95vw !important;">
+    <div id="cart-modal" class="modal cart-m"
+        style="padding: 0 !important; margin: 0 !important; max-width: 95vw !important;">
         <div class="modal-content" style="padding: 5px !important;">
             <h4>Cart</h4>
             <table>
@@ -340,6 +350,7 @@
 
     <script>
         gettotal();
+
         function Filter() {
             $('.prod-admin').hide()
             $('.prod-admin').removeClass('searchable');
@@ -446,7 +457,8 @@
                 }
             })
         }
-        function gettotal(){
+
+        function gettotal() {
             $.ajax({
                 url: "/user/gettotal",
                 type: "GET",
@@ -533,12 +545,14 @@
                 indicators: true
             });
         });
-        function changequantity(id){
-           $(`#${id}cartinp`).val($(`#${id}cartlist`).val())
+
+        function changequantity(id) {
+            $(`#${id}cartinp`).val($(`#${id}cartlist`).val())
             updatecart()
             // getcart()
         }
-        function changequantity2(id){
+
+        function changequantity2(id) {
             updatecart()
             getcart()
         }
