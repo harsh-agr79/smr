@@ -491,9 +491,9 @@
                         <tr id="${item.id}carttd">
                             <td>${a}</td>
                             <td><img src="${image}" class="table-prod"></td>
-                            <td style="font-size: 8px;">${item.name}
+                            <td style="font-size: 10px;">${item.name}
                                 <br>
-                        <span style="font-size: 5px; margin-top:-10px;">
+                        <span style="font-size: 7px; margin-top:-10px;">
                             ${item.brand} ${item.category}</span></td>
                             <td>${item.price}</td>
                             <td class="center"><input type="number" id="${item.id}cartlist"
