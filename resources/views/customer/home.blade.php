@@ -178,7 +178,7 @@
         <a class="btn-floating btn-large green accent-4" onclick="getcart()"><i class="material-icons">shopping_cart</i></a>
     </div>
     <div id="cart-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="padding: 5px !important;">
             <h4>Cart</h4>
             <table>
                 <thead>
