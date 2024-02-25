@@ -316,9 +316,11 @@
                 </div>
                 <div class="col s12">
                     <span style="font-weight: 600;" id="mod-name"></span>
-               
+                </div>
+                <div class="col s4">
                     <span id="mod-brand" style="font-weight: 600;"></span>
-               
+                </div>
+                <div class="col s4">
                     <span id="mod-category" style="font-weight: 600;"></span>
                 </div>
                 <div class="col s12">
