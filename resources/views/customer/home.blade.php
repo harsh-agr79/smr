@@ -315,7 +315,7 @@
 
                 </div>
                 <div class="col s12">
-                    <h6 style="font-weight: 600;" id="mod-name"></h6>
+                    <h6 id="mod-name"></h6>
                 </div>
                 <div class="col s4">
                     <span id="mod-brand" style="font-weight: 600;"></span>
