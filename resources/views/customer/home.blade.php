@@ -122,7 +122,7 @@
             @endforeach
       <form>
     </div> --}}
-    <div class="row center" style="margin: 0;">
+    <div class="row center" style="margin: 0; padding: 0;">
         <div class='col s10 input-field' style="margin-top: 14px;">
             <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
                 type='search' id='search' />
@@ -133,8 +133,8 @@
             <div class="btn green accent-4 modal-trigger" href="#modal1" style="margin-top: 16px;"><i
                     class="material-icons">filter_list</i></div>
         </div>
-        <div class="col s12 center" style="padding: 0 !important; margin: 0 !important;">
-            <div style="font-size: 9px;">Bill Amount: <span id="totalamtout">0</span></div>
+        <div class="col s12 center" style="padding: 0 !important; margin: -10px !important;">
+            <div style="font-size: 9px;" class="center">Bill Amount: <span id="totalamtout">0</span></div>
         </div>
     </div>
 
