@@ -84,7 +84,7 @@
         }
 
         .cart-m {
-            width: 95vw !important;
+            width: 90vw !important;
         }
 
         .cart-m ::-webkit-scrollbar {
