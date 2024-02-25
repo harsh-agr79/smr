@@ -30,6 +30,8 @@ class CartController extends Controller
                     'id'=>$prod->id,
                     'name'=>$prod->name,
                     'image'=>explode("|", $prod->images)[0],
+                    'brand'=>$prod->brand,
+                    'category'=>$prod->category,
                     'price'=>$prod->price,
                     'quantity'=>$qty[$i],
                     'total'=>$prod->price * $qty[$i],
