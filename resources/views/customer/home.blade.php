@@ -134,7 +134,7 @@
                     class="material-icons">filter_list</i></div>
         </div>
         <div class="col s12 center">
-            <span>Bill Amount: <span id="totalamtout">0</span></span>
+            <span style="font-size: 9px;">Bill Amount: <span id="totalamtout">0</span></span>
         </div>
     </div>
 
