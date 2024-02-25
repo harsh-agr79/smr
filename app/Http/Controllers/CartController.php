@@ -27,6 +27,7 @@ class CartController extends Controller
             if($qty[$i] > 0 && $qty[$i] != "NaN"){
                 $prod = DB::table('products')->where("id", $products[$i])->first();
                 $data[] = [
+                    'id'=>$prod->id,
                     'name'=>$prod->name,
                     'image'=>explode("|", $prod->images)[0],
                     'price'=>$prod->price,

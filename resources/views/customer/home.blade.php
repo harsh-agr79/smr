@@ -459,6 +459,7 @@
                 url: "/user/getcart",
                 type: "GET",
                 success: function(response) {
+                    console.log(response);
                     $('#cart-modal').modal("open");
                     $('#cart-table-body').text('');
                     a = 0
@@ -472,12 +473,16 @@
                         a = a + 1
                         t = t + item.total
                         $('#cart-table-body').append(`
-                        <tr>
+                        <tr id="${item.id}carttd">
                             <td>${a}</td>
                             <td><img src="${image}" class="table-dp"></td>
                             <td>${item.name}</td>
                             <td>${item.price}</td>
-                            <td>${item.quantity}</td>
+                            <td class="center"><input type="number" id="${item.id}cartlist"
+                                        inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
+                                        class="browser-default prod-admin-inp gtquantity"
+                                        onkeyup="changequantity(${item.id})" min="0" onchange="changequantity(${item.id})"
+                                        onfocusout="changequantity2({{ $item->id }})" value="${item.quantity}"></td>
                             <td>${item.total}</td>
                         </tr>
                         `)
@@ -522,5 +527,14 @@
                 indicators: true
             });
         });
+        function changequantity(id){
+           $(`#${id}cartinp`).val($(`#${id}cartlist`).val())
+            updatecart()
+            // getcart()
+        }
+        function changequantity2(id){
+            updatecart()
+            getcart()
+        }
     </script>
 @endsection
