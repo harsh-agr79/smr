@@ -14,7 +14,7 @@ class OrderController extends Controller
         $products = explode(",", $break[0]);
         $qty = explode(",", $break[1]);
         for ($i=0; $i < count($products); $i++) {
-            if($qty[$i] > 0){
+            if($qty[$i] > 0 && $qty[$i] != 'NaN'){
                 $prod = DB::table('products')->where("id", $products[$i])->first();
                 DB::table("orders")->insert([
                     'date'=>date('Y-m-d H:i:s'),
@@ -51,7 +51,7 @@ class OrderController extends Controller
         $products = explode(",", $break[0]);
         $qty = explode(",", $break[1]);
         for ($i=0; $i < count($products); $i++) {
-            if($qty[$i] > 0){
+            if($qty[$i] > 0 && $qty[$i] != 'NaN'){
                 $prod = DB::table('products')->where("id", $products[$i])->first();
                 DB::table("orders")->insert([
                     'date'=>date('Y-m-d H:i:s'),
