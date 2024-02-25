@@ -89,7 +89,6 @@ main{
     outline: none;
     background: white !important;
     border-radius: 10px !important;
-    padding: 0 !important;
 }
 .rmenu{
     /* background: var(--bg-content); */
