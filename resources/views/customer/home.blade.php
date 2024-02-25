@@ -438,7 +438,7 @@
                 processData: false,
                 type: "POST",
                 success: function(response) {
-                    console.log(response)
+                    // console.log(response)
                     gettotal();
                 }
             })
@@ -448,7 +448,7 @@
                 url: "/user/gettotal",
                 type: "GET",
                 success: function(response) {
-                    console.log(response)
+                    // console.log(response)
                     $("#totalamtout").text(response)
                 }
             })
