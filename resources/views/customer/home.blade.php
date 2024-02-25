@@ -78,6 +78,9 @@
                 width: 100vw;
             }
         }
+        .table-prod{
+            height: 30px;
+        }
     </style>
     @php
         $cart = $user->cart;
@@ -475,7 +478,7 @@
                         $('#cart-table-body').append(`
                         <tr id="${item.id}carttd">
                             <td>${a}</td>
-                            <td><img src="${image}" class="table-dp"></td>
+                            <td><img src="${image}" class="table-prod"></td>
                             <td>${item.name}</td>
                             <td>${item.price}</td>
                             <td class="center"><input type="number" id="${item.id}cartlist"
