@@ -232,6 +232,7 @@ class OrderController extends Controller
                         'cartoons'=>$order[0]->cartoons,
                         'transport'=>$order[0]->transport,
                         'refid'=>$order[0]->refid,
+                        'save'=>$order[0]->save,
                     ] );
                 } else {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
