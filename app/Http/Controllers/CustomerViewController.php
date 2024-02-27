@@ -43,7 +43,7 @@ class CustomerViewController extends Controller
            return redirect('/user/profile');
     }
 
-    public function statement(){
+    public function statement(Request $request){
             $id = session()->get("USER_ID");
             $cust = DB::table('customers')->where('id', $id)->first();
             $result['cus'] = $cust;
