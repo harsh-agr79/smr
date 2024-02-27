@@ -159,6 +159,7 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get('/user/profile', [CustomerViewController::class, 'profile']);
     Route::post('/user/updateprofile', [CustomerViewController::class, 'updateprofile'])->name('editprofile');
+    Route::get('/user/statement', [CustomerViewController::class, 'statement']);
     
     Route::post('/user/updatecart', [CartController::class, 'updatecart']);
     Route::get('/user/getcart', [CartController::class, 'getcart']);
