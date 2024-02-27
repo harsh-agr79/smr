@@ -102,6 +102,8 @@
                     </li>
                     <li><a href="{{ url('/user/savedorders') }}" class=" active">Saved Baskets<i class="material-icons">save</i></a>
                     </li>
+                    <li><a href="{{ url('/user/statement') }}" class=" active">Statement<i class="material-icons">account_balance</i></a>
+                    </li>
                 </ul>
             </li>
         </ul>
