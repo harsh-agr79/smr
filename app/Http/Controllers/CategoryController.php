@@ -25,9 +25,15 @@ class CategoryController extends Controller
         $id = $request->post('id');
 
         DB::table('categories')->where('id', $id)->update([
-            'category'=>$category,
+            'category'=>$category
         ]);
         DB::table('products')->where('category_id', $id)->update([
+            'category'=>$category
+        ]);
+        DB::table('orders')->where('category_id', $id)->update([
+            'category'=>$category
+        ]);
+        DB::table('salesreturns')->where('category_id', $id)->update([
             'category'=>$category
         ]);
         return response()->json($request->post(), 200);

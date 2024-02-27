@@ -62,7 +62,7 @@
                 <h6 class="black-text" style="font-weight: 600;">
                     @php
                         $bal = explode('|', $cus->balance);
-                        
+
                     @endphp
                     @if ($bal[0] == 'red')
                         Amount to recieve: {{ $bal[1] }}
@@ -78,10 +78,11 @@
                 </div>
                 <div class="col s4">
                     <label><input type="checkbox" id="photo" onchange="vou()" /><span class="textcol">Show
-                           Voucher</span></label>
+                            Voucher</span></label>
                 </div>
                 <div class="col s4">
-                    <label><input type="checkbox" id="photo" onchange="ned()" /><span class="textcol">English Date</span></label>
+                    <label><input type="checkbox" id="photo" onchange="ned()" /><span class="textcol">English
+                            Date</span></label>
                 </div>
                 <form>
                     <div class="col s6">
@@ -121,11 +122,11 @@
                         <th class="voucol" style="display: none;">Voucher</th>
                         {{-- <th>Running balance</th> --}}
                     </tr>
-                   
+
                 </thead>
                 <tbody>
                     <tr style="font-weight: 700">
-                        <td sorttable_customkey= "-10000">From Before: {{$date}}</td>
+                        <td sorttable_customkey= "-10000">From Before: {{ $date }}</td>
                         <td></td>
                         <td>Opening Balance</td>
                         <td>{{ $tod }}</td>
@@ -144,17 +145,13 @@
                                 <td>{{ $data[$i]['type'] }}</td>
                                 <td>
                                     @if ($data[$i]['type'] == 'sale')
-                                        @if ($admin->type == 'admin' || $admin->type == 'staff')
-                                            <a href="{{ url('/detail/' . $data[$i]['ent_id']) }}">
-                                            @elseif($admin->type == 'marketer')
-                                                <a href="{{ url('/marketer/detail/' . $data[$i]['ent_id']) }}">
-                                        @endif
-                                    @elseif($data[$i]['type'] == 'payment')
-                                        <a href="{{ url('/editpayment/' . $data[$i]['ent_id']) }}">
+                                        <a href="{{ url('user/detail/' . $data[$i]['ent_id']) }}">
+                                        @elseif($data[$i]['type'] == 'payment')
+                                            {{ $data[$i]['ent_id'] }}
                                         @elseif($data[$i]['type'] == 'Sales Return')
-                                            <a href="{{ url('slrdetail/' . $data[$i]['ent_id']) }}">
-                                            @elseif($data[$i]['type'] == 'expense')
-                                                <a href="{{ url('editexpense/' . $data[$i]['ent_id']) }}">
+                                            {{ $data[$i]['ent_id'] }}
+                                        @elseif($data[$i]['type'] == 'expense')
+                                            {{ $data[$i]['ent_id'] }}
                                     @endif
                                     {{ $data[$i]['ent_id'] }}</a>
                                 </td>
@@ -281,7 +278,7 @@
 
 
     <script>
-         function tog() {
+        function tog() {
             var narcol = document.getElementsByClassName('narcol');
             $(narcol).toggle()
         }
