@@ -134,7 +134,13 @@ class OrderController extends Controller
         DB::table('orders')->where('order_id', $orderid)->update([
             'userremarks'=>$request->post('userremarks')
         ]);
-        return redirect('user/oldorders');
+        $order = DB::table('orders')->where('order_id', $orderid)->first()->save;
+        if($order == "save"){
+            return redirect('user/savedorders');
+        }
+        else{
+            return redirect('user/oldorders');
+        }
     }
     public function recieveorder(Request $request, $id){
         $order = DB::table('orders')->where('order_id', $id)->get();
@@ -266,7 +272,12 @@ class OrderController extends Controller
             
         }
         updateMainStatus($orderid);
-        return redirect("/user/oldorders");
+        if($order[0]->save == "save"){
+            return redirect('user/savedorders');
+        }
+        else{
+            return redirect('user/oldorders');
+        }
     }
     public function deleteorder(Request $request,$orderid){
         $order = DB::table('orders')->where("order_id",$orderid)->first();
