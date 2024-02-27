@@ -56,6 +56,11 @@
                             <input type="checkbox" @if ($prod->featured == 'on') checked @endif name="featured" />
                             <span>Featured</span>
                         </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" @if ($prod->net == 'on') checked @endif name="net" />
+                            <span>Net</span>
+                        </label>
                     </div>
                     <div class="col m6 s12">
                         <label>Price :</label><input name="price" value="{{ $prod->price }}" type="number"

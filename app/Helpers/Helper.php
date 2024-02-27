@@ -22,6 +22,40 @@ function getTotalAmount( $orderid ) {
     $tsd = $ts - ( $ts * 0.01 * $orders[ 0 ]->discount );
     return $tsd;
 }
+function ldis( $orderid ) {
+    // $orders = DB::table( 'orders' )->where( 'order_id', $orderid )->get();
+    // $ts = 0;
+    // foreach ( $orders as $item ) {
+    //     if ( $item->status == 'pending' ) {
+    //         $ts = $ts + ( $item->quantity * $item->price * (1-($item->discount/100)));
+    //     } else {
+    //         $ts = $ts + ( $item->approvedquantity * $item->price );
+    //     }
+    // }
+    // $tsd = $ts;
+    // if($tsd >=100000){
+    //     foreach($orders as $item){
+    //         $prod = DB::table("products")->where("id", $item->product_id)->first()->net;
+    //         if($prod != "on"){
+    //             DB::table('orders')->where( 'id', $item->id )->update([
+    //                 'ldis'=>"5"
+    //             ]);
+    //         }
+    //         else{
+    //             DB::table('orders')->where( 'id', $item->id )->update([
+    //                 'ldis'=>"0"
+    //             ]);
+    //         }
+    //     }
+        
+    // }   
+    // else{
+    //     DB::table('orders')->where( 'order_id', $orderid )->update([
+    //         'ldis'=>"0"
+    //     ]);
+    // }
+    // return $tsd;
+}
 
 function updateMainStatus( $orderid ) {
     $order = DB::table( 'orders' )->where( 'order_id', $orderid )->get();

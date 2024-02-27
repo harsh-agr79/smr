@@ -54,6 +54,11 @@
                             <input type="checkbox" name="featured"/>
                             <span>Featured</span>
                         </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="net"/>
+                            <span>Net</span>
+                        </label>
                     </div>
                     <div class="col m6 s12">
                         <label>Price :</label><input name="price" type="number" class="browser-default inp"

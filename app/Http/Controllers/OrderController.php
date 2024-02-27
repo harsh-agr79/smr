@@ -13,12 +13,13 @@ class OrderController extends Controller
         $break = explode(":", $cart);
         $products = explode(",", $break[0]);
         $qty = explode(",", $break[1]);
+        $oid = $user->id.getNepaliDay(date('Y-m-d H:i:s')).getNepaliMonth(date('Y-m-d H:i:s')).getNepaliYear(date('Y-m-d H:i:s')).date("His");
         for ($i=0; $i < count($products); $i++) {
             if($qty[$i] > 0 && $qty[$i] != 'NaN'){
                 $prod = DB::table('products')->where("id", $products[$i])->first();
                 DB::table("orders")->insert([
                     'date'=>date('Y-m-d H:i:s'),
-                    'order_id'=>$user->id.getNepaliDay(date('Y-m-d H:i:s')).getNepaliMonth(date('Y-m-d H:i:s')).getNepaliYear(date('Y-m-d H:i:s')).date("His"),
+                    'order_id'=>$oid,
                     'name'=>$user->name,
                     'user_id'=>$user->id,
                     'item'=>$prod->name,
@@ -27,12 +28,14 @@ class OrderController extends Controller
                     'brand_id'=>$prod->brand_id,
                     'category'=>$prod->category,
                     'category_id'=>$prod->category_id,
+                    'net'=>$prod->net,
                     'price'=>$prod->price,
                     'quantity'=>$qty[$i],
                     'approvedquantity'=>"0",
                     'mainstatus'=>"blue",
                     'status'=>"pending",
                     'discount'=>"0",
+                    'sdis'=>"0",
                     'nepday'=>getNepaliDay(date('Y-m-d H:i:s')),
                     'nepmonth'=>getNepaliMonth(date('Y-m-d H:i:s')),
                     'nepyear'=>getNepaliYear(date('Y-m-d H:i:s'))
@@ -42,6 +45,7 @@ class OrderController extends Controller
         DB::table('customers')->where("id", session()->get('USER_ID'))->update([
             'cart'=>NULL
         ]);
+        ldis($oid);
         return redirect("/user/home");
     }
     public function savecart(){
@@ -50,12 +54,13 @@ class OrderController extends Controller
         $break = explode(":", $cart);
         $products = explode(",", $break[0]);
         $qty = explode(",", $break[1]);
+        $oid = $user->id.getNepaliDay(date('Y-m-d H:i:s')).getNepaliMonth(date('Y-m-d H:i:s')).getNepaliYear(date('Y-m-d H:i:s')).date("His");
         for ($i=0; $i < count($products); $i++) {
             if($qty[$i] > 0 && $qty[$i] != 'NaN'){
                 $prod = DB::table('products')->where("id", $products[$i])->first();
                 DB::table("orders")->insert([
                     'date'=>date('Y-m-d H:i:s'),
-                    'order_id'=>$user->id.getNepaliDay(date('Y-m-d H:i:s')).getNepaliMonth(date('Y-m-d H:i:s')).getNepaliYear(date('Y-m-d H:i:s')).date("His"),
+                    'order_id'=>$oid,
                     'name'=>$user->name,
                     'user_id'=>$user->id,
                     'item'=>$prod->name,
@@ -64,12 +69,14 @@ class OrderController extends Controller
                     'brand_id'=>$prod->brand_id,
                     'category'=>$prod->category,
                     'category_id'=>$prod->category_id,
+                    'net'=>$prod->net,
                     'price'=>$prod->price,
                     'quantity'=>$qty[$i],
                     'approvedquantity'=>"0",
                     'mainstatus'=>"blue",
                     'status'=>"pending",
                     'discount'=>"0",
+                    'sdis'=>"0",
                     'nepday'=>getNepaliDay(date('Y-m-d H:i:s')),
                     'nepmonth'=>getNepaliMonth(date('Y-m-d H:i:s')),
                     'nepyear'=>getNepaliYear(date('Y-m-d H:i:s')),
@@ -80,6 +87,7 @@ class OrderController extends Controller
         DB::table('customers')->where("id", session()->get('USER_ID'))->update([
             'cart'=>NULL
         ]);
+        ldis($oid);
         return redirect("/user/home");
     }
 
@@ -194,11 +202,28 @@ class OrderController extends Controller
         $qty = $request->post( 'quantity', [] );
         $ids = $request->post( 'id', [] );
         $date = $request->post( 'date' );
+        $disc = "0";
+        $disc2 = "0";
+        foreach ($order as $item) {
+            if($item->discount > 0 || $item->sdis > 0){
+                $disc = $item->discount;
+                $disc2 = $item->sdis;
+                break;
+            }
+        }
         for ( $i = 0; $i < count( $ids );
         $i++ ) {
             if ( $qty[ $i ] !== '0' && $qty[ $i ] !== NULL && $qty[ $i ] !== "" ) {
                 if ( $ids[ $i ] === 'newitem' ) {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    if($prod->net == 'on'){
+                        $dis = "0";
+                        $dis2 = "0";
+                    }
+                    else{
+                        $dis = $disc;
+                        $dis2 = $disc2;
+                    }
                     DB::table( 'orders' )->insert( [
                         'date'=>$date.' '.date( 'H:i:s' ),
                         'order_id'=>$orderid,
@@ -210,12 +235,14 @@ class OrderController extends Controller
                         'brand_id'=>$prod->brand_id,
                         'category'=>$prod->category,
                         'category_id'=>$prod->category_id,
+                        'net'=>$prod->net,
                         'price'=>$prod->price,
                         'quantity'=>$qty[ $i ],
                         'approvedquantity'=>'0',
                         'mainstatus'=>'blue',
                         'status'=>'pending',
-                        'discount'=>$order[0]->discount,
+                        'discount'=>$dis,
+                        'sdis'=>$dis2,
                         'nepday'=>getNepaliDay( $date ),
                         'nepmonth'=>getNepaliMonth( $date ),
                         'nepyear'=>getNepaliYear( $date ),
@@ -236,6 +263,14 @@ class OrderController extends Controller
                     ] );
                 } else {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    if($prod->net == 'on'){
+                        $dis = "0";
+                        $dis2 = "0";
+                    }
+                    else{
+                        $dis = $disc;
+                        $dis2 = $disc2;
+                    }
                     $o =  DB::table( 'orders' )->where( 'id', $ids[$i] )->first();
                     if($qty[$i] == $o->approvedquantity && $o->status == 'approved'){
                     }
@@ -254,12 +289,14 @@ class OrderController extends Controller
                             'brand_id'=>$prod->brand_id,
                             'category'=>$prod->category,
                             'category_id'=>$prod->category_id,
+                            'net'=>$prod->net,
                             'price'=>$prod->price,
                             'quantity'=>$qty[ $i ],
                             'approvedquantity'=>'0',
                             'mainstatus'=>'blue',
                             'status'=>'pending',
-                            'discount'=>'0',
+                            'discount'=>$dis,
+                            'sdis'=>$dis2,
                             'nepday'=>getNepaliDay( $date ),
                             'nepmonth'=>getNepaliMonth( $date ),
                             'nepyear'=>getNepaliYear( $date )
@@ -273,6 +310,7 @@ class OrderController extends Controller
             
         }
         updateMainStatus($orderid);
+        ldis($orderid);
         if($order[0]->save == "save"){
             return redirect('user/savedorders');
         }

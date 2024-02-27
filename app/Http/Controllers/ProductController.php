@@ -61,6 +61,7 @@ class ProductController extends Controller {
             'price'=>$request->post( 'price' ),
             'featured'=>$request->post( 'featured' ),
             'details'=>$request->post( 'details' ),
+            'net'=>$request->post('net'),
             'images'=>implode( '|', $image )
         ] );
         return redirect( '/products' );
@@ -119,6 +120,7 @@ class ProductController extends Controller {
             'price'=>$request->post( 'price' ),
             'featured'=>$request->post( 'featured' ),
             'details'=>$request->post( 'details' ),
+            'net'=>$request->post('net'),
             'images'=>implode( '|', $image )
         ] );
 

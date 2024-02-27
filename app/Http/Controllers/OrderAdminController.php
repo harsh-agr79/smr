@@ -111,6 +111,7 @@ class OrderAdminController extends Controller {
         $price = $request->post( 'price', [] );
         $status = $request->post( 'status', [] );
         $discount = $request->post( 'discount' );
+        $discount2 = $request->post( 'sdis' );
         for ( $i = 0; $i < count( $id );
         $i++ ) {
 
@@ -123,6 +124,21 @@ class OrderAdminController extends Controller {
             } else {
                 $qty = 0;
             }
+            $prod = DB::table("products")->where('id',DB::table( 'orders' )->where( 'id', $id[ $i ] )->first()->product_id)->first()->net;
+            if($prod == "on"){
+                $dis = 0;
+                $dis2 = 0;
+            }
+            else{
+                $dis = $discount;
+                $dis2 = $discount2;
+            }
+            if($dis == NULL || $dis == ""){
+                $dis = 0;
+            }
+            if($dis2 == NULL || $dis2 == ""){
+                $dis2 = 0;
+            }
             DB::table( 'orders' )->where( 'id', $id[ $i ] )->update( [
                 'approvedquantity'=>$qty,
                 'price'=>$price[ $i ],
@@ -130,11 +146,13 @@ class OrderAdminController extends Controller {
                 'remarks'=>$request->post( 'remarks' ),
                 'cartoons'=>$request->post( 'cartoons' ),
                 'transport'=>$request->post( 'transport' ),
-                'discount'=>$discount,
+                'discount'=>$dis,
+                'sdis'=>$dis2
             ] );
         }
         updateMainStatus( $request->post( 'order_id' ) );
         updatebalance(DB::table("orders")->where('order_id', $request->post( 'order_id' ))->first()->user_id);
+        ldis($request->post( 'order_id' ));
 
         if ( $request->post( 'previous' ) == url( 'editorder/'.DB::table( 'orders' )->where( 'id', $id[ 0 ] )->first()->order_id ) ) {
             return redirect( 'dashboard' );
@@ -222,13 +240,20 @@ class OrderAdminController extends Controller {
         $products = $request->post( 'prodid', [] );
         $qty = $request->post( 'quantity', [] );
         $date = $request->post( 'date' );
+        $oid = $user->id.getNepaliDay( $date.' '.date( 'H:i:s' ) ).getNepaliMonth( $date.' '.date( 'H:i:s' ) ).getNepaliYear( $date.' '.date( 'H:i:s' ) ).date( 'His' );
         for ( $i = 0; $i < count( $products );
         $i++ ) {
             if ( $qty[ $i ] > 0 ) {
                 $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                if($prod->net == 'on'){
+                    $dis = "0";
+                }
+                else{
+                    $dis = "5";
+                }
                 DB::table( 'orders' )->insert( [
                     'date'=>$date.' '.date( 'H:i:s' ),
-                    'order_id'=>$user->id.getNepaliDay( $date.' '.date( 'H:i:s' ) ).getNepaliMonth( $date.' '.date( 'H:i:s' ) ).getNepaliYear( $date.' '.date( 'H:i:s' ) ).date( 'His' ),
+                    'order_id'=>$oid,
                     'name'=>$user->name,
                     'user_id'=>$user->id,
                     'item'=>$prod->name,
@@ -237,12 +262,14 @@ class OrderAdminController extends Controller {
                     'brand_id'=>$prod->brand_id,
                     'category'=>$prod->category,
                     'category_id'=>$prod->category_id,
+                    'net'=>$prod->net,
                     'price'=>$prod->price,
                     'quantity'=>$qty[ $i ],
                     'approvedquantity'=>'0',
                     'mainstatus'=>'blue',
                     'status'=>'pending',
-                    'discount'=>'0',
+                    'discount'=>"0",
+                    'sdis'=>"0",
                     'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
                     'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
                     'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) )
@@ -250,6 +277,7 @@ class OrderAdminController extends Controller {
             }
 
         }
+        ldis($oid);
         return redirect( '/pendingorders' );
     }
 
@@ -276,11 +304,28 @@ class OrderAdminController extends Controller {
         $qty = $request->post( 'quantity', [] );
         $ids = $request->post( 'id', [] );
         $date = $request->post( 'date' );
+        $disc = "0";
+        $disc2 = "0";
+        foreach ($order as $item) {
+            if($item->discount > 0 || $item->sdis > 0){
+                $disc = $item->discount;
+                $disc2 = $item->sdis;
+                break;
+            }
+        }
         for ( $i = 0; $i < count( $ids );
         $i++ ) {
             if ( $qty[ $i ] !== '0' && $qty[ $i ] !== NULL && $qty[ $i ] !== "" ) {
                 if ( $ids[ $i ] === 'newitem' ) {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    if($prod->net == 'on'){
+                        $dis = "0";
+                        $dis2 = "0";
+                    }
+                    else{
+                        $dis = $disc;
+                        $dis2 = $disc2;
+                    }
                     DB::table( 'orders' )->insert( [
                         'date'=>$date.' '.date( 'H:i:s' ),
                         'order_id'=>$orderid,
@@ -292,12 +337,14 @@ class OrderAdminController extends Controller {
                         'brand_id'=>$prod->brand_id,
                         'category'=>$prod->category,
                         'category_id'=>$prod->category_id,
+                        'net'=>$prod->net,
                         'price'=>$prod->price,
                         'quantity'=>$qty[ $i ],
                         'approvedquantity'=>'0',
                         'mainstatus'=>'blue',
                         'status'=>'pending',
-                        'discount'=>$order[0]->discount,
+                        'discount'=>$dis,
+                        'sdis'=>$dis2,
                         'nepday'=>getNepaliDay( $date ),
                         'nepmonth'=>getNepaliMonth( $date ),
                         'nepyear'=>getNepaliYear( $date ),
@@ -317,6 +364,14 @@ class OrderAdminController extends Controller {
                     ] );
                 } else {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    if($prod->net == 'on'){
+                        $dis = "0";
+                        $dis2 = "0";
+                    }
+                    else{
+                        $dis = $disc;
+                        $dis2 = $disc2;
+                    }
                     $o =  DB::table( 'orders' )->where( 'id', $ids[$i] )->first();
                     if($qty[$i] == $o->approvedquantity && $o->status == 'approved'){
                     }
@@ -335,12 +390,14 @@ class OrderAdminController extends Controller {
                             'brand_id'=>$prod->brand_id,
                             'category'=>$prod->category,
                             'category_id'=>$prod->category_id,
+                            'net'=>$prod->net,
                             'price'=>$prod->price,
                             'quantity'=>$qty[ $i ],
                             'approvedquantity'=>'0',
                             'mainstatus'=>'blue',
                             'status'=>'pending',
-                            'discount'=>'0',
+                            'discount'=>$dis,
+                            'sdis'=>$dis2,
                             'nepday'=>getNepaliDay( $date ),
                             'nepmonth'=>getNepaliMonth( $date ),
                             'nepyear'=>getNepaliYear( $date )
@@ -355,6 +412,7 @@ class OrderAdminController extends Controller {
         }
         updateMainStatus($orderid);
         updatebalance($user->id);
+        ldis($orderid);
         return redirect("/");
     }
     public function deleteorder(Request $request,$orderid){
