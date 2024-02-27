@@ -273,6 +273,7 @@
     </div>
 
     <script>
+        getTotal();
         function changequantity(id) {
             var qval = $(`#${id}viewinp`).val();
             if (qval < 1 || qval == null) {
