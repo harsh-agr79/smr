@@ -144,11 +144,7 @@
                                 <td>{{ $data[$i]['type'] }}</td>
                                 <td>
                                     @if ($data[$i]['type'] == 'sale')
-                                        @if ($admin->type == 'admin' || $admin->type == 'staff')
                                             <a href="{{ url('/detail/' . $data[$i]['ent_id']) }}">
-                                            @elseif($admin->type == 'marketer')
-                                                <a href="{{ url('/marketer/detail/' . $data[$i]['ent_id']) }}">
-                                        @endif
                                     @elseif($data[$i]['type'] == 'payment')
                                         <a href="{{ url('/editpayment/' . $data[$i]['ent_id']) }}">
                                         @elseif($data[$i]['type'] == 'Sales Return')
