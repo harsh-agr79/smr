@@ -124,7 +124,7 @@ class CustomerViewController extends Controller
             ->where('date', '<', $date)
             ->where('user_id',$id)
             ->where('net', NULL)
-            ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis, SUM(1-sdis*0.01) as dis2')->groupBy('name')->where('status','approved') 
+            ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
             ->get();
     
             $result['oldpayments'] = DB::table('payments')
@@ -152,7 +152,7 @@ class CustomerViewController extends Controller
                 ->where('net', NULL)
                ->where('date', '>=', $date)
                ->where('date', '<=', $date2)
-               ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis,SUM(1-sdis*0.01) as dis2')->groupBy('name')->where('status','approved') 
+               ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
                ->get();
     
                $result['cupysum'] = DB::table('payments')

@@ -14,7 +14,7 @@
         @if ($oldorders->isEmpty())
             {{ $oo = 0 }}
         @else
-            {{ $oo = ($oldorders['0']->sum - $oldorders['0']->dis)*$oldorders['0']->dis2 }}
+            {{ $oo = $oldorders['0']->sum}}
         @endif
         @if ($oldpayments->isEmpty())
             {{ $op = 0 }}
@@ -183,9 +183,9 @@
                         <td>Total Sales</td>
                         <td>
                             @if (!$cuorsum->isEmpty())
-                                {{ $cuorsum[0]->sum - $cuorsum[0]->dis }}
+                                {{ $cuorsum[0]->sum }}
                                 @php
-                                    $debit = $debit + $cuorsum[0]->sum - $cuorsum[0]->dis;
+                                    $debit = $debit + $cuorsum[0]->sum;
                                 @endphp
                             @else
                                 0
