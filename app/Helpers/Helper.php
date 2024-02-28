@@ -14,13 +14,13 @@ function getTotalAmount( $orderid ) {
     $ts = 0;
     foreach ( $orders as $item ) {
         if ( $item->status == 'pending' ) {
-            $ts = $ts + ( $item->quantity * $item->price );
+            $ts = $ts + ( $item->quantity * $item->price *( 1 - 0.01*$item->discount))*(1-0.01*$item->sdis);
         } else {
-            $ts = $ts + ( $item->approvedquantity * $item->price );
+            $ts = $ts + ( $item->approvedquantity * $item->price *( 1 - 0.01*$item->discount))*(1-0.01*$item->sdis);
         }
     }
-    $tsd = $ts - ( $ts * 0.01 * $orders[ 0 ]->discount );
-    return $tsd;
+    // $tsd = $ts - ( $ts * 0.01 * $orders[ 0 ]->discount );
+    return $ts;
 }
 function ldis( $orderid ) {
     // $orders = DB::table( 'orders' )->where( 'order_id', $orderid )->get();
@@ -127,8 +127,8 @@ function updatebalance($id)
         ->groupBy('user_id')
         ->first();
     $order = DB::table('orders')
-        ->where(['deleted_at' => null, 'status' => 'approved', 'save' => null, 'user_id' => $id])
-        ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis')
+        ->where(['deleted_at' => null, 'status' => 'approved', 'save' => null, 'user_id' => $id, 'net'=>NULL])
+        ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis, SUM(1-0.01*sdis) as dis2')
         ->where('status', 'approved')
         ->groupBy('user_id')
         ->first();
@@ -148,7 +148,7 @@ function updatebalance($id)
         $oc = 0;
 
     if($order!=NULL){
-        $or = $order->sum-$order->dis;
+        $or = ($order->sum-$order->dis)*$order->dis2;
     }
     else{
         $or = 0;

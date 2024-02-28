@@ -14,7 +14,7 @@
         @if ($oldorders->isEmpty())
             {{ $oo = 0 }}
         @else
-            {{ $oo = $oldorders['0']->sum - $oldorders['0']->dis }}
+            {{ $oo = ($oldorders['0']->sum - $oldorders['0']->dis)*$oldorders['0']->dis2 }}
         @endif
         @if ($oldpayments->isEmpty())
             {{ $op = 0 }}
@@ -55,9 +55,6 @@
     </div>
     <div>
         <div class="mp-card" style="margin-top: 20px;">
-            <div class="center">
-                <h6>Statement of : {{ $cus->name }}</h6>
-            </div>
             <div class="green center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
                 <h6 class="black-text" style="font-weight: 600;">
                     @php
@@ -102,7 +99,7 @@
                     </div>
                 </form>
                 <div class="col s4" style="margin-top: 10px;">
-                    <a class="btn green black-text" href="{{ url('/balancesheet/' . $cus->name) }}">
+                    <a class="btn green black-text" href="{{ url('/user/statement') }}">
                         Clear
                     </a>
                 </div>
@@ -155,14 +152,15 @@
                                     @endif
                                     {{ $data[$i]['ent_id'] }}</a>
                                 </td>
-                                <td>
-                                    @if ($data[$i]['debit'] != 0)
-                                        {{ money($data[$i]['debit']) }}
-                                    @endif
-                                </td>
+                               
                                 <td>
                                     @if ($data[$i]['credit'] != 0)
                                         {{ money($data[$i]['credit']) }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($data[$i]['debit'] != 0)
+                                        {{ money($data[$i]['debit']) }}
                                     @endif
                                 </td>
                                 @if ($runb + $data[$i]['debit'] - $data[$i]['credit'] > 0)
@@ -182,6 +180,7 @@
                         <td></td>
                         <td></td>
                         <td>Total Sales</td>
+                        <td></td>
                         <td>
                             @if (!$cuorsum->isEmpty())
                                 {{ $cuorsum[0]->sum - $cuorsum[0]->dis }}
@@ -193,12 +192,12 @@
                             @endif
                         </td>
                         <td></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td>Total Expense</td>
+                        <td></td>
                         <td>
                             @if (!$cuexsum->isEmpty())
                                 {{ $cuexsum[0]->sum }}
@@ -210,13 +209,11 @@
                             @endif
                         </td>
                         <td></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td>Total Payment</td>
-                        <td></td>
                         <td>
                             @if (!$cupysum->isEmpty())
                                 {{ $cupysum[0]->sum }}
@@ -228,12 +225,13 @@
                             @endif
                         </td>
                         <td></td>
+
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td>Total Salesreturn</td>
-                        <td></td>
                         <td>
                             @if (!$cuslrsum->isEmpty())
                                 {{ $cuslrsum[0]->sum - $cuslrsum[0]->dis }}
@@ -245,13 +243,14 @@
                             @endif
                         </td>
                         <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td>Total</td>
-                        <td>{{ $debit }}</td>
                         <td>{{ $credit }}</td>
+                        <td>{{ $debit }}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -259,11 +258,11 @@
                         <td></td>
                         <td>Balance</td>
                         @if ($bal[0] == 'red')
-                            <td> {{ $bal[1] }}</td>
                             <td></td>
+                            <td> {{ $bal[1] }}</td>
                         @else
-                            <td></td>
                             <td> {{ $bal[1] }}</td>
+                            <td></td>
                         @endif
                         <td></td>
                     </tr>

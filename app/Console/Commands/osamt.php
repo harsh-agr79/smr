@@ -34,8 +34,8 @@ class osamt extends Command {
             ->groupBy( 'user_id' )
             ->first();
             $order = DB::table( 'orders' )
-            ->where( [ 'deleted_at' => null, 'status' => 'approved', 'save' => null, 'user_id' => $id ] )
-            ->selectRaw( '*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis' )
+            ->where(['deleted_at' => null, 'status' => 'approved', 'save' => null, 'user_id' => $id, 'net'=>NULL])
+            ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis, SUM(1-0.01*sdis) as dis2')
             ->where( 'status', 'approved' )
             ->groupBy( 'user_id' )
             ->first();
@@ -55,7 +55,7 @@ class osamt extends Command {
             $oc = 0;
 
             if ( $order != NULL ) {
-                $or = $order->sum-$order->dis;
+                $or = ($order->sum-$order->dis)*$order->dis2;
             } else {
                 $or = 0;
             }

@@ -123,7 +123,8 @@ class CustomerViewController extends Controller
             $result['oldorders'] = DB::table('orders')
             ->where('date', '<', $date)
             ->where('user_id',$id)
-            ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis')->groupBy('name')->where('status','approved') 
+            ->where('net', NULL)
+            ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis, SUM(1-sdis*0.01) as dis2')->groupBy('name')->where('status','approved') 
             ->get();
     
             $result['oldpayments'] = DB::table('payments')
@@ -148,9 +149,10 @@ class CustomerViewController extends Controller
                $result['cuorsum'] = DB::table('orders')
                ->where(['save'=>NULL])
                ->where('user_id', $id)
+                ->where('net', NULL)
                ->where('date', '>=', $date)
                ->where('date', '<=', $date2)
-               ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis')->groupBy('name')->where('status','approved') 
+               ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount*0.01 * approvedquantity * price) as dis,SUM(1-sdis*0.01) as dis2')->groupBy('name')->where('status','approved') 
                ->get();
     
                $result['cupysum'] = DB::table('payments')
@@ -175,15 +177,16 @@ class CustomerViewController extends Controller
                ->selectRaw('*, SUM(amount) as sum')->groupBy('name') 
                ->get();
     
-            $orders = DB::table('orders')
-            ->where(['save'=>null])
-            ->where('date', '>=', $date)
-            ->where('date', '<=', $date2)
-            ->where('status','approved')
-            ->where('user_id',$id)
-            ->selectRaw('*, SUM(approvedquantity * price) as sum, SUM(discount * 0.01 * approvedquantity * price) as dis')->groupBy('order_id') 
-            ->orderBy('orders.date','desc')
-            ->get();
+               $orders = DB::table('orders')
+               ->where(['save'=>null])
+               ->where('date', '>=', $date)
+               ->where('date', '<=', $date2)
+               ->where('status','approved')
+               ->where('user_id',$id)
+               ->where('net', NULL)
+               ->selectRaw('*, SUM(approvedquantity * price) as sum')->groupBy('order_id') 
+               ->orderBy('orders.date','desc')
+               ->get();
     
             $payments = DB::table('payments')->where('user_id', $id)
             ->where('date', '>=', $date)
@@ -214,7 +217,7 @@ class CustomerViewController extends Controller
                     'name'=>$item->name,
                     'created'=>$item->date,
                     'ent_id'=>$item->order_id,
-                    'debit'=>$item->sum - $item->dis,
+                    'debit'=>($item->sum * (1-$item->discount*0.01))*(1-0.01*$item->sdis),
                     'nar'=>$item->remarks,
                     'vou'=>'',
                     'credit'=>'0',

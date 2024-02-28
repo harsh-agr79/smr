@@ -14,7 +14,7 @@
         @if ($oldorders->isEmpty())
             {{ $oo = 0 }}
         @else
-            {{ $oo = $oldorders['0']->sum - $oldorders['0']->dis }}
+            {{ $oo = ($oldorders['0']->sum - $oldorders['0']->dis)*$oldorders['0']->dis2 }}
         @endif
         @if ($oldpayments->isEmpty())
             {{ $op = 0 }}
