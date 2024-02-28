@@ -313,6 +313,9 @@ class OrderAdminController extends Controller {
                 break;
             }
         }
+        DB::table( 'orders' )->where('order_id',$orderid)->update( [
+            'date'=>$date.' '.date( 'H:i:s' ),
+        ]);
         for ( $i = 0; $i < count( $ids );
         $i++ ) {
             if ( $qty[ $i ] !== '0' && $qty[ $i ] !== NULL && $qty[ $i ] !== "" ) {
@@ -410,6 +413,7 @@ class OrderAdminController extends Controller {
             }
             
         }
+
         updateMainStatus($orderid);
         updatebalance($user->id);
         ldis($orderid);
