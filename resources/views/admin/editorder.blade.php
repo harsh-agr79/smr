@@ -145,7 +145,7 @@
                                 <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
                                 <td>{{ $item->item }}</td>
                                 <td  id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
-                                <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
+                                <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
                                         onkeyup="changequantity2({{ $item->id }})"
@@ -161,7 +161,7 @@
                             <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
                             <td>{{ $item->name }}</td>
                             <td id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
-                            <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
+                            <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                     inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                     class="browser-default prod-admin-inp gtquantity"
                                     onkeyup="changequantity2({{ $item->id }})"
