@@ -240,7 +240,7 @@
                         <div class="col s4 center"><span class="prod-admin-price">Rs.{{ $item->price }}</span></div>
                         <div class="col s8"><input type="number" id="{{ $item->id . 'viewinp' }}" inputmode="numeric"
                                 pattern="[0-9]*" placeholder="Quantity" class="browser-default prod-admin-inp right"
-                                onkeyup="changequantity({{ $item->id }})"></div>
+                                onkeyup="changequantity({{ $item->id }})" onchange="changequantity({{ $item->id }})"></div>
                     </div>
                 </div>
             </div>
