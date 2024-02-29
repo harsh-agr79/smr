@@ -144,7 +144,6 @@
                             <tr id={{ $item->id . 'list' }}>
                                 <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
                                 <td>{{ $item->item }}</td>
-                                <td  id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
                                 <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
@@ -153,6 +152,7 @@
                                         onfocusout="changequantity2({{ $item->id }})" value="{{$item->quantity}}"></td>
                                 <input type="hidden" name="prodid[]" value="{{ $item->product_id }}">
                                 <input type="hidden" name="id[]" value="{{ $item->id }}">
+                                <td  id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
                                 <td id="{{$item->id}}total">{{$item->quantity * $item->price}}</td>
                             </tr>
                         @endforeach
@@ -160,7 +160,6 @@
                         <tr style="display: none;"id={{ $item->id . 'list' }}>
                             <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
                             <td>{{ $item->name }}</td>
-                            <td id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
                             <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                     inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                     class="browser-default prod-admin-inp gtquantity"
@@ -169,6 +168,7 @@
                                     onfocusout="changequantity2({{ $item->id }})"></td>
                             <input type="hidden" name="prodid[]" value="{{ $item->id }}">
                             <input type="hidden" name="id[]" value="newitem">
+                            <td id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
                             <td id="{{$item->id}}total"></td>
                         </tr>
                     @endforeach
