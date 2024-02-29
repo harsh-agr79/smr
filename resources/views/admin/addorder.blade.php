@@ -172,7 +172,7 @@
                 <a class="btn red modal-close">
                     Edit
                 </a>
-                <button class="btn amber" type="submit">
+                <button class="btn green accent-4" type="submit">
                     Submit
                 </button>
             </div>
