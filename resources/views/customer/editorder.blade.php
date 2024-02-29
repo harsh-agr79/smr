@@ -299,7 +299,7 @@
             }
             var a = $(`#${id}listinp`).val() * $(`#${id}price`).text();
             $(`#${id}total`).text(a);
-            console.log(a);
+            // console.log(a);
             getTotal();
         }
 
@@ -324,7 +324,7 @@
             }
             var a = $(`#${id}listinp`).val() * $(`#${id}price`).text();
             $(`#${id}total`).text(a);
-            console.log(a);
+            // console.log(a);
             getTotal()
         }
 
