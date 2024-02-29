@@ -309,7 +309,7 @@
                             <div class="col s8">
                                 <input type="hidden" class="prodids" name="prodid[]" value="{{ $item->id }}">
                                 <input type="number" id="{{ $item->id }}cartinp" inputmode="numeric" pattern="[0-9]*"
-                                    name="qty[]" onkeyup="updatecart()" placeholder="Quantity"
+                                    name="qty[]" onkeyup="updatecart()" onchange="updatecart()" placeholder="Quantity"
                                     class="browser-default prod-admin-inp right qtys"
                                     @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}" @endif>
                             </div>
