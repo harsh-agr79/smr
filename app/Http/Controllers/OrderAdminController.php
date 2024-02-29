@@ -231,7 +231,7 @@ class OrderAdminController extends Controller {
     public function addorder( Request $request ) {
         $result[ 'brands' ] = DB::table( 'brands' )->get();
         $result[ 'category' ] = DB::table( 'categories' )->get();
-        $result[ 'data' ] = DB::table( 'products' )->orderBy( 'brand', 'DESC' )->orderBy("category_id",'ASC')->get();
+        $result[ 'data' ] = DB::table( 'products' )->orderBy("brand", 'DESC')->orderBy("category_id", 'ASC')->orderBy("name", 'ASC')->get();
         return view( 'admin.addorder', $result );
     }
 
@@ -290,7 +290,7 @@ class OrderAdminController extends Controller {
         ->get();
         $result[ 'data' ] = DB::table( 'products' )
         ->whereNotIn( 'name', DB::table( 'orders' )->where( 'order_id', $orderid )->pluck( 'item' )->toArray() )
-        ->orderBy( 'category', 'ASC' )->get();
+        ->orderBy("brand", 'DESC')->orderBy("category_id", 'ASC')->orderBy("name", 'ASC')->get();
 
         return view( 'admin/editorder', $result );
     }
