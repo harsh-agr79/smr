@@ -166,6 +166,14 @@
                                 <td id="{{$item->id}}total"></td>
                             </tr>
                         @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="font-weight: 600; font-size: 12px;">Total</td>
+                            <td style="font-weight: 600; font-size: 12px;" id="cart-total"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -339,6 +347,7 @@
             }
             $('#totalamt').text(total);
             $('#totalamt2').text(total);
+            $('#cart-total').text(total);
         }
 
         function Filter() {
