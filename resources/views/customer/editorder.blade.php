@@ -170,7 +170,6 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
                             <td style="font-weight: 600; font-size: 12px;">Total</td>
                             <td style="font-weight: 600; font-size: 12px;" id="cart-total"></td>
                         </tr>
