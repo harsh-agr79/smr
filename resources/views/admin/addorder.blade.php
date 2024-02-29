@@ -151,6 +151,7 @@
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
                                         onkeyup="changequantity2({{ $item->id }})"
+                                        onchange="changequantity2({{ $item->id }})"
                                         onfocusout="changequantity2({{ $item->id }})"></td>
                                 <input type="hidden" name="prodid[]" value="{{ $item->id }}">
                                 <td id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
