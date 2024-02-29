@@ -189,7 +189,7 @@ class OrderController extends Controller
             ->get();
             $result[ 'data' ] = DB::table( 'products' )
             ->whereNotIn( 'name', DB::table( 'orders' )->where( 'order_id', $orderid )->pluck( 'item' )->toArray() )
-            ->orderBy( 'category', 'ASC' )->get();
+            ->orderBy("brand", 'DESC')->orderBy("category_id", 'ASC')->orderBy("name", 'ASC')->get();
     
             return view( 'customer/editorder', $result );
         }  
