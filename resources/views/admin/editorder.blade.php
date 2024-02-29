@@ -77,6 +77,9 @@
                 width: 100vw;
             }
         }
+        .table-prod {
+            height: 30px;
+        }
         .cart-m {
             width: 90vw !important;
         }
