@@ -39,7 +39,7 @@
                             <td>{{$item->brand}}</td>
                             <td>{{$item->category}}</td>
                             <td>{{$item->stock}}</td>
-                            <td>{{$item->hidden}}</td>
+                            <td>{{$item->hide}}</td>
                             <td>{{$item->featured}}</td>
                             <td>{{$item->price}}</td>
                         </tr>
