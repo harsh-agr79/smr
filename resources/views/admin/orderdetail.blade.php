@@ -172,7 +172,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="font-weight: 700">First/Cash Discount</td>
+                            <td style="font-weight: 700">(First/Cash) Discount</td>
                             <td><input type="number" min="0" max="100" {{ $dis }} name="discount"
                                     value="{{ $disc }}"></td>
                         </tr>
@@ -181,7 +181,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="font-weight: 700">Direct/Net Discount</td>
+                            <td style="font-weight: 700">(Direct/Net) Discount</td>
                             <td><input type="number" min="0" max="100" {{ $dis }} name="sdis"
                                 value="{{ $disc2 }}"></td>
                         </tr>

@@ -3,9 +3,19 @@
 @section('main')
     @php
         $total = 0;
+        $total2 = 0;
         $cus = DB::table('customers')
             ->where('name', $data[0]->name)
             ->first();
+        $disc = 0;
+        $disc2 = 0;
+        foreach ($data as $item) {
+            if($item->discount > 0 || $item->sdis > 0){
+                $disc = $item->discount;
+                $disc2 = $item->sdis;
+                break;
+            }
+        }
     @endphp
     <div class="mp-container">
         <div class="right center row">
@@ -62,6 +72,7 @@
                         <th class="center">Approved Quantity</th>
                         <th class="center">Price</th>
                         <th>total</th>
+                        <th>Total(discounted)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,13 +90,27 @@
                                 {{ $item->price }}
                             </td>
                             <td>
-                                @if ($item->status == 'pending')
-                                    {{ $a = $item->quantity * $item->price }}
-                                @else
+                                @if ($item->status == 'approved')
                                     {{ $a = $item->approvedquantity * $item->price }}
+                                    <span class="hide">{{ $total = $total + $a }}</span>
+                                @elseif($item->status == 'pending')
+                                    {{ $a = $item->quantity * $item->price }}
+                                    <span class="hide">{{ $total = $total + $a }}</span>
+                                @else
+                                    0
                                 @endif
-                                <span class="hide">{{ $total = $total + $a }}</span>
                             </td>
+                                <td>
+                                    @if ($item->status == 'approved')
+                                        {{ $b = ($item->approvedquantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis)}}
+                                        <span class="hide">{{ $total2 = $total2 + $b }}</span>
+                                    @elseif($item->status == 'pending')
+                                        {{ $b = ($item->quantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis)}}
+                                        <span class="hide">{{ $total2 = $total2 + $b }}</span>
+                                    @else
+                                        0
+                                    @endif
+                                </td>
                         </tr>
                     @endforeach
                     <tr>
@@ -96,21 +121,35 @@
                         <td class="center" style="font-weight: 700">Total</td>
                         <td style="font-weight: 700">{{ $total }}</td>
                     </tr>
+                    @if ($disc > 0)
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="center" style="font-weight: 700">Discount</td>
+                        <td class="center" style="font-weight: 700">(First/cash) Discount</td>
                         <td style="font-weight: 700">{{ $data[0]->discount }}</td>
                     </tr>
+                    @endif
+                    @if ($disc2 > 0)
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="center" style="font-weight: 700">(Direct/Net) Discount</td>
+                        <td style="font-weight: 700">{{ $data[0]->sdis }}</td>
+                    </tr>
+                    @endif
+                    
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td class="center" style="font-weight: 700">Net Total</td>
-                        <td style="font-weight: 700">{{ $total - $total * 0.01 * $data[0]->discount }}</td>
+                        <td style="font-weight: 700">{{ $total2 }}</td>
+                        <td style="font-weight: 700">{{ $total2 }}</td>
                     </tr>
                 </tbody>
             </table>
