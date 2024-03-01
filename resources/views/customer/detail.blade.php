@@ -152,9 +152,11 @@
                         <td></td>
                         <td></td>
                         <td class="center" style="font-weight: 700">Net Total</td>
-                        <td style="font-weight: 700">{{ $total2 }}</td>
                         @if ($data[0]->mainstatus != "blue")
                         <td style="font-weight: 700">{{ $total2 }}</td>
+                        <td style="font-weight: 700">{{ $total2 }}</td>
+                        @else
+                        <td style="font-weight: 700">{{ $total }}</td>
                         @endif
                     </tr>
                 </tbody>
