@@ -10,7 +10,7 @@
         $disc = 0;
         $disc2 = 0;
         foreach ($data as $item) {
-            if($item->discount > 0 || $item->sdis > 0){
+            if ($item->discount > 0 || $item->sdis > 0) {
                 $disc = $item->discount;
                 $disc2 = $item->sdis;
                 break;
@@ -20,23 +20,20 @@
     <div class="mp-container">
         <div class="right center row">
             @if ($data[0]->mainstatus == 'blue')
-            <div class="col s12">
-                <div style="margin: 10px 0;">
-                    <a href="{{ url('/user/editorder/' . $data[0]->order_id) }}"
-                        class="btn-small amber white-text">
-                        Edit
-                        <i class="material-icons right">edit</i>
-                    </a>
+                <div class="col s12">
+                    <div style="margin: 10px 0;">
+                        <a href="{{ url('/user/editorder/' . $data[0]->order_id) }}" class="btn-small amber white-text">
+                            Edit
+                            <i class="material-icons right">edit</i>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{ url('/user/deleteorder/' . $data[0]->order_id) }}" class="btn-small red white-text">
+                            Delete
+                            <i class="material-icons right">delete</i>
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <a href="{{ url('/user/deleteorder/' . $data[0]->order_id) }}"
-                        class="btn-small red white-text">
-                        Delete
-                        <i class="material-icons right">delete</i>
-                    </a>
-                </div>
-            </div>
-
             @endif
             @if ($data[0]->mainstatus != 'blue')
                 <div class="col s12">
@@ -72,7 +69,9 @@
                         <th class="center">Approved Quantity</th>
                         <th class="center">Price</th>
                         <th>total</th>
-                        <th>Total(discounted)</th>
+                        @if($data[0]->mainstatus != "blue")
+                            <th>Total(discounted)</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -81,8 +80,10 @@
                         <tr>
                             <td @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
                                 {{ $item->item }}
-                            <br>
-                        <span style="font-size: 5px; margin-top:-10px;">{{$item->brand}} {{$item->category}}</span></td>
+                                <br>
+                                <span style="font-size: 5px; margin-top:-10px;">{{ $item->brand }}
+                                    {{ $item->category }}</span>
+                            </td>
                             <td class="center">{{ $item->status }}</td>
                             <td class="center">{{ $item->quantity }}</td>
                             <td class="center">{{ $item->approvedquantity }}</td>
@@ -100,17 +101,20 @@
                                     0
                                 @endif
                             </td>
-                                <td>
-                                    @if ($item->status == 'approved')
-                                        {{ $b = ($item->approvedquantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis)}}
-                                        <span class="hide">{{ $total2 = $total2 + $b }}</span>
-                                    @elseif($item->status == 'pending')
-                                        {{ $b = ($item->quantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis)}}
-                                        <span class="hide">{{ $total2 = $total2 + $b }}</span>
-                                    @else
-                                        0
-                                    @endif
-                                </td>
+                            @if ($item->mainstatus != "blue")
+                            <td>
+                                @if ($item->status == 'approved')
+                                    {{ $b = $item->approvedquantity * $item->price * (1 - 0.01 * $item->discount) * (1 - 0.01 * $item->sdis) }}
+                                    <span class="hide">{{ $total2 = $total2 + $b }}</span>
+                                @elseif($item->status == 'pending')
+                                    {{ $b = $item->quantity * $item->price * (1 - 0.01 * $item->discount) * (1 - 0.01 * $item->sdis) }}
+                                    <span class="hide">{{ $total2 = $total2 + $b }}</span>
+                                @else
+                                    0
+                                @endif
+                            </td>
+                            @endif
+                           
                         </tr>
                     @endforeach
                     <tr>
@@ -122,26 +126,26 @@
                         <td style="font-weight: 700">{{ $total }}</td>
                     </tr>
                     @if ($disc > 0)
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="center" style="font-weight: 700">(First/cash) Discount</td>
-                        <td style="font-weight: 700">{{ $data[0]->discount }}</td>
-                    </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="center" style="font-weight: 700">(First/cash) Discount</td>
+                            <td style="font-weight: 700">{{ $data[0]->discount }}</td>
+                        </tr>
                     @endif
                     @if ($disc2 > 0)
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="center" style="font-weight: 700">(Direct/Net) Discount</td>
-                        <td style="font-weight: 700">{{ $data[0]->sdis }}</td>
-                    </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="center" style="font-weight: 700">(Direct/Net) Discount</td>
+                            <td style="font-weight: 700">{{ $data[0]->sdis }}</td>
+                        </tr>
                     @endif
-                    
+
                     <tr>
                         <td></td>
                         <td></td>
@@ -149,7 +153,9 @@
                         <td></td>
                         <td class="center" style="font-weight: 700">Net Total</td>
                         <td style="font-weight: 700">{{ $total2 }}</td>
+                        @if ($data[0]->mainstatus != "blue")
                         <td style="font-weight: 700">{{ $total2 }}</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>

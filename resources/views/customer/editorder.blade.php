@@ -117,9 +117,6 @@
 
         <div id="cart" class="modal cart-m">
             <div class="modal-content bg-content">
-                <div class="right">
-                    Bill Amount: <span id="totalamt2"></span>
-                </div>
                 <div class="center">
                     <h5>Cart</h5>
                 </div>
