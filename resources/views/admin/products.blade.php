@@ -73,7 +73,7 @@
                     selectedData.push($(this).attr("id"));
                 });
                 updateOrder();
-                console.log("hello")
+                // console.log("hello")
             },
             // change: function() {
             //     console.log('hello');
@@ -163,7 +163,7 @@
             for (let i = 0; i < prodid.length; i++) {
                 prod.push(parseInt(prodid[i].value))
             }
-            console.log(prod);
+            // console.log(prod);
             var formdata = new FormData()
             formdata.append('prod', prod)
             $.ajax({
@@ -176,7 +176,7 @@
                 processData: false,
                 type: "POST",
                 success: function(response) {
-                    console.log(response)
+                    // console.log(response)
                     // gettotal();
                 }
             })
