@@ -173,7 +173,11 @@
             </div>
             <div class="fixed-action-btn">
                 <button class="btn btn-large red" onclick="M.toast({html: 'Please wait...'})" style="border-radius: 10px;">
-                    Submit
+                    @if ($data[0]->save == NULL)
+                        Send
+                    @else
+                        Save                        
+                    @endif
                     <i class="left material-icons">send</i>
                 </button>
             </div>

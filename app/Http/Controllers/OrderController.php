@@ -325,7 +325,12 @@ class OrderController extends Controller
         }
         else{
             DB::table("orders")->where("order_id",$orderid)->delete();
-            return redirect("/user/oldorders");
+            if($order->save == NULL){
+                return redirect("/user/oldorders");
+            }
+            else{
+            return redirect("/user/savedorders");
+            }
         }
     }
 }
