@@ -21,7 +21,7 @@ class ProductController extends Controller {
     }
 
     public function products() {
-        $result[ 'data' ] = Product::get();
+        $result[ 'data' ] = Product::orderBy('ordernum', 'ASC')->get();
         return view( 'admin.products', $result );
     }
 
@@ -196,5 +196,22 @@ class ProductController extends Controller {
             ]);
             // print_r(implode("|", $new));
         }
+    }
+    public function arrange(Request $request){
+        $prod = $request->post('prod',[]);
+        $prod = explode(",",$prod);
+        // $a = 1;
+        for ($i=0; $i < count($prod); $i++) { 
+            DB::table('products')->where('id', $prod[$i])->update([
+                'ordernum'=>$i+1,
+            ]);
+        }
+        // foreach($prod as $item){
+        //     DB::table("products")->where('id', $item)->update([
+        //         'ordernum'=>$a,
+        //     ]);
+        //     $a=$a+1;
+        // }
+        return response()->json("Success");
     }
 }

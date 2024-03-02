@@ -17,9 +17,9 @@
         <h5 class="center">Products List</h5>
 
         <div class="mp-card" style="overflow-x: scroll;">
-            <table class="sortable">
+            <table>
                 <thead>
-                    <th>SN</th>
+                    {{-- <th>SN</th> --}}
                     <th>Name</th>
                     <th>Brand</th>
                     <th>Category</th>
@@ -28,13 +28,15 @@
                     <th>featured</th>
                     <th>Price</th>
                 </thead>
-                <tbody>
+                <tbody class="row_position">
+                    <form id="arrangement" method="POST">
+                        @csrf
                     @php
                         $a = 0;
                     @endphp
                     @foreach ($data as $item)
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
-                            <td>{{$a = $a + 1}}</td>
+                            {{-- <td>{{$a = $a + 1}}</td> --}}
                             <td>{{$item->name}}</td>
                             <td>{{$item->brand}}</td>
                             <td>{{$item->category}}</td>
@@ -42,9 +44,11 @@
                             <td>{{$item->hide}}</td>
                             <td>{{$item->featured}}</td>
                             <td>{{$item->price}}</td>
+                        <input type="hidden" class="prodids" name="id[]" value="{{$item->id}}">
                         </tr>
                     @endforeach
                 </tbody>
+                </form>
             </table>
         </div>
     </div>
@@ -59,6 +63,23 @@
             </a>
         </ul>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(".row_position").sortable({
+            delay: 150,
+            stop: function() {
+                var selectedData = new Array();
+                $(".row_position>tr").each(function() {
+                    selectedData.push($(this).attr("id"));
+                });
+                updateOrder();
+                console.log("hello")
+            },
+            // change: function() {
+            //     console.log('hello');
+            // }
+        });
+    </script>
     <script>
          function rightmenu(id) {
             // console.log(orderid)
@@ -135,6 +156,30 @@
                     }
                 }
             }
+        }
+        function updateOrder(){
+            var prodid = $('.prodids')
+            prod = []
+            for (let i = 0; i < prodid.length; i++) {
+                prod.push(parseInt(prodid[i].value))
+            }
+            console.log(prod);
+            var formdata = new FormData()
+            formdata.append('prod', prod)
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/product/updatearrangement",
+                data: formdata,
+                contentType: false,
+                processData: false,
+                type: "POST",
+                success: function(response) {
+                    console.log(response)
+                    // gettotal();
+                }
+            })
         }
     </script>
 @endsection
