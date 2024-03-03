@@ -165,13 +165,13 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Payments<i
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Payments/Salesreturn<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="{{ url('/payments') }}" class="textcol">View Payments<i
+                                <li><a href="{{ url('/payments') }}" class="textcol">View Payments/Salesreturn<i
                                             class="material-icons textcol">attach_money</i></a></li>
-                                <li><a href="{{ url('/addpayment') }}" class="textcol">Add Payment<i
+                                <li><a href="{{ url('/addpayment') }}" class="textcol">Add Payment/Salesreturn<i
                                             class="material-icons textcol">add</i></a></li>
                             </ul>
                         </div>
