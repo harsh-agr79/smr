@@ -152,6 +152,8 @@
                                         }
                                     @endphp
                                         <a href="{{ url('/editpayment/' . $data[$i]['ent_id']) }}">
+                                    @elseif($data[$i]['type'] == 'Sales Return')
+                                            <a href="{{ url('slrdetail/' . $data[$i]['ent_id']) }}">
                                     @elseif($data[$i]['type'] == 'expense')
                                                 <a href="{{ url('editexpense/' . $data[$i]['ent_id']) }}">
                                     @endif
@@ -237,7 +239,14 @@
                         <td>Total Salesreturn</td>
                         <td></td>
                         <td>
-                            {{$sl_r}}
+                            @if (!$cuslrsum->isEmpty())
+                                {{ $cuslrsum[0]->sum - $cuslrsum[0]->dis + $sl_r }}
+                                @php
+                                    $credit = $credit + $cuslrsum[0]->sum - $cuslrsum[0]->dis;
+                                @endphp
+                            @else
+                                0
+                            @endif
                         </td>
                         <td></td>
                     </tr>

@@ -150,6 +150,8 @@
                                             @php
                                                 $sl_r = $sl_r+$data[$i]['credit'];
                                             @endphp
+                                        @elseif($data[$i]['type'] == 'Sales Return')
+                                         {{ $data[$i]['ent_id'] }}
                                         @elseif($data[$i]['type'] == 'expense')
                                             {{ $data[$i]['ent_id'] }}
                                     @endif 
@@ -235,7 +237,14 @@
                         <td></td>
                         <td>Total Salesreturn</td>
                         <td>
-                            {{$sl_r}}
+                            @if (!$cuslrsum->isEmpty())
+                            {{ $cuslrsum[0]->sum - $cuslrsum[0]->dis + $sl_r }}
+                            @php
+                                $credit = $credit + $cuslrsum[0]->sum - $cuslrsum[0]->dis;
+                            @endphp
+                        @else
+                            0
+                        @endif
                         </td>
                         <td></td>
                         <td></td>
