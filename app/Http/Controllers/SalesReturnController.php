@@ -32,7 +32,7 @@ class SalesReturnController extends Controller
     }
 
     public function createslr(Request $request){
-        $result['data'] = DB::table('products')->orderBy('category', 'ASC')->get();
+        $result['data'] = DB::table('products')->orderBy('ordernum', 'ASC')->get();
         $result[ 'brands' ] = DB::table( 'brands' )->get();
         $result[ 'category' ] = DB::table( 'categories' )->get();
         return view('admin/createslr', $result);
