@@ -38,7 +38,7 @@
                     <th>Date</th>
                     <th>Name</th>
                     <th>Type</th>
-                    <th>Payment Id</th>
+                    <th>Id</th>
                     <th>Amount</th>
                     <th>Entry By</th>
                 </thead>
