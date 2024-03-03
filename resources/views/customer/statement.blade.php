@@ -62,9 +62,9 @@
 
                     @endphp
                     @if ($bal[0] == 'red')
-                        Amount to recieve: {{ $bal[1] }}
+                        Amount to Pay: {{ $bal[1] }}
                     @else
-                        Amount to pay: {{ $bal[1] }}
+                        Amount to Recieve: {{ $bal[1] }}
                     @endif
                 </h6>
             </div>

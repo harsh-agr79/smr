@@ -62,7 +62,8 @@ class ProductController extends Controller {
             'featured'=>$request->post( 'featured' ),
             'details'=>$request->post( 'details' ),
             'net'=>$request->post('net'),
-            'images'=>implode( '|', $image )
+            'images'=>implode( '|', $image ),
+            'ordernum'=>100000
         ] );
         return redirect( '/products' );
     }

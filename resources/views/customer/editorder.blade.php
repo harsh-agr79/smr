@@ -184,7 +184,11 @@
                     Edit
                 </a>
                 <button class="btn green accent-4" type="submit">
-                    Submit
+                    @if ($order[0]->save == NULL)
+                        Send
+                    @else
+                        Save
+                    @endif
                 </button>
             </div>
         </div>
