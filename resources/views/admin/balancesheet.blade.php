@@ -62,7 +62,7 @@
                 <h6 class="black-text" style="font-weight: 600;">
                     @php
                         $bal = explode('|', $cus->balance);
-                        
+                        $sl_r = 0;
                     @endphp
                     @if ($bal[0] == 'red')
                         Amount to recieve: {{ $bal[1] }}
@@ -145,11 +145,14 @@
                                 <td>
                                     @if ($data[$i]['type'] == 'sale')
                                             <a href="{{ url('/detail/' . $data[$i]['ent_id']) }}">
-                                    @elseif($data[$i]['type'] == 'payment')
+                                    @elseif($data[$i]['type'] == 'Payment' || $data[$i]['type'] == 'Salesreturn')
+                                    @php
+                                        if($data[$i]['type'] == 'Salesreturn'){
+                                            $sl_r = $sl_r + $data[$i]['credit'];
+                                        }
+                                    @endphp
                                         <a href="{{ url('/editpayment/' . $data[$i]['ent_id']) }}">
-                                        @elseif($data[$i]['type'] == 'Sales Return')
-                                            <a href="{{ url('slrdetail/' . $data[$i]['ent_id']) }}">
-                                            @elseif($data[$i]['type'] == 'expense')
+                                    @elseif($data[$i]['type'] == 'expense')
                                                 <a href="{{ url('editexpense/' . $data[$i]['ent_id']) }}">
                                     @endif
                                     {{ $data[$i]['ent_id'] }}</a>
@@ -218,7 +221,7 @@
                         <td></td>
                         <td>
                             @if (!$cupysum->isEmpty())
-                                {{ $cupysum[0]->sum }}
+                                {{ $cupysum[0]->sum - $sl_r}}
                                 @php
                                     $credit = $credit + $cupysum[0]->sum;
                                 @endphp
@@ -234,14 +237,7 @@
                         <td>Total Salesreturn</td>
                         <td></td>
                         <td>
-                            @if (!$cuslrsum->isEmpty())
-                                {{ $cuslrsum[0]->sum - $cuslrsum[0]->dis }}
-                                @php
-                                    $credit = $credit + $cuslrsum[0]->sum - $cuslrsum[0]->dis;
-                                @endphp
-                            @else
-                                0
-                            @endif
+                            {{$sl_r}}
                         </td>
                         <td></td>
                     </tr>

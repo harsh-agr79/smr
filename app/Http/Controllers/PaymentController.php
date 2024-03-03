@@ -38,6 +38,7 @@ class PaymentController extends Controller
             $pay = DB::table('payments')->where('paymentid', $id)->first();
             $result['date'] = $pay->date;
             $result['name'] = $pay->name;
+            $result['type'] = $pay->type;
             $result['amount'] = $pay->amount;
             $result['voucher'] = $pay->voucher;
             $result['remarks'] = $pay->remarks;
@@ -46,6 +47,7 @@ class PaymentController extends Controller
         else{
             $result['date'] = date('Y-m-d H:i:s');
             $result['name'] = '';
+            $result['type'] = '';
             $result['amount'] = '';
             $result['voucher'] = '';
             $result['remarks'] = '';
@@ -61,6 +63,7 @@ class PaymentController extends Controller
                 'date'=>$request->post('date'),
                 'name'=>$request->post('name'),
                 'user_id'=>DB::table('customers')->where('name', $request->post('name'))->first()->id,
+                'type'=>$request->post('type'),
                 'paymentid'=>date('ymdhis'),
                 'amount'=>$request->post('amount'),
                 'voucher'=>$request->post('voucher'),
@@ -74,6 +77,7 @@ class PaymentController extends Controller
             DB::table('payments')->where('paymentid', $payid)->update([
                 'date'=>$request->post('date'),
                 'name'=>$request->post('name'),
+                'type'=>$request->post('type'),
                 'amount'=>$request->post('amount'),
                 'voucher'=>$request->post('voucher'),
                 'remarks'=>$request->post('remarks'),

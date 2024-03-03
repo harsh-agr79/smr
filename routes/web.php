@@ -136,14 +136,14 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::get('deleteexpense/{id}',[ExpenseController::class, 'deleteexp']);
 
      //SALESRETURN CRUD
-    Route::get('slr', [SalesReturnController::class, 'index']);
-    Route::get('slrdetail/{id}',[SalesReturnController::class, 'detail']);
-    Route::get('createslr', [SalesReturnController::class, 'createslr']);
-    Route::post('admin/addslr', [SalesReturnController::class, 'addslr'])->name('admin.addslr');
-    Route::post('admin/editslr', [SalesReturnController::class, 'editslr_process'])->name('admin.editslr');
-    Route::post('admin/editslrdet', [SalesReturnController::class, 'editslrdet_process'])->name('admin.editslrdet');
-    Route::get('deleteslr/{id}',[SalesReturnController::class, 'deleteslr']);
-    Route::get('editslr/{id}', [SalesReturnController::class, 'editslr']);
+    // Route::get('slr', [SalesReturnController::class, 'index']);
+    // Route::get('slrdetail/{id}',[SalesReturnController::class, 'detail']);
+    // Route::get('createslr', [SalesReturnController::class, 'createslr']);
+    // Route::post('admin/addslr', [SalesReturnController::class, 'addslr'])->name('admin.addslr');
+    // Route::post('admin/editslr', [SalesReturnController::class, 'editslr_process'])->name('admin.editslr');
+    // Route::post('admin/editslrdet', [SalesReturnController::class, 'editslrdet_process'])->name('admin.editslrdet');
+    // Route::get('deleteslr/{id}',[SalesReturnController::class, 'deleteslr']);
+    // Route::get('editslr/{id}', [SalesReturnController::class, 'editslr']);
 
 
     //Analytics

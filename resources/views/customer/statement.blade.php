@@ -59,7 +59,7 @@
                 <h6 class="black-text" style="font-weight: 600;">
                     @php
                         $bal = explode('|', $cus->balance);
-
+                        $sl_r = 0;
                     @endphp
                     @if ($bal[0] == 'red')
                         Amount to Pay: {{ $bal[1] }}
@@ -126,8 +126,8 @@
                         <td sorttable_customkey= "-10000">From Before: {{ $date }}</td>
                         <td></td>
                         <td>Opening Balance</td>
-                        <td>{{ $tod }}</td>
                         <td>{{ $toc }}</td>
+                        <td>{{ $tod }}</td>
                         <td></td>
                     </tr>
                     @if ($data == null)
@@ -142,15 +142,17 @@
                                 <td>{{ $data[$i]['type'] }}</td>
                                 <td>
                                     @if ($data[$i]['type'] == 'sale')
-                                        <a href="{{ url('user/detail/' . $data[$i]['ent_id']) }}">
-                                        @elseif($data[$i]['type'] == 'payment')
+                                        <a href="{{ url('user/detail/' . $data[$i]['ent_id']) }}">{{ $data[$i]['ent_id'] }}</a>
+                                        @elseif($data[$i]['type'] == 'Payment')
                                             {{ $data[$i]['ent_id'] }}
-                                        @elseif($data[$i]['type'] == 'Sales Return')
+                                        @elseif($data[$i]['type'] == 'Salesreturn')
                                             {{ $data[$i]['ent_id'] }}
+                                            @php
+                                                $sl_r = $sl_r+$data[$i]['credit'];
+                                            @endphp
                                         @elseif($data[$i]['type'] == 'expense')
                                             {{ $data[$i]['ent_id'] }}
-                                    @endif
-                                    {{ $data[$i]['ent_id'] }}</a>
+                                    @endif 
                                 </td>
                                
                                 <td>
@@ -216,7 +218,7 @@
                         <td>Total Payment</td>
                         <td>
                             @if (!$cupysum->isEmpty())
-                                {{ $cupysum[0]->sum }}
+                                {{ $cupysum[0]->sum - $sl_r}}
                                 @php
                                     $credit = $credit + $cupysum[0]->sum;
                                 @endphp
@@ -233,14 +235,7 @@
                         <td></td>
                         <td>Total Salesreturn</td>
                         <td>
-                            @if (!$cuslrsum->isEmpty())
-                                {{ $cuslrsum[0]->sum - $cuslrsum[0]->dis }}
-                                @php
-                                    $credit = $credit + $cuslrsum[0]->sum - $cuslrsum[0]->dis;
-                                @endphp
-                            @else
-                                0
-                            @endif
+                            {{$sl_r}}
                         </td>
                         <td></td>
                         <td></td>

@@ -29,6 +29,24 @@
                     </div>
                     <div class="col s12 row">
                         <div class="col s6">
+                            Payment / Salesreturn
+                        </div>
+                        <div class="col s6">
+                            <select name="type" class="browser-default inp">
+                                @if ($type != '')
+                                    <option value="{{$type}}" selected>{{$type}}</option>
+                                    <option value="Payment">Payment</option>
+                                    <option value="Salesreturn">Sales Return</option>
+                                @else
+                                <option value="Payment" Selected>Payment</option>
+                                <option value="Salesreturn">Sales Return</option>
+                                @endif
+                               
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col s12 row">
+                        <div class="col s6">
                             Amount:
                         </div>
                         <div class="col s6">

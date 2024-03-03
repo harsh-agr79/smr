@@ -176,7 +176,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Sales Return<i
+                    {{-- <li class="bold"><a class="collapsible-header textcol" tabindex="0">Sales Return<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
@@ -186,7 +186,7 @@
                                             class="material-icons textcol">add</i></a></li>
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Expenses<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">

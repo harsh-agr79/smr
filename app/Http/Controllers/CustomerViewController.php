@@ -238,25 +238,25 @@ class CustomerViewController extends Controller
                     'nar'=>'',
                     'vou'=>$item->voucher,
                     'credit'=>$item->amount,
-                    'type'=>'payment',
+                    'type'=>$item->type,
                 ];}
             }
-            foreach($slrs as $item){
-                if($item->name == NULL){
+            // foreach($slrs as $item){
+            //     if($item->name == NULL){
     
-                }
-                else{
-                $data[] = [
-                    'name'=>$item->name,
-                    'created'=>$item->date,
-                    'ent_id'=>$item->returnid,
-                    'debit'=>'0',
-                    'nar'=>'',
-                    'vou'=>'',
-                    'credit'=>$item->sum - $item->dis,
-                    'type'=>'Sales Return',
-                ];}
-            }
+            //     }
+            //     else{
+            //     $data[] = [
+            //         'name'=>$item->name,
+            //         'created'=>$item->date,
+            //         'ent_id'=>$item->returnid,
+            //         'debit'=>'0',
+            //         'nar'=>'',
+            //         'vou'=>'',
+            //         'credit'=>$item->sum - $item->dis,
+            //         'type'=>'Sales Return',
+            //     ];}
+            // }
             foreach($exp as $item){
                 if($item->name == NULL){
     
