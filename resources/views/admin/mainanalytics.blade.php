@@ -41,7 +41,7 @@
             <ul class="collapsible">
                 @foreach ($catsales as $item)
                     @php
-                        $amtchart[] = ['Category' => $item->brand, 'Amount' => $item->samt];
+                        $amtchart[] = ['Category' => $item->brand, 'Amount' => intval($item->samt)];
                         $quantchart[] = ['Category' => $item->brand, 'Quantity' => $item->sum + 0];
                     @endphp
                     <li>
