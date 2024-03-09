@@ -251,4 +251,113 @@ class AnalyticsController extends Controller
         $result['data'] = collect($data);
         return view('admin/balancesheet', $result);
     }
+    public function mainanalytics(Request $request){
+        if($request->get('date') && $request->get('date2'))
+        {
+            $date = $request->get('date');
+            $date2 = $request->get('date2');
+        }
+        elseif($request->get('date')){
+            $date = $request->get('date');
+            $date3 = date('Y-10-18');
+            $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
+        }
+        elseif($request->get('date2')){
+            $date2 = $request->get('date2');
+            $date = date('Y-10-18');
+        }
+        elseif($request->get('clear')){
+             if(date('Y-m-d') < date('Y-10-18') ){
+             $date2 = date('Y-10-17');  
+             $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
+            }
+            else{
+                $date = date('Y-10-18');
+                $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
+            }
+        }
+        else{
+            if(date('Y-m-d') < date('Y-10-18') ){
+             $date2 = date('Y-10-17');  
+             $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
+            }
+            else{
+                $date = date('Y-10-18');
+                $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
+            }
+            
+        }
+        $result['date'] = $date;
+        $result['date2'] = $date2;
+        $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
+
+        $result['totalsales'] = DB::table('orders')
+        ->where(['deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-1'])
+        ->where('orders.date', '>=', $date)
+        ->where('orders.date', '<=', $date2)
+        ->where(function ($query) use ($request){
+            if($request->get('name')){
+                $query->where('orders.name', $request->get('name'));
+            }
+        })
+        ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+        ->groupBy('deleted_at')
+        ->get();
+        
+        $result['catsales'] = DB::table('orders')
+        ->where(['deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-1'])
+        ->where('orders.date', '>=', $date)
+        ->where('orders.date', '<=', $date2)
+        ->where(function ($query) use ($request){
+            if($request->get('name')){
+                $query->where('orders.name', $request->get('name'));
+            }
+        })
+        ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+        ->groupBy('brand')
+        ->orderBy('samt','DESC')
+        ->get();
+
+        foreach($result['catsales'] as $item){
+            $result['data'][$item->brand] = DB::table('products')
+            ->where(['orders.brand'=>$item->brand,'status'=>'approved','orders.deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+            ->where('orders.date', '>=', $date)
+            ->where('orders.date', '<=', $date2)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
+            ->join('orders', 'products.id', '=', 'orders.product_id')
+            ->selectRaw('*, SUM(approvedquantity) as sum,SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')->groupBy('orders.product_id')->orderBy('sum','desc')
+            ->get();
+            $result['data2'][$item->brand] = DB::table('products')
+            ->where(['brand'=>$item->brand])
+            ->whereNotIn('id', DB::table('orders')
+            ->where(['category'=>$item->category,'status'=>'approved','deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+            ->where('date', '>=', $date)
+            ->where('date', '<=', $date2)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
+            ->pluck('product_id')
+            ->toArray())
+            ->get();
+        }
+
+        if($request->get('name')){
+            $result['name'] = $request->get('name');
+        }
+        else{
+            $result['name'] = "";
+        }
+
+
+
+        return view('admin/mainanalytics', $result);
+    }
 }

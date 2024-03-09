@@ -141,6 +141,15 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Analytics<i
+                                class="material-icons chevron textcol">chevron_left</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                    <li><a href="{{ url('/mainanalytics') }}" class="textcol">Main Analytics<i
+                                                class="material-icons textcol">pie_chart</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="bold  green"><a class="collapsible-header" tabindex="0">Company<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
@@ -153,7 +162,7 @@
                                 @endif
                             </ul>
                         </div>
-                    </li>                  
+                    </li>
                     <li class="bold "><a class="collapsible-header" tabindex="0">Customers<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">

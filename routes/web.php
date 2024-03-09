@@ -149,6 +149,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //Analytics
     Route::get('statements', [AnalyticsController::class,'statement']);
     Route::get('balancesheet/{id}', [AnalyticsController::class, 'balancesheet']);
+    Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
