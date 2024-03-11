@@ -74,7 +74,7 @@
 
         </form>
     </div>
-    <div>
+    {{-- <div>
         <div class="center" style="margin:60px; display:flex; align-items:center; justify-content:center;">
             <button class="waves-effect btn-large black-text" onclick="window.location.reload()"
                 id="refreshbtn" style="display: block;">Refresh<i class="material-icons right">cached</i></button>
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <script src="{{ asset('/sw.js') }}"></script>
     <script>

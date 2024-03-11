@@ -360,4 +360,177 @@ class AnalyticsController extends Controller
 
         return view('admin/mainanalytics', $result);
     }
+    public function sortanalytics(Request $request){
+        if($request->get('date') && $request->get('date2'))
+        {
+            $date = $request->get('date');
+            $date2 = $request->get('date2');
+        }
+        elseif($request->get('date')){
+            $date = $request->get('date');
+            $date3 = date('Y-10-18');
+            $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
+        }
+        elseif($request->get('date2')){
+            $date2 = $request->get('date2');
+            $date = date('Y-10-18');
+        }
+        elseif($request->get('clear')){
+             if(date('Y-m-d') < date('Y-10-18') ){
+             $date2 = date('Y-10-17');  
+             $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
+            }
+            else{
+                $date = date('Y-10-18');
+                $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
+            }
+        }
+        else{
+            if(date('Y-m-d') < date('Y-10-18') ){
+             $date2 = date('Y-10-17');  
+             $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
+            }
+            else{
+                $date = date('Y-10-18');
+                $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
+            }
+            
+        }
+        $result['date'] = $date;
+        $result['date2'] = $date2;
+        $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
+
+        if ($request->get('name') && $request->get('product')) {
+            $result['npdata'] = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'save'=>NULL])
+            ->where('status', 'approved')
+            ->where('orders.date', '>=', $date)
+            ->where('orders.date', '<=', $date2)
+            ->where('orders.name', $request->get('name'))
+            ->where('orders.item', $request->get('product'))
+            ->orderBy('date', 'DESC')
+            ->get();
+
+            $result['nptotal'] =  DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'save'=>NULL])
+            ->where('status', 'approved')
+            ->where('orders.date', '>=', $date)
+            ->where('orders.date', '<=', $date2)
+            ->where('orders.name', $request->get('name'))
+            ->where('orders.item', $request->get('product'))
+            ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+            ->groupBy('name')
+            ->get();
+
+            $result['datatype'] = 'np';
+            $result['name'] = $request->get('name');
+            $result['product'] = $request->get('product');
+        }
+        elseif ($request->get('name')) {
+            $result['totalsales'] = DB::table('orders')
+        ->where(['deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-1'])
+        ->where('orders.date', '>=', $date)
+        ->where('orders.date', '<=', $date2)
+        ->where(function ($query) use ($request){
+            if($request->get('name')){
+                $query->where('orders.name', $request->get('name'));
+            }
+        })
+        ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+        ->groupBy('deleted_at')
+        ->get();
+        
+        $result['catsales'] = DB::table('orders')
+        ->where(['deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-1'])
+        ->where('orders.date', '>=', $date)
+        ->where('orders.date', '<=', $date2)
+        ->where(function ($query) use ($request){
+            if($request->get('name')){
+                $query->where('orders.name', $request->get('name'));
+            }
+        })
+        ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+        ->groupBy('brand')
+        ->orderBy('samt','DESC')
+        ->get();
+
+        foreach($result['catsales'] as $item){
+            $result['data'][$item->brand] = DB::table('products')
+            ->where(['orders.brand'=>$item->brand,'status'=>'approved','orders.deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+            ->where('orders.date', '>=', $date)
+            ->where('orders.date', '<=', $date2)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
+            ->join('orders', 'products.id', '=', 'orders.product_id')
+            ->selectRaw('*, SUM(approvedquantity) as sum,SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')->groupBy('orders.product_id')->orderBy('sum','desc')
+            ->get();
+            $result['data2'][$item->brand] = DB::table('products')
+            ->where(['brand'=>$item->brand])
+            ->whereNotIn('id', DB::table('orders')
+            ->where(['brand'=>$item->brand,'status'=>'approved','deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+            ->where('date', '>=', $date)
+            ->where('date', '<=', $date2)
+            ->where(function ($query) use ($request){
+                if($request->get('name')){
+                    $query->where('orders.name', $request->get('name'));
+                }
+            })
+            ->pluck('product_id')
+            ->toArray())
+            ->get();
+        }
+            $result['datatype'] = 'n';
+            $result['name'] = $request->get('name');
+            $result['product'] = '';
+        }
+        elseif ($request->get('product')){
+            $result['pdata'] = DB::table('orders')
+            ->where('status', 'approved')
+            ->where(['orders.deleted_at'=>NULL, 'save'=>NULL])
+            ->where('orders.date', '>=', $date)
+            ->where('orders.date', '<=', $date2)
+            ->where('orders.item', $request->get('product'))
+            ->selectRaw('orders.*, customers.type, customers.contact, SUM(approvedquantity) as sum, SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+            ->orderBy('sum','desc')
+            ->join('customers',  'orders.user_id', '=', 'customers.id')
+            // ->select('orders.*', 'customers.type')
+            ->groupBy('orders.name')
+            ->get();
+            $result['ptotal'] =  DB::table('orders')
+            ->where('status', 'approved')
+            ->where(['deleted_at'=>NULL, 'save'=>NULL])
+            ->where('orders.date', '>=', $date)
+            ->where('orders.date', '<=', $date2)
+            ->where('orders.item', $request->get('product'))
+            ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+            ->groupBy('item')
+            ->get();
+            $result['pnodata'] = DB::table('customers')
+            ->whereNotIn('name', DB::table('orders')
+                            ->where('status', 'approved')
+                            ->where(['deleted_at'=>NULL, 'save'=>NULL])
+                            ->where('orders.date', '>=', $date)
+                            ->where('orders.date', '<=', $date2)
+                            ->where('orders.item', $request->get('product'))
+                            ->selectRaw('*, SUM(approvedquantity) as sum,SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')->orderBy('sum','desc')
+                            ->groupBy('orders.name')->pluck('name')->toArray())
+            ->get();
+
+            $result['datatype'] = 'p';
+            $result['name'] = '';
+            $result['product'] = $request->get('product');
+        }
+        else{
+            $result['datatype'] = 'nodata';
+            $result['name'] = '';
+            $result['product'] = '';
+        }
+
+        return view('admin/sortanalytics', $result);
+    }
 }
