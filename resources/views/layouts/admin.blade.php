@@ -147,7 +147,7 @@
                             <ul>
                                 <li><a href="{{ url('/mainanalytics') }}" class="textcol">Main Analytics<i
                                             class="material-icons textcol">pie_chart</i></a></li>
-                                <li><a href="{{ url('/mainanalytics') }}" class="textcol">Sort Analytics<i
+                                <li><a href="{{ url('/sortanalytics') }}" class="textcol">Sort Analytics<i
                                             class="material-icons textcol">multiline_chart</i></a></li>
                             </ul>
                         </div>
