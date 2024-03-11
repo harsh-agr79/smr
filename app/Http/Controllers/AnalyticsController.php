@@ -336,7 +336,7 @@ class AnalyticsController extends Controller
             $result['data2'][$item->brand] = DB::table('products')
             ->where(['brand'=>$item->brand])
             ->whereNotIn('id', DB::table('orders')
-            ->where(['category'=>$item->category,'status'=>'approved','deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+            ->where(['brand'=>$item->brand,'status'=>'approved','deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
             ->where('date', '>=', $date)
             ->where('date', '<=', $date2)
             ->where(function ($query) use ($request){

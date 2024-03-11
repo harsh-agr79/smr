@@ -51,33 +51,6 @@
                             <div class="col s4">{{ money($item->samt) }}</div>
                         </div>
                         <div class="collapsible-body"><span>
-                                {{-- @php
-                                    if ($item->category == 'powerbank') {
-                                        $prod = $datapowerbank;
-                                        $prod2 = $data2powerbank;
-                                    }
-                                    if ($item->category == 'charger') {
-                                        $prod = $datacharger;
-                                        $prod2 = $data2charger;
-                                    }
-                                    if ($item->category == 'cable') {
-                                        $prod = $datacable;
-                                        $prod2 = $data2cable;
-                                    }
-                                    if ($item->category == 'btitem') {
-                                        $prod = $databtitem;
-                                        $prod2 = $data2btitem;
-                                    }
-                                    if ($item->category == 'earphone') {
-                                        $prod = $dataearphone;
-                                        $prod2 = $data2earphone;
-                                    }
-                                    if ($item->category == 'others') {
-                                        $prod = $dataothers;
-                                        $prod2 = $data2others;
-                                    }
-                                    
-                                @endphp --}}
                                 <div>
                                     @php
                                         $subcates = DB::table('categories')
@@ -89,7 +62,7 @@
                                             <label style="margin-right: 15px;">
                                                 <input type="checkbox" name="{{ $item3 }}"
                                                     value="{{ $item3 }}"
-                                                    onclick="Filter('{{ $item->category }}')" />
+                                                    onclick="Filter('{{ $item->brand }}')" />
                                                 <span>{{ $item3 }}</span>
                                             </label>
                                         @endforeach
@@ -110,12 +83,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($data[$item->brand] as $item2)
-                                            @php
-                                                $sbc = '';
-                                                $sc = '';
-                                                $sbc = [$item2->category];
-                                            @endphp
-                                            <tr class="{{ $item->brand }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif"
+                                            <tr class="{{ $item->brand }} {{$item2->category}}"
                                                 ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}','{{ $name }}', '{{ $item2->item }}')">
                                                 <td>{{ $item2->item }}</td>
                                                 <td>{{ $item2->sum }}</td>
@@ -123,13 +91,8 @@
                                             </tr>
                                         @endforeach
                                         @foreach ($data2[$item->brand] as $item2)
-                                            @php
-                                                $sbc = '';
-                                                $sc = '';
-                                                $sbc = [$item2->category];
-                                            @endphp
                                             <tr
-                                                class="{{ $item->category }} @if ($sbc != null) @foreach ($sbc as $sc){{ $sc }} @endforeach @endif">
+                                                class="{{ $item->brand }} {{$item2->category}}">
                                                 <td>{{ $item2->name }}</td>
                                                 <td>0</td>
                                                 <td>0</td>
