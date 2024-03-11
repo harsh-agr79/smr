@@ -66,11 +66,11 @@
                                                 <span>{{ $item3 }}</span>
                                             </label>
                                         @endforeach
-                                        <label style="margin-right: 15px;">
+                                        {{-- <label style="margin-right: 15px;">
                                             <input type="checkbox" name="incall" value="incall"
                                                 onclick="Filter('{{ $item->category }}')" />
                                             <span>Must Include All Selected Tags</span>
-                                        </label>
+                                        </label> --}}
                                     </form>
                                 </div>
                                 <table class="sortable">
