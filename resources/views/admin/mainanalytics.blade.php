@@ -23,10 +23,10 @@
                             placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off">
                     </div>
                     <div class="col s6 m2 l2">
-                        <button class="btn amber darken-1">Apply</button>
+                        <button class="btn green accent-4">Apply</button>
                     </div>
                     <div class="col s6 m2 l2">
-                        <a class="btn amber darken-1" href="{{ url('/mainanalytics') }}">Clear</a>
+                        <a class="btn green accent-4" href="{{ url('/mainanalytics') }}">Clear</a>
                     </div>
                 </div>
             </form>
