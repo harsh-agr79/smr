@@ -162,7 +162,7 @@
                             <label>
                                 <input type="checkbox" name="{{ $item->id }}brd" value="{{ $item->id }}brd"
                                     onclick="Filter()" />
-                                <span>{{ $item->name }}</span>
+                                <span><div class="valign-wrapper"><span>{{ $item->name }}</span><img src="{{asset($item->logo)}}" style="height: 23px; margin-left: 3px;" alt=""></div></span>
                             </label>
                         </div>
                     @endforeach
