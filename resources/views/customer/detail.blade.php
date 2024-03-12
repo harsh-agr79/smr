@@ -123,7 +123,7 @@
                         <td></td>
                         <td></td>
                         <td class="center" style="font-weight: 700">Total</td>
-                        <td style="font-weight: 700">{{ $total }}</td>
+                        <td style="font-weight: 700">{{ money($total) }}</td>
                     </tr>
                     @if ($disc > 0)
                         <tr>
@@ -132,7 +132,8 @@
                             <td></td>
                             <td></td>
                             <td class="center" style="font-weight: 700">(First/cash) Discount</td>
-                            <td style="font-weight: 700">{{ $data[0]->discount }}</td>
+                            <td style="font-weight: 700">{{ $data[0]->discount }}%</td>
+                            <td></td>
                         </tr>
                     @endif
                     @if ($disc2 > 0)
@@ -142,7 +143,8 @@
                             <td></td>
                             <td></td>
                             <td class="center" style="font-weight: 700">(Direct/Net) Discount</td>
-                            <td style="font-weight: 700">{{ $data[0]->sdis }}</td>
+                            <td style="font-weight: 700">{{ $data[0]->sdis }}%</td>
+                            <td></td>
                         </tr>
                     @endif
 
@@ -153,10 +155,10 @@
                         <td></td>
                         <td class="center" style="font-weight: 700">Net Total</td>
                         @if ($data[0]->mainstatus != "blue")
-                        <td style="font-weight: 700">{{ $total2 }}</td>
-                        <td style="font-weight: 700">{{ $total2 }}</td>
+                        <td style="font-weight: 700">{{ money($total2) }}</td>
+                        <td style="font-weight: 700">{{ money($total2) }}</td>
                         @else
-                        <td style="font-weight: 700">{{ $total }}</td>
+                        <td style="font-weight: 700">{{ money($total) }}</td>
                         @endif
                     </tr>
                 </tbody>

@@ -95,11 +95,16 @@
                 @foreach ($data as $item)
                     <tr>
                         <td>{{ $a = $a + 1 }}</td>
-                        <td>{{ $item->item }}</td>
+                        <td>
+                            {{ $item->item }}
+                            <br>
+                            <span style="font-size: 5px; margin-top:-10px;">{{ $item->brand }}
+                                {{ $item->category }}</span>
+                        </td>
                         <td>{{ $item->approvedquantity }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ $b = $item->price * $item->approvedquantity }}</td>
-                        <td>{{ $c = $item->approvedquantity * $item->price * (1 - 0.01 * $item->discount) * (1 - 0.01 * $item->sdis) }}
+                        <td>{{ money($c = $item->approvedquantity * $item->price * (1 - 0.01 * $item->discount) * (1 - 0.01 * $item->sdis)) }}
                         </td>
                         <span class="hide">{{ $total = $total + $b }}</span>
                         <span class="hide">{{ $total2 = $total2 + $c }}</span>
@@ -110,8 +115,8 @@
                     <td></td>
                     <td></td>
                     <td>Total</td>
-                    <td>Rs. {{ $total }}</td>
-                    <td>Rs. {{ $total2 }}</td>
+                    <td>Rs. {{ money($total) }}</td>
+                    <td>Rs. {{ money($total2) }}</td>
                 </tr>
                 @if ($disc > 0)
                     <tr class="green lighten-3">
@@ -138,8 +143,8 @@
                     <td></td>
                     <td>Total</td>
                     <td>Discounted</td>
-                    <td>Rs. {{ $total2 }}</td>
-                    <td>Rs. {{ $total2 }}</td>
+                    <td>Rs. {{ money($total2) }}</td>
+                    <td>Rs. {{ money($total2) }}</td>
                 </tr>
             </tbody>
         </table>

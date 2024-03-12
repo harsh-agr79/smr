@@ -138,7 +138,7 @@
         <div class='col s10 input-field' style="margin-top: 14px;">
             <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
                 type='search' id='search' />
-            <span class="field-icon" id="close-search"><span class="material-icons" style="font-size: 15px;"
+            <span class="field-icon" id="close-search" onclick="$('#search').val(''); searchFun();"><span class="material-icons" style="font-size: 15px;"
                     id="cs-icon">search</span></span>
         </div>
         <div class="col s2">
