@@ -137,10 +137,10 @@
                                 </td>
                                 <td>
                                     @if ($item->status == 'approved')
-                                        {{ $a = $item->approvedquantity * $item->price }}
+                                        {{ money($a = $item->approvedquantity * $item->price) }}
                                         <span class="hide">{{ $total = $total + $a }}</span>
                                     @elseif($item->status == 'pending')
-                                        {{ $a = $item->quantity * $item->price }}
+                                        {{ money($a = $item->quantity * $item->price) }}
                                         <span class="hide">{{ $total = $total + $a }}</span>
                                     @else
                                         0
@@ -148,10 +148,10 @@
                                 </td>
                                 <td>
                                     @if ($item->status == 'approved')
-                                        {{ $b = ($item->approvedquantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis)}}
+                                        {{ money($b = ($item->approvedquantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis))}}
                                         <span class="hide">{{ $total2 = $total2 + $b }}</span>
                                     @elseif($item->status == 'pending')
-                                        {{ $b = ($item->quantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis)}}
+                                        {{ money($b = ($item->quantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis))}}
                                         <span class="hide">{{ $total2 = $total2 + $b }}</span>
                                     @else
                                         0
