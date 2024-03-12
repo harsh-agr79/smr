@@ -103,7 +103,7 @@
                             <input type="hidden" value="{{ $item->quantity }}" name="quantity[]">
                             <tr>
                                 <td @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
-                                    {{ $item->item }}
+                                    {{ $item->item }} @if($item->net != NULL) <span>(NET)</span>
                                 <br>
                             <span style="font-size: 5px; margin-top:-10px;">{{$item->brand}} {{$item->category}}</span></td>
                                 <td class="center">{{ $item->quantity }}</td>

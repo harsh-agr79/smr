@@ -93,10 +93,10 @@
                     $total2 = 0;
                 @endphp
                 @foreach ($data as $item)
-                    <tr>
+                    <tr class="@if($item->net != NULL) grey lighten-2 @endif">
                         <td>{{ $a = $a + 1 }}</td>
                         <td style="padding: 0; margin: 0;">
-                            {{ $item->item }}
+                            {{ $item->item }} @if($item->net != NULL) <span>(NET)</span> @endif
                             <br>
                             <span style="font-size: 5px; margin-top: -20px !important; padding-top: -20px !important;">{{ $item->brand }}
                                 {{ $item->category }}</span>
