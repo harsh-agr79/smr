@@ -98,7 +98,7 @@
                         <td style="padding: 0; margin: 0;">
                             {{ $item->item }}
                             <br>
-                            <span style="font-size: 5px; margin-top: -10px !important;">{{ $item->brand }}
+                            <span style="font-size: 5px; margin-top: -20px !important;">{{ $item->brand }}
                                 {{ $item->category }}</span>
                         </td>
                         <td>{{ $item->approvedquantity }}</td>
