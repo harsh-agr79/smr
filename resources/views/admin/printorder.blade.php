@@ -95,7 +95,7 @@
                 @foreach ($data as $item)
                     <tr>
                         <td>{{ $a = $a + 1 }}</td>
-                        <td>
+                        <td style="padding: 0; margin: 0;">
                             {{ $item->item }}
                             <br>
                             <span style="font-size: 5px; margin-top:-10px;">{{ $item->brand }}
