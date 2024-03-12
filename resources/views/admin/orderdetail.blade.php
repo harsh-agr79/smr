@@ -165,8 +165,8 @@
                             <td></td>
                             <td></td>
                             <td style="font-weight: 700">Total</td>
-                            <td style="font-weight: 700">{{ $total }}</td>
-                            <td style="font-weight: 700">{{ $total2 }}</td>
+                            <td style="font-weight: 700">{{ money($total) }}</td>
+                            <td style="font-weight: 700">{{ money($total2) }}</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -192,8 +192,8 @@
                             <td></td>
                             <td></td>
                             <td style="font-weight: 700">Net Total</td>
-                            <td style="font-weight: 700">{{ $total2 }}</td>
-                            <td style="font-weight: 700">{{ $total2 }}</td>
+                            <td style="font-weight: 700">{{ money($total2) }}</td>
+                            <td style="font-weight: 700">{{ money($total2) }}</td>
                         </tr>
                     </tbody>
                 </table>
