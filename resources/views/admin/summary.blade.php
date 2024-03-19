@@ -644,7 +644,7 @@
         function drawStuff() {
             var chartdata = @json($forchart);
             const mta = chartdata.map(d => Array.from(Object.values(d)))
-            consolr.log(chartdata);
+            // consolr.log(chartdata);
             var data = new google.visualization.DataTable();
             data.addColumn('string', '');
             data.addColumn('number', '');
@@ -688,7 +688,7 @@
 
         function drawStufftwo() {
             var chartdata = @json($forqdata);
-            console.log(chartdata);
+            // console.log(chartdata);
             const mta = chartdata.map(d => Array.from(Object.values(d)))
             var data = new google.visualization.DataTable();
             data.addColumn('string', '');
