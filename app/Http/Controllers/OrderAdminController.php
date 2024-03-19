@@ -315,6 +315,9 @@ class OrderAdminController extends Controller {
         }
         DB::table( 'orders' )->where('order_id',$orderid)->update( [
             'date'=>$date.' '.date( 'H:i:s' ),
+            'nepday'=>getNepaliDay( $date ),
+            'nepmonth'=>getNepaliMonth( $date ),
+            'nepyear'=>getNepaliYear( $date ),
         ]);
         for ( $i = 0; $i < count( $ids );
         $i++ ) {

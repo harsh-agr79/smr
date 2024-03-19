@@ -2,6 +2,19 @@
 
 
 @section('main')
+    <style>
+        .collapsible-header {
+            padding: 10px;
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .collapsible,
+        .collapsible li {
+            border: none;
+            box-shadow: none;
+        }
+    </style>
     <div>
         <div class="mp-card" style="margin-top: 30px;">
             <form>
