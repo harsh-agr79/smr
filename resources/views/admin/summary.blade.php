@@ -131,7 +131,7 @@
                 @php
                     $forchart[] = [
                         'date' => $item->nepmonth . '-' . $item->nepyear,
-                        'amount' => $item->sl,
+                        'amount' => intval($item->sl),
                     ];
                 @endphp
                 <li>
@@ -586,7 +586,7 @@
                         @for ($i = 0; $i < count($qdata); $i++)
                             @if ($qdata[$i]['year'] >= $syear && $qdata[$i]['year'] <= $eyear)
                                 @php
-                                    $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => $qdata[$i]['amount']];
+                                    $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => intval($qdata[$i]['amount'])];
                                 @endphp
                                 <tr>
                                     <td>{{ $qdata[$i]['quat'] }}</td>
