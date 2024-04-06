@@ -137,7 +137,7 @@ class CustomerViewController extends Controller
             $result['oldslr'] = DB::table('salesreturns')
                ->where('user_id', $id)
                ->where('date', '<', $date)
-               ->selectRaw('*, SUM(quantity * price) as sum, SUM(discount*0.01 * quantity * price) as dis')->groupBy('name') 
+               ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name') 
                ->get();
                
            $result['oldexp'] = DB::table('expenses')
@@ -167,7 +167,7 @@ class CustomerViewController extends Controller
                ->where('user_id', $id)
                ->where('date', '>=', $date)
                ->where('date', '<=', $date2)
-               ->selectRaw('*, SUM(quantity * price) as sum, SUM(discount*0.01 * quantity * price) as dis')->groupBy('name') 
+               ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name') 
                ->get();
                
                 $result['cuexsum'] = DB::table('expenses')
@@ -196,7 +196,7 @@ class CustomerViewController extends Controller
             $slrs = DB::table('salesreturns')
             ->where('date', '>=', $date)
             ->where('date', '<=', $date2)
-            ->selectRaw('*, SUM(quantity * price) as sum, SUM(discount * 0.01 * quantity * price) as dis')->groupBy('returnid')->where('user_id',$id) 
+            ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('returnid')->where('user_id',$id) 
             ->orderBy('date','desc')
             ->get();
             
@@ -253,7 +253,7 @@ class CustomerViewController extends Controller
                     'debit'=>'0',
                     'nar'=>'',
                     'vou'=>'',
-                    'credit'=>$item->sum - $item->dis,
+                    'credit'=>$item->sum,
                     'type'=>'Sales Return',
                 ];}
             }
