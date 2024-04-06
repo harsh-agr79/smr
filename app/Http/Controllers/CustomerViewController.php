@@ -397,4 +397,130 @@ class CustomerViewController extends Controller
         return view('customer/mainanalytics', $result);
     }
 
+    public function summary(Request $request){
+        $year = getNepaliYear(today());
+
+        if($request->get('startyear')){
+            $result['syear'] = $request->get('startyear');
+        }
+        else
+        {
+            $result['syear'] = $year;
+        }
+        if($request->get('endyear')){
+            $result['eyear'] = $request->get('endyear');
+        }
+        else
+        {
+            $result['eyear'] = $year;
+        }
+        if($request->get('startmonth')){
+            $result['smonth'] = $request->get('startmonth');
+        }
+        else
+        {
+            $result['smonth'] = "1";
+        }
+        if($request->get('endmonth')){
+            $result['emonth'] = $request->get('endmonth');
+        }
+        else
+        {
+            $result['emonth'] = getNepaliMonth(today());
+        }
+        $cust = DB::table('customers')->where('id', session()->get('USER_ID'))->first();
+        $name = $cust->name;
+
+        $date = getEnglishDate($result['syear'] ,  $result['smonth'],1);
+        $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
+
+        $result['date']=$date;
+        $result['date2']=$date2;
+
+            $result['dtas'] = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name, 'net'=>NULL])
+            ->orderBy('date', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')
+            ->groupBy('nepmonth')
+            ->groupBy('nepyear')
+            ->get();
+
+            $result['fquat'] = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name, 'net'=>NULL])
+            ->whereIn('nepmonth', [1,2,3])
+            ->orderBy('date', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')
+            ->groupBy('nepyear')
+            ->get();
+        
+            $result['squat'] = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name, 'net'=>NULL])
+            ->whereIn('nepmonth', [4,5,6])
+            ->orderBy('date', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')
+            ->groupBy('nepyear')
+            ->get();
+
+            $result['tquat'] = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name, 'net'=>NULL])
+            ->whereIn('nepmonth', [7,8,9])
+            ->orderBy('date', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')
+            ->groupBy('nepyear')
+            ->get();
+
+            $result['frquat'] = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'status'=>'approved', 'save'=>NULL, 'name'=>$name, 'net'=>NULL])
+            ->whereIn('nepmonth', [10,11,12])
+            ->orderBy('date', 'ASC')
+            ->selectRaw('*, SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')
+            ->groupBy('nepyear')
+            ->get();
+
+            $date = getEnglishDate($result['syear'] ,  $result['smonth'],1);
+            $date2 = getEnglishDate($result['eyear'] , $result['emonth'],getLastDate($result['emonth'] , date('y', strtotime($result['eyear'] ))));
+    
+            $result['date']=$date;
+            $result['date2']=$date2;
+
+            $result['catsales'] = DB::table('orders')
+        ->where(['deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-1'])
+        ->where('orders.date', '>=', $date)
+        ->where('orders.date', '<=', $date2)
+        ->where('orders.user_id', session()->get("USER_ID"))
+        ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+        ->groupBy('brand')
+        ->orderBy('samt','DESC')
+        ->get();
+
+        foreach($result['catsales'] as $item){
+            $result['data'][$item->brand] = DB::table('products')
+            ->where(['orders.brand'=>$item->brand,'status'=>'approved','orders.deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+            ->where('orders.date', '>=', $date)
+            ->where('orders.date', '<=', $date2)
+            ->where('orders.user_id', session()->get("USER_ID"))
+            ->join('orders', 'products.id', '=', 'orders.product_id')
+            ->selectRaw('*, SUM(approvedquantity) as sum,SUM(approvedquantity * orders.price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')->groupBy('orders.product_id')->orderBy('sum','desc')
+            ->get();
+            $result['data2'][$item->brand] = DB::table('products')
+            ->where(['brand'=>$item->brand])
+            ->whereNotIn('id', DB::table('orders')
+            ->where(['brand'=>$item->brand,'status'=>'approved','deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+            ->where('date', '>=', $date)
+            ->where('date', '<=', $date2)
+            ->where('orders.user_id', session()->get("USER_ID"))
+            ->pluck('product_id')
+            ->toArray())
+            ->get();
+        }
+
+        $today = date('Y-m-d');
+        //  $target = DB::table('target')->where('userid',$cust->user_id)
+        //  ->where('startdate', '<=', $today)
+        //  ->where('enddate', '>=', $today)
+        //  ->get();
+        return view ('customer/summary', $result);
+    }
+
 }

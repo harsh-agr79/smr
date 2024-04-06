@@ -184,6 +184,7 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     Route::get('/user/recieve/{id}',[OrderController::class, 'recieveorder']);
 
     Route::get('/user/mainanalytics',[CustomerViewController::class, 'mainanalytics']);
+    Route::get('/user/summary',[CustomerViewController::class, 'summary']);
 
     Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
     Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);

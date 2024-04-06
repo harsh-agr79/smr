@@ -106,6 +106,8 @@
                     </li>
                     <li><a href="{{ url('/user/mainanalytics') }}" class=" active">Analytics<i class="material-icons">pie_chart</i></a>
                     </li>
+                    <li><a href="{{ url('/user/summary') }}" class=" active">Summary<i class="material-icons">multiline_chart</i></a>
+                    </li>
                 </ul>
             </li>
         </ul>
