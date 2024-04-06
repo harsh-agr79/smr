@@ -123,7 +123,6 @@ class CustomerViewController extends Controller
             $result['oldorders'] = DB::table('orders')
             ->where('date', '<', $date)
             ->where('user_id',$id)
-            ->where('net', NULL)
             ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
             ->get();
     
@@ -149,7 +148,6 @@ class CustomerViewController extends Controller
                $result['cuorsum'] = DB::table('orders')
                ->where(['save'=>NULL])
                ->where('user_id', $id)
-                ->where('net', NULL)
                ->where('date', '>=', $date)
                ->where('date', '<=', $date2)
                ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
@@ -183,7 +181,6 @@ class CustomerViewController extends Controller
                ->where('date', '<=', $date2)
                ->where('status','approved')
                ->where('user_id',$id)
-               ->where('net', NULL)
                ->selectRaw('*, SUM(approvedquantity * price) as sum')->groupBy('order_id') 
                ->orderBy('orders.date','desc')
                ->get();
