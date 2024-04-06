@@ -104,6 +104,8 @@
                     </li>
                     <li><a href="{{ url('/user/statement') }}" class=" active">Statement<i class="material-icons">account_balance</i></a>
                     </li>
+                    <li><a href="{{ url('/user/mainanalytics') }}" class=" active">Analytics<i class="material-icons">pie_chart</i></a>
+                    </li>
                 </ul>
             </li>
         </ul>

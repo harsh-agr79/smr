@@ -159,6 +159,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function(){
+
+    Route::get('user/finditem', [ProductController::class, 'getproduct']);
+
     Route::get('/user/home', [HomeController::class, 'home']);
 
     Route::get('/user/profile', [CustomerViewController::class, 'profile']);
@@ -179,6 +182,8 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     Route::get('/user/detail/{id}', [OrderController::class, 'detail']);
     Route::post('/user/editdetail', [OrderController::class, 'detailedit'])->name('user.detailedit');
     Route::get('/user/recieve/{id}',[OrderController::class, 'recieveorder']);
+
+    Route::get('/user/mainanalytics',[CustomerViewController::class, 'mainanalytics']);
 
     Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
     Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);

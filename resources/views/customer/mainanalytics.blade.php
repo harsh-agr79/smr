@@ -1,4 +1,4 @@
-@extends('layouts/admin')
+@extends('layouts/customer')
 
 
 @section('main')
@@ -27,10 +27,6 @@
                         <label>To:</label>
                         <input type="date" name="date2" value="{{ $date2 }}"
                             class="inp browser-default black-text">
-                    </div>
-                    <div class="input-field col s6 l4 m4">
-                        <input type="text" name="name" id="customer" value="{{ $name }}"
-                            placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off">
                     </div>
                     <div class="input-field col s6 l4 m4">
                         <input type="text" name="product" id="product" value="{{ $product }}"
@@ -102,13 +98,12 @@
                  $amtchart = [];
              @endphp
              <div>
-              
-                 @if ($admin->type != 'staff')
+                
                  <div class="green accent-4 center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
                      <h5 class="black-text" style="font-weight: 600;">Total Sales:
                          {{ money($totalsales[0]->samt) }}</h5>
                  </div>  
-                 @endif
+                
                  <div class="mp-card" style="margin-top: 10px;">
                      <ul class="collapsible">
                          @foreach ($catsales as $item)
@@ -156,7 +151,7 @@
                                              <tbody>
                                                  @foreach ($data[$item->brand] as $item2)
                                                      <tr class="{{ $item->brand }} {{$item2->category}}"
-                                                         ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}','{{ $name }}', '{{ $item2->item }}')">
+                                                         ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item2->item }}')">
                                                          <td>{{ $item2->item }}</td>
                                                          <td>{{ $item2->sum }}</td>
                                                          <td>{{ money($item2->samt) }}</td>
@@ -189,20 +184,20 @@
          
              </div>
              <script>
-                 function openanadetail(date, date2, name, product) {
-                     var type = `{{ $admin->type }}`;
+                 function openanadetail(date, date2, product) {
+                     var type = ``;
                      // console.log(type);
-                     if (type === 'marketer') {
-                         var url = '/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
+                    //  if (type === 'marketer') {
+                         var url = '/user/mainanalytics?date=' + date + '&date2=' + date2  + '&product=' + product
                          url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
                          window.open(url,
                              "_self");
-                     } else {
-                         var url = '/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
-                         url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
-                         window.open(url,
-                             "_self");
-                     }
+                    //  } else {
+                    //      var url = '/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
+                    //      url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
+                    //      window.open(url,
+                    //          "_self");
+                    //  }
          
                  }
          
@@ -330,7 +325,7 @@
                         <tbody>
                             @foreach ($pdata as $item)
                                 <tr
-                                    ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->name }}', '{{ $item->item }}')">
+                                    ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}', '{{ $item->item }}')">
                                     <td>
                                     </td>
                                     <td>{{ $item->name }}</td>
@@ -365,7 +360,7 @@
 
     <script>
         function opendetail(orderid, seen, ms) {
-            // var admintype = `{{ $admin->type }}`;
+            // var admintype = ``;
             // if (admintype == "admin" || jQuery.inArray("detail/{id}", perms) > -1) {
             //     if (admintype == "admin" || seen == 'seen' || jQuery.inArray("firstorderview", perms) > -1) {
                     window.open('/detail/' + orderid, "_self");
@@ -378,45 +373,26 @@
             // }
         }
 
-        function openanadetail(date, date2, name, product) {
-            var type = `{{ $admin->type }}`;
+        function openanadetail(date, date2, product) {
+            var type = ``;
             // console.log(type);
-            if (type === 'marketer') {
-                var url = '/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
+            // if (type === 'marketer') {
+                var url = '/user/mainanalytics?date=' + date + '&date2=' + date2 + '&product=' + product
                 url =  url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
                 window.open(url,
                     "_self");
-            } else {
-                var url = '/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
-                url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
-                window.open(url,
-                    "_self");
-            }
+            // } else {
+            //     var url = '/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
+            //     url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
+            //     window.open(url,
+            //         "_self");
+            // }
 
         }
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '/findcustomer',
-                success: function(response2) {
-
-                    var custarray2 = response2;
-                    var datacust2 = {};
-                    for (var i = 0; i < custarray2.length; i++) {
-
-                        datacust2[custarray2[i].name] = null;
-                    }
-                    // console.log(datacust2)
-                    $('input#customer').autocomplete({
-                        data: datacust2,
-                    });
-                }
-            })
-        })
-        $(document).ready(function() {
-            $.ajax({
-                type: 'get',
-                url: '/finditem',
+                url: '/user/finditem',
                 success: function(response) {
 
                     var custarray = response;
