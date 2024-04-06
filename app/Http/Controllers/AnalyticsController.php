@@ -105,7 +105,7 @@ class AnalyticsController extends Controller
         $result['oldslr'] = DB::table('salesreturns')
            ->where('user_id', $id)
            ->where('date', '<', $date)
-           ->selectRaw('*, SUM(quantity * price) as sum, SUM(discount*0.01 * quantity * price) as dis')->groupBy('name') 
+           ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name') 
            ->get();
            
        $result['oldexp'] = DB::table('expenses')
@@ -134,7 +134,7 @@ class AnalyticsController extends Controller
            ->where('user_id', $id)
            ->where('date', '>=', $date)
            ->where('date', '<=', $date2)
-           ->selectRaw('*, SUM(quantity * price) as sum, SUM(discount*0.01 * quantity * price) as dis')->groupBy('name') 
+           ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name') 
            ->get();
            
             $result['cuexsum'] = DB::table('expenses')

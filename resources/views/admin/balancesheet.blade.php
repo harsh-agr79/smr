@@ -24,7 +24,7 @@
         @if ($oldslr->isEmpty())
             {{ $os = 0 }}
         @else
-            {{ $os = $oldslr['0']->sum - $oldslr['0']->dis }}
+            {{ $os = $oldslr['0']->sum }}
         @endif
         @if ($oldexp->isEmpty())
             {{ $oe = 0 }}
@@ -240,9 +240,9 @@
                         <td></td>
                         <td>
                             @if (!$cuslrsum->isEmpty())
-                                {{ $cuslrsum[0]->sum - $cuslrsum[0]->dis + $sl_r }}
+                                {{ $cuslrsum[0]->sum + $sl_r }}
                                 @php
-                                    $credit = $credit + $cuslrsum[0]->sum - $cuslrsum[0]->dis;
+                                    $credit = $credit + $cuslrsum[0]->sum;
                                 @endphp
                             @else
                                 0
