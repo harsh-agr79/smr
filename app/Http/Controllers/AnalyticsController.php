@@ -92,7 +92,6 @@ class AnalyticsController extends Controller
         $result['oldorders'] = DB::table('orders')
         ->where('date', '<', $date)
         ->where('user_id',$id)
-        ->where('net', NULL)
         ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
         ->get();
 
@@ -118,7 +117,6 @@ class AnalyticsController extends Controller
            $result['cuorsum'] = DB::table('orders')
            ->where(['save'=>NULL])
            ->where('user_id', $id)
-            ->where('net', NULL)
            ->where('date', '>=', $date)
            ->where('date', '<=', $date2)
            ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
@@ -152,8 +150,7 @@ class AnalyticsController extends Controller
         ->where('date', '<=', $date2)
         ->where('status','approved')
         ->where('user_id',$id)
-        ->where('net', NULL)
-        ->selectRaw('*, SUM(approvedquantity * price) as sum')->groupBy('order_id') 
+        ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('order_id') 
         ->orderBy('orders.date','desc')
         ->get();
 
@@ -186,7 +183,7 @@ class AnalyticsController extends Controller
                 'name'=>$item->name,
                 'created'=>$item->date,
                 'ent_id'=>$item->order_id,
-                'debit'=>($item->sum * (1-$item->discount*0.01))*(1-0.01*$item->sdis),
+                'debit'=>$item->sum,
                 'nar'=>$item->remarks,
                 'vou'=>'',
                 'credit'=>'0',
