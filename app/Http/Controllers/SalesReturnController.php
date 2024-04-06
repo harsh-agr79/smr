@@ -38,18 +38,51 @@ class SalesReturnController extends Controller
         return view('admin/createslr', $result);
     }
 
-    public function addslr(Request $request){
+    // public function addslr(Request $request){
+    //     $user = DB::table( 'customers' )->where( 'name', $request->post( 'name' ) )->first();
+    //     $products = $request->post( 'prodid', [] );
+    //     $qty = $request->post( 'quantity', [] );
+    //     $date = $request->post( 'date' );
+    //     for ( $i = 0; $i < count( $products );
+    //     $i++ ) {
+    //         if ( $qty[ $i ] > 0 ) {
+    //             $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+    //             DB::table( 'salesreturns' )->insert( [
+    //                 'date'=>$date,
+    //                 'returnid'=>'slr'.$user->id.time(),
+    //                 'name'=>$user->name,
+    //                 'user_id'=>$user->id,
+    //                 'item'=>$prod->name,
+    //                 'product_id'=>$prod->id,
+    //                 'brand'=>$prod->brand,
+    //                 'brand_id'=>$prod->brand_id,
+    //                 'category'=>$prod->category,
+    //                 'category_id'=>$prod->category_id,
+    //                 'price'=>$prod->price,
+    //                 'quantity'=>$qty[ $i ],
+    //                 'discount'=>'0',
+    //                 'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
+    //                 'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
+    //                 'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) )
+    //             ] );
+    //         }
+    //     }
+    //     updatebalance($user->id);
+    //     return redirect('slr');
+    // }
+    public function addslr( Request $request ) {
         $user = DB::table( 'customers' )->where( 'name', $request->post( 'name' ) )->first();
         $products = $request->post( 'prodid', [] );
         $qty = $request->post( 'quantity', [] );
         $date = $request->post( 'date' );
+        $oid = "slr".$user->id.getNepaliDay( $date.' '.date( 'H:i:s' ) ).getNepaliMonth( $date.' '.date( 'H:i:s' ) ).getNepaliYear( $date.' '.date( 'H:i:s' ) ).date( 'His' );
         for ( $i = 0; $i < count( $products );
         $i++ ) {
             if ( $qty[ $i ] > 0 ) {
                 $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
                 DB::table( 'salesreturns' )->insert( [
-                    'date'=>$date,
-                    'returnid'=>'slr'.$user->id.time(),
+                    'date'=>$date.' '.date( 'H:i:s' ),
+                    'returnid'=>$oid,
                     'name'=>$user->name,
                     'user_id'=>$user->id,
                     'item'=>$prod->name,
@@ -58,17 +91,20 @@ class SalesReturnController extends Controller
                     'brand_id'=>$prod->brand_id,
                     'category'=>$prod->category,
                     'category_id'=>$prod->category_id,
+                    'net'=>$prod->net,
                     'price'=>$prod->price,
                     'quantity'=>$qty[ $i ],
-                    'discount'=>'0',
+                    'discount'=>"0",
+                    'sdis'=>"0",
                     'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
                     'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
                     'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) )
                 ] );
             }
+
         }
         updatebalance($user->id);
-        return redirect('slr');
+        return redirect( '/slr' );
     }
 
     public function detail(Request $request, $returnid){
@@ -95,8 +131,72 @@ class SalesReturnController extends Controller
         return view('admin/editslr', $result);
     }
 
-    public function editslr_process(Request $request)
-    {
+    // public function editslr_process(Request $request)
+    // {
+    //     $returnid = $request->post( 'returnid' );
+    //     $slr = DB::table( 'salesreturns' )->where( 'returnid', $returnid )->get();
+    //     $user = DB::table( 'customers' )->where( 'name', $request->post( 'name' ) )->first();
+    //     $products = $request->post( 'prodid', [] );
+    //     $qty = $request->post( 'quantity', [] );
+    //     $ids = $request->post( 'id', [] );
+    //     $date = $request->post( 'date' );
+    //     for ( $i = 0; $i < count( $ids );
+    //     $i++ ) {
+    //         if ( $qty[ $i ] !== '0' && $qty[ $i ] !== NULL && $qty[ $i ] !== "" ) {
+    //             if ( $ids[ $i ] === 'newitem' ) {
+    //                 $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+    //                 DB::table( 'salesreturns' )->insert( [
+    //                 'date'=>$date,
+    //                 'returnid'=>$returnid,
+    //                 'name'=>$user->name,
+    //                 'user_id'=>$user->id,
+    //                 'item'=>$prod->name,
+    //                 'product_id'=>$prod->id,
+    //                 'brand'=>$prod->brand,
+    //                 'brand_id'=>$prod->brand_id,
+    //                 'category'=>$prod->category,
+    //                 'category_id'=>$prod->category_id,
+    //                 'price'=>$prod->price,
+    //                 'quantity'=>$qty[ $i ],
+    //                 'discount'=>$slr[0]->discount,
+    //                 'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
+    //                 'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
+    //                 'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) ),
+    //                 'remarks'=>$slr[0]->remarks
+    //                 ] );
+    //             } else {
+    //                 $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+    //                 $o =  DB::table( 'salesreturns' )->where( 'id', $ids[$i] )->first();
+    //                     DB::table( 'salesreturns' )->where( 'id', $ids[ $i ] )->update( [
+    //                         'date'=>$date,
+    //                         'returnid'=>$returnid,
+    //                         'name'=>$user->name,
+    //                         'user_id'=>$user->id,
+    //                         'item'=>$prod->name,
+    //                         'product_id'=>$prod->id,
+    //                         'brand'=>$prod->brand,
+    //                         'brand_id'=>$prod->brand_id,
+    //                         'category'=>$prod->category,
+    //                         'category_id'=>$prod->category_id,
+    //                         'price'=>$prod->price,
+    //                         'quantity'=>$qty[ $i ],
+    //                         'discount'=>$slr[0]->discount,
+    //                         'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
+    //                         'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
+    //                         'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) )
+    //                     ] );
+    //             }
+    //         }
+    //         elseif ($qty[$i] == NULL || $qty[$i] == '0' || $qty[$i] == '' && $id[$i] !== NULL) {
+    //             DB::table('salesreturns')->where('id', $ids[$i])->delete();
+    //         }
+            
+    //     }
+    //     updatebalance($user->id);
+    //     return redirect('slrdetail/'.$returnid);
+    // }
+    public function editslr_process( Request $request ) {
+        // dd( $request->post() );
         $returnid = $request->post( 'returnid' );
         $slr = DB::table( 'salesreturns' )->where( 'returnid', $returnid )->get();
         $user = DB::table( 'customers' )->where( 'name', $request->post( 'name' ) )->first();
@@ -104,36 +204,68 @@ class SalesReturnController extends Controller
         $qty = $request->post( 'quantity', [] );
         $ids = $request->post( 'id', [] );
         $date = $request->post( 'date' );
+        $disc = "0";
+        $disc2 = "0";
+        foreach ($slr as $item) {
+            if($item->discount > 0 || $item->sdis > 0){
+                $disc = $item->discount;
+                $disc2 = $item->sdis;
+                break;
+            }
+        }
+        DB::table( 'salesreturns' )->where('returnid',$returnid)->update( [
+            'date'=>$date.' '.date( 'H:i:s' ),
+            'nepday'=>getNepaliDay( $date ),
+            'nepmonth'=>getNepaliMonth( $date ),
+            'nepyear'=>getNepaliYear( $date ),
+        ]);
         for ( $i = 0; $i < count( $ids );
         $i++ ) {
             if ( $qty[ $i ] !== '0' && $qty[ $i ] !== NULL && $qty[ $i ] !== "" ) {
                 if ( $ids[ $i ] === 'newitem' ) {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    if($prod->net == 'on'){
+                        $dis = "0";
+                        $dis2 = "0";
+                    }
+                    else{
+                        $dis = $disc;
+                        $dis2 = $disc2;
+                    }
                     DB::table( 'salesreturns' )->insert( [
-                    'date'=>$date,
-                    'returnid'=>$returnid,
-                    'name'=>$user->name,
-                    'user_id'=>$user->id,
-                    'item'=>$prod->name,
-                    'product_id'=>$prod->id,
-                    'brand'=>$prod->brand,
-                    'brand_id'=>$prod->brand_id,
-                    'category'=>$prod->category,
-                    'category_id'=>$prod->category_id,
-                    'price'=>$prod->price,
-                    'quantity'=>$qty[ $i ],
-                    'discount'=>$slr[0]->discount,
-                    'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
-                    'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
-                    'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) ),
-                    'remarks'=>$slr[0]->remarks
+                        'date'=>$date.' '.date( 'H:i:s' ),
+                        'returnid'=>$returnid,
+                        'name'=>$user->name,
+                        'user_id'=>$user->id,
+                        'item'=>$prod->name,
+                        'product_id'=>$prod->id,
+                        'brand'=>$prod->brand,
+                        'brand_id'=>$prod->brand_id,
+                        'category'=>$prod->category,
+                        'category_id'=>$prod->category_id,
+                        'net'=>$prod->net,
+                        'price'=>$prod->price,
+                        'quantity'=>$qty[ $i ],
+                        'discount'=>$dis,
+                        'sdis'=>$dis2,
+                        'nepday'=>getNepaliDay( $date ),
+                        'nepmonth'=>getNepaliMonth( $date ),
+                        'nepyear'=>getNepaliYear( $date ),
+                        'remarks'=>$slr[0]->remarks,
                     ] );
                 } else {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();
+                    if($prod->net == 'on'){
+                        $dis = "0";
+                        $dis2 = "0";
+                    }
+                    else{
+                        $dis = $disc;
+                        $dis2 = $disc2;
+                    }
                     $o =  DB::table( 'salesreturns' )->where( 'id', $ids[$i] )->first();
                         DB::table( 'salesreturns' )->where( 'id', $ids[ $i ] )->update( [
-                            'date'=>$date,
-                            'returnid'=>$returnid,
+                            'date'=>$date.' '.date( 'H:i:s' ),
                             'name'=>$user->name,
                             'user_id'=>$user->id,
                             'item'=>$prod->name,
@@ -142,13 +274,16 @@ class SalesReturnController extends Controller
                             'brand_id'=>$prod->brand_id,
                             'category'=>$prod->category,
                             'category_id'=>$prod->category_id,
+                            'net'=>$prod->net,
                             'price'=>$prod->price,
                             'quantity'=>$qty[ $i ],
-                            'discount'=>$slr[0]->discount,
-                            'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
-                            'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
-                            'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) )
-                        ] );
+                            'discount'=>$dis,
+                            'sdis'=>$dis2,
+                            'nepday'=>getNepaliDay( $date ),
+                            'nepmonth'=>getNepaliMonth( $date ),
+                            'nepyear'=>getNepaliYear( $date ),
+                            'remarks'=>$slr[0]->remarks,
+                        ] );  
                 }
             }
             elseif ($qty[$i] == NULL || $qty[$i] == '0' || $qty[$i] == '' && $id[$i] !== NULL) {
@@ -156,6 +291,7 @@ class SalesReturnController extends Controller
             }
             
         }
+
         updatebalance($user->id);
         return redirect('slrdetail/'.$returnid);
     }
@@ -163,10 +299,29 @@ class SalesReturnController extends Controller
         $returnid = $request->post('returnid');
         $id = $request->post('id', []);
         $price = $request->post('price', []);
+        $discount=$request->post('discount');
+        $discount2=$request->post('sdis');
+        // dd($request->post());
         for ($i=0; $i < count($id); $i++) { 
+            $prod = DB::table("products")->where('id',DB::table( 'salesreturns' )->where( 'id', $id[ $i ] )->first()->product_id)->first()->net;
+            if($prod == "on"){
+                $dis = 0;
+                $dis2 = 0;
+            }
+            else{
+                $dis = $discount;
+                $dis2 = $discount2;
+            }
+            if($dis == NULL || $dis == ""){
+                $dis = 0;
+            }
+            if($dis2 == NULL || $dis2 == ""){
+                $dis2 = 0;
+            }
             DB::table('salesreturns')->where('returnid', $returnid)->where('id', $id[$i])->update([
                 'price'=>$price[$i],
-                'discount'=>$request->post('discount'),
+                'discount'=>$dis,
+                'sdis'=>$dis2,
                 'remarks'=>$request->post('remarks'),
             ]);
         }

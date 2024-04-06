@@ -77,6 +77,12 @@
                 width: 100vw;
             }
         }
+        .table-prod {
+            height: 30px;
+        }
+        .cart-m {
+            width: 90vw !important;
+        }
     </style>
     <form enctype="multipart/form-data" id="createform" action="{{ route('admin.editslr') }}" method="post">
         @csrf
@@ -117,26 +123,28 @@
             </div>
         </div>
         
-        <div id="cart" class="modal">
+        <div id="cart" class="modal cart-m">
             <div class="modal-content bg-content">
-                <div class="right">
-                    Bill Amount: <span id="totalamt2"></span>
-                </div>
                 <div class="center">
                     <h5>Cart</h5>
                 </div>
                 <table>
                     <thead>
+                        <th>Image</th>
                         <th>Name</th>
-                        <th>price</th>
-                        <th class="center">Quantity</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
                     </thead>
                     <tbody>
                         @foreach ($slr as $item)
                             <tr id={{ $item->id . 'list' }}>
-                                <td>{{ $item->item }}</td>
-                                <td class="gtprice">{{ $item->price }}</td>
-                                <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
+                                <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
+                                <td style="font-size: 10px;">{{$item->item}}
+                                    <br>
+                            <span style="font-size: 7px; margin-top:-10px;">
+                                {{$item->brand}} {{$item->category}}</span></td>
+                                <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
                                         onkeyup="changequantity2({{ $item->id }})"
@@ -144,13 +152,18 @@
                                         onfocusout="changequantity2({{ $item->id }})" value="{{$item->quantity}}"></td>
                                 <input type="hidden" name="prodid[]" value="{{ $item->product_id }}">
                                 <input type="hidden" name="id[]" value="{{ $item->id }}">
+                                <td  id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
+                                <td id="{{$item->id}}total">{{$item->quantity * $item->price}}</td>
                             </tr>
                         @endforeach
                         @foreach ($data as $item)
                         <tr style="display: none;"id={{ $item->id . 'list' }}>
-                            <td>{{ $item->name }}</td>
-                            <td class="gtprice">{{ $item->price }}</td>
-                            <td class="center"><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
+                            <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
+                            <td style="font-size: 10px;">{{$item->name}}
+                                <br>
+                        <span style="font-size: 7px; margin-top:-10px;">
+                            {{$item->brand}} {{$item->category}}</span></td>
+                            <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                     inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                     class="browser-default prod-admin-inp gtquantity"
                                     onkeyup="changequantity2({{ $item->id }})"
@@ -158,8 +171,17 @@
                                     onfocusout="changequantity2({{ $item->id }})"></td>
                             <input type="hidden" name="prodid[]" value="{{ $item->id }}">
                             <input type="hidden" name="id[]" value="newitem">
+                            <td id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
+                            <td id="{{$item->id}}total"></td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: 600; font-size: 12px;">Total</td>
+                        <td style="font-weight: 600; font-size: 12px;" id="cart-total"></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -167,7 +189,7 @@
                 <a class="btn red modal-close">
                     Edit
                 </a>
-                <button class="btn amber" type="submit">
+                <button class="btn green accent-4" type="submit">
                     Submit
                 </button>
             </div>
@@ -299,6 +321,7 @@
         })
     </script>
     <script>
+        getTotal();
         function changequantity(id) {
             var qval = $(`#${id}viewinp`).val();
             if (qval < 1 || qval == null) {
@@ -308,6 +331,8 @@
                 $(`#${id}list`).show();
                 $(`#${id}listinp`).val(qval);
             }
+            var a = $(`#${id}listinp`).val() * $(`#${id}price`).text();
+            $(`#${id}total`).text(a);
             getTotal();
         }
 
@@ -330,6 +355,8 @@
                 $(`#${id}listinp`).val(qval);
                 $(`#${id}viewinp`).val(qval);
             }
+            var a = $(`#${id}listinp`).val() * $(`#${id}price`).text();
+            $(`#${id}total`).text(a);
             getTotal()
         }
 
@@ -344,6 +371,7 @@
             }
             $('#totalamt').text(total);
             $('#totalamt2').text(total);
+            $('#cart-total').text(total);
         }
 
         function Filter() {

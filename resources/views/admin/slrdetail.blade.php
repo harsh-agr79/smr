@@ -3,6 +3,7 @@
 @section('main')
     @php
         $total = 0;
+        $total2 = 0;
         $cus = DB::table('customers')
             ->where('name', $data[0]->name)
             ->first();
@@ -26,6 +27,7 @@
                             <th class="center">Quantity</th>
                             <th class="center">Price</th>
                             <th>total</th>
+                            <th>discounted</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,8 +46,16 @@
                                         style="display: none;" name="price[]" value="{{ $item->price }}">
                                 </td>
                                 <td>
-                                    {{ $a = $item->quantity * $item->price }}
-                                    <span class="hide">{{ $total = $total + $a }}</span>
+                                 
+                                        {{ money($a = $item->quantity * $item->price) }}
+                                        <span class="hide">{{ $total = $total + $a }}</span>
+                                   
+                                </td>
+                                <td>
+                                   
+                                        {{ money($b = ($item->quantity * $item->price * (1-0.01*$item->discount)) * (1-0.01*$item->sdis))}}
+                                        <span class="hide">{{ $total2 = $total2 + $b }}</span>
+                                   
                                 </td>
                             </tr>
                         @endforeach
@@ -54,18 +64,26 @@
                             <td></td>
                             <td style="font-weight: 700">Total</td>
                             <td style="font-weight: 700">{{ $total }}</td>
+                            <td style="font-weight: 700">{{ $total2 }}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
-                            <td style="font-weight: 700">Discount</td>
+                            <td style="font-weight: 700">Cash Discount</td>
                             <td><input type="text" name="discount" value="{{ $data[0]->discount }}"></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
+                            <td style="font-weight: 700">Net Discount</td>
+                            <td><input type="text" name="sdis" value="{{ $data[0]->sdis }}"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
                             <td style="font-weight: 700">Net Total</td>
-                            <td style="font-weight: 700">{{ $total - $total * 0.01 * $data[0]->discount }}</td>
+                            <td style="font-weight: 700">{{ $total2}}</td>
+                            <td style="font-weight: 700">{{ $total2}}</td>
                         </tr>
                     </tbody>
                 </table>
