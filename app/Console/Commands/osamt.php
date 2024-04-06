@@ -41,7 +41,7 @@ class osamt extends Command {
             ->first();
             $slr = DB::table( 'salesreturns' )
             ->where( 'user_id', $id )
-            ->selectRaw( '*, SUM(quantity * price) as sum, SUM(discount * 0.01 * quantity * price) as dis' )
+            ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')
             ->groupBy( 'user_id' )
             ->first();
             $exp = DB::table( 'expenses' )
@@ -65,7 +65,7 @@ class osamt extends Command {
                 $ex = 0;
             }
             if ( $slr != NULL ) {
-                $sr = $slr->sum-$slr->dis;
+                $sr = $slr->sum;
             } else {
                 $sr = 0;
             }

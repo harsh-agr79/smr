@@ -162,7 +162,7 @@ class AnalyticsController extends Controller
         $slrs = DB::table('salesreturns')
         ->where('date', '>=', $date)
         ->where('date', '<=', $date2)
-        ->selectRaw('*, SUM(quantity * price) as sum, SUM(discount * 0.01 * quantity * price) as dis')->groupBy('returnid')->where('user_id',$id) 
+        ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('returnid')->where('user_id',$id) 
         ->orderBy('date','desc')
         ->get();
         
@@ -219,7 +219,7 @@ class AnalyticsController extends Controller
                 'debit'=>'0',
                 'nar'=>'',
                 'vou'=>'',
-                'credit'=>$item->sum - $item->dis,
+                'credit'=>$item->sum,
                 'type'=>'Sales Return',
             ];}
         }
