@@ -35,9 +35,10 @@
                         @foreach ($data as $item)
                             <input type="hidden" value="{{ $item->id }}" name="id[]">
                             <tr>
-                                <td
-                                    @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
-                                    {{ $item->item }}</td>
+                                <td @if ($item->stock == 'on') style="text-decoration: underline solid red 25%;" @endif>
+                                    {{ $item->item }} @if($item->net != NULL) <span>(NET)</span> @endif
+                                <br>
+                            <span style="font-size: 5px; margin-top:-10px;">{{$item->brand}} {{$item->category}}</span></td>
                                 <td class="center">{{ $item->quantity }}</td>
                                 <td class="center">
                                     <span class="green lighten-2 black-text center" style="padding: 2px;"

@@ -24,7 +24,10 @@
                     @foreach ($data as $item)
                         <tr>
                             <td>{{$sn = $sn + 1 }}</td>
-                            <td>{{$item->item}}</td>
+                            <td>
+                                {{ $item->item }} @if($item->net != NULL) <span>(NET)</span> @endif
+                            <br>
+                        <span style="font-size: 7px; margin-top:-10px;">{{$item->brand}} {{$item->category}}</span></td>
                             <td>{{$item->approvedquantity}}</td>
                         </tr>
                     @endforeach
