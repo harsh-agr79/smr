@@ -328,7 +328,7 @@ class AnalyticsController extends Controller
             }
         })
         ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
-        ->groupBy('category')
+        ->groupBy('category_id')
         ->orderBy('samt','DESC')
         ->get();
 

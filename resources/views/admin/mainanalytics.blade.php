@@ -51,8 +51,8 @@
             </div>
         @endif
         @php
-            $catchart[] = [];
-            $catqchart[] = [];
+            $catchart = [];
+            $catqchart = [];
             foreach ($categoryg as $item) {
                 $catchart[] = ['category' => $item->category, 'Amount' => (int) $item->samt];
                 $catqchart[] = ['category' => $item->category, 'Amount' => (int) $item->sum];
