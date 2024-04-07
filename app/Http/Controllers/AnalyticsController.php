@@ -317,6 +317,21 @@ class AnalyticsController extends Controller
         ->orderBy('samt','DESC')
         ->get();
 
+        $result['categoryg'] = DB::table('orders')
+        ->where(['deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])
+        ->whereIn('mainstatus', ['green', 'deep-purple', 'amber darken-1'])
+        ->where('orders.date', '>=', $date)
+        ->where('orders.date', '<=', $date2)
+        ->where(function ($query) use ($request){
+            if($request->get('name')){
+                $query->where('orders.name', $request->get('name'));
+            }
+        })
+        ->selectRaw('*,SUM(approvedquantity) as sum,SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as samt')
+        ->groupBy('category')
+        ->orderBy('samt','DESC')
+        ->get();
+
         foreach($result['catsales'] as $item){
             $result['data'][$item->brand] = DB::table('products')
             ->where(['orders.brand'=>$item->brand,'status'=>'approved','orders.deleted_at'=>NULL, 'save'=>NULL, 'orders.net'=>NULL])

@@ -45,11 +45,19 @@
             </form>
         </div>
         @if ($admin->type != 'staff')
-        <div class="green accent-4 center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
-            <h5 class="black-text" style="font-weight: 600;">Total Sales:
-                {{ money($totalsales[0]->samt) }}</h5>
-        </div>  
+            <div class="green accent-4 center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
+                <h5 class="black-text" style="font-weight: 600;">Total Sales:
+                    {{ money($totalsales[0]->samt) }}</h5>
+            </div>
         @endif
+        @php
+            $catchart[] = [];
+            $catqchart[] = [];
+            foreach ($categoryg as $item) {
+                $catchart[] = ['category' => $item->category, 'Amount' => (int) $item->samt];
+                $catqchart[] = ['category' => $item->category, 'Amount' => (int) $item->sum];
+            }
+        @endphp
         <div class="mp-card" style="margin-top: 10px;">
             <ul class="collapsible">
                 @foreach ($catsales as $item)
@@ -66,16 +74,13 @@
                         <div class="collapsible-body"><span>
                                 <div>
                                     @php
-                                        $subcates = DB::table('categories')
-                                            ->pluck('category')
-                                            ->toArray();
+                                        $subcates = DB::table('categories')->pluck('category')->toArray();
                                     @endphp
                                     <form id="{{ $item->brand }}form">
                                         @foreach ($subcates as $item3)
                                             <label style="margin-right: 15px;">
                                                 <input type="checkbox" name="{{ $item3 }}"
-                                                    value="{{ $item3 }}"
-                                                    onclick="Filter('{{ $item->brand }}')" />
+                                                    value="{{ $item3 }}" onclick="Filter('{{ $item->brand }}')" />
                                                 <span>{{ $item3 }}</span>
                                             </label>
                                         @endforeach
@@ -96,7 +101,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($data[$item->brand] as $item2)
-                                            <tr class="{{ $item->brand }} {{$item2->category}}"
+                                            <tr class="{{ $item->brand }} {{ $item2->category }}"
                                                 ondblclick="openanadetail('{{ $date }}', '{{ $date2 }}','{{ $name }}', '{{ $item2->item }}')">
                                                 <td>{{ $item2->item }}</td>
                                                 <td>{{ $item2->sum }}</td>
@@ -104,8 +109,7 @@
                                             </tr>
                                         @endforeach
                                         @foreach ($data2[$item->brand] as $item2)
-                                            <tr
-                                                class="{{ $item->brand }} {{$item2->category}}">
+                                            <tr class="{{ $item->brand }} {{ $item2->category }}">
                                                 <td>{{ $item2->name }}</td>
                                                 <td>0</td>
                                                 <td>0</td>
@@ -126,6 +130,12 @@
             <div class="col m6 s12">
                 <div class="mp-chart" id="piechart_3d2" style="width: auto; height: 500px;"></div>
             </div>
+            <div class="col m6 s12">
+                <div class="mp-chart" id="piechart_3d3" style="width: auto; height: 500px;"></div>
+            </div>
+            <div class="col m6 s12">
+                <div class="mp-chart" id="piechart_3d4" style="width: auto; height: 500px;"></div>
+            </div>
         </div>
 
     </div>
@@ -134,13 +144,14 @@
             var type = `{{ $admin->type }}`;
             // console.log(type);
             if (type === 'marketer') {
-                var url = '/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
-                url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
+                var url = '/marketer/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' +
+                    product
+                url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B');
                 window.open(url,
                     "_self");
             } else {
                 var url = '/sortanalytics?date=' + date + '&date2=' + date2 + '&name=' + name + '&product=' + product
-                url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B'); 
+                url = url.replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\+/g, '%2B');
                 window.open(url,
                     "_self");
             }
@@ -177,6 +188,8 @@
         });
         google.charts.setOnLoadCallback(drawChart);
         google.charts.setOnLoadCallback(drawChart2);
+        google.charts.setOnLoadCallback(drawChart3);
+        google.charts.setOnLoadCallback(drawChart4);
 
         function drawChart() {
 
@@ -224,6 +237,58 @@
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
+            chart.draw(data, options);
+        }
+
+        function drawChart3() {
+
+            var chartdata = @json($catchart);
+            console.log(chartdata)
+            const mta = chartdata.map(d => Array.from(Object.values(d)))
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '');
+            data.addColumn('number', '');
+
+            data.addRows(mta);
+
+            var options = {
+                title: 'Category: Sales By Amount',
+                is3D: true,
+                backgroundColor: {
+                    fill: 'transparent'
+                },
+                textStyle: {
+                    color: '#FFF'
+                }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d3'));
+            chart.draw(data, options);
+        }
+
+        function drawChart4() {
+
+            var chartdata = @json($catqchart);
+            console.log(chartdata)
+            const mta = chartdata.map(d => Array.from(Object.values(d)))
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '');
+            data.addColumn('number', '');
+
+            data.addRows(mta);
+
+            var options = {
+                title: 'Category: Sales By Quantity',
+                is3D: true,
+                backgroundColor: {
+                    fill: 'transparent'
+                },
+                textStyle: {
+                    color: '#FFF'
+                }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d4'));
             chart.draw(data, options);
         }
     </script>
