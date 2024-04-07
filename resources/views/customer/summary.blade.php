@@ -322,7 +322,7 @@
             <ul class="collapsible">
                 @foreach ($catsales as $item)
                     @php
-                        $amtchart[] = ['Category' => $item->brand, 'Amount' => intval($item->samt)];
+                        $amtchart[] = ['Category' => $item->brand, 'Amount' => (int)$item->samt];
                         $quantchart[] = ['Category' => $item->brand, 'Quantity' => $item->sum + 0];
                     @endphp
                     <li>
@@ -492,7 +492,7 @@
                         @for ($i = 0; $i < count($qdata); $i++)
                             @if ($qdata[$i]['year'] >= $syear && $qdata[$i]['year'] <= $eyear)
                                 @php
-                                    $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => $qdata[$i]['amount']];
+                                    $forqdata[] = ['quater' => $qdata[$i]['quat'], 'sales' => (int)$qdata[$i]['amount']];
                                 @endphp
                                 <tr>
                                     <td>{{ $qdata[$i]['quat'] }}</td>
