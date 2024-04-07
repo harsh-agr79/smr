@@ -184,7 +184,7 @@
                         @php
                             $forchart[] = [
                                 'date' => $item->nepmonth . '-' . $item->nepyear,
-                                'amount' => $item->sl,
+                                'amount' => (int)$item->sl,
                             ];
                         @endphp
                         <li>
@@ -217,7 +217,7 @@
                     @elseif($syear == $eyear)
                         @if ($smonth <= $item->nepmonth && $emonth >= $item->nepmonth && $item->nepyear == $syear)
                             @php
-                                $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl];
+                                $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => (int)$item->sl];
                             @endphp
                             <li>
                                 <div class="collapsible-header row"
@@ -250,7 +250,7 @@
                     @elseif($item->nepyear == $syear)
                         @if ($smonth <= $item->nepmonth)
                             @php
-                                $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl];
+                                $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => (int)$item->sl];
                             @endphp
                             <li>
                                 <div class="collapsible-header row"
@@ -283,7 +283,7 @@
                     @elseif($item->nepyear == $eyear)
                         @if ($emonth >= $item->nepmonth)
                             @php
-                                $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => $item->sl];
+                                $forchart[] = ['date' => $item->nepmonth . '-' . $item->nepyear, 'amount' => (int)$item->sl];
                             @endphp
                             <li>
                                 <div class="collapsible-header row"
