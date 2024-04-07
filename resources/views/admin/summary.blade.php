@@ -354,7 +354,7 @@
                             @if (count($thirdays) > 0)
                                 <tr>
                                     <td class="hide">99999999999999999999999999999999999999999999</td>
-                                    <td style="font-weight: 700;">Above 30 days</td>
+                                    <td style="font-weight: 700;">Above 15 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($thirdays[0]->sl) > 0)
                                             <td style="font-weight: 700;">
@@ -373,7 +373,7 @@
                                 </tr>
                             @else
                                 <tr>
-                                    <td style="font-weight: 700;">Above 30 days</td>
+                                    <td style="font-weight: 700;">Above 15 days</td>
 
                                     @if ($tbc - $tbd > 0)
                                         <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>
@@ -386,7 +386,7 @@
                             @if (count($fourdays) > 0)
                                 <tr>
                                     <td class="hide">99999999999999999999999999999999999999999999</td>
-                                    <td style="font-weight: 700;">Above 45 days</td>
+                                    <td style="font-weight: 700;">Above 25 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($fourdays[0]->sl) > 0)
                                             <td style="font-weight: 700;">
@@ -405,7 +405,7 @@
                                 </tr>
                             @else
                                 <tr>
-                                    <td style="font-weight: 700;">Above 45 days</td>
+                                    <td style="font-weight: 700;">Above 25 days</td>
 
                                     @if ($tbc - $tbd > 0)
                                         <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>
@@ -418,7 +418,7 @@
                             @if (count($sixdays) > 0)
                                 <tr>
                                     <td class="hide">99999999999999999999999999999999999999999999</td>
-                                    <td style="font-weight: 700;">Above 60 days</td>
+                                    <td style="font-weight: 700;">Above 35 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($sixdays[0]->sl) > 0)
                                             <td style="font-weight: 700;">
@@ -437,7 +437,7 @@
                                 </tr>
                             @else
                                 <tr>
-                                    <td style="font-weight: 700;">Above 60 days</td>
+                                    <td style="font-weight: 700;">Above 35 days</td>
 
                                     @if ($tbc - $tbd > 0)
                                         <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>
@@ -449,7 +449,7 @@
                             @if (count($nindays) > 0)
                                 <tr>
                                     <td class="hide">99999999999999999999999999999999999999999999</td>
-                                    <td style="font-weight: 700;">Above 90 days</td>
+                                    <td style="font-weight: 700;">Above 45 days</td>
                                     @if ($tbd > $tbc)
                                         @if ($tbd - $tbc - ($nindays[0]->sl) > 0)
                                             <td style="font-weight: 700;">
@@ -468,7 +468,7 @@
                                 </tr>
                             @else
                                 <tr>
-                                    <td style="font-weight: 700;">Above 90 days</td>
+                                    <td style="font-weight: 700;">Above 45 days</td>
 
                                     @if ($tbc - $tbd > 0)
                                         <td style="font-weight: 700;">{{ money($tbc - $tbd) }}</td>

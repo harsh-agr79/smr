@@ -53,7 +53,7 @@
                         <td
                             class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
                             {{ $item->type }}</td>
-                        <td class="{{ $bal[0] }} lighten-5 bal black-text ">{{ $bal[1] }}</td>
+                        <td class="{{ $bal[0] }} lighten-5 bal black-text ">{{ money($bal[1]) }}</td>
                     </tr>
                 @endforeach
             </tbody>

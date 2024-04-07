@@ -625,14 +625,14 @@ class AnalyticsController extends Controller
             ->where(['deleted_at'=>NULL,'net'=>NULL,'save'=>NULL])
             ->where('name', $request->get('name'))
             ->where('status','approved') 
-            ->whereBetween('date', [now()->subDays(30), now()->addDays(1)])
+            ->whereBetween('date', [now()->subDays(15), now()->addDays(1)])
             ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
             ->get();
 
             $result['fourdays'] = DB::table('orders')
             ->where(['deleted_at'=>NULL, 'net'=>NULL])
             ->where('name',$request->get('name'))
-            ->whereBetween('date', [now()->subDays(45), now()->addDays(1)])
+            ->whereBetween('date', [now()->subDays(25), now()->addDays(1)])
             ->where('status','approved') 
             ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
             ->get();
@@ -640,14 +640,14 @@ class AnalyticsController extends Controller
             $result['sixdays'] = DB::table('orders')
             ->where(['deleted_at'=>NULL, 'net'=>NULL])
             ->where('name', $request->get('name'))
-            ->whereBetween('date', [now()->subDays(60), now()->addDays(1)])
+            ->whereBetween('date', [now()->subDays(35), now()->addDays(1)])
             ->where('status','approved') 
             ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
             ->get();
             $result['nindays'] = DB::table('orders')
             ->where(['deleted_at'=>NULL, 'net'=>NULL])
             ->where('name', $request->get('name'))
-            ->whereBetween('date', [now()->subDays(90), now()->addDays(1)])
+            ->whereBetween('date', [now()->subDays(45), now()->addDays(1)])
             ->where('status','approved') 
             ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
             ->get();
