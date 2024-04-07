@@ -115,6 +115,11 @@
                                                 <td>0</td>
                                             </tr>
                                         @endforeach
+                                        {{-- <tr>
+                                            <td>Total</td>
+                                            <td id="{{$item->brand}}qtsum">0</td>
+                                            <td id="{{$item->brand}}amtsum">0</td>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </span></div>
