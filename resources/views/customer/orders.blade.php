@@ -8,14 +8,16 @@
                     <div class="blue" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Pending</span>
                 </div>
                 <div class="valign-wrapper">
-                    <div class="amber darken-1" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Approved</span>
+                    <div class="amber darken-1" style="width: 10px; height:10px; margin-right: 5px;"></div>
+                    <span>Approved</span>
                 </div>
                 <div class="valign-wrapper">
-                    <div class="deep-purple" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Packing Order</span>
+                    <div class="deep-purple" style="width: 10px; height:10px; margin-right: 5px;"></div><span>Packing
+                        Order</span>
                 </div>
             </div>
             <div class="col s4">
-                <h5 class="center" style="text-transform: capitalize;">{{$page}}</h5>
+                <h5 class="center" style="text-transform: capitalize;">{{ $page }}</h5>
             </div>
             <div class="col s4">
                 <div class="valign-wrapper">
@@ -30,7 +32,8 @@
             <form id="filter">
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <input type="date" name="date" value="{{ $date }}" class="browser-default inp black-text">
+                        <input type="date" name="date" value="{{ $date }}"
+                            class="browser-default inp black-text">
                     </div>
                     <div class="col m4 s6" style="margin-top: 20px">
                         <button class="btn green accent-4">Apply</button>
@@ -48,7 +51,7 @@
                                 $l = 'old';
                             @endphp
                         @endif
-                        <a class="btn green accent-4" href="{{url('/user/'.$l.'orders')}}">VIEW {{$u}}</a>
+                        <a class="btn green accent-4" href="{{ url('/user/' . $l . 'orders') }}">VIEW {{ $u }}</a>
                     </div>
                 </div>
             </form>
@@ -74,22 +77,22 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
-                            <tr
-                                oncontextmenu="rightmenu({{ $item->order_id }}, '{{ $item->mainstatus }}'); return false;"
-                              >
+                            <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->order_id }}, '{{ $item->mainstatus }}'); return false;">
                                 <td>
                                     <div id="{{ $item->order_id . 'order' }}" class="{{ $item->mainstatus }}"
                                         style="height: 35px; width:10px;"></div>
                                 </td>
                                 <td>{{ getNepaliDate($item->date) }}</td>
-                                <td   onclick="opendetail({{ $item->order_id }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
+                                <td
+                                    onclick="opendetail({{ $item->order_id }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
                                     <div class="row" style="padding: 0; margin: 0;">
-                                        <div class="col s12 blue-text" style="font-size: 12px; font-weight: 600;">{{ $item->name }}
+                                        <div class="col s12 blue-text" style="font-size: 12px; font-weight: 600;">
+                                            {{ $item->name }}
                                         </div>
                                         <div class="col s12 blue-text" style="font-size: 8px;">{{ $item->order_id }}</div>
                                     </div>
                                 </td>
-                                <td>{{getTotalAmount($item->order_id)}}</td>
+                                <td>{{ getTotalAmount($item->order_id) }}</td>
                                 <td>
                                     @if ($item->delivered == 'on')
                                         <i class="material-icons textcol">check</i>
@@ -99,20 +102,27 @@
                                 </td>
                                 <td>
                                     <label>
-                                        <input @if ($item->received == 'on')
-                                            checked
-                                        @endif @if($item->mainstatus != 'green') disabled @endif type="checkbox" onclick="recieve({{$item->order_id}})"/>
+                                        <input @if ($item->received == 'on') checked @endif
+                                            @if ($item->mainstatus != 'green') disabled @endif type="checkbox"
+                                            onclick="recieve({{ $item->order_id }})" />
                                         <span></span>
-                                      </label>
+                                    </label>
                                 </td>
                                 @if ($page == 'Saved Baskets')
                                     <td>
-                                        <a href="{{url('user/confirmorder/'.$item->order_id)}}" class="btn green accent-4">
+                                        <a href="{{ url('user/confirmorder/' . $item->order_id) }}"
+                                            class="btn green accent-4">
                                             Send
                                         </a>
                                     </td>
                                 @endif
                             </tr>
+                            @if ($item->mainstatus == 'blue')
+                                <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
+                                    <li><a href="/user/editorder/{{ $item->order_id }}">Edit</a></li>
+                                    <li><a href="/user/deleteorder/{{ $item->order_id }}">Delete</a></li>
+                                </ul>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -138,7 +148,7 @@
         function rightmenu(order_id, status) {
             var rmenu = document.getElementById("rightmenu");
             if (status == 'blue') {
-            console.log(order_id)
+                console.log(order_id)
                 rmenu.style.display = 'block';
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';
@@ -178,16 +188,17 @@
         }
 
         function opendetail(order_id, seen, ms) {
-                window.open('/user/detail/' + order_id, "_self");
+            window.open('/user/detail/' + order_id, "_self");
         }
-        function recieve(id){
+
+        function recieve(id) {
             $.ajax({
-                    type: 'get',
-                    url: '/user/recieve/' + id,
-                    success: function(response) {
-                        console.log(response);
-                    }
-                })
+                type: 'get',
+                url: '/user/recieve/' + id,
+                success: function(response) {
+                    console.log(response);
+                }
+            })
         }
     </script>
 @endsection
