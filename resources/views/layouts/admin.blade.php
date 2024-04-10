@@ -254,6 +254,16 @@
     <script src="{{ asset('/assets/script.js') }}"></script>
     <script src="{{ asset('/assets/select.js') }}"></script>
     <script src="{{ asset('/assets/sorttable.js') }}"></script>
+    <script>
+         $(document).ready(function() {
+            p = navigator.platform;
+            if (p == 'iPhone' || p == 'iPod' || p == 'iPad') {
+                $('.iphone').css('display', 'block');
+            } else {
+                $('.iphone').remove();
+            }
+        });
+    </script>
 
 </body>
 

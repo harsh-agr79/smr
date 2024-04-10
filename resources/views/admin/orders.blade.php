@@ -42,13 +42,15 @@
                         </div>
                         <div class="input-field col s12 m4 l4">
                             <input type="text" name="name" id="customer" value="{{ $name }}"
-                                placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off">
+                                placeholder="Customer" class="autocomplete browser-default inp black-text"
+                                autocomplete="off">
                         </div>
                     </div>
                     <div class="row col s12">
                         <div class="input-field col s12 l4 m4">
                             <input type="text" name="product" id="product" value="{{ $product }}"
-                                placeholder="Product" class="autocomplete browser-default inp black-text" autocomplete="off">
+                                placeholder="Product" class="autocomplete browser-default inp black-text"
+                                autocomplete="off">
                         </div>
                         <div class="input-field col s12 m4 l4">
                             <select name="status" class="browser-default selectinp">
@@ -68,7 +70,7 @@
                             <a class="btn green accent-4" href="{{ url('orders') }}">clear</a>
                         </div>
                     </div>
-                    
+
                 </div>
             </form>
         </div>
@@ -89,11 +91,12 @@
                             <th>Delivered</th>
                             <th>recieved</th>
                             <th class="tamt" style="display: none;">Amount</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
-                            <tr class=" @if ($item->seen == '') z-depth-2 @endif"
+                            <tr class='dropdown-trigger' data-target="drop{{ $item->id }}" class=" @if ($item->seen == '') z-depth-2 @endif"
                                 oncontextmenu="rightmenu({{ $item->order_id }}); return false;"
                                 ondblclick="opendetail({{ $item->order_id }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
                                 <td>
@@ -110,8 +113,8 @@
                                     </div>
                                 </td>
                                 @if ($product != '')
-                                <td>{{$item->quantity}}</td>
-                            @endif
+                                    <td>{{ $item->quantity }}</td>
+                                @endif
                                 <td>
                                     @if ($item->delivered == 'on')
                                         <i class="material-icons textcol">check</i>
@@ -121,6 +124,10 @@
                                 </td>
                                 <td>{{ $item->receiveddate }}</td>
                                 <td class="tamt" style="display: none;"> {{ getTotalAmount($item->order_id) }}</td>
+                                <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
+                                    <li><a href="#!">one</a></li>
+                                    <li><a href="#!">two</a></li>
+                                </ul>
                             </tr>
                         @endforeach
                     </tbody>
@@ -136,10 +143,10 @@
             <a id="rmeditlink">
                 <li>Edit</li>
             </a>
-            
-                <a id="rmdeletelink">
-                    <li class="border-top">Delete</li>
-                </a>
+
+            <a id="rmdeletelink">
+                <li class="border-top">Delete</li>
+            </a>
         </ul>
     </div>
 
@@ -147,11 +154,11 @@
         function rightmenu(order_id) {
             console.log(order_id)
             var rmenu = document.getElementById("rightmenu");
-                rmenu.style.display = 'block';
-                rmenu.style.top = mouseY(event) + 'px';
-                rmenu.style.left = mouseX(event) + 'px';
-                $('#rmeditlink').attr('href', '/editorder/' + order_id);
-                $('#rmdeletelink').attr('href', '/deleteorder/' + order_id);
+            rmenu.style.display = 'block';
+            rmenu.style.top = mouseY(event) + 'px';
+            rmenu.style.left = mouseX(event) + 'px';
+            $('#rmeditlink').attr('href', '/editorder/' + order_id);
+            $('#rmdeletelink').attr('href', '/deleteorder/' + order_id);
         }
 
         $(document).bind("click", function(event) {
@@ -185,11 +192,15 @@
         }
 
         function opendetail(order_id, seen, ms) {
-                    window.open('/detail/' + order_id, "_self");
+            window.open('/detail/' + order_id, "_self");
         }
     </script>
     <script>
         $(document).ready(function() {
+            $('.dropdown-trigger').dropdown({
+                coverTrigger: false,
+                constrainWidth: false,
+            });
             $.ajax({
                 type: 'get',
                 url: '{!! URL::to('findcustomer') !!}',
