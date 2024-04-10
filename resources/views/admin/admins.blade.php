@@ -18,12 +18,16 @@
                 </thead>
                 <tbody id="admin-tbody">
                     @foreach ($data as $item)
-                        <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                        <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td >{{ $item->name }}</td>
                             <td >{{ $item->email }}</td>
                             <td >{{ $item->userid }}</td>
                             <td >{{ $item->type }}</td>
                         </tr>
+                        <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
+                            <li><a onclick="editadmin({{$item->id}})">Edit</a></li>
+                            <li><a onclick="deladmin({{$item->id}})">Delete</a></li>
+                        </ul>
                     @endforeach
                 </tbody>
             </table>

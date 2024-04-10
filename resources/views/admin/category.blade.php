@@ -19,10 +19,14 @@
                         $i = 0
                     @endphp
                     @foreach ($data as $item)
-                        <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                        <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td>{{$i = $i + 1}}</td>
                             <td >{{ $item->category }}</td>
                         </tr>
+                        <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
+                            <li><a onclick="editcat({{$item->id}})">Edit</a></li>
+                            <li><a onclick="delcat({{$item->id}})">Delete</a></li>
+                        </ul>
                     @endforeach
                 </tbody>
             </table>

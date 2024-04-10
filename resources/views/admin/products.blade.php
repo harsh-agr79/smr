@@ -35,7 +35,7 @@
                         $a = 0;
                     @endphp
                     @foreach ($data as $item)
-                        <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                        <tr  data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             {{-- <td>{{$a = $a + 1}}</td> --}}
                             <td>{{$item->name}}</td>
                             <td>{{$item->brand}}</td>
@@ -45,6 +45,10 @@
                             <td>{{$item->featured}}</td>
                             <td>{{$item->price}}</td>
                         <input type="hidden" class="prodids" name="id[]" value="{{$item->id}}">
+                        <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
+                            <li><a href="/products/edit/{{$item->id}}">Edit</a></li>
+                            <li><a href="/products/delprod/{{$item->id}}">Delete</a></li>
+                        </ul>
                         </tr>
                     @endforeach
                 </tbody>

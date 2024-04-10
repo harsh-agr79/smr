@@ -39,11 +39,15 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
-                        <tr ondblclick="opendet('{{ $item->returnid }}')"
+                        <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" ondblclick="opendet('{{ $item->returnid }}')"
                             oncontextmenu="rightmenu('{{ $item->returnid }}'); return false;">
                             <td>{{ $item->date }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->returnid }}</td>
+                            <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
+                                <li><a href="/editslr/{{$item->returnid}}">Edit</a></li>
+                                <li><a href="/deleteslr/{{$item->returnid}}">Delete</a></li>
+                            </ul>
                         </tr>
                     @endforeach
                 </tbody>

@@ -17,7 +17,7 @@
                 </thead>
                 <tbody id="brand-tbody">
                     @foreach ($data as $item)
-                        <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                        <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td>
                                 @if ($item->logo == NULL)
                                 <img src="{{asset('images/user.png')}}" class="materialboxed table-dp">
@@ -27,6 +27,10 @@
                             </td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->info }}</td>
+                            <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
+                                <li><a onclick="editbrand({{$item->id}})">Edit</a></li>
+                                <li><a onclick="delbrand({{$item->id}})">Delete</a></li>
+                            </ul>
                         </tr>
                     @endforeach
                 </tbody>
