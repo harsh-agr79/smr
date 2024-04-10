@@ -96,7 +96,7 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
-                            <tr class='dropdown-trigger' data-target="drop{{ $item->id }}" class=" @if ($item->seen == '') z-depth-2 @endif"
+                            <tr  data-target="drop{{ $item->id }}" class="dropdown-trigger @if ($item->seen == '') z-depth-2 @endif"
                                 oncontextmenu="rightmenu({{ $item->order_id }}); return false;"
                                 ondblclick="opendetail({{ $item->order_id }}, '{{ $item->seen }}', '{{ $item->mainstatus }}')">
                                 <td>
