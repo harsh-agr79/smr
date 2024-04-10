@@ -125,8 +125,8 @@
                                 <td>{{ $item->receiveddate }}</td>
                                 <td class="tamt" style="display: none;"> {{ getTotalAmount($item->order_id) }}</td>
                                 <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                    <li><a href="#!">one</a></li>
-                                    <li><a href="#!">two</a></li>
+                                    <li><a href="/editorder/{{$item->order_id}}">Edit</a></li>
+                                    <li><a href="/deleteorder/{{$item->order_id}}">Delete</a></li>
                                 </ul>
                             </tr>
                         @endforeach
@@ -143,7 +143,6 @@
             <a id="rmeditlink">
                 <li>Edit</li>
             </a>
-
             <a id="rmdeletelink">
                 <li class="border-top">Delete</li>
             </a>
