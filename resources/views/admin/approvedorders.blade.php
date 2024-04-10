@@ -83,7 +83,7 @@
                             </label>
                             </form>
                         </td>
-                        <ul id='drop{{ $item->id }}p' class='dropdown-content iphone'>
+                        <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
                             <li><a href="/editorder/{{$item->order_id}}">Edit</a></li>
                             <li><a href="/deleteorder/{{$item->order_id}}">Delete</a></li>
                         </ul>
