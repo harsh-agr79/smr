@@ -34,6 +34,37 @@
 </head>
 
 <body class="has-fixed-sidenav">
+    <style>
+        .modal-cont {
+            padding: 10px 0px;
+        }
+
+        .mod-btn {
+            padding: 5px 15px;
+            width: 100%;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .mod-btn i {
+            font-size: 30px;
+        }
+
+        .modal-top-des {
+            height: 5px;
+            border-radius: 5px;
+            background: gray;
+        }
+
+        .mod-btn span {
+            padding: 10px;
+        }
+
+        .bottom-sheet {
+            padding: 5px;
+            border-radius: 20px 20px 0px 0px !important;
+        }
+    </style>
     <header>
         <div class="navbar-fixed">
             <nav class="navbar white">
