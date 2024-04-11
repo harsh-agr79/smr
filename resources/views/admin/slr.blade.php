@@ -44,11 +44,7 @@
                             <td>{{ $item->date }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->returnid }}</td>
-                        <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                            <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                <li><a href="/editslr/{{$item->returnid}}">Edit</a></li>
-                                <li><a href="/deleteslr/{{$item->returnid}}">Delete</a></li>
-                            </ul>
+                            <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/editslr/{{$item->returnid}}','/deleteslr/{{$item->returnid}}')"><i class="material-icons">more_vert</i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -22,12 +22,8 @@
                         <tr  oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td>{{$i = $i + 1}}</td>
                             <td >{{ $item->category }}</td>
-                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                        </tr>
-                        <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                            <li><a onclick="editcat({{$item->id}})">Edit</a></li>
-                            <li><a onclick="delcat({{$item->id}})">Delete</a></li>
-                        </ul>
+                            <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelinkajax('editcat({{$item->id}})','delcat({{$item->id}})')"><i class="material-icons">more_vert</i></a></td>                       
+                         </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -134,6 +130,7 @@
                 type: "GET",
                 success: function(response) {
                     // console.log(response);
+                    $('#menumodal').modal('close')
                     $('#edcat').val(response.category)
                     $('#edid').val(response.id)
                 }
@@ -189,6 +186,7 @@
                 type: "GET",
                 success: function(response){
                     M.toast({html: response});
+                    $('#menumodal').modal('close');
                     getcatdata();
                 }
             })

@@ -27,11 +27,7 @@
                             </td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->info }}</td>
-                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                            <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                <li><a onclick="editbrand({{$item->id}})">Edit</a></li>
-                                <li><a onclick="delbrand({{$item->id}})">Delete</a></li>
-                            </ul>
+                            <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelinkajax('editbrand({{$item->id}})','delbrand({{$item->id}})')"><i class="material-icons">more_vert</i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -187,6 +183,7 @@
                 type: "GET",
                 success: function(response) {
                     // console.log(response);
+                    $('#menumodal').modal('close');
                     $('#edname').val(response.name)
                     $('#edinfo').val(response.info)
                     $('#edlogo').attr('src', response.logo)
@@ -252,6 +249,7 @@
                 url: "/brand/delbrand/" + id,
                 type: "GET",
                 success: function(response) {
+                    $('#menumodal').modal('close');
                     M.toast({
                         html: response
                     });

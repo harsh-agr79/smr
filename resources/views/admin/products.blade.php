@@ -45,11 +45,7 @@
                             <td>{{$item->featured}}</td>
                             <td>{{$item->price}}</td>
                         <input type="hidden" class="prodids" name="id[]" value="{{$item->id}}">
-                        <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                        <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                            <li><a href="/products/edit/{{$item->id}}">Edit</a></li>
-                            <li><a href="/products/delprod/{{$item->id}}">Delete</a></li>
-                        </ul>
+                        <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/products/edit/{{$item->id}}','/products/delprod/{{$item->id}}')"><i class="material-icons">more_vert</i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

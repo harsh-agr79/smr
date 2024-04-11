@@ -42,11 +42,7 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->address}}</td>
                             <td>{{$item->contact}}</td>
-                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                            <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                <li><a href="/customers/edit/{{$item->id}}">Edit</a></li>
-                                <li><a href="/customers/delcust/{{$item->id}}">Delete</a></li>
-                            </ul>
+                        <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/customers/edit/{{$item->id}}','/customers/delcust/{{$item->id}}')"><i class="material-icons">more_vert</i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -65,6 +61,10 @@
         </ul>
     </div>
     <script>
+         $(document).ready(function(){
+  $('.modal').modal();
+
+});
          function rightmenu(id) {
             // console.log(orderid)
             var rmenu = document.getElementById("rightmenu");

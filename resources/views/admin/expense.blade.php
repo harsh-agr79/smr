@@ -49,11 +49,7 @@
                             <td><a href="{{url('editexpense/'.$item->expenseid)}}">{{$item->expenseid}}</a></td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->particular}}</td>
-                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                            <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                <li><a href="/editexpense/{{$item->expenseid}}">Edit</a></li>
-                                <li><a href="/deleteexpense/{{$item->expenseid}}">Delete</a></li>
-                            </ul>
+                            <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/editexpense/{{$item->expenseid}}','/deleteexpense/{{$item->expenseid}}')"><i class="material-icons">more_vert</i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

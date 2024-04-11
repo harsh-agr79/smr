@@ -324,12 +324,16 @@
                 // $('#rightmenu').remove();
                 // $('.iphone').remove();
             } else {
-                $('.iphone').remove();
+                // $('.iphone').remove();
             }
         });
         function changelink(edlink,dellink){
             $('#menu-editlink').attr('href', edlink);
             $('#menu-dellink').attr('href', dellink);
+        }
+        function changelinkajax(edlink,dellink){
+            $('#menu-editlink').attr('onclick', edlink);
+            $('#menu-dellink').attr('onclick', dellink);
         }
     </script>
 

@@ -44,18 +44,14 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
-                        <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->paymentid }}); return false;">
+                        <tr oncontextmenu="rightmenu({{ $item->paymentid }}); return false;">
                             <td>{{getNepaliDate($item->date)}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->type}}</td>
                             <td><a href="{{url('/editpayment/'.$item->paymentid)}}">{{$item->paymentid}}</a></td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->entry_by}}</td>
-                        <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                            <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                <li><a href="/editpayment/{{$item->paymentid}}">Edit</a></li>
-                                <li><a href="/deletepayment/{{$item->paymentid}}">Delete</a></li>
-                            </ul>
+                            <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/editpayment/{{$item->paymentid}}','/deletepayment/{{$item->paymentid}}')"><i class="material-icons">more_vert</i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
