@@ -124,11 +124,7 @@
                                 </td>
                                 <td>{{ $item->receiveddate }}</td>
                                 <td class="tamt" style="display: none;"> {{ getTotalAmount($item->order_id) }}</td>
-                                <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                                <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                    <li><a href="/editorder/{{$item->order_id}}">Edit</a></li>
-                                    <li><a href="/deleteorder/{{$item->order_id}}">Delete</a></li>
-                                </ul>
+                                <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/editorder/{{$item->order_id}}','/deleteorder/{{$item->order_id}}')"><i class="material-icons">more_vert</i></a></td>
                             </tr>
                         @endforeach
                     </tbody>
