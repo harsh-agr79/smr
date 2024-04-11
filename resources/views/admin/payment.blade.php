@@ -51,6 +51,7 @@
                             <td><a href="{{url('/editpayment/'.$item->paymentid)}}">{{$item->paymentid}}</a></td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->entry_by}}</td>
+                        <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
                             <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
                                 <li><a href="/editpayment/{{$item->paymentid}}">Edit</a></li>
                                 <li><a href="/deletepayment/{{$item->paymentid}}">Delete</a></li>

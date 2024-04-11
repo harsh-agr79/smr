@@ -77,7 +77,7 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
-                            <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->order_id }}, '{{ $item->mainstatus }}'); return false;">
+                            <tr oncontextmenu="rightmenu({{ $item->order_id }}, '{{ $item->mainstatus }}'); return false;">
                                 <td>
                                     <div id="{{ $item->order_id . 'order' }}" class="{{ $item->mainstatus }}"
                                         style="height: 35px; width:10px;"></div>
@@ -116,6 +116,7 @@
                                         </a>
                                     </td>
                                 @endif
+                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
                             </tr>
                             @if ($item->mainstatus == 'blue')
                                 <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>

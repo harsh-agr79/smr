@@ -43,12 +43,13 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
-                        <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu('{{ $item->expenseid }}'); return false;">
+                        <tr oncontextmenu="rightmenu('{{ $item->expenseid }}'); return false;">
                             <td>{{getNepaliDate($item->date)}}</td>
                             <td>{{$item->name}}</td>
                             <td><a href="{{url('editexpense/'.$item->expenseid)}}">{{$item->expenseid}}</a></td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->particular}}</td>
+                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
                             <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
                                 <li><a href="/editexpense/{{$item->expenseid}}">Edit</a></li>
                                 <li><a href="/deleteexpense/{{$item->expenseid}}">Delete</a></li>

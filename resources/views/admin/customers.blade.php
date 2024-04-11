@@ -28,7 +28,7 @@
                         $a = 0;
                     @endphp
                     @foreach ($data as $item)
-                        <tr data-target="drop{{ $item->id }}" class="dropdown-trigger" oncontextmenu="rightmenu({{ $item->id }}); return false;">
+                        <tr oncontextmenu="rightmenu({{ $item->id }}); return false;">
                             <td>{{$a = $a + 1}}</td>
                             <td>
                                 @if ($item->profileimg == NULL)
@@ -42,6 +42,7 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->address}}</td>
                             <td>{{$item->contact}}</td>
+                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
                             <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
                                 <li><a href="/customers/edit/{{$item->id}}">Edit</a></li>
                                 <li><a href="/customers/delcust/{{$item->id}}">Delete</a></li>
