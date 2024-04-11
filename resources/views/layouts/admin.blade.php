@@ -259,6 +259,7 @@
             p = navigator.platform;
             if (p == 'iPhone' || p == 'iPod' || p == 'iPad') {
                 $('.iphone').css('display', 'block');
+                $('#rightmenu').remove();
             } else {
                 $('.iphone').remove();
             }
