@@ -115,8 +115,8 @@
                                     </td>
                                     <td>{{ $item->seenby }}</td>
                                     <td class="tamt" style="display: none;"> {{ getTotalAmount($item->order_id) }}</td>
-                                    <td class="iphone"><a data-target="drop{{ $item->order_id }}p" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                                    <ul id='drop{{ $item->order_id }}p' class='dropdown-content iphone'>
+                                    <td class="iphone"><a data-target="drop" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
+                                    <ul id='drop' class='dropdown-content iphone'>
                                         <li><a href="/editorder/{{$item->order_id}}">Edit</a></li>
                                         <li><a href="/deleteorder/{{$item->order_id}}">Delete</a></li>
                                     </ul>

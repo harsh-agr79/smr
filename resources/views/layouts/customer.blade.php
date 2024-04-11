@@ -138,6 +138,7 @@
             p = navigator.platform;
             if (p == 'iPhone' || p == 'iPod' || p == 'iPad') {
                 $('.iphone').css('display', 'block');
+                $('.iphone').remove();
             } else {
                 $('.iphone').remove();
             }
