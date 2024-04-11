@@ -324,7 +324,7 @@
                 // $('#rightmenu').remove();
                 // $('.iphone').remove();
             } else {
-                // $('.iphone').remove();
+                $('.iphone').remove();
             }
         });
         function changelink(edlink,dellink){
