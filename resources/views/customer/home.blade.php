@@ -311,7 +311,7 @@
                                 <input type="number" id="{{ $item->id }}cartinp" inputmode="numeric" pattern="[0-9]*"
                                     name="qty[]" onkeyup="updatecart()" onchange="updatecart()" placeholder="Quantity"
                                     class="browser-default prod-admin-inp right qtys"
-                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}" @endif>
+                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}" @endif content="width=device-width, initial-scale=1, maximum-scale=1">
                             </div>
                         </div>
                     </div>
@@ -500,7 +500,7 @@
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
                                         onkeyup="changequantity(${item.id})" min="0" onchange="changequantity(${item.id})"
-                                        onfocusout="changequantity2({{ $item->id }})" style="width: 7vh !important;" value="${item.quantity}"></td>
+                                        onfocusout="changequantity2({{ $item->id }})" style="width: 7vh !important;" value="${item.quantity}" content="width=device-width, initial-scale=1, maximum-scale=1"></td>
                                         <td>${item.price}</td>
                             <td>${item.total}</td>
                         </tr>
