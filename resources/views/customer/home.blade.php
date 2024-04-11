@@ -500,7 +500,7 @@
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
                                         onkeyup="changequantity(${item.id})" min="0" onchange="changequantity(${item.id})"
-                                        onfocusout="changequantity2({{ $item->id }})" style="width: 7vh !important;" value="${item.quantity}" content="width=device-width, initial-scale=1, maximum-scale=1"></td>
+                                        onfocusout="changequantity2({{ $item->id }})" style="width: 7vh !important;" value="${item.quantity}"></td>
                                         <td>${item.price}</td>
                             <td>${item.total}</td>
                         </tr>
