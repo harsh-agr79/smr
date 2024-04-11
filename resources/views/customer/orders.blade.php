@@ -51,7 +51,8 @@
                                 $l = 'old';
                             @endphp
                         @endif
-                        <a class="btn green accent-4" href="{{ url('/user/' . $l . 'orders') }}">VIEW {{ $u }}</a>
+                        <a class="btn green accent-4" href="{{ url('/user/' . $l . 'orders') }}">VIEW
+                            {{ $u }}</a>
                     </div>
                 </div>
             </form>
@@ -116,14 +117,14 @@
                                         </a>
                                     </td>
                                 @endif
-                            <td class="iphone"><a data-target="drop{{ $item->id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
+                                @if ($item->mainstatus == 'blue')
+                                    <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal"
+                                            onclick="changelink('/user/editorder/{{ $item->order_id }}','/user/deleteorder/{{ $item->order_id }}')"><i
+                                                class="material-icons">more_vert</i></a></td>
+                                @else
+                                    <td class="iphone"><a class="btn-flat"><i class="material-icons">more_vert</i></a></td>
+                                @endif
                             </tr>
-                            @if ($item->mainstatus == 'blue')
-                                <ul id='drop{{ $item->id }}' class='dropdown-content iphone'>
-                                    <li><a href="/user/editorder/{{ $item->order_id }}">Edit</a></li>
-                                    <li><a href="/user/deleteorder/{{ $item->order_id }}">Delete</a></li>
-                                </ul>
-                            @endif
                         @endforeach
                     </tbody>
                 </table>

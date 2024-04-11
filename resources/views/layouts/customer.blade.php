@@ -119,6 +119,37 @@
     <main>
         @yield('main')
     </main>
+    <div id="menumodal" class="modal bottom-sheet iphone">
+        <div class="modal-cont">
+            <div class="row">
+                <div class="col s5"></div>
+                <div class="col s2 modal-top-des"></div>
+                <div class="col s5"></div>
+            </div>
+            <a id="menu-editlink">
+                <div class="mod-btn row">
+                    <div class="col s1">
+                        <i class="material-icons black-text">edit</i>
+                    </div>
+                    <div class="col s11">
+                        <span class="black-text">Edit</span>
+                    </div>
+                </div>
+            </a>
+            <a id="menu-dellink">
+                <div class="mod-btn row">
+                    <div class="col s1">
+                        <i class="material-icons red-text">delete</i>
+                    </div>
+                    <div class="col s11">
+                        <span class="red-text">
+                            Delete
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ asset('/assets/script.js') }}"></script>
@@ -134,6 +165,7 @@
         integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous">
     </script>
     <script>
+        
          $(document).ready(function() {
             $('.dropdown-trigger').dropdown({
                 coverTrigger: false,
@@ -151,6 +183,10 @@
                 $('.iphone').remove();
             }
         });
+        function changelink(edlink,dellink){
+            $('#menu-editlink').attr('href', edlink);
+            $('#menu-dellink').attr('href', dellink);
+        }
     </script>
 </body>
 
