@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             @foreach ($mpe as $item)
-                                <tr data-target="drop{{ $item->order_id }}" class="dropdown-trigger @if ($item->seen == '') z-depth-2 @endif"
+                                <tr class=" @if ($item->seen == '') z-depth-2 @endif"
                                     oncontextmenu="rightmenu({{ $item->order_id }}); return false;"
                                     ondblclick="opendetail({{ $item->order_id }}, '{{ $item->seen }}', '{{$item->mainstatus}}')">
                                     <td>
@@ -69,6 +69,7 @@
                                                 </label>
                                             </form>
                                         </td>
+                                        <td class="iphone"><a data-target="drop{{ $item->order_id }}" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
                                         <ul id='drop{{ $item->order_id }}' class='dropdown-content iphone'>
                                             <li><a href="/editorder/{{$item->order_id}}">Edit</a></li>
                                             <li><a href="/deleteorder/{{$item->order_id}}">Delete</a></li>
@@ -96,7 +97,7 @@
                         </thead>
                         <tbody>
                             @foreach ($pending as $item)
-                                <tr data-target="drop{{ $item->order_id }}p" class="dropdown-trigger @if ($item->seen == '') z-depth-2 @endif"
+                                <tr class="@if ($item->seen == '') z-depth-2 @endif"
                                     oncontextmenu="rightmenu({{ $item->order_id }}); return false;"
                                     ondblclick="opendetail({{ $item->order_id }}, '{{ $item->seen }}', '{{$item->mainstatus}}')">
                                     <td>
@@ -114,6 +115,7 @@
                                     </td>
                                     <td>{{ $item->seenby }}</td>
                                     <td class="tamt" style="display: none;"> {{ getTotalAmount($item->order_id) }}</td>
+                                    <td class="iphone"><a data-target="drop{{ $item->order_id }}p" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
                                     <ul id='drop{{ $item->order_id }}p' class='dropdown-content iphone'>
                                         <li><a href="/editorder/{{$item->order_id}}">Edit</a></li>
                                         <li><a href="/deleteorder/{{$item->order_id}}">Delete</a></li>
