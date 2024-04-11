@@ -69,10 +69,11 @@
                             <th>Date</th>
                             <th>Detail</th>
                             <th>Amount</th>
-                            <th>Delivered</th>
-                            <th>recieved</th>
                             @if ($page == 'Saved Baskets')
                                 <th>Confirm</th>
+                            @else
+                                <th>Delivered</th>
+                                <th>recieved</th>
                             @endif
                         </tr>
                     </thead>
@@ -94,27 +95,29 @@
                                     </div>
                                 </td>
                                 <td>{{ getTotalAmount($item->order_id) }}</td>
-                                <td>
-                                    @if ($item->delivered == 'on')
-                                        <i class="material-icons textcol">check</i>
-                                    @else
-                                        <i class="material-icons textcol">close</i>
-                                    @endif
-                                </td>
-                                <td>
-                                    <label>
-                                        <input @if ($item->received == 'on') checked @endif
-                                            @if ($item->mainstatus != 'green') disabled @endif type="checkbox"
-                                            onclick="recieve({{ $item->order_id }})" />
-                                        <span></span>
-                                    </label>
-                                </td>
+
                                 @if ($page == 'Saved Baskets')
                                     <td>
                                         <a href="{{ url('user/confirmorder/' . $item->order_id) }}"
                                             class="btn green accent-4">
                                             Send
                                         </a>
+                                    </td>
+                                @else
+                                    <td>
+                                        @if ($item->delivered == 'on')
+                                            <i class="material-icons textcol">check</i>
+                                        @else
+                                            <i class="material-icons textcol">close</i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input @if ($item->received == 'on') checked @endif
+                                                @if ($item->mainstatus != 'green') disabled @endif type="checkbox"
+                                                onclick="recieve({{ $item->order_id }})" />
+                                            <span></span>
+                                        </label>
                                     </td>
                                 @endif
                                 @if ($item->mainstatus == 'blue')
