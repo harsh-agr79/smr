@@ -187,7 +187,7 @@
         </div>
     </div>
     <div class="fixed-action-btn">
-        <a class="btn btn-large red" onclick="getcart()"><i class="material-icons">send</i></a>
+        <a class="btn red" onclick="getcart()">Order<i class="material-icons right">send</i></a>
     </div>
     <div id="cart-modal" class="modal cart-m"
         style="padding: 0 !important; margin: 0 !important; max-width: 95vw !important;">
