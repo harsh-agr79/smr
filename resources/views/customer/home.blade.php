@@ -135,7 +135,10 @@
       <form>
     </div> --}}
     <div class="row center" style="margin: 0; padding: 0;">
-        <div class='col s10 input-field' style="margin-top: 14px;">
+        <div class="col s2">
+            <div class="btn green accent-4" style="margin-top: 16px;" onclick="getcart()"><i class="material-icons">shopping_cart</i></div>
+        </div>
+        <div class='col s8 input-field' style="margin-top: 14px;">
             <input class='validate browser-default search inp black-text z-depth-1' onkeyup="searchFun()" autocomplete="off"
                 type='search' id='search' />
             <span class="field-icon" id="close-search" onclick="$('#search').val(''); searchFun();"><span class="material-icons" style="font-size: 15px;"
