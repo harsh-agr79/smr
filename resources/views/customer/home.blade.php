@@ -1,5 +1,5 @@
 @extends('layouts.customer')
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 @section('main')
     <style>
         .bottom-sheet {
@@ -311,7 +311,7 @@
                                 <input type="number" id="{{ $item->id }}cartinp" inputmode="numeric" pattern="[0-9]*"
                                     name="qty[]" onkeyup="updatecart()" onchange="updatecart()" placeholder="Quantity"
                                     class="browser-default prod-admin-inp right qtys"
-                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}" @endif content="width=device-width, initial-scale=1, maximum-scale=1">
+                                    @if (in_array($item->id, $prod)) value="{{ getqty($item->id, $prod, $qty) }}" @endif>
                             </div>
                         </div>
                     </div>
