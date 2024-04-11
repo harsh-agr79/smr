@@ -69,7 +69,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::post('/products/addpro', [ProductController::class, 'addprod_process'])->name('addprod');
      Route::get('/products/edit/{id}', [ProductController::class, 'editproduct']);
      Route::post('products/editprod', [ProductController::class, 'editprod_process'])->name('editprod');
-    //  Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']);
+     Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']);
      Route::post('/product/updatearrangement', [ProductController::class, 'arrange']);
      Route::get("/addmp", [ProductController::class, 'addmp']);
 
@@ -80,7 +80,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/brand/getbranddata', [BrandController::class, 'getbranddata']);
     Route::post('/brand/editbrand', [BrandController::class, 'editbrand']);
     Route::post('/brand/addbrand', [BrandController::class, 'addbrand']);
-    // Route::get('/brand/delbrand/{id}', [BrandController::Class, 'delbrand']);
+    Route::get('/brand/delbrand/{id}', [BrandController::Class, 'delbrand']);
 
     //category
     Route::get('/category', [CategoryController::class, 'index']);
@@ -88,7 +88,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/category/getcatdata', [CategoryController::class, 'getcategorydata']);
     Route::post('/category/editcat', [CategoryController::class, 'editcategory']);
     Route::post('/category/addcat', [CategoryController::class, 'addcategory']);
-    // Route::get('/category/delcat/{id}', [CategoryController::Class, 'delcategory']);
+    Route::get('/category/delcat/{id}', [CategoryController::Class, 'delcategory']);
 
     //Payments CRUD
     Route::get('payments', [PaymentController::class, 'index']);
@@ -115,7 +115,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('updatecln', [ChalanController::class, 'updatechalan']);
     Route::post('updatedeliver', [OrderAdminController::class, 'updatedeliver']);
 
-    // Route::get('/deleteorder/{id}', [OrderAdminController::class, 'deleteorder']);
+    Route::get('/deleteorder/{id}', [OrderAdminController::class, 'deleteorder']);
 
     //CHALAN PAGES
     Route::get('chalan', [ChalanController::class, 'chalan']);
