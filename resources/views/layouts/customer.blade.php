@@ -198,14 +198,6 @@
     <script>
         
          $(document).ready(function() {
-            $('.dropdown-trigger').dropdown({
-                coverTrigger: false,
-                constrainWidth: false,
-                inDuration: 0,
-                outDuration: 0,
-                hover: false,
-                closeOnClick: false
-            });
             p = navigator.platform;
             if (p == 'iPhone' || p == 'iPod' || p == 'iPad') {
                 $('.iphone').css('display', 'block');
