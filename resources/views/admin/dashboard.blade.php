@@ -115,11 +115,11 @@
                                     </td>
                                     <td>{{ $item->seenby }}</td>
                                     <td class="tamt" style="display: none;"> {{ getTotalAmount($item->order_id) }}</td>
-                                    <td class="iphone"><a data-target="drop" class="dropdown-trigger btn-flat"><i class="material-icons">more_vert</i></a></td>
-                                    <ul id='drop' class='dropdown-content iphone'>
+                                    <td class="iphone"><a data-target="drop" onclick="rightmenu({{$item->order_id}});" class="btn-flat"><i class="material-icons">more_vert</i></a></td>
+                                    {{-- <ul id='drop' class='dropdown-content iphone'>
                                         <li><a href="/editorder/{{$item->order_id}}">Edit</a></li>
                                         <li><a href="/deleteorder/{{$item->order_id}}">Delete</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -146,7 +146,9 @@
         function toggleamt() {
             $('.tamt').toggle();
         }
-
+        $('tr').on('taphold', function(e){
+            console.log(e);
+        })
         function rightmenu(order_id) {
             // console.log(order_id)
             var rmenu = document.getElementById("rightmenu");
@@ -155,8 +157,7 @@
                 rmenu.style.top = mouseY(event) + 'px';
                 rmenu.style.left = mouseX(event) + 'px';
                 $('#rmeditlink').attr('href', '/editorder/' + order_id);
-                $('#rmdeletelink').attr('href', '/deleteorder/' + order_id);
-            
+                $('#rmdeletelink').attr('href', '/deleteorder/' + order_id);   
         }
 
         $(document).bind("click", function(event) {

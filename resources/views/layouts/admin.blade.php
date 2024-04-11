@@ -34,6 +34,11 @@
 </head>
 
 <body class="has-fixed-sidenav">
+    <style>
+        .dropdown-content {
+            transform: none !important;
+        }
+    </style>
     <header>
         <div class="navbar-fixed">
             <nav class="navbar white">
@@ -255,12 +260,12 @@
     <script src="{{ asset('/assets/select.js') }}"></script>
     <script src="{{ asset('/assets/sorttable.js') }}"></script>
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             p = navigator.platform;
             if (p == 'iPhone' || p == 'iPod' || p == 'iPad') {
                 $('.iphone').css('display', 'block');
-                $('#rightmenu').remove();
-                $('.iphone').remove();
+                // $('#rightmenu').remove();
+                // $('.iphone').remove();
             } else {
                 $('.iphone').remove();
             }
