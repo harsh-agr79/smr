@@ -1,5 +1,5 @@
 @extends('layouts.customer')
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+{{-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> --}}
 @section('main')
     <style>
         .bottom-sheet {
