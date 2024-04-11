@@ -273,7 +273,7 @@
             if (p == 'iPhone' || p == 'iPod' || p == 'iPad') {
                 $('.iphone').css('display', 'block');
                 // $('#rightmenu').remove();
-                $('.iphone').remove();
+                // $('.iphone').remove();
             } else {
                 $('.iphone').remove();
             }
