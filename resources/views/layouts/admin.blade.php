@@ -330,10 +330,14 @@
         function changelink(edlink,dellink){
             $('#menu-editlink').attr('href', edlink);
             $('#menu-dellink').attr('href', dellink);
+            $('#menu-editlink').attr('onclick', '');
+            $('#menu-dellink').attr('onclick', '');
         }
         function changelinkajax(edlink,dellink){
             $('#menu-editlink').attr('onclick', edlink);
             $('#menu-dellink').attr('onclick', dellink);
+            $('#menu-editlink').attr('href', "");
+            $('#menu-dellink').attr('href', "");
         }
     </script>
 
