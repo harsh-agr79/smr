@@ -636,6 +636,8 @@ class AnalyticsController extends Controller
             ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
             ->get();
 
+            $result['custdata'] = DB::table('customers')->where('name', $request->get('name'))->first();
+
             $result['thirdays'] = DB::table('orders')
             ->where(['deleted_at'=>NULL,'net'=>NULL,'save'=>NULL])
             ->where('name', $request->get('name'))
