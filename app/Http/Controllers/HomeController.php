@@ -14,4 +14,9 @@ class HomeController extends Controller
         $result['category'] = DB::table('categories')->get();
         return view('customer/home', $result);
     }
+    public function homereal(){
+        $result['data']=DB::table('front')->where('type', 'image')->get();
+        $result['data2']=DB::table('front')->where('type', 'message')->get();
+        return view('customer/homereal', $result);
+    }
 }

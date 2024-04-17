@@ -281,11 +281,7 @@
                         <div class="col s12" style=" margin: 0; padding: 0;" onclick="details({{ $item->id }})">
                             <span class="prod-admin-title">{{ $item->name }}</span>
                         </div>
-                        @if ($item->featured != NULL || $item->offer != NULL)
-                        <div class="col s12">
-                            @if ($item->offer != NULL)<span class="green accent-4 black-text" style="padding:1px 3px; border-radius: 3px;">{{$item->offer}}</span>@endif @if ($item->featured != NULL) <span style="padding:1px 3px; border-radius: 3px;" class="red white-text">NEW !!</span> @endif
-                        </div>
-                        @endif
+                       
                         <div class="col s12 row" style="padding: 0;  margin: 0;" onclick="details({{ $item->id }})">
                             <span class="prod-admin-det col s8">{{ $item->brand }} {{ $item->category }}</span>
                             <span class="prod-admin-det col s4">
@@ -296,8 +292,13 @@
                                 @endif
                             </span>
                         </div>
+                        @if ($item->featured != NULL || $item->offer != NULL)
+                        <div class="col s12" style="margin: 0 !important; padding: 0;">
+                            @if ($item->featured != NULL)  <span style="padding:1px 3px; border-radius: 3px;" class="red white-text">NEW !!</span>@endif @if ($item->offer != NULL)<span class="amber darken-4 white-text" style="padding:1px 3px; border-radius: 3px;">{{$item->offer}}</span>@endif 
+                        </div>
+                        @endif
                         <div class="row col s12 price-line" style="padding: 0;  margin: 0;">
-                            <div class="col s4 center" style="margin-top: 5px;"><span
+                            <div class="col s4 center" style="margin-top: 5px; padding: 0;"><span
                                     class="prod-admin-price">Rs.{{ $item->price }}</span></div>
                             {{-- <div class="col s7 add-to-cart container right">
                             <div class="row container">

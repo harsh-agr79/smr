@@ -260,6 +260,8 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="bold"><a href="{{ url('/frontsettings') }}" class="textcol">Front Settings<i
+                        class="material-icons textcol">settings</i></a></li>
                 </ul>
             </li>
         </ul>

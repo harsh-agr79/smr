@@ -17,6 +17,7 @@ use App\Http\Controllers\ChalanController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SalesReturnController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,13 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/customers/edit/{id}', [CustomerController::class, 'editcustomer']);
     Route::post('customers/editcus', [CustomerController::class, 'editcus_process'])->name('editcust');
     Route::get('/customers/delcust/{id}', [CustomerController::class, 'deletecustomer']);
+
+     //FRONT SETTINGS
+     Route::get('frontsettings', [FrontController::class, 'index']);
+     Route::post('frontimg', [FrontController::class, 'addimg'])->name('addimg');
+     Route::get('delete/frontimg/{id}/{id2}', [FrontController::class, 'deleteimg']);
+     Route::post('frontmsg', [FrontController::class, 'addmsg'])->name('addmsg');
+     Route::get('delete/frontmsg/{id}', [FrontController::class, 'deletemsg']);
 
      //Product
      Route::get('/products', [ProductController::class, 'products']);
@@ -162,7 +170,8 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get('user/finditem', [ProductController::class, 'getproduct']);
 
-    Route::get('/user/home', [HomeController::class, 'home']);
+    Route::get('/user/createorder', [HomeController::class, 'home']);
+    Route::get('/user/home', [HomeController::class, 'homereal']);
 
     Route::get('/user/profile', [CustomerViewController::class, 'profile']);
     Route::post('/user/updateprofile', [CustomerViewController::class, 'updateprofile'])->name('editprofile');

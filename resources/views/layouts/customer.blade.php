@@ -129,6 +129,8 @@
                 <ul class="collapsible collapsible-accordion">
                     <li><a href="{{ url('/') }}" class=" active">Home<i class="material-icons">home</i></a>
                     </li>
+                    <li><a href="{{ url('/user/createorder') }}" class=" active">Create Order<i class="material-icons">add</i></a>
+                    </li>
                     <li><a href="{{ url('/user/oldorders') }}" class=" active">Orders<i class="material-icons">shopping_basket</i></a>
                     </li>
                     <li><a href="{{ url('/user/savedorders') }}" class=" active">Saved Baskets<i class="material-icons">save</i></a>
