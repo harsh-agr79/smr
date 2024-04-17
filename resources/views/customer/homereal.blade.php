@@ -249,7 +249,7 @@
             }
         }
         $('.mp-caro-item').addClass('hide');
-        caroItem[next].classList.remove('hide');
+        caroItem[next].removeClass('hide');
         setTimeout(carousel, 5000);
     }
 
