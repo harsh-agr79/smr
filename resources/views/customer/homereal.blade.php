@@ -175,7 +175,7 @@
                 $bal = explode('|', $user->balance);
             @endphp
             <div class="center mp-card">
-                <div class="center amber white-text" style="border-radius: 10px; padding: 10px;">
+                <div class="center green accent-4 white-text" style="border-radius: 10px; padding: 10px;">
                     @if ($bal[0] == 'red')
                         <h5>Amount To Pay: {{ money($bal[1]) }}</h5>
                     @else
@@ -331,7 +331,7 @@
             $bal = explode('|', $user->balance);
         @endphp
         <div class="center mp-card bal-popcard">
-            <div class="center amber white-text" style="border-radius: 10px; padding: 10px;">
+            <div class="center green accent-4 white-text" style="border-radius: 10px; padding: 10px;">
                 @if ($bal[0] == 'red')
                     <h5>Amount To Pay: {{ money($bal[1]) }}</h5>
                 @else
