@@ -1,79 +1,90 @@
 @extends('layouts/customer')
 
 @section('main')
-<style>
-    @media screen and (max-width: 720px){
-    .prod-container{
-        margin: 0;
-    }
-    .mp-caro-item{
-    height: 56vw;
-    width: 100vw;
-    }
-}
-@media screen and (max-width: 900px){
-    .mp-caro-item{
-    height: 50vh;
-    width: 100vw;
-    }
-}
-.home-btn{
-    /* width: 200px !important; */
-    background: #00c853;
-    color: black;
-    border-radius: 10px; 
-    padding: 15px; 
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.home-btn i{
-    margin-left: 3vw; 
-    color: black !important;
-}
-.home-btn:hover{
-    background: #00e676;
-}
-.spc{
-    transform: scale(1.04);
-}
+    <style>
+        @media screen and (max-width: 720px) {
+            .prod-container {
+                margin: 0;
+            }
 
-.mp-caro-item{
-    height: 30vh;
-    width: 100%;
-}
-.scroll-text{
-  display:flex;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  min-width: 100%;
-  overflow: hidden; 
-}
-.news-message{
-  display : flex;
-  flex-shrink: 0;
-  height: 30px;
-  align-items: center;
-  animation: slide-left 15s linear infinite;
-}
-.news-message p{
-    font-size: 1.5em;
-    font-weight: 600;
-    padding-left: 1em;
-    color: var(--textcol);
-  }
-  @keyframes slide-left {
-  from {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  to {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
-}
-</style>
+            .mp-caro-item {
+                height: 56vw;
+                width: 100vw;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .mp-caro-item {
+                height: 50vh;
+                width: 100vw;
+            }
+        }
+
+        .home-btn {
+            /* width: 200px !important; */
+            background: #00c853;
+            color: black;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-btn i {
+            margin-left: 3vw;
+            color: black !important;
+        }
+
+        .home-btn:hover {
+            background: #00e676;
+        }
+
+        .spc {
+            transform: scale(1.04);
+        }
+
+        .mp-caro-item {
+            height: 30vh;
+            width: 100%;
+        }
+
+        .scroll-text {
+            display: flex;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            min-width: 100%;
+            overflow: hidden;
+        }
+
+        .news-message {
+            display: flex;
+            flex-shrink: 0;
+            height: 30px;
+            align-items: center;
+            animation: slide-left 15s linear infinite;
+        }
+
+        .news-message p {
+            font-size: 1.5em;
+            font-weight: 600;
+            padding-left: 1em;
+            color: var(--textcol);
+        }
+
+        @keyframes slide-left {
+            from {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+
+            to {
+                -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 
     <div class="row" style="padding: 0; margin: 0;">
         <div class="col l6 m12 s12" style="padding: 0; margin: 0;">
@@ -120,7 +131,8 @@
                 <a href="{{ url('user/savedorders') }}" class="home-btn">Saved Baskets<i class="material-icons">save</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
-                <a href="{{ url('user/mainanalytics') }}" class="home-btn">Analytics<i class="material-icons">equalizer</i></a>
+                <a href="{{ url('user/mainanalytics') }}" class="home-btn">Analytics<i
+                        class="material-icons">equalizer</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
                 <a href="{{ url('user/summary') }}" class="home-btn">Summary <i
@@ -172,13 +184,10 @@
         
         </div> --}}
     </div>
-   
-      
-   
 @endsection
 
 @if (time() - session()->get('USER_TIME') < 20)
-{{-- <div class="bal-popup hide-on-large-only" id="balpop" onclick="closefunc()">
+    {{-- <div class="bal-popup hide-on-large-only" id="balpop" onclick="closefunc()">
     @php
         $bal = explode('|', $user->balance);
     @endphp
@@ -223,52 +232,55 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-    function closefunc(){
+    function closefunc() {
         $('#balpop').remove();
     }
     carousel()
-  function carousel(){
-    var caroItem = $('.mp-caro-item');
-    var next = 0;
-    for (let i = 0; i < caroItem.length; i++) {
-      if(!caroItem[i].classList.contains('hide')){
-        var next = i + 1;
-        if(next > caroItem.length-1){
-          var next = 0;
+
+    function carousel() {
+        var caroItem = $('.mp-caro-item');
+        var next = 0;
+        for (let i = 0; i < caroItem.length; i++) {
+            if (!caroItem[i].classList.contains('hide')) {
+                var next = i + 1;
+                if (next > caroItem.length - 1) {
+                    var next = 0;
+                }
+            }
         }
-      } 
+        $('.mp-caro-item').addClass('hide');
+        caroItem[next].classList.remove('hide');
+        setTimeout(carousel, 5000);
     }
-    $('.mp-caro-item').addClass('hide');
-    caroItem[next].classList.remove('hide');
-    setTimeout(carousel, 5000);
-  }
-  function next(){
-    var caroItem = $('.mp-caro-item');
-    var next = 0;
-    for (let i = 0; i < caroItem.length; i++) {
-      if(!caroItem[i].classList.contains('hide')){
-        var next = i + 1;
-        if(next > caroItem.length-1){
-          var next = 0;
+
+    function next() {
+        var caroItem = $('.mp-caro-item');
+        var next = 0;
+        for (let i = 0; i < caroItem.length; i++) {
+            if (!caroItem[i].classList.contains('hide')) {
+                var next = i + 1;
+                if (next > caroItem.length - 1) {
+                    var next = 0;
+                }
+            }
+
         }
-      }
-   
+        $('.mp-caro-item').addClass('hide');
+        caroItem[next].classList.remove('hide');
     }
-    $('.mp-caro-item').addClass('hide');
-    caroItem[next].classList.remove('hide');
-  }
-  function prev(i){
-    var caroItem = $('.mp-caro-item');
-    var next = 0;
-    for (let i = 0; i < caroItem.length; i++) {
-      if(!caroItem[i].classList.contains('hide')){
-        var next = i - 1;
-        if(next == -1){
-        var next = caroItem.length-1;
+
+    function prev(i) {
+        var caroItem = $('.mp-caro-item');
+        var next = 0;
+        for (let i = 0; i < caroItem.length; i++) {
+            if (!caroItem[i].classList.contains('hide')) {
+                var next = i - 1;
+                if (next == -1) {
+                    var next = caroItem.length - 1;
+                }
+            }
         }
-      }
+        $('.mp-caro-item').addClass('hide');
+        caroItem[next].classList.remove('hide');
     }
-    $('.mp-caro-item').addClass('hide');
-    caroItem[next].classList.remove('hide');
-  }
 </script>
