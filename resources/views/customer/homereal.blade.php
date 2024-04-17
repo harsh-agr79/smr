@@ -84,6 +84,32 @@
                 transform: translateX(-100%);
             }
         }
+        .bal-popup{
+    position: fixed;
+    z-index: 1005;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.649);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bal-popcard{
+    width: 90vw;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* background: #000000; */
+    opacity: .6;
+    filter: grayscale(100%);
+    z-index: 0;
+    overflow: hidden;
+}
     </style>
 
     <div class="row" style="padding: 0; margin: 0;">
@@ -142,7 +168,7 @@
                 <a href="{{ url('user/statement') }}" class="home-btn">Statement <i class="material-icons">web</i></a>
             </div>
         </div>
-        {{-- <div class="col l6 m12 s12 center hide-on-med-and-down" id="balpop-pc" onclick="closefunc()">
+        <div class="col l6 m12 s12 center hide-on-med-and-down" id="balpop-pc" onclick="closefunc()">
             @php
                 $bal = explode('|', $user->balance);
             @endphp
@@ -161,33 +187,117 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>30 Days</td>
-                                <td>{{ $user->thirdays }}</td>
-                            </tr>
-                            <tr>
-                                <td>45 Days</td>
-                                <td>{{ $user->fourdays }}</td>
-                            </tr>
-                            <tr>
-                                <td>60 Days</td>
-                                <td>{{ $user->sixdays }}</td>
-                            </tr>
-                            <tr>
-                                <td>90 Days</td>
-                                <td>{{ $user->nindays }}</td>
-                            </tr>
+                            @if (count($thirdays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>{{ money($bal[1] - $thirdays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
+                            @if (count($fourdays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>{{ money($bal[1] - $fourdays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
+                            @if (count($sixdays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>{{ money($bal[1] - $sixdays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
+                            @if (count($nindays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>{{ money($bal[1] - $nindays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
                         </tbody>
                     </table>
                 </div>
             </div>
-        
-        </div> --}}
+
+        </div>
     </div>
 @endsection
 
 @if (time() - session()->get('USER_TIME') < 20)
-    {{-- <div class="bal-popup hide-on-large-only" id="balpop" onclick="closefunc()">
+    <div class="bal-popup hide-on-large-only" id="balpop" onclick="closefunc()">
     @php
         $bal = explode('|', $user->balance);
     @endphp
@@ -206,28 +316,112 @@
                     <th></th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>30 Days</td>
-                        <td>{{ $user->thirdays }}</td>
-                    </tr>
-                    <tr>
-                        <td>45 Days</td>
-                        <td>{{ $user->fourdays }}</td>
-                    </tr>
-                    <tr>
-                        <td>60 Days</td>
-                        <td>{{ $user->sixdays }}</td>
-                    </tr>
-                    <tr>
-                        <td>90 Days</td>
-                        <td>{{ $user->nindays }}</td>
-                    </tr>
+                    @if (count($thirdays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>{{ money($bal[1] - $thirdays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>15 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
+                            @if (count($fourdays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>{{ money($bal[1] - $fourdays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>25 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
+                            @if (count($sixdays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>{{ money($bal[1] - $sixdays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>35 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
+                            @if (count($nindays) > 0)
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>{{ money($bal[1] - $nindays[0]->sl) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @endif
+                            @else
+                                @if ($bal[0] == 'red')
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>{{ money($bal[1]) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>45 days</td>
+                                        <td>0</td>
+                                    </tr>
+                                @endif
+                            @endif
                 </tbody>
             </table>
         </div>
     </div>
 
-</div> --}}
+</div>
 @endif
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
