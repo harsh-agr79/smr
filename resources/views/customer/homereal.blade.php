@@ -249,8 +249,7 @@
             }
         }
         console.log(next)
-        $('.mp-caro-item').addClass('hide');
-        caroItem[next].removeClass('hide');
+        next()
         setTimeout(carousel, 5000);
     }
 
