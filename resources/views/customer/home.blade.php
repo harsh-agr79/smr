@@ -281,6 +281,11 @@
                         <div class="col s12" style=" margin: 0; padding: 0;" onclick="details({{ $item->id }})">
                             <span class="prod-admin-title">{{ $item->name }}</span>
                         </div>
+                        @if ($item->featured != NULL || $item->offer != NULL)
+                        <div class="col s12">
+                            @if ($item->offer != NULL)<span class="green accent-4 black-text" style="padding:1px 3px; border-radius: 3px;">{{$item->offer}}</span>@endif @if ($item->featured != NULL) <span style="padding:1px 3px; border-radius: 3px;" class="red white-text">NEW !!</span> @endif
+                        </div>
+                        @endif
                         <div class="col s12 row" style="padding: 0;  margin: 0;" onclick="details({{ $item->id }})">
                             <span class="prod-admin-det col s8">{{ $item->brand }} {{ $item->category }}</span>
                             <span class="prod-admin-det col s4">

@@ -52,7 +52,7 @@
                         <br>
                         <label>
                             <input type="checkbox" name="featured"/>
-                            <span>Featured</span>
+                            <span>New Launch</span>
                         </label>
                         <br>
                         <label>
@@ -63,6 +63,10 @@
                     <div class="col m6 s12">
                         <label>Price :</label><input name="price" type="number" class="browser-default inp"
                             placeholder="Price" required>
+                    </div>
+                    <div class="col m6 s12">
+                        <label> Offer :</label><input name="offer" type="text" class="browser-default inp"
+                            placeholder="Offer">
                     </div>
                     <div class="col s12" style="margin-top: 20px;">
                         <label>Details :</label>

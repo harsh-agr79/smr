@@ -25,7 +25,7 @@
                     <th>Category</th>
                     <th>Out of Stock</th>
                     <th>Hidden</th>
-                    <th>featured</th>
+                    <th>New Launch</th>
                     <th>Price</th>
                 </thead>
                 <tbody class="row_position">
