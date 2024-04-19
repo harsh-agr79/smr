@@ -18,6 +18,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SalesReturnController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::post('products/editprod', [ProductController::class, 'editprod_process'])->name('editprod');
      Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']);
      Route::post('/product/updatearrangement', [ProductController::class, 'arrange']);
-     Route::get("/addmp", [ProductController::class, 'addmp']);
+    //  Route::get("/addmp", [ProductController::class, 'addmp']);
 
     //brands
     Route::get('/brands', [BrandController::class, 'index']);
@@ -160,6 +161,12 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
     Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
     Route::get('summary', [AnalyticsController::class, 'detailedreport']);
+
+    Route::get('/staff', [StaffController::class, 'staff']);
+    Route::get('/addstaff', [StaffController::class, 'addstaff']);
+    Route::get('/addstaff/{id}', [StaffController::class, 'addstaff']);
+    Route::post('/addstaffprocess', [StaffController::class, 'addstaff_process'])->name('addstaffprocess');
+    // Route::get('/deletestaff', [StaffController::class, 'deletestaff']);
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);

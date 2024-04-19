@@ -124,44 +124,65 @@
                     <li><a href="{{ url('dashboard') }}" class=" active">Dashboard<i
                                 class="material-icons">web</i></a>
                     </li>
-                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Orders<i
-                                class="material-icons chevron textcol">chevron_left</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-
-                                <li><a href="{{ url('/orders') }}" class="textcol">View Orders<i
-                                            class="material-icons textcol">visibility</i></a></li>
-
-                                <li class="amber darken-1"><a href="{{ url('/approvedorders') }}"
-                                        class="textcol">Approved Orders<i class="material-icons textcol">check</i></a>
-                                </li>
-
-                                <li class="blue"><a href="{{ url('/pendingorders') }}" class="textcol">Pending
-                                        Orders<i class="material-icons textcol">warning</i></a></li>
-
-                                <li class="red"><a href="{{ url('/rejectedorders') }}" class="textcol">Rejected
-                                        Orders<i class="material-icons textcol">clear</i></a></li>
-
-                                <li class="green"><a href="{{ url('/deliveredorders') }}" class="textcol">Delivered
-                                        Orders<i class="material-icons textcol">local_shipping</i></a></li>
-
-                                <li class="deep-purple"><a href="{{ url('/chalan') }}" class="textcol">Chalan<i
-                                            class="material-icons textcol">check</i></a>
-                                </li>
-
-                                <li class="cyan ligthen-3"><a href="{{ url('/bulkprintorders') }}"
-                                        class="black-text">Bulk Print<i
-                                            class="material-icons black-text">print</i></a>
-                                </li>
-
-                                <li class="amber lighten-4"><a href="{{ url('/addorder') }}"
-                                        class="black-text">Create Order<i
-                                            class="material-icons black-text">add</i></a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
+                    @if (
+                        $admin->type != 'staff' ||
+                            in_array('orders', $perms) ||
+                            in_array('pendingorders', $perms) ||
+                            in_array('deliveredorders', $perms) ||
+                            in_array('rejectedorders', $perms) ||
+                            in_array('approvedorders', $perms) ||
+                            in_array('chalan', $perms) ||
+                            in_array('createorder', $perms))
+                        <li class="bold"><a class="collapsible-header textcol" tabindex="0">Orders<i
+                                    class="material-icons chevron textcol">chevron_left</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @if ($admin->type != 'staff' || in_array('orders', $perms))
+                                        <li><a href="{{ url('/orders') }}" class="textcol">View Orders<i
+                                                    class="material-icons textcol">visibility</i></a></li>
+                                    @endif
+                                    @if ($admin->type != 'staff' || in_array('approvedorders', $perms))
+                                        <li class="amber darken-1"><a href="{{ url('/approvedorders') }}"
+                                                class="textcol">Approved Orders<i
+                                                    class="material-icons textcol">check</i></a></li>
+                                    @endif
+                                    @if ($admin->type != 'staff' || in_array('pendingorders', $perms))
+                                        <li class="blue"><a href="{{ url('/pendingorders') }}"
+                                                class="textcol">Pending
+                                                Orders<i class="material-icons textcol">warning</i></a></li>
+                                    @endif
+                                    @if ($admin->type != 'staff' || in_array('rejectedorders', $perms))
+                                        <li class="red"><a href="{{ url('/rejectedorders') }}"
+                                                class="textcol">Rejected Orders<i
+                                                    class="material-icons textcol">clear</i></a></li>
+                                    @endif
+                                    @if ($admin->type != 'staff' || in_array('deliveredorders', $perms))
+                                        <li class="green"><a href="{{ url('/deliveredorders') }}"
+                                                class="textcol">Delivered Orders<i
+                                                    class="material-icons textcol">local_shipping</i></a></li>
+                                    @endif
+                                    @if ($admin->type != 'staff' || in_array('chalan', $perms))
+                                        <li class="deep-purple"><a href="{{ url('/chalan') }}"
+                                                class="textcol">Chalan<i class="material-icons textcol">check</i></a>
+                                        </li>
+                                    @endif
+                                    @if ($admin->type != 'staff' || in_array('bulkprint', $perms))
+                                        <li class="cyan ligthen-3"><a href="{{ url('/bulkprintorders') }}"
+                                                class="black-text">Bulk Print<i
+                                                    class="material-icons black-text">print</i></a>
+                                        </li>
+                                    @endif
+                                    @if ($admin->type != 'staff' || in_array('createorder', $perms))
+                                        <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
+                                                class="black-text">Create Order<i
+                                                    class="material-icons black-text">add</i></a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+                    @if ($admin->type != 'staff' || in_array('statements', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Statements<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
@@ -172,19 +193,29 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
+                    @if ($admin->type != 'staff' || in_array('mainanalytics', $perms) || in_array('sortanalytics', $perms) || in_array('summary', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Analytics<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
+                                @if ($admin->type != 'staff' || in_array('mainanalytics', $perms))
                                 <li><a href="{{ url('/mainanalytics') }}" class="textcol">Main Analytics<i
                                             class="material-icons textcol">pie_chart</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('sortanalytics', $perms))
                                 <li><a href="{{ url('/sortanalytics') }}" class="textcol">Sort Analytics<i
                                             class="material-icons textcol">multiline_chart</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('summary', $perms))
                                 <li><a href="{{ url('/summary') }}" class="textcol">Detailed Report<i
                                             class="material-icons textcol">show_chart</i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
+                    @endif
+                    @if ($admin->type != 'staff')
                     <li class="bold  green"><a class="collapsible-header" tabindex="0">Company<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
@@ -195,73 +226,117 @@
                                                 shield_person
                                             </i></a></li>
                                 @endif
+                                @if ($admin->type != 'staff')
+                                <li><a href="{{ url('staff') }}" class=" active">Staffs<i
+                                    class="material-symbols-outlined">
+                                    shield_person
+                                </i></a></li>
+                                <li><a href="{{ url('addstaff') }}" class=" active"> Add Staffs<i
+                                    class="material-symbols-outlined">
+                                    shield_person
+                                </i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
-                    <li class="bold "><a class="collapsible-header" tabindex="0">Customers<i
-                                class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body" style="">
+                    @endif
+                    @if ($admin->type != 'staff' || in_array('customers', $perms) || in_array('customers/add', $perms))
+                    <li class="bold"><a class="collapsible-header textcol" tabindex="0">Customers<i
+                                class="material-icons chevron textcol">chevron_left</i></a>
+                        <div class="collapsible-body">
                             <ul>
-                                <li><a href="{{ url('customers') }}" class=" active">List<i
-                                            class="material-symbols-outlined">group</i></a></li>
-                                <li><a href="{{ url('customers/add') }}" class=" active">Add Customers<i
-                                            class="material-symbols-outlined">person_add</i></a></li>
+                                @if ($admin->type != 'staff' || in_array('customers', $perms))
+                                    <li><a href="{{ url('/customers') }}" class="textcol">View Customers<i
+                                                class="material-icons textcol">people</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('customers/add', $perms))
+                                    <li><a href="{{ url('/customers/add') }}" class="textcol">Add Customer<i
+                                                class="material-icons textcol">person_add</i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
+                @endif
+                @if ($admin->type != 'staff' || in_array('payments', $perms) || in_array('addpayments', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Payments/Salesreturn<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
+                                @if ($admin->type != 'staff' || in_array('payments', $perms))
                                 <li><a href="{{ url('/payments') }}" class="textcol">View Payments/Salesreturn<i
                                             class="material-icons textcol">attach_money</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('addpayment', $perms))
                                 <li><a href="{{ url('/addpayment') }}" class="textcol">Add Payment/Salesreturn<i
                                             class="material-icons textcol">add</i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
+                    @endif
+                    @if ($admin->type != 'staff' || in_array('slr', $perms) || in_array('createslr', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Sales Return<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
+                                @if ($admin->type != 'staff' || in_array('slr', $perms))
                                 <li><a href="{{ url('/slr') }}" class="textcol">View Sales Return<i
                                             class="material-icons textcol">autorenew</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('createslr', $perms))
                                 <li><a href="{{ url('/createslr') }}" class="textcol">Add Sales Return<i
                                             class="material-icons textcol">add</i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
+                    @endif
+                    @if ($admin->type != 'staff' || in_array('expenses', $perms) || in_array('addexpense', $perms))
                     <li class="bold"><a class="collapsible-header textcol" tabindex="0">Expenses<i
                                 class="material-icons chevron textcol">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-
+                                @if ($admin->type != 'staff' || in_array('expenses', $perms))
                                 <li><a href="{{ url('/expenses') }}" class="textcol">View Expenses<i
-                                            class="material-icons textcol">credit_card</i></a></li>
-
+                                        class="material-icons textcol">credit_card</i></a></li>
+                                @endif    
+                                @if ($admin->type != 'staff' || in_array('addexpense', $perms))
                                 <li><a href="{{ url('/addexpense') }}" class="textcol">Add Expense<i
                                             class="material-icons textcol">add</i></a></li>
-
+                                @endif
                             </ul>
                         </div>
                     </li>
+                    @endif
+                    @if ($admin->type != 'staff' || in_array('brands', $perms) || in_array('category', $perms) || in_array("products", $perms) || in_array("products/add", $perms))
                     <li class="bold "><a class="collapsible-header" tabindex="0">Inventory<i
                                 class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body" style="">
                             <ul>
+                                @if ($admin->type != 'staff' || in_array('brands', $perms))
                                 <li><a href="{{ url('brands') }}" class=" active">Brands<i
                                             class="material-symbols-outlined">store</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('category', $perms))
                                 <li><a href="{{ url('category') }}" class=" active">Categories<i
                                             class="material-symbols-outlined">category</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('products', $perms))
                                 <li><a href="{{ url('products') }}" class=" active">Products<i
                                             class="material-symbols-outlined">inventory</i></a></li>
+                                @endif
+                                @if ($admin->type != 'staff' || in_array('products/add', $perms))
                                 <li><a href="{{ url('products/add') }}" class=" active">Add Product<i
                                             class="material-symbols-outlined">add_circle</i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
+                    @endif
+                    @if ($admin->type != 'staff' || in_array('frontsettings', $perms))
                     <li class="bold"><a href="{{ url('/frontsettings') }}" class="textcol">Front Settings<i
                         class="material-icons textcol">settings</i></a></li>
+                    @endif
                 </ul>
             </li>
         </ul>
