@@ -172,8 +172,8 @@
                                                     class="material-icons black-text">print</i></a>
                                         </li>
                                     @endif
-                                    @if ($admin->type != 'staff' || in_array('createorder', $perms))
-                                        <li class="amber lighten-4"><a href="{{ url('/createorder') }}"
+                                    @if ($admin->type != 'staff' || in_array('addorder', $perms))
+                                        <li class="amber lighten-4"><a href="{{ url('/addorder') }}"
                                                 class="black-text">Create Order<i
                                                     class="material-icons black-text">add</i></a>
                                         </li>
