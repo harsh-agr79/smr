@@ -360,13 +360,12 @@ class OrderAdminController extends Controller {
                         'receiveddate'=>$order[0]->receiveddate,
                         'seen'=>$order[0]->seen,
                         'seenby'=>$order[0]->seenby,
-                        'refname'=>$order[0]->refname,
-                        'reftype'=>$order[0]->reftype,
+                        'marketer'=>$order[0]->marketer,
+                        'marketer_id'=>$order[0]->marketer_id,
                         'remarks'=>$order[0]->remarks,
                         'userremarks'=>$order[0]->userremarks,
                         'cartoons'=>$order[0]->cartoons,
                         'transport'=>$order[0]->transport,
-                        'refid'=>$order[0]->refid,
                     ] );
                 } else {
                     $prod = DB::table( 'products' )->where( 'id', $products[ $i ] )->first();

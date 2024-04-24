@@ -82,6 +82,6 @@ class MarketerController extends Controller
             ]);
         }
 
-        return redirect(url()->previous());
+        return redirect('/marketer');
     }
 }
