@@ -7,25 +7,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
-class StaffController extends Controller
+class MarketerController extends Controller
 {
-    public function staff(){
-        $result['data'] = DB::table('staffs')->get();
+    public function marketer(){
+        $result['data'] = DB::table('marketers')->get();
 
-        return view('admin/staff', $result);
+        return view('admin/marketer', $result);
     }
 
-    public function addstaff(Request $request,$id=''){
+    public function addmarketer(Request $request,$id=''){
 
         if($id > 0){
-            $data = DB::table('staffs')->where('id', $id)->first();
+            $data = DB::table('marketers')->where('id', $id)->first();
            $result['id'] = $data->id;
            $result['name'] = $data->name;
            $result['userid'] = $data->userid;
            $result['contact'] = $data->contact;
            $result['password'] = $data->password;
-
-           $result['permission'] = explode("|", $data->permission);
         }
         else{
            $result['id'] = '';
@@ -33,20 +31,17 @@ class StaffController extends Controller
            $result['userid'] = '';
            $result['contact'] = '';
            $result['password'] = '';
-
-           $result['permission'] = [];
         }
-        return view('admin/addstaff', $result);
+        return view('admin/addmarketer', $result);
     }
 
-    public function addstaff_process(Request $request){
+    public function addmarketer_process(Request $request){
 
         // dd($request->post());
         $id = $request->get('id');
         $name = $request->get('name');
         $userid = $request->get('userid');
         $contact = $request->get('contact');
-        $perms = $request->post('perm', []);
         if($request->get('passwordnew')){
             $password = Hash::make($request->get('passwordnew'));
         }
@@ -55,16 +50,15 @@ class StaffController extends Controller
         }
 
         $request->validate([
-            'userid'=>'required|unique:admins,userid|unique:customers,userid|unique:marketers,userid|unique:staffs,userid,'.$request->post('id')
+            'userid'=>'required|unique:admins,userid|unique:staffs,userid|unique:customers,userid|unique:marketers,userid,'.$request->post('id')
         ]);
 
         if($id>0){
-            DB::table('staffs')->where('id', $id)->update([
+            DB::table('marketers')->where('id', $id)->update([
                 'name'=>$name,
                 'userid'=>$userid,
                 'contact'=>$contact,
                 'password'=>$password,
-                'permission'=>implode("|", $perms)
             ]);
             // $initial = $request->post('name2');
             // $initialid = $request->post('userid2');
@@ -80,12 +74,11 @@ class StaffController extends Controller
             // DB::table('permission')->where('userid', $id)->delete();
         }
         else{
-            DB::table('staffs')->insert([
+            DB::table('marketers')->insert([
                 'name'=>$name,
                 'userid'=>$userid,
                 'contact'=>$contact,
                 'password'=>Hash::make($password),
-                'permission'=>implode("|", $perms)
             ]);
         }
 

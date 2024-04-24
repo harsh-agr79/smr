@@ -22,7 +22,7 @@ class CustomerController extends Controller
     }
     public function addcus_process(Request $request){
         $request->validate([
-            'userid'=>'required|unique:admins,userid|unique:customers,userid,'.$request->post('id'),           
+            'userid'=>'required|unique:marketers,userid|unique:staffs,userid|unique:admins,userid|unique:customers,userid,'.$request->post('id'),        
             'email'=>'required|unique:admins,email|unique:customers,email,'.$request->post('id'), 
             'contact'=>'required|unique:customers,contact,'.$request->post('id'),
             'tax_number'=>'required|unique:customers,tax_number,'.$request->post('id'),                      

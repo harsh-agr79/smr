@@ -19,6 +19,8 @@ use App\Http\Controllers\SalesReturnController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\MarketerViewController;
+use App\Http\Controllers\MarketerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -167,6 +169,12 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/addstaff/{id}', [StaffController::class, 'addstaff']);
     Route::post('/addstaffprocess', [StaffController::class, 'addstaff_process'])->name('addstaffprocess');
     // Route::get('/deletestaff', [StaffController::class, 'deletestaff']);
+
+    Route::get('/marketer', [MarketerController::class, 'marketer']);
+    Route::get('/addmarketer', [MarketerController::class, 'addmarketer']);
+    Route::get('/marketer/{id}', [MarketerController::class, 'addmarketer']);
+    Route::post('/addmarketerprocess', [MarketerController::class, 'addmarketer_process'])->name('addmarketerprocess');
+    // Route::get('/deletemarketer', [MarketerController::class, 'deletemarketer']);
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);

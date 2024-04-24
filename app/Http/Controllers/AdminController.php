@@ -45,7 +45,7 @@ class AdminController extends Controller
     }
     public function editadmin(Request $request){
         $request->validate([
-            'userid'=>'required|unique:admins,userid|unique:customers,userid'.$request->post('id'),           
+            'userid'=>'required|unique:customers,userid|unique:marketers,userid|unique:staffs,userid|unique:admins,userid,'.$request->post('id'),           
             'email'=>'required|unique:admins,email|unique:customers,email'.$request->post('id'),         
         ]);
 
