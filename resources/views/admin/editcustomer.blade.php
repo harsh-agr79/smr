@@ -114,8 +114,19 @@
                         </select>
                     </div>
                     <div class="col m6 s12">
-                        <label>Marketer :</label><input name="marketer" value="{{ $cus->marketer }}" type="text"
-                            class="browser-default inp" placeholder="Name">
+                        <label>Marketer :</label>
+                        <select id="MySelct" name="marketer" searchname="myselectsearch"
+                            searchable="Select Product">
+                            
+                            @if ($cus->marketer != NULL)
+                            <option value="{{$cus->marketer_id}}" selected>{{$cus->marketer}}</option>
+                            @else
+                            <option value="" selected>Select Marketer</option>
+                            @endif
+                            @foreach ($marketers as $item)
+                                <option value="{{ $item->id }}">{{ $item->userid }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col m6 s12">
                         <label>Tax Type :</label>

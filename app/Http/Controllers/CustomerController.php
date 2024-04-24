@@ -18,6 +18,7 @@ class CustomerController extends Controller
     }
     public function addcustomer(){
         $result['brands'] = DB::table('brands')->get();
+        $result['marketers'] = DB::table('marketers')->get();
         return view('admin/addcustomers', $result);
     }
     public function addcus_process(Request $request){
@@ -43,7 +44,8 @@ class CustomerController extends Controller
         'area'=>$request->post('area'),
         'state'=>$request->post('state'),
         'district'=>$request->post('district'),
-        'marketer'=>$request->post('marketer'),
+        'marketer_id'=>$request->post('marketer'),
+        'marketer'=>DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid,
         'tax_type'=>$request->post('tax_type'),
         'tax_number'=>$request->post('tax_number'),
         'type'=>$request->post('type'),
@@ -54,6 +56,7 @@ class CustomerController extends Controller
     public function editcustomer($id){
         $result['cus'] = DB::table('customers')->where('id', $id)->first();
         $result['brands'] = DB::table('brands')->get();
+        $result['marketers'] = DB::table('marketers')->get();
 
         return view('admin/editcustomer', $result);
     }
@@ -104,7 +107,8 @@ class CustomerController extends Controller
             'area'=>$request->post('area'),
             'state'=>$request->post('state'),
             'district'=>$request->post('district'),
-            'marketer'=>$request->post('marketer'),
+            'marketer_id'=>$request->post('marketer'),
+            'marketer'=>DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid,
             'tax_type'=>$request->post('tax_type'),
             'tax_number'=>$request->post('tax_number'),
             'type'=>$request->post('type'),

@@ -84,8 +84,14 @@
                         </select>
                     </div>
                     <div class="col m6 s12">
-                        <label>Marketer :</label><input name="marketer" type="text" class="browser-default inp"
-                            placeholder="Name">
+                        <select id="MySelct" name="marketer" searchname="myselectsearch"
+                            searchable="Select Product">
+                            <option value="" selected>Select Marketer</option>
+
+                            @foreach ($marketers as $item)
+                                <option value="{{ $item->id }}">{{ $item->userid }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col m6 s12">
                         <label>Tax Type :</label>
