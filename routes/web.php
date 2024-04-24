@@ -172,7 +172,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     Route::get('/marketer', [MarketerController::class, 'marketer']);
     Route::get('/addmarketer', [MarketerController::class, 'addmarketer']);
-    Route::get('/marketer/{id}', [MarketerController::class, 'addmarketer']);
+    Route::get('/addmarketer/{id}', [MarketerController::class, 'addmarketer']);
     Route::post('/addmarketerprocess', [MarketerController::class, 'addmarketer_process'])->name('addmarketerprocess');
     // Route::get('/deletemarketer', [MarketerController::class, 'deletemarketer']);
 
@@ -218,5 +218,11 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get('/user/deleteorder/{id}', [OrderController::class, 'deleteorder']);
 });
+
+
+Route::group(['middleware'=>'MarketerAuth'], function(){
+    Route::get('/marketer/dashboard', [MarketerViewController::class, 'dashboard']);
+});
+
 
 

@@ -16,6 +16,9 @@ class AdminController extends Controller
         elseif(session()->has('USER_LOGIN')){
             return redirect('/user/home');
         }
+        elseif(session()->has('MARKETER_LOGIN')){
+            return redirect('/marketer/dashboard');
+        }
         else{
             return view('login');
         }

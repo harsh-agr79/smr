@@ -49,6 +49,9 @@ class Kernel extends HttpKernel
         'CustomerAuth' => [
             \App\Http\Middleware\CustomerAuth::class,
         ],
+        'MarketerAuth' => [
+            \App\Http\Middleware\MarketerAuth::class,
+        ],
     ];
 
     /**

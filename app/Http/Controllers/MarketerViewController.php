@@ -9,5 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class MarketerViewController extends Controller
 {
-    //
+    public function dashboard(){
+        return view('marketer.dashboard');
+    }
 }
