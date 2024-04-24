@@ -85,7 +85,7 @@
                     </div>
                     <div class="col m6 s12">
                         <select id="MySelct" name="marketer" searchname="myselectsearch"
-                            searchable="Select Product">
+                            searchable="Select Marketer">
                             <option value="" selected>Select Marketer</option>
 
                             @foreach ($marketers as $item)

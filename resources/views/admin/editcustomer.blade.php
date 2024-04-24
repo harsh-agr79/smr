@@ -116,7 +116,7 @@
                     <div class="col m6 s12">
                         <label>Marketer :</label>
                         <select id="MySelct" name="marketer" searchname="myselectsearch"
-                            searchable="Select Product">
+                            searchable="Select Marketer">
                             
                             @if ($cus->marketer != NULL)
                             <option value="{{$cus->marketer_id}}" selected>{{$cus->marketer}}</option>
