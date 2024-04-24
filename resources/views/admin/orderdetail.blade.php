@@ -10,7 +10,7 @@
         $total = 0;
         $total2 = 0;
         $cus = DB::table('customers')
-            ->where('name', $data[0]->name)
+            ->where('id', $data[0]->user_id)
             ->first();
         $dis = '';
         $disc = 0;

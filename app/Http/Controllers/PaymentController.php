@@ -57,7 +57,12 @@ class PaymentController extends Controller
     }
     public function addpay_process(Request $request){
         $payid = $request->post('payid');
-        $admin = DB::table('admins')->find($request->session()->get('ADMIN_ID'));
+        if(session()->get('ADMIN_TYPE') == 'staff'){
+            $admin = DB::table('staffs')->find($request->session()->get('ADMIN_ID'));
+        }
+        else{
+            $admin = DB::table('admins')->find($request->session()->get('ADMIN_ID'));
+        }
         if($payid === NULL){
             DB::table('payments')->insert([
                 'date'=>$request->post('date'),
@@ -68,7 +73,7 @@ class PaymentController extends Controller
                 'amount'=>$request->post('amount'),
                 'voucher'=>$request->post('voucher'),
                 'remarks'=>$request->post('remarks'),
-                'entry_by'=>$admin->email,
+                'entry_by'=>$admin->userid,
             ]);
             updatebalance(DB::table('customers')->where('name', $request->post('name'))->first()->id);
             return redirect('addpayment');

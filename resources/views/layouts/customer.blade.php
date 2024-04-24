@@ -131,7 +131,7 @@
                     </li>
                     <li><a href="{{ url('/user/createorder') }}" class=" active">Create Order<i class="material-icons">add</i></a>
                     </li>
-                    <li><a href="{{ url('/user/oldorders') }}" class=" active">Orders<i class="material-icons">shopping_basket</i></a>
+                    <li><a href="{{ url('/user/oldorders') }}" class=" active">Old Bills/Orders<i class="material-icons">shopping_basket</i></a>
                     </li>
                     <li><a href="{{ url('/user/savedorders') }}" class=" active">Saved Baskets<i class="material-icons">save</i></a>
                     </li>

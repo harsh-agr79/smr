@@ -5,11 +5,13 @@
         <div>
             <h5 class="center">Dashboard</h5>
         </div>
-        
+            @if ($admin->type != 'staff')
             <label>
                 <input type="checkbox" onclick="toggleamt()" />
                 <span>View Total Amount</span>
             </label>
+            @endif
+           
         
         <div class="row" >
             <div class="col l6 s12" style="margin-top: 15px; padding: 1px;">
