@@ -183,7 +183,8 @@
                 "rolpa",
                 "eastern rukum ",
                 "banke",
-                "bardiya"
+                "bardiya",
+                "parasi"
             ]
             var mad = [
                 "sarlahi",
