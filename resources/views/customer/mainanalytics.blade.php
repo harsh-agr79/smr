@@ -101,7 +101,10 @@
                 
                  <div class="green accent-4 center" style="padding: 5px; margin-top: 20px; border-radius: 10px;">
                      <h5 class="black-text" style="font-weight: 600;">Total Sales:
-                         {{ money($totalsales[0]->samt) }}</h5>
+                        @if (count($totalsales) > 0)
+                        {{ money($totalsales[0]->samt) }}
+                        @endif
+                         </h5>
                  </div>  
                 
                  <div class="mp-card" style="margin-top: 10px;">
