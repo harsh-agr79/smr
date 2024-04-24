@@ -114,6 +114,11 @@ class CustomerController extends Controller
             'type'=>$request->post('type'),
             'brands'=>implode("|", $brands)
            ]);
+
+           DB::table('orders')->where('user_id', $request->post('id'))->update([
+            'marketer_id'=>$request->post('marketer'),
+            'marketer'=>DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid
+           ]);
         
            return redirect('/customers');
     }
