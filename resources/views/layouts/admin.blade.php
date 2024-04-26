@@ -227,6 +227,14 @@
                                             </i></a></li>
                                 @endif
                                 @if ($admin->type != 'staff')
+                                <li><a href="{{ url('marketer') }}" class=" active">Marketer<i
+                                    class="material-symbols-outlined">
+                                    person
+                                </i></a></li>
+                                <li><a href="{{ url('addmarketer') }}" class=" active"> Add Marketer<i
+                                    class="material-symbols-outlined">
+                                   person_add
+                                </i></a></li>
                                 <li><a href="{{ url('staff') }}" class=" active">Staffs<i
                                     class="material-symbols-outlined">
                                     person
