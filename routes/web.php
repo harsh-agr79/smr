@@ -114,6 +114,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('pendingorders', [OrderAdminController::class, 'pendingorders']);
     Route::get('rejectedorders', [OrderAdminController::class, 'rejectedorders']);
     Route::get('deliveredorders', [OrderAdminController::class, 'deliveredorders']);
+
     Route::get('/detail/{id}', [OrderAdminController::class, 'details']);
 
     Route::get('/addorder', [OrderAdminController::class, 'addorder']);
@@ -222,6 +223,28 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
 Route::group(['middleware'=>'MarketerAuth'], function(){
     Route::get('/marketer/dashboard', [MarketerViewController::class, 'dashboard']);
+
+
+    Route::get('/marketer/payments', [MarketerViewController::class, 'index']);
+    Route::get('/marketer/addpayment', [MarketerViewController::class, 'addpay']);
+    Route::get('/marketer/editpayment/{id}', [MarketerViewController::class, 'addpay']);
+    Route::post('/marketer/addpay', [MarketerViewController::class, 'addpay_process'])->name('marketer_addpay');
+    Route::get('/marketer/deletepayment/{id}',[MarketerViewController::class, 'deletepay']);
+
+    Route::get('/marketer/findcustomer', [MarketerViewController::class, 'getcustomer']);
+
+    Route::get('/marketer/statements', [MarketerViewController::class,'statement']);
+    Route::get('/marketer/balancesheet/{id}', [MarketerViewController::class, 'balancesheet']);
+
+    Route::get('/marketer/detail/{id}', [MarketerViewController::class, 'details']);
+
+    Route::get('/marketer/addorder', [MarketerViewController::class, 'addorder']);
+    Route::post('/marketer/addorder/add', [MarketerViewController::class, 'createorder'])->name("marketer_createorder");
+    Route::get('/marketer/editorder/{id}', [MarketerViewController::class, 'editorder']);
+    Route::post('/marketer/order/edit', [MarketerViewController::class, 'editorder_process'])->name("marketer_editorder");
+
+    Route::get('/marketer/saveorder/{id}', [OrderAdminController::class, 'save']);
+    Route::get('/marketer/printorder/{id}', [OrderAdminController::class, 'print']);
 });
 
 

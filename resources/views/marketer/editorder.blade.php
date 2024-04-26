@@ -1,4 +1,4 @@
-@extends('layouts/admin')
+@extends('layouts/marketer')
 
 @section('main')
     <script type="text/javascript">
@@ -84,20 +84,20 @@
             width: 90vw !important;
         }
     </style>
-    <form enctype="multipart/form-data" id="createform" action="{{ route('createorder') }}" method="post">
+    <form enctype="multipart/form-data" id="createform" action="{{ route('marketer_editorder') }}" method="post">
         @csrf
         <div class="mp-card" style="margin-top: 20px;">
             <div class="row" style="margin:0; padding: 0;">
                 <div class="input-field col s6" style="margin:0; padding: 5px;">
-                    <input type="date" class="inp browser-default black-text" name="date" value="{{ date('Y-m-d') }}"
+                    <input type="date" class="inp browser-default black-text" name="date" value="{{ date('Y-m-d', strtotime($order[0]->date)) }}"
                         required>
                 </div>
                 <div class="input-field col s6" style="margin:0; padding: 5px;">
-                    <input type="text" name="name" id="customer" name="customer" accesskey="c"
+                    <input type="text" name="name" id="customer" name="customer" value="{{$order[0]->name}}" accesskey="c"
                         placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off"
                         required>
                 </div>
-
+                <input type="hidden" name="orderid" value="{{$order[0]->order_id}}">
                 <div class="row col s12" style="margin:0; padding: 0;">
                     <div class="col s2" style="margin:0; padding: 5px;">
                         <div class="btn green accent-4 modal-trigger" href="#modal1"><i
@@ -122,8 +122,8 @@
                 </div>
             </div>
         </div>
-
-        <div id="cart" class="modal card-m">
+        
+        <div id="cart" class="modal cart-m">
             <div class="modal-content bg-content">
                 <div class="center">
                     <h5>Cart</h5>
@@ -137,31 +137,51 @@
                         <th>Total</th>
                     </thead>
                     <tbody>
-                        @foreach ($data as $item)
-                            <tr style="display: none;"id={{ $item->id . 'list' }}>
+                        @foreach ($order as $item)
+                            <tr id={{ $item->id . 'list' }}>
                                 <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
-                                <td style="font-size: 10px;">{{$item->name}}
+                                <td style="font-size: 10px;">{{$item->item}}
                                     <br>
                             <span style="font-size: 7px; margin-top:-10px;">
                                 {{$item->brand}} {{$item->category}}</span></td>
-                                <td><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
+                                <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
                                         inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
                                         class="browser-default prod-admin-inp gtquantity"
                                         onkeyup="changequantity2({{ $item->id }})"
                                         onchange="changequantity2({{ $item->id }})"
-                                        onfocusout="changequantity2({{ $item->id }})"></td>
-                                <input type="hidden" name="prodid[]" value="{{ $item->id }}">
-                                <td id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
-                                <td id="{{$item->id}}total"></td>
+                                        onfocusout="changequantity2({{ $item->id }})" value="{{$item->quantity}}"></td>
+                                <input type="hidden" name="prodid[]" value="{{ $item->product_id }}">
+                                <input type="hidden" name="id[]" value="{{ $item->id }}">
+                                <td  id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
+                                <td id="{{$item->id}}total">{{$item->quantity * $item->price}}</td>
                             </tr>
                         @endforeach
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="font-weight: 600; font-size: 12px;">Total</td>
-                            <td style="font-weight: 600; font-size: 12px;" id="cart-total"></td>
+                        @foreach ($data as $item)
+                        <tr style="display: none;"id={{ $item->id . 'list' }}>
+                            <td><img src="{{ asset(explode('|', $item->images)[0]) }}" class="table-prod" alt=""></td>
+                            <td style="font-size: 10px;">{{$item->name}}
+                                <br>
+                        <span style="font-size: 7px; margin-top:-10px;">
+                            {{$item->brand}} {{$item->category}}</span></td>
+                            <td ><input type="number" id="{{ $item->id . 'listinp' }}" name="quantity[]"
+                                    inputmode="numeric" pattern="[0-9]*" placeholder="Quantity"
+                                    class="browser-default prod-admin-inp gtquantity"
+                                    onkeyup="changequantity2({{ $item->id }})"
+                                    onchange="changequantity2({{ $item->id }})"
+                                    onfocusout="changequantity2({{ $item->id }})"></td>
+                            <input type="hidden" name="prodid[]" value="{{ $item->id }}">
+                            <input type="hidden" name="id[]" value="newitem">
+                            <td id="{{$item->id}}price" class="gtprice">{{ $item->price }}</td>
+                            <td id="{{$item->id}}total"></td>
                         </tr>
+                    @endforeach
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: 600; font-size: 12px;">Total</td>
+                        <td style="font-weight: 600; font-size: 12px;" id="cart-total"></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -208,16 +228,43 @@
             </div>
         </div>
     </div>
-    <div style="height: 65vh; overflow-y: scroll;" class="prod-admin-container">
+    <div style="height: 65vh; overflow-y: scroll; margin-top: 10px;" class="prod-admin-container">
+        @foreach ($order as $item)
+            <div class="mp-card row prod-admin searchable {{ $item->brand_id }}brd {{ $item->category_id }}cat"
+                style="margin: 3px; padding: 10px;">
+                <div class="col s4" style="padding: 0;  margin: 0;">
+                    <img src="{{ asset(explode('|', $item->images)[0]) }}" class="prod-admin-img materialboxed"
+                        alt="">
+                </div>
+                <div class="col s8 row" style="padding: 0; margin: 0;">
+                    <div class="col s12" style=" margin: 0; padding: 0;">
+                        <span class="prod-admin-title">{{ $item->item }}</span>
+                    </div>
+                    <div class="col s12 row" style="padding: 0;  margin: 0;">
+                        <span class="prod-admin-det col s6">{{ $item->brand }} {{ $item->category }}</span>
+                        <span class="prod-admin-det col s6">
+                            @if ($item->stock == 'on')
+                                <span class="red-text right">Out of Stock</span>
+                            @else
+                                <span class="green-text right">In Stock</span>
+                            @endif
+                        </span>
+                    </div>
+                    <div class="row col s12 price-line valign-wrapper" style="padding: 0;  margin: 0;">
+                        <div class="col s4 center"><span class="prod-admin-price">Rs.{{ $item->price }}</span></div>
+                        <div class="col s8"><input type="number" id="{{ $item->id . 'viewinp' }}" inputmode="numeric"
+                                pattern="[0-9]*" placeholder="Quantity" class="browser-default prod-admin-inp right"
+                                onkeyup="changequantity({{ $item->id }})"  onchange="changequantity({{ $item->id }})" value="{{$item->quantity}}"></div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
         @foreach ($data as $item)
             <div class="mp-card row prod-admin searchable {{ $item->brand_id }}brd {{ $item->category_id }}cat"
                 style="margin: 3px; padding: 10px;">
                 <div class="col s4" style="padding: 0;  margin: 0;">
-                    @php
-                        $a = explode('|', $item->images);
-                    @endphp
-                    <img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif"
-                        class="prod-admin-img materialboxed" alt="">
+                    <img src="{{ asset(explode('|', $item->images)[0]) }}" class="prod-admin-img materialboxed"
+                        alt="">
                 </div>
                 <div class="col s8 row" style="padding: 0; margin: 0;">
                     <div class="col s12" style=" margin: 0; padding: 0;">
@@ -274,6 +321,7 @@
         })
     </script>
     <script>
+        getTotal();
         function changequantity(id) {
             var qval = $(`#${id}viewinp`).val();
             if (qval < 1 || qval == null) {
@@ -322,6 +370,7 @@
                 }
             }
             $('#totalamt').text(total);
+            $('#totalamt2').text(total);
             $('#cart-total').text(total);
         }
 

@@ -1,4 +1,4 @@
-@extends('layouts/admin')
+@extends('layouts/marketer')
 
 @section('main')
     <script type="text/javascript">
@@ -84,7 +84,7 @@
             width: 90vw !important;
         }
     </style>
-    <form enctype="multipart/form-data" id="createform" action="{{ route('createorder') }}" method="post">
+    <form enctype="multipart/form-data" id="createform" action="{{ route('marketer_createorder') }}" method="post">
         @csrf
         <div class="mp-card" style="margin-top: 20px;">
             <div class="row" style="margin:0; padding: 0;">
@@ -256,7 +256,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: 'get',
-                url: '/findcustomer',
+                url: '/marketer/findcustomer',
                 success: function(response2) {
 
                     var custarray2 = response2;
