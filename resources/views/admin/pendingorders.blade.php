@@ -30,8 +30,8 @@
                             <td>
                                 <div class="row" style="padding: 0; margin: 0;">
                                     <div class="col s12" style="font-size: 12px; font-weight: 600;">{{ $item->name }}</div>
-                                    <div class="col s4 m3 l3" style="font-size: 8px;">{{ $item->order_id }}</div>
-                                    <div class="col s8 m4 l4" style="font-size: 8px;">{{ $item->marketer }}</div>
+                                    <div class="col s4 m4 l3" style="font-size: 6px;">{{ $item->order_id }}</div>
+                                    <div class="col s8 m8 l4" style="font-size: 10px;">{{ $item->marketer }}</div>
                                 </div>
                             </td>
                             <td>{{$item->seenby}}</td>
