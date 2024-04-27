@@ -13,9 +13,9 @@ class LoginController extends Controller
         $password = $request->post('password');
 
         $admin = DB::table('admins')->where(['userid'=>$userid])->first();
-        // $customer = DB::table('customers')->where('userid',$userid)->first();
-        $staff = DB::table('staffs')->where('userid',$userid)->first();
-        $marketer = DB::table('marketers')->where('userid',$userid)->first();
+        $customer = DB::table('customers')->where('userid',$userid)->first();
+        // $staff = DB::table('staffs')->where('userid',$userid)->first();
+        // $marketer = DB::table('marketers')->where('userid',$userid)->first();
         if($admin!=NULL){
             if (Hash::check($request->post('password'), $admin->password)) {
                 $request->session()->put('ADMIN_LOGIN', true);
@@ -30,47 +30,47 @@ class LoginController extends Controller
                 return redirect('/');
             }
         }
-        // elseif($customer!=NULL){
-        //     if (Hash::check($request->post('password'), $customer->password)) {
-        //         $request->session()->put('USER_LOGIN', true);
-        //         $request->session()->put('USER_ID', $customer->id);
-        //         $request->session()->put('USER_TIME', time() );
+        elseif($customer!=NULL){
+            if (Hash::check($request->post('password'), $customer->password)) {
+                $request->session()->put('USER_LOGIN', true);
+                $request->session()->put('USER_ID', $customer->id);
+                $request->session()->put('USER_TIME', time() );
+    
+                return redirect('/');
+                }
+                else{
+                    $request->session()->flash('error','please enter valid login details');
+                    return redirect('/');
+                }
+        }
+        // elseif($staff!=NULL){
+        //     if (Hash::check($request->post('password'), $staff->password)) {
+        //         $request->session()->put('ADMIN_LOGIN', true);
+        //         $request->session()->put('ADMIN_ID', $staff->id);
+        //         $request->session()->put('STAFF_ID', $staff->id);
+        //         $request->session()->put('ADMIN_TIME', time() );
+        //         $request->session()->put('ADMIN_TYPE', 'staff');
     
         //         return redirect('/');
-        //         }
-        //         else{
-        //             $request->session()->flash('error','please enter valid login details');
-        //             return redirect('/');
-        //         }
+        //     }
+        //     else{
+        //         $request->session()->flash('error','please enter valid login details');
+        //         return redirect('/');
+        //     }
         // }
-        elseif($staff!=NULL){
-            if (Hash::check($request->post('password'), $staff->password)) {
-                $request->session()->put('ADMIN_LOGIN', true);
-                $request->session()->put('ADMIN_ID', $staff->id);
-                $request->session()->put('STAFF_ID', $staff->id);
-                $request->session()->put('ADMIN_TIME', time() );
-                $request->session()->put('ADMIN_TYPE', 'staff');
+        // elseif($marketer!=NULL){
+        //     if (Hash::check($request->post('password'), $marketer->password)) {
+        //         $request->session()->put('MARKETER_LOGIN', true);
+        //         $request->session()->put('MARKETER_ID', $marketer->id);
+        //         $request->session()->put('MARKETER_TIME', time() );
     
-                return redirect('/');
-            }
-            else{
-                $request->session()->flash('error','please enter valid login details');
-                return redirect('/');
-            }
-        }
-        elseif($marketer!=NULL){
-            if (Hash::check($request->post('password'), $marketer->password)) {
-                $request->session()->put('MARKETER_LOGIN', true);
-                $request->session()->put('MARKETER_ID', $marketer->id);
-                $request->session()->put('MARKETER_TIME', time() );
-    
-                return redirect('/');
-            }
-            else{
-                $request->session()->flash('error','please enter valid login details');
-                return redirect('/');
-            }
-        }
+        //         return redirect('/');
+        //     }
+        //     else{
+        //         $request->session()->flash('error','please enter valid login details');
+        //         return redirect('/');
+        //     }
+        // }
         else{
             $request->session()->flash('error','please enter valid login details');
             return redirect('/');
