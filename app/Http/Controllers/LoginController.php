@@ -13,7 +13,7 @@ class LoginController extends Controller
         $password = $request->post('password');
 
         $admin = DB::table('admins')->where(['userid'=>$userid])->first();
-        $customer = DB::table('customers')->where('userid',$userid)->first();
+        // $customer = DB::table('customers')->where('userid',$userid)->first();
         $staff = DB::table('staffs')->where('userid',$userid)->first();
         $marketer = DB::table('marketers')->where('userid',$userid)->first();
         if($admin!=NULL){
@@ -30,19 +30,19 @@ class LoginController extends Controller
                 return redirect('/');
             }
         }
-        elseif($customer!=NULL){
-            if (Hash::check($request->post('password'), $customer->password)) {
-                $request->session()->put('USER_LOGIN', true);
-                $request->session()->put('USER_ID', $customer->id);
-                $request->session()->put('USER_TIME', time() );
+        // elseif($customer!=NULL){
+        //     if (Hash::check($request->post('password'), $customer->password)) {
+        //         $request->session()->put('USER_LOGIN', true);
+        //         $request->session()->put('USER_ID', $customer->id);
+        //         $request->session()->put('USER_TIME', time() );
     
-                return redirect('/');
-                }
-                else{
-                    $request->session()->flash('error','please enter valid login details');
-                    return redirect('/');
-                }
-        }
+        //         return redirect('/');
+        //         }
+        //         else{
+        //             $request->session()->flash('error','please enter valid login details');
+        //             return redirect('/');
+        //         }
+        // }
         elseif($staff!=NULL){
             if (Hash::check($request->post('password'), $staff->password)) {
                 $request->session()->put('ADMIN_LOGIN', true);
