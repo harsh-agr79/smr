@@ -76,8 +76,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
      //Product
      Route::get('/products', [ProductController::class, 'products']);
-     Route::get('/products/add', [ProductController::class, 'addproduct']);
-     Route::post('/products/addpro', [ProductController::class, 'addprod_process'])->name('addprod');
+    //  Route::get('/products/add', [ProductController::class, 'addproduct']);
+    //  Route::post('/products/addpro', [ProductController::class, 'addprod_process'])->name('addprod');
      Route::get('/products/edit/{id}', [ProductController::class, 'editproduct']);
      Route::post('products/editprod', [ProductController::class, 'editprod_process'])->name('editprod');
      Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']);
