@@ -370,7 +370,7 @@ class MarketerViewController extends Controller
     public function addorder( Request $request ) {
         $result[ 'brands' ] = DB::table( 'brands' )->get();
         $result[ 'category' ] = DB::table( 'categories' )->get();
-        $result[ 'data' ] = DB::table( 'products' )->orderBy("ordernum", 'ASC')->get();
+        $result[ 'data' ] = DB::table( 'products' )->orderBy("ordernum", 'ASC')->where('hide', NULL)->get();
         return view( 'marketer.addorder', $result );
     }
 
