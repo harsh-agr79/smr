@@ -61,8 +61,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //Customer
     Route::get('/customers', [CustomerController::class, 'customers']);
-    Route::get('/customers/add', [CustomerController::class, 'addcustomer']);
-    Route::post('/customers/addpro', [CustomerController::class, 'addcus_process'])->name('addcust');
+    // Route::get('/customers/add', [CustomerController::class, 'addcustomer']);
+    // Route::post('/customers/addpro', [CustomerController::class, 'addcus_process'])->name('addcust');
     Route::get('/customers/edit/{id}', [CustomerController::class, 'editcustomer']);
     Route::post('customers/editcus', [CustomerController::class, 'editcus_process'])->name('editcust');
     Route::get('/customers/delcust/{id}', [CustomerController::class, 'deletecustomer']);
