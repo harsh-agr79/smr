@@ -8,7 +8,94 @@ use Illuminate\Support\Facades\DB;
 class AnalyticsController extends Controller
 {
     public function statement(Request $request){
-        $result['data'] = DB::table('customers')->orderBy('name', 'ASC')->get();
+        $cust = DB::table('customers')->orderBy('name', 'ASC')->get();
+
+        $data = array();
+        
+        foreach($cust as $item){
+            $fif = DB::table('orders')
+            ->where(['deleted_at'=>NULL,'net'=>NULL,'save'=>NULL])
+            ->where('user_id', $item->id)
+            ->where('status','approved') 
+            ->whereBetween('date', [now()->subDays(15), now()->addDays(1)])
+            ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
+            ->get();
+
+            $twe = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'net'=>NULL])
+            ->where('user_id', $item->id)
+            ->whereBetween('date', [now()->subDays(25), now()->addDays(1)])
+            ->where('status','approved') 
+            ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
+            ->get();
+
+            $thir = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'net'=>NULL])
+            ->where('user_id', $item->id)
+            ->whereBetween('date', [now()->subDays(35), now()->addDays(1)])
+            ->where('status','approved') 
+            ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
+            ->get();
+            $fou = DB::table('orders')
+            ->where(['deleted_at'=>NULL, 'net'=>NULL])
+            ->where('user_id', $item->id)
+            ->whereBetween('date', [now()->subDays(45), now()->addDays(1)])
+            ->where('status','approved') 
+            ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
+            ->get();
+
+            $bal = explode('|', $item->balance);
+
+            if($bal[0] == 'red'){
+                if (count($fif) > 0) {
+                    $a = $bal[1] - $fif[0]->sl;
+                }
+                else{
+                    $a = $bal[1];
+                }
+                if (count($twe) > 0) {
+                    $b = $bal[1] - $twe[0]->sl;
+                }
+                else{
+                    $b = $bal[1];
+                }
+                if (count($thir) > 0) {
+                    $c = $bal[1] - $thir[0]->sl;
+                }
+                else{
+                    $c = $bal[1];
+                }
+                if (count($fou) > 0) {
+                    $d = $bal[1] - $fou[0]->sl;
+                }
+                else{
+                    $d = $bal[1];
+                }
+            }
+            else{
+                $a = 0;
+                $b = 0;
+                $c = 0;
+                $d = 0;
+            }
+
+            $data[] = [
+                'id'=>$item->id,
+                'name' => $item->name,
+                'shopname' => $item->shopname,
+                'type'=>$item->type,
+                'bal_type' => $bal[0],
+                'balance' => $bal[1],
+                'fif'=>$a,
+                'twe'=>$b,
+                'thir'=>$c,
+                'fou'=>$d
+            ];
+        }
+
+        $result['data'] = collect($data);
+
+        
 
         return view('admin/statement', $result);
     }
@@ -17,39 +104,7 @@ class AnalyticsController extends Controller
         $cust = DB::table('customers')->where('id', $id)->first();
         $result['cus'] = $cust;
         $today = date('Y-m-d');
-        //  $target = DB::table('target')->where('userid',$cust->user_id)
-        //  ->where('startdate', '<=', $today)
-        //  ->where('enddate', '>=', $today)
-        //  ->get();
-
-        //  if(count($target) > 0){
-        //     $rdate = $target['0']->startdate;
-        //     $rdate2 = $target['0']->enddate;
-
-        //     if($request->get('date') && $request->get('date2'))
-        //         {
-        //             $date = $request->get('date');
-        //             $date2 = $request->get('date2');
-        //         }
-        //         elseif($request->get('date')){
-        //             $date = $request->get('date');
-        //             $date2 = $rdate2;
-        //         }
-        //         elseif($request->get('date2')){
-        //             $date2 = $request->get('date2');
-        //             $date = $rdate2;
-        //         }
-        //         elseif($request->get('clear')){
-        //             $date = $rdate;
-        //             $date2 = $rdate2;
-        //          }
-        //         else{
-        //             $date = $rdate;
-        //             $date2 = $rdate2;
-        //         }
-
-        //  }
-        //  else{
+        
             if($request->get('date') && $request->get('date2'))
             {
                 $date = $request->get('date');
@@ -57,30 +112,30 @@ class AnalyticsController extends Controller
             }
             elseif($request->get('date')){
                 $date = $request->get('date');
-                $date3 = date('Y-10-18');
+                $date3 = date('Y-07-16');
                 $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
             }
             elseif($request->get('date2')){
                 $date2 = $request->get('date2');
-                $date = date('Y-10-18');
+                $date = date('Y-07-16');
             }
             elseif($request->get('clear')){
-               if(date('Y-m-d') < date('Y-10-18') ){
-                $date2 = date('Y-10-17');  
+               if(date('Y-m-d') < date('Y-07-16') ){
+                $date2 = date('Y-07-15');  
                 $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
                }
                else{
-                   $date = date('Y-10-18');
+                   $date = date('Y-07-16');
                    $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
                }
             }
             else{
-                if(date('Y-m-d') < date('Y-10-18') ){
-                $date2 = date('Y-10-17');  
+                if(date('Y-m-d') < date('Y-07-16') ){
+                $date2 = date('Y-07-15');  
                 $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
                }
                else{
-                   $date = date('Y-10-18');
+                   $date = date('Y-07-16');
                    $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
                }
             }
@@ -256,30 +311,30 @@ class AnalyticsController extends Controller
         }
         elseif($request->get('date')){
             $date = $request->get('date');
-            $date3 = date('Y-10-18');
+            $date3 = date('Y-07-16');
             $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
         }
         elseif($request->get('date2')){
             $date2 = $request->get('date2');
-            $date = date('Y-10-18');
+            $date = date('Y-07-16');
         }
         elseif($request->get('clear')){
-             if(date('Y-m-d') < date('Y-10-18') ){
-             $date2 = date('Y-10-17');  
+             if(date('Y-m-d') < date('Y-07-16') ){
+             $date2 = date('Y-07-15');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-10-18');
+                $date = date('Y-07-16');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
         }
         else{
-            if(date('Y-m-d') < date('Y-10-18') ){
-             $date2 = date('Y-10-17');  
+            if(date('Y-m-d') < date('Y-07-16') ){
+             $date2 = date('Y-07-15');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-10-18');
+                $date = date('Y-07-16');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
             
@@ -380,30 +435,30 @@ class AnalyticsController extends Controller
         }
         elseif($request->get('date')){
             $date = $request->get('date');
-            $date3 = date('Y-10-18');
+            $date3 = date('Y-07-16');
             $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
         }
         elseif($request->get('date2')){
             $date2 = $request->get('date2');
-            $date = date('Y-10-18');
+            $date = date('Y-07-16');
         }
         elseif($request->get('clear')){
-             if(date('Y-m-d') < date('Y-10-18') ){
-             $date2 = date('Y-10-17');  
+             if(date('Y-m-d') < date('Y-07-16') ){
+             $date2 = date('Y-07-15');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-10-18');
+                $date = date('Y-07-16');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
         }
         else{
-            if(date('Y-m-d') < date('Y-10-18') ){
-             $date2 = date('Y-10-17');  
+            if(date('Y-m-d') < date('Y-07-16') ){
+             $date2 = date('Y-07-15');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-10-18');
+                $date = date('Y-07-16');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
             

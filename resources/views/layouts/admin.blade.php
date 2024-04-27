@@ -102,6 +102,8 @@
                                 </div>
                             </div>
                         </li>
+                        <li><a onclick=" window.history.back();"><i
+                            class="material-icons">arrow_back</i></a>
                         <li><a href="#!" data-target="settings-dropdown" class="dropdown-trigger "><i
                                     class="material-icons">settings</i></a>
 

@@ -161,9 +161,9 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //Analytics
     Route::get('statements', [AnalyticsController::class,'statement']);
     Route::get('balancesheet/{id}', [AnalyticsController::class, 'balancesheet']);
-    Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
-    Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
-    Route::get('summary', [AnalyticsController::class, 'detailedreport']);
+    // Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
+    // Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
+    // Route::get('summary', [AnalyticsController::class, 'detailedreport']);
 
     Route::get('/staff', [StaffController::class, 'staff']);
     Route::get('/addstaff', [StaffController::class, 'addstaff']);
@@ -208,8 +208,8 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     Route::post('/user/editdetail', [OrderController::class, 'detailedit'])->name('user.detailedit');
     Route::get('/user/recieve/{id}',[OrderController::class, 'recieveorder']);
 
-    Route::get('/user/mainanalytics',[CustomerViewController::class, 'mainanalytics']);
-    Route::get('/user/summary',[CustomerViewController::class, 'summary']);
+    // Route::get('/user/mainanalytics',[CustomerViewController::class, 'mainanalytics']);
+    // Route::get('/user/summary',[CustomerViewController::class, 'summary']);
 
     Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
     Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);

@@ -45,7 +45,7 @@
                     @foreach ($data as $item)
                         <tr oncontextmenu="rightmenu('{{ $item->expenseid }}'); return false;">
                             <td>{{getNepaliDate($item->date)}}</td>
-                            <td>{{$item->name}}</td>
+                            <td>{{ $item->name.shopname($item->user_id) }}</td>
                             <td><a href="{{url('editexpense/'.$item->expenseid)}}">{{$item->expenseid}}</a></td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->particular}}</td>

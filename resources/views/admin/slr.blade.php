@@ -42,7 +42,7 @@
                         <tr  ondblclick="opendet('{{ $item->returnid }}')"
                             oncontextmenu="rightmenu('{{ $item->returnid }}'); return false;">
                             <td>{{ $item->date }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->name.shopname($item->user_id) }}</td>
                             <td>{{ $item->returnid }}</td>
                             <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/editslr/{{$item->returnid}}','/deleteslr/{{$item->returnid}}')"><i class="material-icons">more_vert</i></a></td>
                         </tr>

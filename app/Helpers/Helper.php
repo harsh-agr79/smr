@@ -191,3 +191,9 @@ function updatebalance($id)
         'balance'=>implode("|",$result)
     ]);
 }
+
+function shopname($id){
+    $shop = DB::table('customers')->where('id', $id)->first()->shopname;
+
+    return "(".$shop.")";
+}

@@ -91,7 +91,7 @@ class LoginController extends Controller
         ->havingBetween('orders.date', [today()->subDays(1), today()->addDays(1)])
         ->orderBy('orders.date', 'DESC')
         ->join('customers', 'customers.id', '=', 'orders.user_id')
-        ->selectRaw('orders.name,orders.date,orders.marketer, order_id, mainstatus, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
+        ->selectRaw('orders.name,orders.date,orders.marketer, order_id, user_id, mainstatus, seen, seenby, delivered, clnstatus, SUM(approvedquantity * price) as sla, SUM(discount * 0.01 * approvedquantity * price) as disa, SUM(quantity * price) as sl, SUM(discount * 0.01 * quantity * price) as dis')
         ->groupBy('orders.order_id')
         ->get();
 
@@ -99,7 +99,7 @@ class LoginController extends Controller
         ->where(['orders.deleted_at'=>NULL, 'save'=>NULL, 'status'=>'pending'])
         ->orderBy('orders.date', 'DESC')
         ->join('customers', 'customers.id', '=', 'orders.user_id')
-        ->selectRaw('orders.name,orders.date,orders.marketer, order_id, mainstatus, seen, seenby, delivered, clnstatus,SUM(quantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')
+        ->selectRaw('orders.name,orders.date,orders.marketer, order_id, user_id,mainstatus, seen, seenby, delivered, clnstatus,SUM(quantity * orders.price) as samt, SUM(discount * 0.01 * approvedquantity * orders.price) as damt')
         ->groupBy('orders.order_id')
         ->get();
         return view('admin/dashboard', $result);

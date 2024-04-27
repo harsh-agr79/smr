@@ -25,7 +25,7 @@
                                     style="height: 35px; width:10px;"></div>
                             </td>
                             <td>{{ getNepaliDate($item->date) }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->name.shopname($item->user_id) }}</td>
                             <td>{{ $item->order_id }}</td>
                             <td class="iphone"><a class="modal-trigger btn-flat" href="#menumodal" onclick="changelink('/editorder/{{$item->order_id}}','/deleteorder/{{$item->order_id}}')"><i class="material-icons">more_vert</i></a></td>
                         </tr>

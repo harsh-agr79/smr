@@ -31,38 +31,64 @@
                     
                     <th class="">type</th>
                     <th class="bal ">Balance</th>
+                    <th>15 days</th>
+                    <th>25 days</th>
+                    <th>35 days</th>
+                    <th>45 days</th>
                 </tr>
             </thead>
             <tbody>
                 @php
                     $a = 0;
+                    $sum = 0;
                 @endphp
-                @foreach ($data as $item)
-                    @php
-                        $bal = explode('|', $item->balance);
-                    @endphp
-                    <tr ondblclick="openbs('{{ $item->id }}')">
+                @for($i = 0; $i < count($data); $i++)
+                    <tr ondblclick="openbs('{{ $data[$i]['id'] }}')">
                         <td>
                             <div
                                 style="height: 20px; width:5px;"></div>
                         </td>
                         <td>{{ $a = $a + 1 }}</td>
-                        <td class="name">{{ $item->name }}</td>
-                        <td class="shop" style="display: none;">{{ $item->shopname }}</td>
+                        <td class="name">{{ $data[$i]['name'] }}</td>
+                        <td class="shop" style="display: none;">{{ $data[$i]['shopname'] }}</td>
                         
                         <td
-                            class="black-text  @if ($item->type == 'dealer') purple lighten-5 @elseif($item->type == 'wholesaler') lime lighten-5 @elseif($item->type == 'retailer') light-blue lighten-5 @else @endif">
-                            {{ $item->type }}</td>
-                        <td class="{{ $bal[0] }} lighten-5 bal black-text ">{{ money($bal[1]) }}</td>
+                            class="black-text  @if ($data[$i]['type'] == 'dealer') purple lighten-5 @elseif($data[$i]['type'] == 'wholesaler') lime lighten-5 @elseif($data[$i]['type'] == 'retailer') light-blue lighten-5 @else @endif">
+                            {{ $data[$i]['type'] }}</td>
+                        <td class="{{ $data[$i]['bal_type'] }} lighten-5 bal black-text ">{{ money($data[$i]['balance']) }}</td>
+                        @if ($data[$i]['bal_type'] == 'red')
+                        <span class="hide">{{$sum = $sum + $data[$i]['balance']}}</span>
+                        @endif
+                        <td class="{{ $data[$i]['bal_type'] }} lighten-5 bal black-text ">@if ($data[$i]['fif'] < 0)
+                            0
+                        @else
+                        {{ money($data[$i]['fif']) }}
+                        @endif</td>
+                        <td class="{{ $data[$i]['bal_type'] }} lighten-5 bal black-text ">@if ($data[$i]['twe'] < 0)
+                            0
+                        @else
+                        {{ money($data[$i]['twe']) }}
+                        @endif</td>
+                        <td class="{{ $data[$i]['bal_type'] }} lighten-5 bal black-text ">@if ($data[$i]['thir'] < 0)
+                            0
+                        @else
+                        {{ money($data[$i]['thir']) }}
+                        @endif</td>
+                        <td class="{{ $data[$i]['bal_type'] }} lighten-5 bal black-text ">@if ($data[$i]['fou'] < 0)
+                            0
+                        @else
+                        {{ money($data[$i]['fou']) }}
+                        @endif</td>
                     </tr>
-                @endforeach
+                @endfor
             </tbody>
             <tfoot>
                 <tr>
                     <td></td>
                     <td id="totalrows"></td>
-                    <td>Total</td>
-                    <td></td>
+                    <td>: Total Rows</td>
+                    <td>Total credit:</td>
+                    <td>{{money($sum)}}</td>
                 </tr>
             </tfoot>
         </table>
