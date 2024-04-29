@@ -61,23 +61,23 @@ Route::group(['middleware'=>'AdminAuth'], function(){
 
     //Customer
     Route::get('/customers', [CustomerController::class, 'customers']);
-    // Route::get('/customers/add', [CustomerController::class, 'addcustomer']);
-    // Route::post('/customers/addpro', [CustomerController::class, 'addcus_process'])->name('addcust');
+    Route::get('/customers/add', [CustomerController::class, 'addcustomer']);
+    Route::post('/customers/addpro', [CustomerController::class, 'addcus_process'])->name('addcust');
     Route::get('/customers/edit/{id}', [CustomerController::class, 'editcustomer']);
     Route::post('customers/editcus', [CustomerController::class, 'editcus_process'])->name('editcust');
     Route::get('/customers/delcust/{id}', [CustomerController::class, 'deletecustomer']);
 
      //FRONT SETTINGS
-    //  Route::get('frontsettings', [FrontController::class, 'index']);
-    //  Route::post('frontimg', [FrontController::class, 'addimg'])->name('addimg');
-    //  Route::get('delete/frontimg/{id}/{id2}', [FrontController::class, 'deleteimg']);
-    //  Route::post('frontmsg', [FrontController::class, 'addmsg'])->name('addmsg');
-    //  Route::get('delete/frontmsg/{id}', [FrontController::class, 'deletemsg']);
+     Route::get('frontsettings', [FrontController::class, 'index']);
+     Route::post('frontimg', [FrontController::class, 'addimg'])->name('addimg');
+     Route::get('delete/frontimg/{id}/{id2}', [FrontController::class, 'deleteimg']);
+     Route::post('frontmsg', [FrontController::class, 'addmsg'])->name('addmsg');
+     Route::get('delete/frontmsg/{id}', [FrontController::class, 'deletemsg']);
 
      //Product
      Route::get('/products', [ProductController::class, 'products']);
-    //  Route::get('/products/add', [ProductController::class, 'addproduct']);
-    //  Route::post('/products/addpro', [ProductController::class, 'addprod_process'])->name('addprod');
+     Route::get('/products/add', [ProductController::class, 'addproduct']);
+     Route::post('/products/addpro', [ProductController::class, 'addprod_process'])->name('addprod');
      Route::get('/products/edit/{id}', [ProductController::class, 'editproduct']);
      Route::post('products/editprod', [ProductController::class, 'editprod_process'])->name('editprod');
      Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']);
@@ -161,21 +161,21 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //Analytics
     Route::get('statements', [AnalyticsController::class,'statement']);
     Route::get('balancesheet/{id}', [AnalyticsController::class, 'balancesheet']);
-    // Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
-    // Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
-    // Route::get('summary', [AnalyticsController::class, 'detailedreport']);
+    Route::get('mainanalytics', [AnalyticsController::class, 'mainanalytics']);
+    Route::get('sortanalytics', [AnalyticsController::class, 'sortanalytics']);
+    Route::get('summary', [AnalyticsController::class, 'detailedreport']);
 
-    // Route::get('/staff', [StaffController::class, 'staff']);
-    // Route::get('/addstaff', [StaffController::class, 'addstaff']);
-    // Route::get('/addstaff/{id}', [StaffController::class, 'addstaff']);
-    // Route::post('/addstaffprocess', [StaffController::class, 'addstaff_process'])->name('addstaffprocess');
-    // Route::get('/deletestaff', [StaffController::class, 'deletestaff']);
+    Route::get('/staff', [StaffController::class, 'staff']);
+    Route::get('/addstaff', [StaffController::class, 'addstaff']);
+    Route::get('/addstaff/{id}', [StaffController::class, 'addstaff']);
+    Route::post('/addstaffprocess', [StaffController::class, 'addstaff_process'])->name('addstaffprocess');
+    Route::get('/deletestaff', [StaffController::class, 'deletestaff']);
 
-    // Route::get('/marketer', [MarketerController::class, 'marketer']);
-    // Route::get('/addmarketer', [MarketerController::class, 'addmarketer']);
-    // Route::get('/addmarketer/{id}', [MarketerController::class, 'addmarketer']);
-    // Route::post('/addmarketerprocess', [MarketerController::class, 'addmarketer_process'])->name('addmarketerprocess');
-    // Route::get('/deletemarketer', [MarketerController::class, 'deletemarketer']);
+    Route::get('/marketer', [MarketerController::class, 'marketer']);
+    Route::get('/addmarketer', [MarketerController::class, 'addmarketer']);
+    Route::get('/addmarketer/{id}', [MarketerController::class, 'addmarketer']);
+    Route::post('/addmarketerprocess', [MarketerController::class, 'addmarketer_process'])->name('addmarketerprocess');
+    Route::get('/deletemarketer', [MarketerController::class, 'deletemarketer']);
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
@@ -208,8 +208,8 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
     Route::post('/user/editdetail', [OrderController::class, 'detailedit'])->name('user.detailedit');
     Route::get('/user/recieve/{id}',[OrderController::class, 'recieveorder']);
 
-    // Route::get('/user/mainanalytics',[CustomerViewController::class, 'mainanalytics']);
-    // Route::get('/user/summary',[CustomerViewController::class, 'summary']);
+    Route::get('/user/mainanalytics',[CustomerViewController::class, 'mainanalytics']);
+    Route::get('/user/summary',[CustomerViewController::class, 'summary']);
 
     Route::get('/user/saveorder/{id}', [OrderAdminController::class, 'save']);
     Route::get('/user/printorder/{id}', [OrderAdminController::class, 'print']);

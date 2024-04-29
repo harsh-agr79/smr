@@ -112,30 +112,30 @@ class AnalyticsController extends Controller
             }
             elseif($request->get('date')){
                 $date = $request->get('date');
-                $date3 = date('Y-07-16');
+                $date3 = date('Y-09-17');
                 $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
             }
             elseif($request->get('date2')){
                 $date2 = $request->get('date2');
-                $date = date('Y-07-16');
+                $date = date('Y-09-17');
             }
             elseif($request->get('clear')){
-               if(date('Y-m-d') < date('Y-07-16') ){
-                $date2 = date('Y-07-15');  
+               if(date('Y-m-d') < date('Y-09-17') ){
+                $date2 = date('Y-09-16');  
                 $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
                }
                else{
-                   $date = date('Y-07-16');
+                   $date = date('Y-09-17');
                    $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
                }
             }
             else{
-                if(date('Y-m-d') < date('Y-07-16') ){
-                $date2 = date('Y-07-15');  
+                if(date('Y-m-d') < date('Y-09-17') ){
+                $date2 = date('Y-09-16');  
                 $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
                }
                else{
-                   $date = date('Y-07-16');
+                   $date = date('Y-09-17');
                    $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
                }
             }
@@ -311,30 +311,30 @@ class AnalyticsController extends Controller
         }
         elseif($request->get('date')){
             $date = $request->get('date');
-            $date3 = date('Y-07-16');
+            $date3 = date('Y-09-17');
             $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
         }
         elseif($request->get('date2')){
             $date2 = $request->get('date2');
-            $date = date('Y-07-16');
+            $date = date('Y-09-17');
         }
         elseif($request->get('clear')){
-             if(date('Y-m-d') < date('Y-07-16') ){
-             $date2 = date('Y-07-15');  
+             if(date('Y-m-d') < date('Y-09-17') ){
+             $date2 = date('Y-09-16');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-07-16');
+                $date = date('Y-09-17');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
         }
         else{
-            if(date('Y-m-d') < date('Y-07-16') ){
-             $date2 = date('Y-07-15');  
+            if(date('Y-m-d') < date('Y-09-17') ){
+             $date2 = date('Y-09-16');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-07-16');
+                $date = date('Y-09-17');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
             
@@ -435,30 +435,30 @@ class AnalyticsController extends Controller
         }
         elseif($request->get('date')){
             $date = $request->get('date');
-            $date3 = date('Y-07-16');
+            $date3 = date('Y-09-17');
             $date2 = date('Y-m-d', strtotime($date3. ' + 1 year -1 day'));
         }
         elseif($request->get('date2')){
             $date2 = $request->get('date2');
-            $date = date('Y-07-16');
+            $date = date('Y-09-17');
         }
         elseif($request->get('clear')){
-             if(date('Y-m-d') < date('Y-07-16') ){
-             $date2 = date('Y-07-15');  
+             if(date('Y-m-d') < date('Y-09-17') ){
+             $date2 = date('Y-09-16');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-07-16');
+                $date = date('Y-09-17');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
         }
         else{
-            if(date('Y-m-d') < date('Y-07-16') ){
-             $date2 = date('Y-07-15');  
+            if(date('Y-m-d') < date('Y-09-17') ){
+             $date2 = date('Y-09-16');  
              $date = date('Y-m-d', strtotime($date2. ' -1 year +1 day'));
             }
             else{
-                $date = date('Y-07-16');
+                $date = date('Y-09-17');
                 $date2 = date('Y-m-d', strtotime($date. ' + 1 year -1 day'));
             }
             
