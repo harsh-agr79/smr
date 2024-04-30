@@ -29,6 +29,15 @@ class CustomerController extends Controller
             'tax_number'=>'required|unique:customers,tax_number,'.$request->post('id'),                      
         ]);
 
+        if($request->post('marketer') != NULL){
+            $marketer_id=$request->post('marketer');
+            $marketer=DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid;
+        }
+        else{
+            $marketer_id=NULL;
+            $marketer=NULL;
+        }
+
         
        DB::table('customers')->insert([
         'name'=>$request->post('name'),
@@ -44,8 +53,8 @@ class CustomerController extends Controller
         'area'=>$request->post('area'),
         'state'=>$request->post('state'),
         'district'=>$request->post('district'),
-        'marketer_id'=>$request->post('marketer'),
-        'marketer'=>DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid,
+        'marketer_id'=>$marketer_id,
+        'marketer'=>$marketer,
         'tax_type'=>$request->post('tax_type'),
         'tax_number'=>$request->post('tax_number'),
         'type'=>$request->post('type'),
@@ -92,6 +101,15 @@ class CustomerController extends Controller
         else{
             $password = Hash::make($request->post('password'));
         }
+        if($request->post('marketer') != NULL){
+            $marketer_id=$request->post('marketer');
+            $marketer=DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid;
+        }
+        else{
+            $marketer_id=NULL;
+            $marketer=NULL;
+        }
+        
         $brands = $request->post('brands', []);
         DB::table('customers')->where('id', $request->post('id'))->where('uniqueid', $request->post('uniqueid'))->update([
             'name'=>$request->post('name'),
@@ -107,8 +125,8 @@ class CustomerController extends Controller
             'area'=>$request->post('area'),
             'state'=>$request->post('state'),
             'district'=>$request->post('district'),
-            'marketer_id'=>$request->post('marketer'),
-            'marketer'=>DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid,
+            'marketer_id'=>$marketer_id,
+            'marketer'=>$marketer,
             'tax_type'=>$request->post('tax_type'),
             'tax_number'=>$request->post('tax_number'),
             'type'=>$request->post('type'),
