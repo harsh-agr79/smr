@@ -116,7 +116,6 @@ class CustomerController extends Controller
             'shopname'=>$request->post('shopname'),
             'email'=>$request->post('email'),
             'userid'=>$request->post('userid'),
-            // 'uniqueid'=>$request->post('userid').time().rand(1,1000000),
             'password'=>$password,
             'dob'=>$request->post('dob'),
             'contact'=>$request->post('contact'),
