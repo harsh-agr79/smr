@@ -79,7 +79,7 @@ class CustomerController extends Controller
         ]);
 
         if($file = $request->file('dp')){
-
+            dd($request->post());
             if(File::exists($request->post('olddp'))) {
                 File::delete($request->post('olddp'));
             }
