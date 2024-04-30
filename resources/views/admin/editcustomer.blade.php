@@ -119,6 +119,7 @@
                             searchable="Select Marketer">
                             
                             @if ($cus->marketer != NULL)
+                            <option value="" selected>Select Marketer</option>
                             <option value="{{$cus->marketer_id}}" selected>{{$cus->marketer}}</option>
                             @else
                             <option value="" selected>Select Marketer</option>
