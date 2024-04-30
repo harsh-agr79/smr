@@ -134,8 +134,8 @@ class CustomerController extends Controller
            ]);
 
            DB::table('orders')->where('user_id', $request->post('id'))->update([
-            'marketer_id'=>$request->post('marketer'),
-            'marketer'=>DB::table('marketers')->where('id', $request->post('marketer'))->first()->userid
+            'marketer_id'=>$marketer_id,
+            'marketer'=>$marketer,
            ]);
         
            return redirect('/customers');
