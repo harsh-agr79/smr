@@ -3,7 +3,7 @@
 @section('main')
     <div>
         <div class="center" style="margin-top: 20px;">
-            <div class="center">{{$data[0]->name}}</div>
+            <div class="center">{{ $data[0]->name.shopname($data[0]->user_id) }}</div>
             <div class="center">{{$data[0]->order_id}}</div>
             <div class="center">{{$data[0]->date}}</div>
             <div class="center">{{getNepaliDate($data[0]->date)}}</div>

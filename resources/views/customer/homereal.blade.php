@@ -152,7 +152,7 @@
                         class="material-icons">add</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">
-                <a href="{{ url('user/oldorders') }}" class="home-btn">Previous Orders<i
+                <a href="{{ url('user/oldorders') }}" class="home-btn">Old Orders/Bills<i
                         class="material-icons">shopping_basket</i></a>
             </div>
             <div class="col s12" style="margin-top: 10px;">

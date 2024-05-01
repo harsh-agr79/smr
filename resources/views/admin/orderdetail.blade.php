@@ -60,6 +60,7 @@
             <h6 style="font-size: 12px;">order_id: {{ $data[0]->order_id }}</h6>
             <h6 style="font-size: 12px;">Date: {{ date('Y-m-d', strtotime($data[0]->date)) }}</h6>
             <h6 style="font-size: 12px;">Miti: {{ getNepaliDate($data[0]->date) }}</h6>
+            <h6 style="font-size: 12px;">PAN/VAT: {{ $cus->tax_number }}</h6>
 
             @if ($cus->marketer != null)
                 <h6 style="font-size: 12px;">Referer: {{ $cus->marketer }}</h6>
