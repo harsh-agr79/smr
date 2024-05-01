@@ -21,6 +21,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\MarketerViewController;
 use App\Http\Controllers\MarketerController;
+use App\Http\Controllers\TrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +66,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('/customers/addpro', [CustomerController::class, 'addcus_process'])->name('addcust');
     Route::get('/customers/edit/{id}', [CustomerController::class, 'editcustomer']);
     Route::post('customers/editcus', [CustomerController::class, 'editcus_process'])->name('editcust');
-    Route::get('/customers/delcust/{id}', [CustomerController::class, 'deletecustomer']);
+    Route::get('/customers/delcust/{id}', [CustomerController::class, 'deletecustomer']); //soft
 
      //FRONT SETTINGS
      Route::get('frontsettings', [FrontController::class, 'index']);
@@ -80,7 +81,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
      Route::post('/products/addpro', [ProductController::class, 'addprod_process'])->name('addprod');
      Route::get('/products/edit/{id}', [ProductController::class, 'editproduct']);
      Route::post('products/editprod', [ProductController::class, 'editprod_process'])->name('editprod');
-     Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']);
+     Route::get('/products/delprod/{id}', [ProductController::class, 'deleteproduct']); //soft
      Route::post('/product/updatearrangement', [ProductController::class, 'arrange']);
     //  Route::get("/addmp", [ProductController::class, 'addmp']);
 
@@ -106,7 +107,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('addpayment', [PaymentController::class, 'addpay']);
     Route::get('editpayment/{id}', [PaymentController::class, 'addpay']);
     Route::post('addpay', [PaymentController::class, 'addpay_process'])->name('addpay');
-    Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']);
+    Route::get('deletepayment/{id}',[PaymentController::class, 'deletepay']); //soft
 
     //ORDER VIEW PAGES
     Route::get('orders', [OrderAdminController::class, 'orders']);
@@ -127,7 +128,7 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::post('updatecln', [ChalanController::class, 'updatechalan']);
     Route::post('updatedeliver', [OrderAdminController::class, 'updatedeliver']);
 
-    Route::get('/deleteorder/{id}', [OrderAdminController::class, 'deleteorder']);
+    Route::get('/deleteorder/{id}', [OrderAdminController::class, 'deleteorder']); //soft
 
     //CHALAN PAGES
     Route::get('chalan', [ChalanController::class, 'chalan']);
@@ -176,6 +177,16 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('/addmarketer/{id}', [MarketerController::class, 'addmarketer']);
     Route::post('/addmarketerprocess', [MarketerController::class, 'addmarketer_process'])->name('addmarketerprocess');
     Route::get('/deletemarketer', [MarketerController::class, 'deletemarketer']);
+
+
+    //TRASH
+    Route::get('/trash', [TrashController::class, 'trash']);
+        //restore
+        Route::get('/restore/order/{id}', [TrashController::class, 'order_restore']);
+        Route::get('/restore/payment/{id}', [TrashController::class, 'payment_restore']);
+        //DELETE
+        Route::get('/trashdel/order/{id}', [TrashController::class, 'order_delete']);
+        Route::get('/trashdel/payment/{id}', [TrashController::class, 'payment_delete']);
 
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);

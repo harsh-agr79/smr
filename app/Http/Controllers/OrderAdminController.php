@@ -270,6 +270,8 @@ class OrderAdminController extends Controller {
                     'status'=>'pending',
                     'discount'=>"0",
                     'sdis'=>"0",
+                    'marketer'=>$user->marketer,
+                    'marketer_id'=>$user->marketer_id,
                     'nepday'=>getNepaliDay( date( 'Y-m-d H:i:s' ) ),
                     'nepmonth'=>getNepaliMonth( date( 'Y-m-d H:i:s' ) ),
                     'nepyear'=>getNepaliYear( date( 'Y-m-d H:i:s' ) )
@@ -360,8 +362,8 @@ class OrderAdminController extends Controller {
                         'receiveddate'=>$order[0]->receiveddate,
                         'seen'=>$order[0]->seen,
                         'seenby'=>$order[0]->seenby,
-                        'marketer'=>$order[0]->marketer,
-                        'marketer_id'=>$order[0]->marketer_id,
+                        'marketer'=>$user->marketer,
+                        'marketer_id'=>$user->marketer_id,
                         'remarks'=>$order[0]->remarks,
                         'userremarks'=>$order[0]->userremarks,
                         'cartoons'=>$order[0]->cartoons,
@@ -403,6 +405,8 @@ class OrderAdminController extends Controller {
                             'status'=>'pending',
                             'discount'=>$dis,
                             'sdis'=>$dis2,
+                            'marketer'=>$user->marketer,
+                            'marketer_id'=>$user->marketer_id,
                             'nepday'=>getNepaliDay( $date ),
                             'nepmonth'=>getNepaliMonth( $date ),
                             'nepyear'=>getNepaliYear( $date )
@@ -427,7 +431,9 @@ class OrderAdminController extends Controller {
             return redirect("/");
         }
         else{
-            DB::table("orders")->where("order_id",$orderid)->delete();
+            DB::table("orders")->where("order_id",$orderid)->update([
+                'deleted_at'=>date('Y-m-d H:i:s')
+            ]);
             updatebalance($order->user_id);
             return redirect("/orders");
         }
