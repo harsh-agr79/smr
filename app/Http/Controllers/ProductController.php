@@ -141,10 +141,10 @@ class ProductController extends Controller {
                 }
             }
             Product::where( 'id', $id )->delete();
-            $request->session()->flash( 'error', 'Cannot Delete Product Other Data Exists' );
+            $request->session()->flash( 'error', 'Product Deleted' );
             return redirect( '/products' );
         } else {
-            $request->session()->flash( 'error', 'Product Deleted' );
+            $request->session()->flash( 'error', 'Cannot Delete' );
             return redirect( '/products' );
         }
 
