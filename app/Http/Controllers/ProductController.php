@@ -132,7 +132,8 @@ class ProductController extends Controller {
 
     public function deleteproduct( Request $request, $id ) {
         $orders = DB::table( 'orders' )->where( 'product_id', $id )->get();
-        if ( count( $orders ) == 0 ) {
+        $slrs = DB::table( 'salesreturns' )->where( 'product_id', $id )->get();
+        if ( count( $orders ) == 0 && count($slrs) == 0) {
             $prod = Product::where( 'id', $id )->first();
             $imgs = explode( '|', $prod->images );
             foreach ( $imgs as $item ) {
@@ -149,7 +150,7 @@ class ProductController extends Controller {
         }
 
     }
-    public function addmp(){
+    // public function addmp(){
         // $contents = File::get(base_path('/try.json'));
         // $json = json_decode(json: $contents, associative: true);
         // dd($json);
@@ -184,22 +185,22 @@ class ProductController extends Controller {
         //     'category'=>"DATACABLE",
         //     'category_id'=>"3",
         // ]);
-        $prod = DB::table("products")->get();
-        foreach($prod as $item){
-            $new = [];
-            $img = explode("|", $item->images);
-            foreach($img as $item2){
-                $imgs = explode("/", $item2);
-                if($imgs[1] != NULL){
-                    $new[] = $item2;
-                }
-            }
-            DB::table("products")->where("id", $item->id)->update([
-                'images'=>implode("|", $new)
-            ]);
-            // print_r(implode("|", $new));
-        }
-    }
+    //     $prod = DB::table("products")->get();
+    //     foreach($prod as $item){
+    //         $new = [];
+    //         $img = explode("|", $item->images);
+    //         foreach($img as $item2){
+    //             $imgs = explode("/", $item2);
+    //             if($imgs[1] != NULL){
+    //                 $new[] = $item2;
+    //             }
+    //         }
+    //         DB::table("products")->where("id", $item->id)->update([
+    //             'images'=>implode("|", $new)
+    //         ]);
+    //         // print_r(implode("|", $new));
+    //     }
+    // }
     public function arrange(Request $request){
         $prod = $request->post('prod',[]);
         $prod = explode(",",$prod);
