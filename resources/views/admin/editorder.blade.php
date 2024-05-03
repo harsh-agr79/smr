@@ -93,9 +93,16 @@
                         required>
                 </div>
                 <div class="input-field col s6" style="margin:0; padding: 5px;">
-                    <input type="text" name="name" id="customer" name="customer" value="{{$order[0]->name}}" accesskey="c"
-                        placeholder="Customer" class="autocomplete browser-default inp black-text" autocomplete="off"
-                        required>
+                    <select id="MySelct" name="name" searchname="myselectsearch"
+                    searchable="Select Customer">
+                    <option value="{{$order[0]->name}}" selected>{{$order[0]->name.shopname($order[0]->user_id)}}</option>
+                    @php
+                        $customers = DB::table('customers')->get();
+                    @endphp
+                    @foreach ($customers as $item)
+                        <option value="{{ $item->name }}">{{ $item->name }}({{$item->shopname}})</option>
+                    @endforeach
+                </select> 
                 </div>
                 <input type="hidden" name="orderid" value="{{$order[0]->order_id}}">
                 <div class="row col s12" style="margin:0; padding: 0;">

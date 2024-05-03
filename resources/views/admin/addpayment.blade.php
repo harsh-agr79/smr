@@ -23,8 +23,16 @@
                             Name:
                         </div>
                         <div class="input-field col s6" style="margin-top: 0;">
-                            <input type="text" name="name" value="{{$name}}" accesskey="c" id="customer" placeholder="Customer"
-                                class="autocomplete browser-default inp black-text" autocomplete="off" required>
+                            <select id="MySelct" name="name" searchname="myselectsearch"
+                            searchable="Select Customer">
+                            <option value="" selected>Select Customer</option>
+                            @php
+                                $customers = DB::table('customers')->get();
+                            @endphp
+                            @foreach ($customers as $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}({{$item->shopname}})</option>
+                            @endforeach
+                        </select> 
                         </div>
                     </div>
                     <div class="col s12 row">
