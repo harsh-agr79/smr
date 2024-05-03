@@ -6,7 +6,7 @@
             <div>
                 <h6 class="center">Payment</h6>
             </div>
-            <form action="{{route('addpay')}}" method="POST">
+            <form action="{{ route('addpay') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col s12 row">
@@ -23,16 +23,19 @@
                             Name:
                         </div>
                         <div class="input-field col s6" style="margin-top: 0;">
-                            <select id="MySelct" name="name" searchname="myselectsearch"
-                            searchable="Select Customer">
-                            <option value="" selected>Select Customer</option>
-                            @php
-                                $customers = DB::table('customers')->get();
-                            @endphp
-                            @foreach ($customers as $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}({{$item->shopname}})</option>
-                            @endforeach
-                        </select> 
+                            <select id="MySelct" name="name" searchname="myselectsearch" searchable="Select Customer">
+                                @if ($name != null)
+                                    <option value="{{ $name }}" selected>{{ $name }}</option>
+                                @else
+                                    <option value="" selected>Select Customer</option>
+                                @endif
+                                @php
+                                    $customers = DB::table('customers')->get();
+                                @endphp
+                                @foreach ($customers as $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}({{ $item->shopname }})</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col s12 row">
@@ -42,14 +45,14 @@
                         <div class="col s6">
                             <select name="type" class="browser-default inp">
                                 @if ($type != '')
-                                    <option value="{{$type}}" selected>{{$type}}</option>
+                                    <option value="{{ $type }}" selected>{{ $type }}</option>
                                     <option value="Payment">Payment</option>
                                     <option value="Salesreturn">Sales Return</option>
                                 @else
-                                <option value="Payment" Selected>Payment</option>
-                                <option value="Salesreturn">Sales Return</option>
+                                    <option value="Payment" Selected>Payment</option>
+                                    <option value="Salesreturn">Sales Return</option>
                                 @endif
-                               
+
                             </select>
                         </div>
                     </div>
@@ -58,8 +61,8 @@
                             Amount:
                         </div>
                         <div class="col s6">
-                            <input type="number" name="amount" value="{{$amount}}" class="inp black-text browser-default"
-                                placeholder="Amount" required>
+                            <input type="number" name="amount" value="{{ $amount }}"
+                                class="inp black-text browser-default" placeholder="Amount" required>
                         </div>
                     </div>
                     <div class="col s12 row">
@@ -67,8 +70,8 @@
                             Voucher:
                         </div>
                         <div class="col s6">
-                            <input type="text" name="voucher" value="{{$voucher}}" class="inp black-text browser-default"
-                                placeholder="Voucher">
+                            <input type="text" name="voucher" value="{{ $voucher }}"
+                                class="inp black-text browser-default" placeholder="Voucher">
                         </div>
                     </div>
                     <div class="col s12 row">
@@ -76,12 +79,12 @@
                             Remarks:
                         </div>
                         <div class="col s6">
-                            <input type="text" name="remarks" value="{{$remarks}}" class="inp black-text browser-default"
-                                placeholder="Remarks">
+                            <input type="text" name="remarks" value="{{ $remarks }}"
+                                class="inp black-text browser-default" placeholder="Remarks">
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="payid" value="{{$payid}}">
+                <input type="hidden" name="payid" value="{{ $payid }}">
                 <div class="fixed-action-btn">
                     <button class="btn btn-large red" onclick="M.toast({html: 'Please wait...'})"
                         style="border-radius: 10px;">
