@@ -74,7 +74,7 @@
 
     <script>
          $(document).ready(function() {
-            var inoice = $('#invoice');
+            var invoice = $('#invoice');
             html2pdf(invoice, {
                 margin: [15, 0, 15, 0],
       filename: `catalog.pdf`,
