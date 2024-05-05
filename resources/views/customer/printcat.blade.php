@@ -82,7 +82,7 @@
             html2pdf(invoice, {
                 filename: 'catalog.pdf',
                 pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
-                html2canvas:  { scale: 4 }
+                html2canvas:  { scale: 2 }
             });
             // setTimeout(function() { window.close() }, 10000);
         })
