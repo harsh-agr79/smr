@@ -50,7 +50,7 @@
                 @foreach ($data as $item)
                     <tr>
                         <td><span>{{$item->name}}</span><br>
-                            @if($item->featured != NULL) <span class="red" style="padding: 5px; border-radius: 4px;">NEW!</span>@endif  @if($item->offer != NULL) <span class="amber" style="padding: 5px; border-radius: 4px;">{{$item->offer}}</span>@endif
+                            @if($item->featured != NULL) <span class="red" style="padding: 5px; margin: 3px; border-radius: 4px;">NEW!</span>@endif  @if($item->offer != NULL) <span class="amber" style="padding: 5px; border-radius: 4px; margin: 3px;">{{$item->offer}}</span>@endif
                         </td>
                        
                         <td>{{$item->category}}</td>
