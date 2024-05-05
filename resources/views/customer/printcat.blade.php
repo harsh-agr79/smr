@@ -86,7 +86,7 @@
                     useCORS: true
                 },
             });
-            setTimeout(function() { window.close() }, 10000);
+            setTimeout(function() { window.close() }, 15000);
         })
     </script>
 </body>
