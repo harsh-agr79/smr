@@ -243,7 +243,7 @@
                                 $credit = $credit + $cuslrsum[0]->sum;
                             @endphp
                         @else
-                            0
+                            {{$sl_r}}
                         @endif
                         </td>
                         <td></td>
