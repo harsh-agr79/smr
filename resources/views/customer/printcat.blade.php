@@ -33,9 +33,7 @@
             }
         }
     </style>
-    @php
-        $n = 1;
-    @endphp
+
     <div id="invoice" style="padding: 10px;">
         <table>
             <thead>
@@ -59,16 +57,7 @@
                         <td>{{$item->price}}</td>
                         <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
                     </tr>
-                    @php
-                        $n = $n+1;
-                    @endphp
-                    @if($n > 4)
-                    <tr class="html2pdf__page-break">
-                    </tr>
-                        @php
-                            $n = 1;
-                        @endphp
-                    @endif
+                   
                 @endforeach
             </tbody>
            </table>
@@ -86,7 +75,8 @@
          $(document).ready(function() {
             var inoice = $('#invoice');
             html2pdf(invoice, {
-                filename: 'catalog.pdf'
+                filename: 'catalog.pdf',
+                pagebreak: {mode: ['avoid-all', 'css', 'legacy'] }
             });
             setTimeout(function() { window.close() }, 5000);
         })
