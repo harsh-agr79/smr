@@ -49,7 +49,9 @@
             <tbody>
                 @foreach ($data as $item)
                     <tr>
-                        <td>{{$item->name}}</td>
+                        <td><span>{{$item->name}}</span><br>
+                            @if($item->featured != NULL) <span class="red" style="padding: 5px; border-radius: 4px;">NEW!</span>@endif  @if($item->offer != NULL) <span class="amber" style="padding: 5px; border-radius: 4px;">{{$item->offer}}</span>@endif
+                        </td>
                        
                         <td>{{$item->category}}</td>
                         <td>{{$item->brand}}</td>
@@ -59,8 +61,6 @@
                         <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif" style="height: 150px;"  alt=""></td>
                         
                         <td>{{$item->price}}</td>
-                        <!-- <td>@if($item->featured == "on") <i class="material-icons red-text">done</i> @endif</td>
-                        <td>{{$item->offer}}</td> -->
                         <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
                     </tr>
                 @endforeach
