@@ -76,17 +76,10 @@
          $(document).ready(function() {
             var inoice = $('#invoice');
             html2pdf(invoice, {
-                filename: `catalog.pdf`,
-                image: { type: 'jpeg', quality: 1 },
-                html2canvas: {
-                  dpi: 192,
-                  scale:4,
-                  letterRendering: true,
-                  useCORS: true
-                },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                filename: 'catalog.pdf',
+                pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
             });
-            // setTimeout(function() { window.close() }, 15000);
+            setTimeout(function() { window.close() }, 10000);
         })
     </script>
 </body>
