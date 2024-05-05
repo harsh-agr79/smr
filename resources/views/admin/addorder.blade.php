@@ -396,7 +396,7 @@
             }
         }
         function printcatalogue(){
-            var formData = $('#filterform').serializeArray()
+            var formData = $('#filformbrd').serializeArray()
             var formData2 = $('#filformcat').serializeArray()
             var brand = formData.map(b => b.value);
             var category = formData2.map(a => a.value);
