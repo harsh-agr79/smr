@@ -77,7 +77,14 @@
             var inoice = $('#invoice');
             html2pdf(invoice, {
                 filename: 'catalog.pdf',
-                pagebreak: {mode: ['avoid-all', 'css', 'legacy'] }
+                pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: {
+                    dpi: 192,
+                    scale:4,
+                    letterRendering: true,
+                    useCORS: true
+                },
             });
             setTimeout(function() { window.close() }, 5000);
         })
