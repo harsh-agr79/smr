@@ -51,4 +51,20 @@ class HomeController extends Controller
         ->get();
         return view('customer/homereal', $result);
     }
+
+    public function printcat(Request $request, $brands, $cats){
+        $bs = explode("_", $brands);
+        $cs = explode("_", $cats);
+        $query = DB::table('products');
+        if($bs[0] != "0"){
+            $query = $query->whereIn("brand_id", $bs);
+        }
+        if($cs[0] != "0"){
+            $query = $query->whereIn("category_id", $cs);
+        }
+        $query = $query->get();
+        $result['data'] = $query;
+
+        return view("customer/printcat", $result);
+    }
 }

@@ -199,6 +199,7 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get('/user/createorder', [HomeController::class, 'home']);
     Route::get('/user/home', [HomeController::class, 'homereal']);
+    Route::get('/user/printcat/{id}/{id2}', [HomeController::class, 'printcat']);
 
     Route::get('/user/profile', [CustomerViewController::class, 'profile']);
     Route::post('/user/updateprofile', [CustomerViewController::class, 'updateprofile'])->name('editprofile');
