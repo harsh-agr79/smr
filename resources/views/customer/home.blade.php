@@ -591,7 +591,7 @@
             else{
                 cats = category.join("_")
             }
-            window.open('/user/printcat/' + brands + "/" + cats, '_blank', 'toolbar=0,location=0,menubar=0');
+            window.open('/user/printcat/' + brands + "/" + cats, '_blank');
         }
     </script>
 @endsection

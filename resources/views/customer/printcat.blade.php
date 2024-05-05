@@ -21,34 +21,46 @@
             font-size: 10px;
             font-weight: 600;
         }
+
+        .cont {
+            margin-left: 30vw;
+            margin-right: 30vw;
+        }
+
+        @media screen and (max-width: 1100px) {
+            .cont {
+                margin: 0;
+            }
+        }
     </style>
-    <div id="catalog">
-       <table>
-        <thead>
-            <th>Name</th>
-            <th>Brand</th>
-            <th>category</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Details</th>
-        </thead>
-        <tbody>
-            @foreach ($data as $item)
-                <tr>
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->brand}}</td>
-                    <td>{{$item->category}}</td>
-                    @php
-                        $a = explode('|', $item->images);
-                    @endphp
-                    <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif" style="height: 150px;"  alt=""></td>
-                    <td>{{$item->price}}</td>
-                    <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
-                </tr>
-            @endforeach
-        </tbody>
-       </table>
+    <div id="invoice" style="padding: 10px;">
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>category</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Details</th>
+            </thead>
+            <tbody>
+                @foreach ($data as $item)
+                    <tr>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->brand}}</td>
+                        <td>{{$item->category}}</td>
+                        {{-- @php
+                            $a = explode('|', $item->images);
+                        @endphp
+                        <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif" style="height: 150px;"  alt=""></td> --}}
+                        <td>{{$item->price}}</td>
+                        <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
+                    </tr>
+                @endforeach
+            </tbody>
+           </table>
     </div>
+
 
 
     <!--JavaScript at end of body for optimized loading-->
@@ -56,14 +68,17 @@
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <script>
-        $(document).ready(function() {
-            var invoice = $('#catalog');
+         $(document).ready(function() {
+            var inoice = $('#invoice');
             html2pdf(invoice, {
                 filename: 'catalog.pdf'
             });
+            setTimeout(function() { window.close() }, 5000);
         })
     </script>
 </body>
 
 </html>
+
