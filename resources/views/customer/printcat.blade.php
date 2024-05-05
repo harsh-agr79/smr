@@ -84,7 +84,7 @@
                 pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
                 html2canvas:  { scale: 4 }
             });
-            setTimeout(function() { window.close() }, 10000);
+            // setTimeout(function() { window.close() }, 10000);
         })
     </script>
 </body>
