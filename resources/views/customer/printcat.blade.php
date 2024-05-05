@@ -38,8 +38,8 @@
         <table>
             <thead>
                 <th>Name</th>
-                <th>Brand</th>
                 <th>category</th>
+                <th>Brand</th>
                 <th>Image</th>
                 <th>Price</th>
                 <th>Details</th>
@@ -48,8 +48,9 @@
                 @foreach ($data as $item)
                     <tr>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->brand}}</td>
+                       
                         <td>{{$item->category}}</td>
+                        <td>{{$item->brand}}</td>
                         @php
                             $a = explode('|', $item->images);
                         @endphp

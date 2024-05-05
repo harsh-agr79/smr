@@ -55,7 +55,7 @@ class HomeController extends Controller
     public function printcat(Request $request, $brands, $cats){
         $bs = explode("_", $brands);
         $cs = explode("_", $cats);
-        $query = DB::table('products');
+        $query = DB::table('products')->orderBy("ordernum", "ASC");
         if($bs[0] != "0"){
             $query = $query->whereIn("brand_id", $bs);
         }
