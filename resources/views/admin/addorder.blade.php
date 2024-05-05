@@ -183,8 +183,11 @@
         </div>
     </form>
     <div id="modal1" class="modal">
+    <div class="right" style="margin: 10px;">
+            <button class="btn green accent-4" onclick="printcatalogue();"><i class="material-icons">print</i></button>
+        </div>
         <div class="center">
-            <h5>Filter By company and category</h5>
+            <h5>Filter company/category</h5>
         </div>
         <div class="row" style="padding: 10px;">
             <div class="col s6">
@@ -192,7 +195,7 @@
                     @foreach ($brands as $item)
                         <div>
                             <label>
-                                <input type="checkbox" name="{{ $item->id }}brd" value="{{ $item->id }}brd"
+                                <input type="checkbox" name="{{ $item->id }}brd" value="{{ $item->id }}"
                                     onclick="Filter()" />
                                 <span>{{ $item->name }}</span>
                             </label>
@@ -205,7 +208,7 @@
                     @foreach ($category as $item)
                         <div>
                             <label>
-                                <input type="checkbox" name="{{ $item->id }}cat" value="{{ $item->id }}cat"
+                                <input type="checkbox" name="{{ $item->id }}cat" value="{{ $item->id }}"
                                     onclick="Filter()" />
                                 <span>{{ $item->category }}</span>
                             </label>
@@ -391,6 +394,26 @@
                     }
                 }
             }
+        }
+        function printcatalogue(){
+            var formData = $('#filterform').serializeArray()
+            var formData2 = $('#filformcat').serializeArray()
+            var brand = formData.map(b => b.value);
+            var category = formData2.map(a => a.value);
+            cats = category.join("_")
+            if(brand.length < 1){
+                brands = "0"
+            }
+            else{
+                brands = brand.join("_")
+            }
+            if(category.length < 1){
+                cats = "0"
+            }
+            else{
+                cats = category.join("_")
+            }
+            window.open('/printcat/' + brands + "/" + cats, '_blank');
         }
     </script>
 @endsection

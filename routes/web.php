@@ -141,6 +141,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     Route::get('bulkprintorders', [OrderAdminController::class, 'bprintindex']);
     Route::post('bulkprint', [OrderAdminController::class, 'bulkprint'])->name('bulkprint');
 
+    Route::get('/printcat/{id}/{id2}', [HomeController::class, 'printcat']);
+
      //expenses CRUD
      Route::get('expenses', [ExpenseController::class, 'index']);
      Route::get('addexpense', [ExpenseController::class, 'addexp']);
@@ -199,7 +201,7 @@ Route::group(['middleware'=>'CustomerAuth'], function(){
 
     Route::get('/user/createorder', [HomeController::class, 'home']);
     Route::get('/user/home', [HomeController::class, 'homereal']);
-    Route::get('/user/printcat/{id}/{id2}', [HomeController::class, 'printcat']);
+  
 
     Route::get('/user/profile', [CustomerViewController::class, 'profile']);
     Route::post('/user/updateprofile', [CustomerViewController::class, 'updateprofile'])->name('editprofile');

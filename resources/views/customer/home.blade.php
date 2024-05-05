@@ -154,9 +154,7 @@
     </div>
 
     <div id="modal1" class="modal">
-        <div class="right" style="margin: 10px;">
-            <button class="btn green accent-4" onclick="printcatalogue();"><i class="material-icons">print</i></button>
-        </div>
+        
         <div class="center">
             <h5>Filter company/category</h5>
         </div>
@@ -573,25 +571,6 @@
             getcart()
         }
 
-        function printcatalogue(){
-            var formData = $('#filterform').serializeArray()
-            var formData2 = $('#filformcat').serializeArray()
-            var brand = formData.map(b => b.value);
-            var category = formData2.map(a => a.value);
-            cats = category.join("_")
-            if(brand.length < 1){
-                brands = "0"
-            }
-            else{
-                brands = brand.join("_")
-            }
-            if(category.length < 1){
-                cats = "0"
-            }
-            else{
-                cats = category.join("_")
-            }
-            window.open('/user/printcat/' + brands + "/" + cats, '_blank');
-        }
+       
     </script>
 @endsection
