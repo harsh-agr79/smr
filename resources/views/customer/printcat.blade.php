@@ -76,15 +76,16 @@
          $(document).ready(function() {
             var inoice = $('#invoice');
             html2pdf(invoice, {
-                filename: 'catalog.pdf',
-                pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
-                image: { type: 'jpeg', quality: 1 },
-                html2canvas: {
-                    dpi: 192,
-                    scale:4,
-                    letterRendering: true,
-                    useCORS: true
-                },
+                margin: [15, 0, 15, 0],
+      filename: `catalog.pdf`,
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: {
+        dpi: 192,
+        scale:4,
+        letterRendering: true,
+        useCORS: true
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             });
             setTimeout(function() { window.close() }, 15000);
         })
