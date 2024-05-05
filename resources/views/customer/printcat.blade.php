@@ -63,7 +63,6 @@
                         <td>{{$item->offer}}</td>
                         <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
                     </tr>
-                   
                 @endforeach
             </tbody>
            </table>
