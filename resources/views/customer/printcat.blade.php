@@ -42,6 +42,8 @@
                 <th>Brand</th>
                 <th>Image</th>
                 <th>Price</th>
+                <th>New</th>
+                <th>Offer</th>
                 <th>Details</th>
             </thead>
             <tbody>
@@ -55,7 +57,10 @@
                             $a = explode('|', $item->images);
                         @endphp
                         <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif" style="height: 150px;"  alt=""></td>
+                        
                         <td>{{$item->price}}</td>
+                        <td>@if($item->featured == "on") <i class="material-icons red-text">done</i> @endif</td>
+                        <td>{{$item->offer}}</td>
                         <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
                     </tr>
                    
