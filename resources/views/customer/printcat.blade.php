@@ -49,10 +49,10 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->brand}}</td>
                         <td>{{$item->category}}</td>
-                        {{-- @php
+                        @php
                             $a = explode('|', $item->images);
                         @endphp
-                        <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif" style="height: 150px;"  alt=""></td> --}}
+                        <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif" style="height: 150px;"  alt=""></td>
                         <td>{{$item->price}}</td>
                         <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
                     </tr>
