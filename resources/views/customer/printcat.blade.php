@@ -18,7 +18,7 @@
     <style>
         td {
             padding: 2px;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 800;
         }
 
