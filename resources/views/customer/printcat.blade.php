@@ -18,8 +18,8 @@
     <style>
         td {
             padding: 2px;
-            font-size: 12px;
-            font-weight: 800;
+            font-size: 11px;
+            font-weight: 700;
         }
 
         .cont {
