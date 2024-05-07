@@ -49,8 +49,10 @@
             <tbody>
                 @foreach ($data as $item)
                     <tr>
-                        <td><span>{{$item->name}}</span><br>
-                            @if($item->featured != NULL) <span class="red" style="padding:0 5px; margin: 3px; border-radius: 4px;">NEW!</span>@endif <br> @if($item->offer != NULL) <span class="amber" style="padding: 0 5px; border-radius: 4px; margin: 3px;">{{$item->offer}}</span>@endif <br> @if($item->stock != NULL) <span class="red">Out of Stock</span>@endif
+                        <td><span>{{$item->name}} @if ($item->net != NULL)
+                            <span class="red-text">(NET)</span>
+                        @endif</span><br>
+                            @if($item->featured != NULL) <span class="red" style="padding:0 5px; margin: 3px; border-radius: 4px;">NEW!</span>@endif <br> @if($item->offer != NULL) <span class="amber" style="padding: 0 5px; border-radius: 4px; margin: 3px;">{{$item->offer}}</span>@endif <br> @if($item->stock != NULL) <span class="red-text">Out of Stock</span>@endif
                         </td>
                        
                         <td>{{$item->category}}</td>
