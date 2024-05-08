@@ -16,9 +16,6 @@
 
 <body>
     <style>
-        tr{
-            margin-top: 10px !important;
-        }
         td {
             padding: 2px;
             font-size: 11px;
