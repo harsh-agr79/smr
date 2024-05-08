@@ -24,6 +24,7 @@
         tr{
             height: 23% !important;
             padding-top: 10px !important; 
+            page-break-inside: avoid;
         }
 
         .cont {
