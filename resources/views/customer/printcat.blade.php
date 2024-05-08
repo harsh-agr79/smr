@@ -109,7 +109,7 @@
                 //get table rows in html 
                 var rows = document.querySelectorAll('table > tbody > tr');
                 let current_page_height = 0;
-                let max_page_height = 775; //adjust max sizeof page in px 
+                let max_page_height = 800; //adjust max sizeof page in px 
                 rows.forEach(row => {
                     var row_height = row.offsetHeight;
                     current_page_height = current_page_height + row_height
@@ -123,7 +123,7 @@
             var inoice = $('#invoice');
             html2pdf(invoice, {
                 filename: 'catalog.pdf',
-                margin: [25, 0, 25, 0],
+                margin: [15, 0, 15, 0],
                 image: {
                     type: 'jpeg',
                     quality: 0.9
