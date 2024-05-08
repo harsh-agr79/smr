@@ -90,6 +90,7 @@
                 filename: 'catalog.pdf',
                 pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
                 html2canvas:  { scale: 2 }
+                jsPDF: { unit: 'mm', format: 'A4', orientation: 'landscape' },
             });
             // setTimeout(function() { window.close() }, 10000);
         })
