@@ -89,8 +89,7 @@
             html2pdf(invoice, {
                 filename: 'catalog.pdf',
                 pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
-                html2canvas:  { scale: 2 }
-                jsPDF: { unit: 'mm', format: 'A4', orientation: 'landscape' },
+                html2canvas:  { scale: 2 , letterRendering: true }
             });
             // setTimeout(function() { window.close() }, 10000);
         })
