@@ -16,6 +16,9 @@
 
 <body>
     <style>
+        tr{
+            margin-top: 10px;
+        }
         td {
             padding: 2px;
             font-size: 11px;
@@ -34,7 +37,7 @@
         }
     </style>
 
-    <div id="invoice" style="padding: 10px;">
+    <div id="invoice" style="padding: 20px;">
         <table>
             <thead>
                 <th>Name</th>
