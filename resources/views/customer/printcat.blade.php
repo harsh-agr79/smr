@@ -7,9 +7,7 @@
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -21,12 +19,11 @@
             font-size: 11px;
             font-weight: 800;
         }
-
-        /* tr {
+        tr{
             height: 23% !important;
-            padding-top: 10px !important;
+            padding-top: 10px !important; 
             page-break-inside: avoid;
-        } */
+        }
 
         .cont {
             margin-left: 30vw;
@@ -55,38 +52,25 @@
             <tbody>
                 @foreach ($data as $item)
                     <tr>
-                        <td><span>{{ $item->name }} @if ($item->net != null)
-                                    <span class="red-text">(NET)</span>
-                                @endif
-                            </span><br>
-                            @if ($item->featured != null)
-                                <span class="red" style="padding:0 5px; margin: 3px; border-radius: 4px;">NEW!</span>
-                                @endif <br>
-                                @if ($item->offer != null)
-                                    <span class="amber"
-                                        style="padding: 0 5px; border-radius: 4px; margin: 3px;">{{ $item->offer }}</span>
-                                    @endif <br>
-                                    @if ($item->stock != null)
-                                        <span class="red-text">Out of Stock</span>
-                                    @endif
+                        <td><span>{{$item->name}} @if ($item->net != NULL)
+                            <span class="red-text">(NET)</span>
+                        @endif</span><br>
+                            @if($item->featured != NULL) <span class="red" style="padding:0 5px; margin: 3px; border-radius: 4px;">NEW!</span>@endif <br> @if($item->offer != NULL) <span class="amber" style="padding: 0 5px; border-radius: 4px; margin: 3px;">{{$item->offer}}</span>@endif <br> @if($item->stock != NULL) <span class="red-text">Out of Stock</span>@endif
                         </td>
-
-                        <td>{{ $item->category }}</td>
-                        <td>{{ $item->brand }}</td>
+                       
+                        <td>{{$item->category}}</td>
+                        <td>{{$item->brand}}</td>
                         @php
                             $a = explode('|', $item->images);
                         @endphp
-                        <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif"
-                                style="height: 150px;" alt=""></td>
-
-                        <td>{{ $item->price }}</td>
-                        <td>
-                            <div style="white-space: pre-wrap">{{ $item->details }}</div>
-                        </td>
+                        <td><img src="@if ($item->images != '' || $item->images != null) {{ asset(explode('|', $item->images)[count($a) - 1]) }}@else{{ asset('images/prod.jpg') }} @endif" style="height: 150px;"  alt=""></td>
+                        
+                        <td>{{$item->price}}</td>
+                        <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+           </table>
     </div>
 
 
@@ -99,48 +83,16 @@
 
     <script>
          $(document).ready(function() {
-            // var inoice = $('#invoice');
-            // html2pdf(invoice, {
-            //     filename: 'catalog.pdf',
-            //     pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
-            //     html2canvas:  { scale: 2 , letterRendering: true }
-            // });
-            // // setTimeout(function() { window.close() }, 10000);
-
-            exportTableToExcel('invoice', 'SettlementTransactions');
+            var inoice = $('#invoice');
+            html2pdf(invoice, {
+                filename: 'catalog.pdf',
+                pagebreak: {mode: ['avoid-all', 'css', 'legacy'] },
+                html2canvas:  { scale: 2 , letterRendering: true }
+            });
+            // setTimeout(function() { window.close() }, 10000);
         })
-    
-        function exportTableToExcel(transactionsTable, filename = '') {
-            let downloadLink;
-            const dataType = 'application/vnd.ms-excel';
-            const tableSelect = document.getElementById(transactionsTable);
-            const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-
-            // Specify file name
-            filename = filename ? filename + '.xls' : 'excel_data.xls';
-
-            // Create download link element
-            downloadLink = document.createElement("a");
-
-            document.body.appendChild(downloadLink);
-
-            if (navigator.msSaveOrOpenBlob) {
-                var blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-                // Setting the file name
-                downloadLink.download = filename;
-
-                //triggering the function
-                downloadLink.click();
-            }
-        }
     </script>
 </body>
 
 </html>
+
