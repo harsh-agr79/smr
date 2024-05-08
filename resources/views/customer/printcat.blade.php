@@ -36,6 +36,9 @@
             }
         }
     </style>
+    @php
+        $n = 0;
+    @endphp
 
     <div id="invoice" style="padding: 20px;">
         <table>
@@ -68,6 +71,17 @@
                         <td>{{$item->price}}</td>
                         <td><div style="white-space: pre-wrap">{{$item->details}}</div></td>
                     </tr>
+                    @php
+                        $n = $n + 1;
+                    @endphp
+                    @if($n == 5)
+                    <tr class="html2pdf__page-break">
+                    </tr>
+                        @php
+                            $n = 0;
+                        @endphp
+                    @endif
+
                 @endforeach
             </tbody>
            </table>
