@@ -21,6 +21,9 @@
             font-size: 11px;
             font-weight: 800;
         }
+        tr{
+            height: 23% !important;
+        }
 
         .cont {
             margin-left: 30vw;
