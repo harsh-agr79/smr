@@ -123,7 +123,7 @@
             var inoice = $('#invoice');
             html2pdf(invoice, {
                 filename: 'catalog.pdf',
-                margin: [15, 0, 15, 0],
+                margin: [30, 0, 15, 0],
                 image: {
                     type: 'jpeg',
                     quality: 0.9
