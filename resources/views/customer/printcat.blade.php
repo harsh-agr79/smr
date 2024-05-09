@@ -140,7 +140,7 @@
             var invoice = document.getElementById('invoice');
             var opt = {
                 filename: 'catalog.pdf',
-                // margin: [30, 0, 50, 0],
+                margin: [10, 0, 10, 0],
                 image: {
                     type: 'jpeg',
                     quality: 0.9
