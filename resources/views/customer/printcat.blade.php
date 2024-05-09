@@ -104,6 +104,8 @@
                             <div style="white-space: pre-wrap">{{ $item->details }}</div>
                         </td>
                     </tr>
+                    <tr class="html2pdf__page-break">
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -132,8 +134,7 @@
                     //If the sum of page rows heights are bigger thant my limit, then insert break
                     if (current_page_height > max_page_height) {
                         current_page_height = 0;
-                        $(`<tr class="html2pdf__page-break">
-                </tr>`).insertAfter(row);
+                        $(``).insertAfter(row);
                         console.log("break");
                     }
                 });
