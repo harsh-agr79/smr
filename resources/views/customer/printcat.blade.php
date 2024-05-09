@@ -124,7 +124,7 @@
                 //get table rows in html 
                 var rows = document.querySelectorAll('table > tbody > tr');
                 let current_page_height = 0;
-                let max_page_height = 750; //adjust max sizeof page in px 
+                let max_page_height = 500; //adjust max sizeof page in px 
                 rows.forEach(row => {
                     var row_height = row.offsetHeight;
                     current_page_height = current_page_height + row_height
