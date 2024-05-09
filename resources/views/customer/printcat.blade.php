@@ -16,10 +16,9 @@
 
 <body>
     <style>
-        * {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         td {
             padding: 2px;
             font-size: 11px;
@@ -50,7 +49,7 @@
     </style>
 
     <div id="invoice" style="padding: 20px;">
-        <table id="exTable">
+        <table>
             <thead>
                 <th>Name</th>
                 <th>category</th>
@@ -68,10 +67,10 @@
                     <td></td>
                     <td><img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt=""></td>
                     <td></td>
-                    <td>Company Name: SAMAR SUPPLIERS <br>
-                        Company Address: Amarpath 6, Butwal <br>
-                        contact: 9849287007
-                    </td>
+                    <td>Company Name:  SAMAR SUPPLIERS <br>
+                    Company Address: Amarpath 6, Butwal <br>
+                    contact: 9849287007
+                </td>
                 </tr>
                 @foreach ($data as $item)
                     <tr>
@@ -119,68 +118,48 @@
 
     <script>
         $(document).ready(function() {
-            // function insertBreaks() {
+            function insertBreaks() {
 
-            //     //get table rows in html 
-            //     var rows = document.querySelectorAll('table > tbody > tr');
-            //     let current_page_height = 0;
-            //     let max_page_height = 750; //adjust max sizeof page in px 
-            //     rows.forEach(row => {
-            //         var row_height = row.offsetHeight;
-            //         current_page_height = current_page_height + row_height
-            //         //If the sum of page rows heights are bigger thant my limit, then insert break
-            //         if (current_page_height > max_page_height) {
-            //             current_page_height = 0;
-            //             row.classList.add('addBreak');
-            //         }
-            //     });
-            // }
-            // var inoice = $('#invoice');
-            // html2pdf(invoice, {
-            //     filename: 'catalog.pdf',
-            //     margin: [30, 0, 50, 0],
-            //     image: {
-            //         type: 'jpeg',
-            //         quality: 0.9
-            //     },
-            //     autoPaging: 'text',
-            //     html2canvas: {
-            //         scale: 2,
-            //         logging: true,
-            //         dpi: 300,
-            //         letterRendering: true
-            //     },
-            //     jsPDF: {
-            //         unit: 'mm',
-            //         format: 'a4',
-            //         orientation: 'p'
-            //     },
-            //     pagebreak: {
-            //         avoid: 'tr',
-            //         mode: ['css'],
-            //     }
-            // });
+                //get table rows in html 
+                var rows = document.querySelectorAll('table > tbody > tr');
+                let current_page_height = 0;
+                let max_page_height = 750; //adjust max sizeof page in px 
+                rows.forEach(row => {
+                    var row_height = row.offsetHeight;
+                    current_page_height = current_page_height + row_height
+                    //If the sum of page rows heights are bigger thant my limit, then insert break
+                    if (current_page_height > max_page_height) {
+                        current_page_height = 0;
+                        row.classList.add('addBreak');
+                    }
+                });
+            }
+            var inoice = $('#invoice');
+            html2pdf(invoice, {
+                filename: 'catalog.pdf',
+                margin: [30, 0, 50, 0],
+                image: {
+                    type: 'jpeg',
+                    quality: 0.9
+                },
+                autoPaging: 'text',
+                html2canvas: {
+                    scale: 2,
+                    logging: true,
+                    dpi: 300,
+                    letterRendering: true
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'p'
+                },
+                pagebreak: {
+                    avoid: 'tr',
+                    mode: ['css'],
+                }
+            });
             // setTimeout(function() { window.close() }, 10000);
-            exportToExcel('exTable')
-            function exportToExcel(tableId) {
-                let tableData = document.getElementById(tableId).outerHTML;
-                tableData = tableData.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
-                tableData = tableData.replace(/<input[^>]*>|<\/input>/gi, ""); //remove input params
-                tableData = tableData +
-                    '<br /><br />Code witten By sudhir K gupta.<br />My Blog - https://comedymood.com'
-
-                let a = document.createElement('a');
-                a.href = `data:application/vnd.ms-excel, ${encodeURIComponent(tableData)}`
-                a.download = 'downloaded_file_' + getRandomNumbers() + '.xls'
-                a.click()
-            }
-
-            function getRandomNumbers() {
-                let dateObj = new Date()
-                let dateTime = `${dateObj.getHours()}${dateObj.getMinutes()}${dateObj.getSeconds()}`
-
-                return `${dateTime}${Math.floor((Math.random().toFixed(2)*100))}`
-            }
         })
     </script>
 </body>
