@@ -118,22 +118,22 @@
 
     <script>
         $(document).ready(function() {
-            function insertBreaks() {
+            // function insertBreaks() {
 
-                //get table rows in html 
-                var rows = document.querySelectorAll('table > tbody > tr');
-                let current_page_height = 0;
-                let max_page_height = 750; //adjust max sizeof page in px 
-                rows.forEach(row => {
-                    var row_height = row.offsetHeight;
-                    current_page_height = current_page_height + row_height
-                    //If the sum of page rows heights are bigger thant my limit, then insert break
-                    if (current_page_height > max_page_height) {
-                        current_page_height = 0;
-                        row.classList.add('addBreak');
-                    }
-                });
-            }
+            //     //get table rows in html 
+            //     var rows = document.querySelectorAll('table > tbody > tr');
+            //     let current_page_height = 0;
+            //     let max_page_height = 750; //adjust max sizeof page in px 
+            //     rows.forEach(row => {
+            //         var row_height = row.offsetHeight;
+            //         current_page_height = current_page_height + row_height
+            //         //If the sum of page rows heights are bigger thant my limit, then insert break
+            //         if (current_page_height > max_page_height) {
+            //             current_page_height = 0;
+            //             row.classList.add('addBreak');
+            //         }
+            //     });
+            // }
             var invoice = document.getElementById('invoice');
             var opt = {
                 filename: 'catalog.pdf',
