@@ -134,7 +134,7 @@
                     }
                 });
             }
-            var invoice = $('#invoice');
+            var invoice = document.getElementById('invoice');
             var opt = {
                 filename: 'catalog.pdf',
                 margin: [30, 0, 50, 0],
