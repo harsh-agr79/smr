@@ -138,7 +138,8 @@
                 });
             }
             insertBreaks();
-            var invoice = document.getElementById('invoice');
+            function print(){
+                var invoice = document.getElementById('invoice');
             var opt = {
                 filename: 'catalog.pdf',
                 margin: [10, 0, 10, 0],
@@ -167,6 +168,11 @@
             html2pdf().set(opt).from(invoice).save();
             // html2pdf(invoice, opt);
             // setTimeout(function() { window.close() }, 10000);
+
+            }
+
+            print();
+            
         })
     </script>
 </body>
