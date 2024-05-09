@@ -159,6 +159,7 @@
                     mode: ['css'],
                 }
             };
+            console.log("works")
             html2pdf().set(opt).from(invoice).save();
             // html2pdf(invoice, opt);
             // setTimeout(function() { window.close() }, 10000);
