@@ -58,6 +58,17 @@
                 <th>Details</th>
             </thead>
             <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><img src="{{ asset('/logo/logo.jpg') }}" style="height: 100px" alt=""></td>
+                    <td></td>
+                    <td>Company Name:  SAMAR SUPPLIERS <br>
+                    Company Address: Amarpath 6, Butwal <br>
+                    contact: 9849287007
+                </td>
+                </tr>
                 @foreach ($data as $item)
                     <tr>
                         <td><span>{{ $item->name }} @if ($item->net != null)
