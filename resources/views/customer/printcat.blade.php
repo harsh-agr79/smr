@@ -48,8 +48,8 @@
         }
     </style>
 
-    <div id="invoice" style="padding: 20px;">
-        <table>
+    <div  style="padding: 20px;">
+        <table id="invoice">
             <thead>
                 <th>Name</th>
                 <th>category</th>
@@ -134,7 +134,7 @@
                     }
                 });
             }
-            var inoice = $('#invoice');
+            var invoice = $('#invoice');
             html2pdf(invoice, {
                 filename: 'catalog.pdf',
                 margin: [30, 0, 50, 0],
