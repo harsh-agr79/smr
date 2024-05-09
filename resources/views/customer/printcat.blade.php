@@ -16,9 +16,10 @@
 
 <body>
     <style>
-        *{
+        * {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         td {
             padding: 2px;
             font-size: 11px;
@@ -48,7 +49,7 @@
         }
     </style>
 
-    <div  style="padding: 20px;">
+    <div style="padding: 20px;">
         <table id="invoice">
             <thead>
                 <th>Name</th>
@@ -67,10 +68,10 @@
                     <td></td>
                     <td><img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt=""></td>
                     <td></td>
-                    <td>Company Name:  SAMAR SUPPLIERS <br>
-                    Company Address: Amarpath 6, Butwal <br>
-                    contact: 9849287007
-                </td>
+                    <td>Company Name: SAMAR SUPPLIERS <br>
+                        Company Address: Amarpath 6, Butwal <br>
+                        contact: 9849287007
+                    </td>
                 </tr>
                 @foreach ($data as $item)
                     <tr>
@@ -131,48 +132,49 @@
                     //If the sum of page rows heights are bigger thant my limit, then insert break
                     if (current_page_height > max_page_height) {
                         current_page_height = 0;
-                        row.insertAfter(`<tr class="html2pdf__page-break">
-                </tr>`);
+                        $(`<tr class="html2pdf__page-break">
+                </tr>`).insertAfter(row);
                         console.log("break");
                     }
                 });
             }
             insertBreaks();
-            function print(){
+
+            function print() {
                 var invoice = document.getElementById('invoice');
-            var opt = {
-                filename: 'catalog.pdf',
-                margin: [10, 0, 10, 0],
-                image: {
-                    type: 'jpeg',
-                    quality: 0.9
-                },
-                autoPaging: 'text',
-                html2canvas: {
-                    scale: 2,
-                    logging: true,
-                    dpi: 300,
-                    letterRendering: true
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'p'
-                },
-                pagebreak: {
-                    avoid: 'tr',
-                    mode: ['css'],
-                }
-            };
-            console.log("works")
-            html2pdf().set(opt).from(invoice).save();
-            // html2pdf(invoice, opt);
-            // setTimeout(function() { window.close() }, 10000);
+                var opt = {
+                    filename: 'catalog.pdf',
+                    margin: [10, 0, 10, 0],
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.9
+                    },
+                    autoPaging: 'text',
+                    html2canvas: {
+                        scale: 2,
+                        logging: true,
+                        dpi: 300,
+                        letterRendering: true
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'p'
+                    },
+                    pagebreak: {
+                        avoid: 'tr',
+                        mode: ['css'],
+                    }
+                };
+                console.log("works")
+                html2pdf().set(opt).from(invoice).save();
+                // html2pdf(invoice, opt);
+                // setTimeout(function() { window.close() }, 10000);
 
             }
 
             print();
-            
+
         })
     </script>
 </body>
