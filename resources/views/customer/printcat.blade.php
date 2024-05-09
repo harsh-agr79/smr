@@ -131,7 +131,7 @@
                     //If the sum of page rows heights are bigger thant my limit, then insert break
                     if (current_page_height > max_page_height) {
                         current_page_height = 0;
-                        row.after(`<tr class="html2pdf__page-break">
+                        row.insertAfter(`<tr class="html2pdf__page-break">
                 </tr>`);
                         console.log("break");
                     }
