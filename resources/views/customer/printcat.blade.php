@@ -132,6 +132,7 @@
                     if (current_page_height > max_page_height) {
                         current_page_height = 0;
                         row.classList.add('addBreak');
+                        console.log("break");
                     }
                 });
             }
