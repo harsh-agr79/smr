@@ -135,7 +135,7 @@
                 });
             }
             var invoice = $('#invoice');
-            html2pdf(invoice, {
+            var opt = {
                 filename: 'catalog.pdf',
                 margin: [30, 0, 50, 0],
                 image: {
@@ -158,7 +158,9 @@
                     avoid: 'tr',
                     mode: ['css'],
                 }
-            });
+            };
+            html2pdf().set(opt).from(invoice).save();
+            // html2pdf(invoice, opt);
             // setTimeout(function() { window.close() }, 10000);
         })
     </script>
