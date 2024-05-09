@@ -62,7 +62,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><img src="{{ asset('/logo/logo.jpg') }}" style="height: 100px" alt=""></td>
+                    <td><img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt=""></td>
                     <td></td>
                     <td>Company Name:  SAMAR SUPPLIERS <br>
                     Company Address: Amarpath 6, Butwal <br>
