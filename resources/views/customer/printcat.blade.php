@@ -16,6 +16,9 @@
 
 <body>
     <style>
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
         td {
             padding: 2px;
             font-size: 11px;
