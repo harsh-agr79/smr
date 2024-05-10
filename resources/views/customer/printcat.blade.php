@@ -193,8 +193,7 @@
                 a.href = canvas.toDataURL("image/png");
                 a.download = 'catalog.png';
                 a.click();
-            }, {
-                scale: 4
+                window.close();
             });
         }
 
