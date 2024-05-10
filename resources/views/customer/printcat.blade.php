@@ -28,7 +28,7 @@
 
         td {
             padding: 2px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
         }
 
@@ -55,7 +55,7 @@
         }
 
         #invoice{
-            transform: scale(2);
+            transform: scale(1.8);
         }
     </style>
 
