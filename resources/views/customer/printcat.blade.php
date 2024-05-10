@@ -201,7 +201,7 @@
                 doc.addImage(imgData, 'PNG');
                 doc.save('catalog.pdf');
                 // window.close()
-            });
+            }, {scale: 4});
         }
 
         function downloadImage(uri, filename) {
