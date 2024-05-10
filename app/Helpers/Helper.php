@@ -74,7 +74,7 @@ function updateMainStatus( $orderid ) {
         $result = 'green';
         $del = "on";
         $cln = "delivered";
-    } elseif ( $order[ 0 ]->clnstatus == 'packorder' && $tc !== $rc && $tc == $cc + $rc) {
+    } elseif ( $order[ 0 ]->clnstatus == 'packorder' && $tc !== $rc) {
         $result = 'deep-purple';
         $del = NULL;
         $cln = "packorder";
