@@ -49,8 +49,16 @@
         }
     </style>
 
-    <div style="padding: 20px;">
-        <table id="invoice">
+    <div id="invoice" style="padding: 20px;">
+        <div class="center">
+            <img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt="">
+            <span class="right">Company Name: SAMAR SUPPLIERS <br>
+                Company Address: Amarpath 6, Butwal <br>
+                contact: 9849287007
+            </span>
+        </div>
+        
+        <table >
             <thead>
                 <th>Name</th>
                 <th>category</th>
@@ -62,17 +70,6 @@
                 <th>Details</th>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt=""></td>
-                    <td></td>
-                    <td>Company Name: SAMAR SUPPLIERS <br>
-                        Company Address: Amarpath 6, Butwal <br>
-                        contact: 9849287007
-                    </td>
-                </tr>
                 @foreach ($data as $item)
                     <tr>
                         <td><span>{{ $item->name }} @if ($item->net != null)
@@ -145,7 +142,7 @@
                 var invoice = document.getElementById('invoice');
                 var opt = {
                     filename: 'catalog.pdf',
-                    margin: [10, 0, 10, 0],
+                    margin: [30, 0, 40, 0],
                     image: {
                         type: 'jpeg',
                         quality: 0.9
