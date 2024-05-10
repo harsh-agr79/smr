@@ -53,6 +53,10 @@
                 margin: 0;
             }
         }
+
+        #invoice{
+            transform: scale(2);
+        }
     </style>
 
     <div id="invoice" style="padding: 20px;">
@@ -122,7 +126,7 @@
 
 
 
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             screenshot();
 
@@ -215,39 +219,6 @@
             click(link);
             document.body.removeChild(link);
         }
-    </script> --}}
-
-    <script>
-        window.jsPDF = window.jspdf.jsPDF;
-
-        $(document).ready(function(){
-            Convert_HTML_To_PDF();
-        })
-
-        // Convert HTML content to PDF
-        function Convert_HTML_To_PDF() {
-            window.jsPDF = window.jspdf.jsPDF;
-            
-                var doc = new jsPDF();
-
-                // Source HTMLElement or a string containing HTML.
-                var elementHTML = document.querySelector("#invoice");
-
-                doc.html(elementHTML, {
-                    callback: function(doc) {
-                        // Save the PDF
-                        doc.save('document-html.pdf');
-                    },
-                    margin: [10, 10, 10, 10],
-                    autoPaging: 'text',
-                    x: 0,
-                    y: 0,
-                    width: 190, //target width in the PDF document
-                    windowWidth: 675 //window width in CSS pixels
-                });
-            }
-
-    
     </script>
 </body>
 
