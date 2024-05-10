@@ -193,9 +193,15 @@
         })
 
         function screenshot() {
-            html2canvas(document.getElementById("#invoice"), {
-                scale: 2
-            }).then(function(canvas){downloadImage(canvas.toDataURL(), "catalog.png")});
+            html2canvas($("#invoice"), {
+            onrendered: function(canvas) {         
+                var imgData = canvas.toDataURL(
+                    'image/png');              
+                var doc = new jsPDF('p', 'mm');
+                doc.addImage(imgData, 'PNG', 10, 10);
+                doc.save('catalog.pdf');
+            }
+        });
         }
 
         function downloadImage(uri, filename) {
