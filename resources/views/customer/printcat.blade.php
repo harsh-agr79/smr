@@ -190,7 +190,7 @@
 
         function screenshot() {
             html2canvas(document.getElementById("invoice")).then(function(canvas) {
-                downloadImage(canvas.toDataURL(), `{{ $data[0]->order_id }}` + ".png");
+                downloadImage(canvas.toDataURL(), `catalog` + ".png");
                 window.close()
             });
         }
