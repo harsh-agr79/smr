@@ -225,6 +225,7 @@
 
         // Convert HTML content to PDF
         function Convert_HTML_To_PDF() {
+            window.jsPDF = window.jspdf.jsPDF;
             
                 var doc = new jsPDF();
 
