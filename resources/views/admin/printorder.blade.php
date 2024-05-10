@@ -40,7 +40,7 @@
     </div>
     @php
         $cus = DB::table('customers')
-            ->where('user', $data[0]->user_id)
+            ->where('id', $data[0]->user_id)
             ->first();
         $disc = 0;
         $disc2 = 0;
