@@ -70,11 +70,11 @@ function updateMainStatus( $orderid ) {
             $rc = $rc + 1;
         }
     }
-    if ( $order[ 0 ]->delivered == 'on' && $tc !== $rc && $tc == $cc + $rc) {
+    if ( $order[ 0 ]->delivered == 'on' && $tc !== $rc && $tc == $cc) {
         $result = 'green';
         $del = "on";
         $cln = "delivered";
-    } elseif ( $order[ 0 ]->clnstatus == 'packorder' && $tc !== $rc) {
+    } elseif ( $order[ 0 ]->clnstatus == 'packorder' && $tc !== $rc && $tc == $cc) {
         $result = 'deep-purple';
         $del = NULL;
         $cln = "packorder";
