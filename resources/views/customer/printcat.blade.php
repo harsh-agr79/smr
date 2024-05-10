@@ -55,7 +55,7 @@
         }
 
         #invoice{
-            transform: scale(2);
+            transform: scale(2.5);
         }
     </style>
 
