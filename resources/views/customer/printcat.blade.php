@@ -194,7 +194,8 @@
 
         function screenshot() {
             html2canvas(document.getElementById("invoice"), {
-            onrendered: function(canvas) {         
+            onrendered: function(canvas) {        
+                console.log("hello") 
                 var imgData = canvas.toDataURL(
                     'image/png');              
                 var doc = new jsPDF('p', 'mm');
