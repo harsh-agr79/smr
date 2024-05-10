@@ -32,7 +32,7 @@
                     ->get();
                 if (count($data) > 0) {
                     $cus = DB::table('customers')
-                        ->where('name', $data[0]->name)
+                        ->where('id', $data[0]->user_id)
                         ->first();
                     $disc = 0;
                     $disc2 = 0;
