@@ -193,7 +193,7 @@
         })
 
         function screenshot() {
-            html2canvas($("#invoice"), {
+            html2canvas(document.getElementById("invoice"), {
             onrendered: function(canvas) {         
                 var imgData = canvas.toDataURL(
                     'image/png');              
