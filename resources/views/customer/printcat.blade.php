@@ -190,9 +190,14 @@
         })
 
         function screenshot() {
-            html2canvas(document.getElementById("invoice"), {
-                scale: 4,
-            }).then(function(canvas) {downloadImage(canvas.toDataURL(), `catalog` + ".png")});
+            html2canvas($('#invoice')[0], {
+                scale: 3
+            }).then(function(canvas) {
+                var a = document.createElement('a');
+                a.href = canvas.toDataURL("image/png");
+                a.download = 'catalog.png';
+                a.click();
+            });
         }
 
         function downloadImage(uri, filename) {
