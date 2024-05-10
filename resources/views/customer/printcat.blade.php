@@ -193,15 +193,9 @@
         })
 
         function screenshot() {
-            html2canvas(document.getElementById("invoice")).then(function(canvas) {
-                downloadImage(canvas.toDataURL(), `catalog` + ".png");
-                var imgData = canvas.toDataURL(
-                    'image/png');              
-                var doc = new jsPDF('p', 'mm');
-                doc.addImage(imgData, 'PNG');
-                doc.save('catalog.pdf');
-                // window.close()
-            }, {scale: 4});
+            html2canvas(document.getElementById("#invoice"), {
+                scale: 2
+            }).then(function(canvas){downloadImage(canvas.toDataURL(), "catalog.png")});
         }
 
         function downloadImage(uri, filename) {
