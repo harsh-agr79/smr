@@ -217,20 +217,24 @@
     </script> --}}
 
     <script>
-        $(document).ready(function (){
-                            $('#cmd').click(function () {
-                            var specialElementHandlers = 
-                            function (element,renderer) {
-                            return true;
-                            }
-                            var doc = new jsPDF();
-                            doc.fromHTML($('#invoice').html(), 15, 15, {
-                            'width': 170,
-                            'elementHandlers': specialElementHandlers
-                            });
-                            doc.output('datauri'); 
-                        });
-                        });
+        $(document).ready(function() {
+            var doc = new jsPDF();
+            var specialElementHandlers = {
+                '#editor': function(element, renderer) {
+                    return true;
+                }
+            };
+            var specialElementHandlers =
+                function(element, renderer) {
+                    return true;
+                }
+            var doc = new jsPDF();
+            doc.fromHTML($('#content').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.output('datauri');
+        });
     </script>
 </body>
 
