@@ -32,28 +32,6 @@
             font-weight: 700;
         }
 
-        tr {
-            height: 23% !important;
-            padding-top: 10px !important;
-            page-break-inside: avoid;
-        }
-
-        .cont {
-            margin-left: 30vw;
-            margin-right: 30vw;
-        }
-
-        .addBreak {
-            break-before: auto;
-            margin-top: 70px;
-        }
-
-        @media screen and (max-width: 1100px) {
-            .cont {
-                margin: 0;
-            }
-        }
-
         #invoice{
             transform: scale(2);
         }
