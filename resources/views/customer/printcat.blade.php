@@ -47,6 +47,8 @@
                 margin: 0;
             }
         }
+
+        
     </style>
 
     <div id="invoice" style="padding: 20px;">
@@ -130,19 +132,19 @@
                     //If the sum of page rows heights are bigger thant my limit, then insert break
                     if (current_page_height > max_page_height) {
                         current_page_height = 0;
-                        $(` <tr class="html2pdf__page-break">
+                        $(` <tr style="page-break-after:always;">
                     </tr>`).insertAfter(row);
                         console.log("break");
                     }
                 });
             }
-            // insertBreaks();
+            insertBreaks();
 
             function print() {
                 var invoice = document.getElementById('invoice');
                 var opt = {
                     filename: 'catalog.pdf',
-                    margin: [30, 0, 40, 0],
+                    // margin: [30, 0, 50, 0],
                     image: {
                         type: 'jpeg',
                         quality: 0.9
