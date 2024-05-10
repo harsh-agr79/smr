@@ -195,7 +195,7 @@
                 var imgData = canvas.toDataURL(
                     'image/png');
                 var doc = new jsPDF('p', 'mm');
-                doc.addImage(imgData, 'PNG');
+                doc.addImage(imgData, 'PNG', 10, 10);
                 doc.save('catalog.pdf');
                 // window.close()
             }, {
