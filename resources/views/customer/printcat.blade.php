@@ -28,7 +28,7 @@
 
         td {
             padding: 0 !important;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
         }
 
