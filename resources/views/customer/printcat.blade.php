@@ -11,9 +11,9 @@
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.js"
         integrity="sha512-oa6kn7l/guSfv94d8YmJLcn/s3Km4mm/t4RqFqyorSMXkKlg6pFM6HmLXsJvOP/Cl/dv/N5xW7zuaA+paSc55Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.min.js"
@@ -59,8 +59,6 @@
                 margin: 0;
             }
         }
-
-        
     </style>
 
     <div id="invoice" style="padding: 20px;">
@@ -71,8 +69,8 @@
                 contact: 9849287007
             </span>
         </div>
-        
-        <table >
+
+        <table>
             <thead>
                 <th>Name</th>
                 <th>category</th>
@@ -115,7 +113,6 @@
                             <div style="white-space: pre-wrap">{{ $item->details }}</div>
                         </td>
                     </tr>
-                   
                 @endforeach
             </tbody>
         </table>
@@ -129,7 +126,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    
+
 
     <script>
         $(document).ready(function() {
@@ -193,16 +190,17 @@
         })
 
         function screenshot() {
-            html2canvas(document.getElementById("invoice"), {
-            onrendered: function(canvas) {        
-                console.log("hello") 
+            html2canvas(document.getElementById("invoice")).then(function(canvas) {
+                downloadImage(canvas.toDataURL(), `catalog` + ".png");
                 var imgData = canvas.toDataURL(
-                    'image/png');              
+                    'image/png');
                 var doc = new jsPDF('p', 'mm');
-                doc.addImage(imgData, 'PNG', 10, 10);
+                doc.addImage(imgData, 'PNG');
                 doc.save('catalog.pdf');
-            }
-        });
+                // window.close()
+            }, {
+                scale: 4
+            });
         }
 
         function downloadImage(uri, filename) {
