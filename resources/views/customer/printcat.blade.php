@@ -121,7 +121,7 @@
 
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             screenshot();
 
@@ -214,6 +214,23 @@
             click(link);
             document.body.removeChild(link);
         }
+    </script> --}}
+
+    <script>
+        $(document).ready(function (){
+                            $('#cmd').click(function () {
+                            var specialElementHandlers = 
+                            function (element,renderer) {
+                            return true;
+                            }
+                            var doc = new jsPDF();
+                            doc.fromHTML($('#invoice').html(), 15, 15, {
+                            'width': 170,
+                            'elementHandlers': specialElementHandlers
+                            });
+                            doc.output('datauri'); 
+                        });
+                        });
     </script>
 </body>
 
