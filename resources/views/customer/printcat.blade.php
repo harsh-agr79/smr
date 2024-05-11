@@ -137,7 +137,7 @@
                     },
                     autoPaging: 'text',
                     html2canvas: {
-                        scale: 1.8,
+                        scale: 1.9,
                         logging: true,
                         letterRendering: true
                     },
