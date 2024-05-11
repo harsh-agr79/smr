@@ -38,12 +38,10 @@
     </style>
 
     <div id="invoice" style="padding: 20px;">
-        <div class="center">
-            <img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt="">
-            <span class="right">Company Name: SAMAR SUPPLIERS <br>
-                Company Address: Amarpath 6, Butwal <br>
-                contact: 9849287007
-            </span>
+        <div class="row">
+            <div class="col s4 center"><h4>SAMAR SUPPLIERS</h4></div>
+            <div class="col s4"><img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt=""></div>
+            <div class="col s4 center"><h4>9849287007</h4></div>
         </div>
 
         <table>
