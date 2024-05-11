@@ -11,11 +11,11 @@
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"
         integrity="sha512-sn/GHTj+FCxK5wam7k9w4gPPm6zss4Zwl/X9wgrvGMFbnedR8lTUSLdsolDRBRzsX6N+YgG6OWyvn9qaFVXH9w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -108,24 +108,24 @@
         $(document).ready(function() {
             // screenshot();
 
-            function insertBreaks() {
+            // function insertBreaks() {
 
-                //get table rows in html 
-                var rows = document.querySelectorAll('table > tbody > tr');
-                let current_page_height = 0;
-                let max_page_height = 750; //adjust max sizeof page in px 
-                rows.forEach(row => {
-                    var row_height = row.offsetHeight;
-                    current_page_height = current_page_height + row_height
-                    //If the sum of page rows heights are bigger thant my limit, then insert break
-                    if (current_page_height > max_page_height) {
-                        current_page_height = 0;
-                        $(` <tr style="page-break-after:always;">
-                    </tr>`).insertAfter(row);
-                        console.log("break");
-                    }
-                });
-            }
+            //     //get table rows in html 
+            //     var rows = document.querySelectorAll('table > tbody > tr');
+            //     let current_page_height = 0;
+            //     let max_page_height = 750; //adjust max sizeof page in px 
+            //     rows.forEach(row => {
+            //         var row_height = row.offsetHeight;
+            //         current_page_height = current_page_height + row_height
+            //         //If the sum of page rows heights are bigger thant my limit, then insert break
+            //         if (current_page_height > max_page_height) {
+            //             current_page_height = 0;
+            //             $(` <tr style="page-break-after:always;">
+            //         </tr>`).insertAfter(row);
+            //             console.log("break");
+            //         }
+            //     });
+            // }
             // insertBreaks();
 
             function print() {
