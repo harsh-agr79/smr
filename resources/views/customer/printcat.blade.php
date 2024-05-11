@@ -29,7 +29,7 @@
         td {
             padding: 0 !important;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
         }
 /* 
         #invoice{
