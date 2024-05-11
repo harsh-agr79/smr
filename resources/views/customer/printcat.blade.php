@@ -85,10 +85,7 @@
                                 style="height: 150px;" alt=""></td>
 
                         <td>{{ $item->price }}</td>
-                        <td style="white-space: pre-wrap">
-                            <br>
-                            {{ $item->details }}
-                        </td>
+                        <td style="white-space: pre-wrap"><br>{{ $item->details }}</td>
                     </tr>
                 @endforeach
             </tbody>
