@@ -86,7 +86,7 @@
 
                         <td>{{ $item->price }}</td>
                         <td style="white-space: pre-wrap">
-                            
+                            <br>
                             {{ $item->details }}
                         </td>
                     </tr>
