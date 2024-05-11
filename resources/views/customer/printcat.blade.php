@@ -141,7 +141,6 @@
                     html2canvas: {
                         scale: 2,
                         logging: true,
-                        dpi: 300,
                         letterRendering: true
                     },
                     jsPDF: {
