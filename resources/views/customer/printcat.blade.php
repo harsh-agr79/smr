@@ -149,8 +149,8 @@
                         orientation: 'p'
                     },
                     pagebreak: {
-                        avoid: 'tr',
-                        mode: ['css'],
+                        avoid: ['tr','td'],
+                        mode: ['css', 'legacy']
                     }
                 };
                 console.log("works")
