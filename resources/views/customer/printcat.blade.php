@@ -40,8 +40,8 @@
     <div id="invoice" style="padding: 20px;">
         <div class="row">
             <div class="col s4 center"><h5>SAMAR SUPPLIERS</h5></div>
-            <div class="col s4"><img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt=""></div>
-            <div class="col s4 center"><h5>9849287007</h5></div>
+            <div class="col s4 center"><img src="{{ asset('/logo/logo.jpg') }}" style="height: 150px" alt=""></div>
+            <div class="col s4 center valign-wrapper"><img src="{{asset('/images/whatsapp.webp')}}" style="height: 70px;" alt=""><h5>9849287007</h5></div>
         </div>
 
         <table>
