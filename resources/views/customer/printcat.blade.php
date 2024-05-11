@@ -31,10 +31,10 @@
             font-size: 12px;
             font-weight: 700;
         }
-
+/* 
         #invoice{
             transform: scale(2);
-        }
+        } */
     </style>
 
     <div id="invoice" style="padding: 20px;">
@@ -106,7 +106,7 @@
 
     <script>
         $(document).ready(function() {
-            screenshot();
+            // screenshot();
 
             function insertBreaks() {
 
@@ -132,7 +132,7 @@
                 var invoice = document.getElementById('invoice');
                 var opt = {
                     filename: 'catalog.pdf',
-                    margin: [10, 0, 10, 0],
+                    // margin: [10, 0, 10, 0],
                     image: {
                         type: 'jpeg',
                         quality: 0.9
@@ -161,41 +161,9 @@
 
             }
 
-            // print();
+            print();
 
         })
-
-        function screenshot() {
-            html2canvas(document.getElementById("invoice")).then(function(canvas) {
-                var a = document.createElement('a');
-                a.href = canvas.toDataURL("image/png");
-                a.download = 'catalog.png';
-                a.click();
-                // window.close();
-            });
-        }
-
-        function downloadImage(uri, filename) {
-            var link = document.createElement('a');
-            if (typeof link.download !== 'string') {
-                window.open(uri);
-            } else {
-                link.href = uri;
-                link.download = filename;
-                accountForFirefox(clickLink, link);
-            }
-        }
-
-        function clickLink(link) {
-            link.click();
-        }
-
-        function accountForFirefox(click) {
-            var link = arguments[1];
-            document.body.appendChild(link);
-            click(link);
-            document.body.removeChild(link);
-        }
     </script>
 </body>
 
