@@ -31,6 +31,9 @@
             font-size: 11px;
             font-weight: 800;
         }
+        h5{
+            font-weight: 700;
+        }
 /* 
         #invoice{
             transform: scale(2);
