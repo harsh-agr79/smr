@@ -85,6 +85,7 @@
                                 style="height: 150px;" alt=""></td>
 
                         <td>{{ $item->price }}</td>
+                        <br>
                         <td style="white-space: pre-wrap">{{ $item->details }}
                         </td>
                     </tr>
