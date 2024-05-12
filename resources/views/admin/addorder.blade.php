@@ -400,7 +400,6 @@
             var formData2 = $('#filformcat').serializeArray()
             var brand = formData.map(b => b.value);
             var category = formData2.map(a => a.value);
-            cats = category.join("_")
             if(brand.length < 1){
                 brands = "0"
             }

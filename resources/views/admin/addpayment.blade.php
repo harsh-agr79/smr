@@ -15,7 +15,7 @@
                         </div>
                         <div class="col s6">
                             <input type="datetime-local" step="any" value="{{ $date }}" name="date"
-                                class="inp black-text browser-default" placeholder="Date">
+                                class="inp black-text browser-default" placeholder="Date" required>
                         </div>
                     </div>
                     <div class="col s12 row">
@@ -23,7 +23,7 @@
                             Name:
                         </div>
                         <div class="input-field col s6" style="margin-top: 0;">
-                            <select id="MySelct" name="name" searchname="myselectsearch" searchable="Select Customer">
+                            <select id="MySelct" name="name" searchname="myselectsearch" searchable="Select Customer" required>
                                 @if ($name != null)
                                     <option value="{{ $name }}" selected>{{ $name }}</option>
                                 @else
@@ -43,7 +43,7 @@
                             Payment / Salesreturn
                         </div>
                         <div class="col s6">
-                            <select name="type" class="browser-default inp">
+                            <select name="type" class="browser-default inp" required>
                                 @if ($type != '')
                                     <option value="{{ $type }}" selected>{{ $type }}</option>
                                     <option value="Payment">Payment</option>
