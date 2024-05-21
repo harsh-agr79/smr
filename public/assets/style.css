@@ -163,7 +163,7 @@ tr{
 .search{
     outline: none;
     border: none;
-    background: rgb(0, 194, 0);
+    background: #00c200;
 }
 .search:focus{
     border:none; 

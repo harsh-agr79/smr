@@ -176,6 +176,61 @@
             </a>
         </div>
     </div>
+    <div id="flash" class="popup section bgunder"
+        style="margin-bottom: -2em; display: block; height: 214px; transform: translateY(0px);">
+        <div class="container pWrapper">
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <div class="card hoverable">
+                        <div class="card-content flow-text">
+                            {{-- <i class="close material-icons right" onclick="closeThis()" style="cursor: pointer;">close</i> --}}
+                            <p id="install-message">
+                                You can install this app for easy access.
+                                <button id="install" class="btn amber darken-1 black-text"
+                                    style="margin: .5em auto auto auto; display: block;">Install Mypower Order</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // document.addEventListener('contextmenu', event => event.preventDefault());
+
+        let deferredPrompt;
+        const addBtn = document.querySelector('#install');
+        const card = document.querySelector('#flash');
+        addBtn.style.display = 'none';
+        card.style.display = 'none';
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Update UI to notify the user they can add to home screen
+            addBtn.style.display = 'block';
+            card.style.display = 'block';
+
+            addBtn.addEventListener('click', (e) => {
+                // hide our user interface that shows our A2HS button
+                addBtn.style.display = 'none';
+                card.style.display = 'none';
+                // Show the prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    } else {
+                        console.log('User dismissed the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ asset('/assets/script.js') }}"></script>
