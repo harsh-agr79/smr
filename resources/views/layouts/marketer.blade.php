@@ -176,14 +176,14 @@
             </a>
         </div>
     </div>
-    <div id="flash" class="popup section bgunder"
+    {{-- <div id="flash" class="popup section bgunder"
         style="margin-bottom: -2em; display: block; height: 214px; transform: translateY(0px);">
         <div class="container pWrapper">
             <div class="row">
                 <div class="col s12 m8 offset-m2">
                     <div class="card hoverable">
                         <div class="card-content flow-text">
-                            {{-- <i class="close material-icons right" onclick="closeThis()" style="cursor: pointer;">close</i> --}}
+                            <i class="close material-icons right" onclick="closeThis()" style="cursor: pointer;">close</i>
                             <p id="install-message">
                                 You can install this app for easy access.
                                 <button id="install" class="btn amber darken-1 black-text"
@@ -194,7 +194,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <script>
         // document.addEventListener('contextmenu', event => event.preventDefault());
 
