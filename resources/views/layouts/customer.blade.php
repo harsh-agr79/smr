@@ -197,7 +197,7 @@
                             <p id="install-message">
                                 You can install this app for easy access.
                                 <button id="install" class="btn amber darken-1 black-text"
-                                    style="margin: .5em auto auto auto; display: block;">Install Mypower Order</button>
+                                    style="margin: .5em auto auto auto; display: block;">Install APP</button>
                             </p>
                         </div>
                     </div>
