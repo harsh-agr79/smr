@@ -8,19 +8,27 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigInteger('id', true);
+            $table->string('name');
+            $table->string('email');
+            $table->string('userid');
+            $table->longText('password');
+            $table->string('type');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('admins');
     }

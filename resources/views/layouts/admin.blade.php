@@ -402,7 +402,7 @@
         </div>
     </div>
 
-    {{-- <div id="flash" class="popup section bgunder"
+    <div id="flash" class="popup section bgunder"
         style="margin-bottom: -2em; display: block; height: 214px; transform: translateY(0px);">
         <div class="container pWrapper">
             <div class="row">
@@ -420,7 +420,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <script>
         // document.addEventListener('contextmenu', event => event.preventDefault());
 
