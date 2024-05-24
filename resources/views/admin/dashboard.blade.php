@@ -3,7 +3,7 @@
 @section('main')
     <div>
         <div>
-            <h5 class="center">Dashboard</h5>
+            <h5 class="center">Dashboard New SMR</h5>
         </div>
             @if ($admin->type != 'staff')
             <label>
