@@ -14,7 +14,7 @@ class AnalyticsController extends Controller
         
         foreach($cust as $item){
             $fif = DB::table('orders')
-            ->where(['deleted_at'=>NULL,'net'=>NULL,'save'=>NULL])
+            ->where(['deleted_at'=>NULL,'save'=>NULL])
             ->where('user_id', $item->id)
             ->where('status','approved') 
             ->whereBetween('date', [now()->subDays(15), now()->addDays(1)])
@@ -22,7 +22,7 @@ class AnalyticsController extends Controller
             ->get();
 
             $twe = DB::table('orders')
-            ->where(['deleted_at'=>NULL, 'net'=>NULL])
+            ->where(['deleted_at'=>NULL])
             ->where('user_id', $item->id)
             ->whereBetween('date', [now()->subDays(25), now()->addDays(1)])
             ->where('status','approved') 
@@ -30,14 +30,14 @@ class AnalyticsController extends Controller
             ->get();
 
             $thir = DB::table('orders')
-            ->where(['deleted_at'=>NULL, 'net'=>NULL])
+            ->where(['deleted_at'=>NULL])
             ->where('user_id', $item->id)
             ->whereBetween('date', [now()->subDays(35), now()->addDays(1)])
             ->where('status','approved') 
             ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sl')->groupBy('name')
             ->get();
             $fou = DB::table('orders')
-            ->where(['deleted_at'=>NULL, 'net'=>NULL])
+            ->where(['deleted_at'=>NULL])
             ->where('user_id', $item->id)
             ->whereBetween('date', [now()->subDays(45), now()->addDays(1)])
             ->where('status','approved') 
