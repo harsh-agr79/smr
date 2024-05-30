@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
-    <meta name="theme-color" content="#ffb300" />
+    <meta name="theme-color" content="#00c200" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     {{-- <link rel="apple-touch-icon" href="{{ asset('app1.png') }}"> --}}
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
