@@ -70,7 +70,6 @@ class CustomerController extends Controller
         return view('admin/editcustomer', $result);
     }
     public function editcus_process(Request $request){
-        // dd($request->post());
         $request->validate([
             'userid'=>'required|unique:marketers,userid|unique:staffs,userid|unique:admins,userid|unique:customers,userid,'.$request->post('id'),
             'email'=>'required|unique:admins,email|unique:customers,email,'.$request->post('id'), 
@@ -79,7 +78,6 @@ class CustomerController extends Controller
         ]);
 
         if($file = $request->file('dp')){
-            dd($request->post());
             if(File::exists($request->post('olddp'))) {
                 File::delete($request->post('olddp'));
             }
