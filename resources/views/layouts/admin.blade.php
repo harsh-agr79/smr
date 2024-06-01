@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <title>Admin</title>
-    <link rel="icon" href="{{ asset('/icons/favicon-32x32.png') }}">
+    <link rel="icon" href="{{ asset('smrlogo.png') }}">
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/icons/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/icons/favicon-32x32.png')}}">
