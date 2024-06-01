@@ -11,12 +11,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <title>Marketer</title>
-    <link rel="icon" href="{{ asset('icons/favicon-32x32.png') }}">
+    <link rel="icon" href="{{ asset('/icons/favicon-32x32.png') }}">
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('icons/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icons/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('icons/favicon-16x16.png')}}">
-    <link rel="mask-icon" href="{{asset('icons/safari-pinned-tab.svg')}}" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/icons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/icons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/icons/favicon-16x16.png')}}">
+    <link rel="mask-icon" href="{{asset('/icons/safari-pinned-tab.svg')}}" color="#5bbad5">
     <link href="//cdn.shopify.com/s/files/1/1775/8583/t/1/assets/admin-materialize.min.css?v=8850535670742419153"
         rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet'>
