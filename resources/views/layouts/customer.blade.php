@@ -3,24 +3,20 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="">
     <meta name="theme-color" content="#00c200" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    {{-- <link rel="apple-touch-icon" href="{{ asset('app1.png') }}"> --}}
-    {{-- <link rel="manifest" href="{{ asset('/manifest.json') }}"> --}}
-    <title>Admin</title>
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <link rel="icon" href="{{ asset('logo.jpg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    <title>Customer</title>
+    <link rel="icon" href="{{ asset('icons/favicon-32x32.png') }}">
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
-    {{-- <link rel="icon" href="{{ asset('icons/favicon-32x32.png') }}"> --}}
-    {{-- <link rel="shortcut icon" href="{{ asset('icons/favicon.ico') }}" /> --}}
-    {{-- <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-touch-icon.png') }}"> --}}
-    {{-- <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icons/favicon-32x32.png') }}"> --}}
-    {{-- <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/favicon-16x16.png') }}"> --}}
-    {{-- <link rel="mask-icon" href="{{ asset('icons/safari-pinned-tab.svg') }}" color="#ffb300"> --}}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('icons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('icons/favicon-16x16.png')}}">
+    <link rel="mask-icon" href="{{asset('icons/safari-pinned-tab.svg')}}" color="#5bbad5">
     <link href="//cdn.shopify.com/s/files/1/1775/8583/t/1/assets/admin-materialize.min.css?v=8850535670742419153"
         rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet'>
@@ -196,7 +192,7 @@
                             <i class="close material-icons right" onclick="closeThis()" style="cursor: pointer;">close</i>
                             <p id="install-message">
                                 You can install this app for easy access.
-                                <button id="install" class="btn amber darken-1 black-text"
+                                <button id="install" class="btn green accent-4 black-text"
                                     style="margin: .5em auto auto auto; display: block;">Install APP</button>
                             </p>
                         </div>
