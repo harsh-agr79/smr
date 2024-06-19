@@ -16,7 +16,8 @@ class OrderAdminController extends Controller {
         $query = DB::table( 'orders' );
         $query = $query->where( [ 'deleted_at'=>NULL, 'save'=>NULL ] )->orderBy( 'date', 'DESC' );
         if ( $request->get( 'name' ) ) {
-            $query = $query->where( 'name', $request->get( 'name' ) )->groupBy( 'order_id' );
+            $cust = DB::table('customers')->where('name', $request->get( 'name' ) )->first();
+            $query = $query->where( 'user_id', $cust->id )->groupBy( 'order_id' );
             $result[ 'name' ] = $request->get( 'name' );
         } else {
             $result[ 'name' ] = '';
