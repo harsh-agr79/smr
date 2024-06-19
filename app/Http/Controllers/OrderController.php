@@ -97,7 +97,7 @@ class OrderController extends Controller
         $cust = DB::table('customers')->where('id', session()->get('USER_ID'))->first();
         $name = $cust->name;
         $query = DB::table('orders');
-        $query = $query->where(['deleted_at'=>NULL, 'save'=>NULL, 'name'=>$name])->orderBy('date', 'DESC')->groupBy('order_id');
+        $query = $query->where(['deleted_at'=>NULL, 'save'=>NULL, 'user_id'=>session()->get('USER_ID')])->orderBy('date', 'DESC')->groupBy('order_id');
         if($request->get('date')){
            $query = $query->whereDate('date', $request->get('date'));
            $result['date']= $request->get('date');
@@ -116,7 +116,7 @@ class OrderController extends Controller
         $cust = DB::table('customers')->where('id', session()->get('USER_ID'))->first();
         $name = $cust->name;
         $query = DB::table('orders');
-        $query = $query->where(['deleted_at'=>NULL, 'save'=>'save', 'name'=>$name])->orderBy('date', 'DESC')->groupBy('order_id');
+        $query = $query->where(['deleted_at'=>NULL, 'save'=>'save', 'user_id'=>session()->get('USER_ID')])->orderBy('date', 'DESC')->groupBy('order_id');
         if($request->get('date')){
            $query = $query->whereDate('date', $request->get('date'));
            $result['date']= $request->get('date');
