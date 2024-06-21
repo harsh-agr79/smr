@@ -61,7 +61,7 @@
                             Amount:
                         </div>
                         <div class="col s6">
-                            <input type="number" name="amount" value="{{ $amount }}"
+                            <input type="number" name="amount" value="{{ $amount }}" step="0.01"
                                 class="inp black-text browser-default" placeholder="Amount" required>
                         </div>
                     </div>
