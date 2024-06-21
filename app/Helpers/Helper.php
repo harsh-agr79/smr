@@ -120,76 +120,70 @@ function money($money){
 }
 function updatebalance($id)
 {
-    $payment = DB::table('payments')
-        ->where('deleted', null)
-        ->where('user_id', $id)
-        ->selectRaw('*, SUM(amount) as sum')
-        ->groupBy('user_id')
-        ->first();
-        $order = DB::table( 'orders' )
-        ->where(['deleted_at' => null, 'status' => 'approved', 'save' => null, 'user_id' => $id, 'net'=>NULL])
-        ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')
-        ->where( 'status', 'approved' )
-        ->groupBy( 'user_id' )
-        ->first();
-    $slr = DB::table('salesreturns')
-        ->where('user_id', $id)
-        ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')
-        ->groupBy('user_id')
-        ->first();
-    $exp = DB::table('expenses')
-        ->where('user_id', $id)
-        ->selectRaw('*, SUM(amount) as sum')
-        ->groupBy('user_id')
-        ->first();
-    $cus = DB::table('customers')->where('id', $id)->first();
+    $payment = DB::table( 'payments' )
+    ->where( 'deleted', null )
+    ->where( 'user_id', $id )
+    ->selectRaw( '*, SUM(amount) as sum' )
+    ->groupBy( 'user_id' )
+    ->first();
+    $order = DB::table( 'orders' )
+    ->where(['deleted_at' => null, 'status' => 'approved', 'save' => null, 'user_id' => $id])
+    ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')
+    ->where( 'status', 'approved' )
+    ->groupBy( 'user_id' )
+    ->first();
+    $slr = DB::table( 'salesreturns' )
+    ->where( 'user_id', $id )
+    ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')
+    ->groupBy( 'user_id' )
+    ->first();
+    $exp = DB::table( 'expenses' )
+    ->where( 'user_id', $id )
+    ->selectRaw( '*, SUM(amount) as sum' )
+    ->groupBy( 'user_id' )
+    ->first();
+    $cus = DB::table( 'customers' )->where( 'id', $id )->first();
 
-        $od = 0;
-        $oc = 0;
+    $od = 0;
+    $oc = 0;
 
-    if($order!=NULL){
+    if ( $order != NULL ) {
         $or = $order->sum;
-    }
-    else{
+    } else {
         $or = 0;
     }
-    if($exp != NULL){
+    if ( $exp != NULL ) {
         $ex = $exp->sum;
-    }
-    else{
+    } else {
         $ex = 0;
     }
-    if($slr != NULL){
+    if ( $slr != NULL ) {
         $sr = $slr->sum;
-    }
-    else{
+    } else {
         $sr = 0;
     }
-    if($payment!=NULL){
+    if ( $payment != NULL ) {
         $py = $payment->sum;
-    }
-    else{
+    } else {
         $py = 0;
     }
 
     $tdb = $od+$or+$ex;
     $tcb = $oc+$py+$sr;
 
-    if($tdb > $tcb){
-        $result = array('red', $tdb-$tcb);
+    if ( $tdb > $tcb ) {
+        $result = array( 'red', $tdb-$tcb );
+        // return $result;
+    } elseif ( $tdb < $tcb ) {
+        $result = array( 'green', $tcb-$tdb );
+        // return $result;
+    } else {
+        $result = array( 'green', 0 );
         // return $result;
     }
-    elseif($tdb < $tcb){
-        $result = array('green', $tcb-$tdb);
-        // return $result;
-    }
-    else{
-        $result = array('green', 0);
-        // return $result;
-    }
-    DB::table('customers')->where("id",$id)->update([
-        'balance'=>implode("|",$result)
-    ]);
+    DB::table( 'customers' )->where( 'id', $id )->update( [
+        'balance'=>implode( '|', $result )
+    ] );
 }
 
 function shopname($id){
