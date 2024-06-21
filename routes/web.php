@@ -261,5 +261,8 @@ Route::group(['middleware'=>'MarketerAuth'], function(){
     Route::get('/marketer/printorder/{id}', [OrderAdminController::class, 'print']);
 });
 
+Route::get('/express/{any}', function () {
+    abort(404);
+})->where('any', '.*');
 
 
