@@ -222,7 +222,7 @@
                     <a href="{{ url('/user/savecart') }}" class="btn-small amber darken-2">Save Basket</a>
                 </div>
                 <div class="col s6">
-                    <a href="{{ url('/user/confirmcart') }}" class="btn-small green accent-4">Confirm Order</a>
+                    <a href="{{ url('/user/confirmcart') }}" class="btn-small green accent-4" id="confirmOrder">Confirm Order</a>
                 </div>
 
             </div>
@@ -573,4 +573,23 @@
 
        
     </script>
+     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+<script>
+    $(function(){
+            let ip_address = '127.0.0.1';
+            let socket_port = '3000';
+            let socket = io(ip_address + ":" + socket_port);
+
+            // let chatInput = $('#chatInput');
+
+            var name = `{{$user->name}}`
+
+            var message = "New Order From " + name
+            $('#confirmOrder').on('click', function() {
+                socket.emit('sendnotifToServer', message);
+                $('.sub-btn').text('Order Sent').attr('disabled', 'true');
+               window.history.pushState(null, document.title, '/home');
+           })
+        })
+</script>
 @endsection
