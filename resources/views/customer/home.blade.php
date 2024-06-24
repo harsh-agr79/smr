@@ -222,7 +222,7 @@
                     <a href="{{ url('/user/savecart') }}" class="btn-small amber darken-2">Save Basket</a>
                 </div>
                 <div class="col s6">
-                    <a href="{{ url('/user/confirmcart') }}" class="btn-small green accent-4" id="confirmOrder">Confirm Order</a>
+                    <button class="btn-small green accent-4" id="confirmOrder">Confirm Order</button>
                 </div>
 
             </div>
@@ -573,4 +573,20 @@
 
        
     </script>
+     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+     <script>
+         $(function(){
+                 let ip_address = 'smr.startuplair.com';
+                 // let socket_port = '3000';
+                 let socket = io(ip_address);
+     
+                 var name = `{{$user->name}}`
+ 
+                 var message = "New Order From " + name
+                $('#confirmOrder').on('click', function() {
+                     socket.emit('sendNotifToAdmin', message);
+                     window.location.href = "/user/confirmcart";
+                })
+             })
+     </script>
 @endsection
