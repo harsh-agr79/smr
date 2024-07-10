@@ -172,10 +172,10 @@ function updatebalance($id)
     $tcb = $oc+$py+$sr;
 
     if ( $tdb > $tcb ) {
-        $result = array( 'red', $tdb-$tcb );
+        $result = array( 'red', round($tdb-$tcb, 2) );
         // return $result;
     } elseif ( $tdb < $tcb ) {
-        $result = array( 'green', $tcb-$tdb );
+        $result = array( 'green', round($tcb-$tdb, 2) );
         // return $result;
     } else {
         $result = array( 'green', 0 );
