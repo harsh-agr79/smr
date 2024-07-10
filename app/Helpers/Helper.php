@@ -99,6 +99,7 @@ function updateMainStatus( $orderid ) {
     updatebalance($order[0]->user_id);
 }
 function money($money){
+    $money = round($money, 2);
     $decimal = (string)($money - floor($money));
     $money = floor($money);
     $length = strlen($money);
