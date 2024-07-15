@@ -79,10 +79,10 @@ class osamt extends Command {
             $tcb = $oc+$py+$sr;
 
             if ( $tdb > $tcb ) {
-                $result = array( 'red', round($tdb-$tcb, 2) );
+                $result = array( 'red', round($tdb-$tcb, 3) );
                 // return $result;
             } elseif ( $tdb < $tcb ) {
-                $result = array( 'green', round($tcb-$tdb, 2) );
+                $result = array( 'green', round($tcb-$tdb, 3) );
                 // return $result;
             } else {
                 $result = array( 'green', 0 );

@@ -99,7 +99,7 @@ function updateMainStatus( $orderid ) {
     updatebalance($order[0]->user_id);
 }
 function money($money){
-    $money = round($money, 2);
+    $money = round($money, 3);
     $decimal = (string)($money - floor($money));
     $money = floor($money);
     $length = strlen($money);
@@ -173,10 +173,10 @@ function updatebalance($id)
     $tcb = $oc+$py+$sr;
 
     if ( $tdb > $tcb ) {
-        $result = array( 'red', round($tdb-$tcb, 2) );
+        $result = array( 'red', round($tdb-$tcb, 3) );
         // return $result;
     } elseif ( $tdb < $tcb ) {
-        $result = array( 'green', round($tcb-$tdb, 2) );
+        $result = array( 'green', round($tcb-$tdb, 3) );
         // return $result;
     } else {
         $result = array( 'green', 0 );
