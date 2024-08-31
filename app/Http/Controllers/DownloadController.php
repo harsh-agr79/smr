@@ -10,8 +10,8 @@ class DownloadController extends Controller
 {
     public function downloadFolder()
     {
-        $folderPath = public_path('/'); // Path to your public assets folder
-        $zipFileName = 'assets.zip'; // Name of the zip file to be created
+        $folderPath = public_path(); // Path to the public directory
+        $zipFileName = 'public_folder.zip'; // Name of the zip file to be created
 
         $zip = new ZipArchive;
 
@@ -25,6 +25,7 @@ class DownloadController extends Controller
                     $filePath = $file->getRealPath();
                     $relativePath = substr($filePath, strlen($folderPath) + 1);
 
+                    // Add current file to the zip archive
                     $zip->addFile($filePath, $relativePath);
                 }
             }
