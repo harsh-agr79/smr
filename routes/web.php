@@ -22,6 +22,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\MarketerViewController;
 use App\Http\Controllers\MarketerController;
 use App\Http\Controllers\TrashController;
+use App\Http\Controllers\DownloadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -193,6 +194,8 @@ Route::group(['middleware'=>'AdminAuth'], function(){
     //Ajax gets
     Route::get('findcustomer', [CustomerController::class, 'getcustomer']);
     Route::get('finditem', [ProductController::class, 'getproduct']);
+
+    Route::get('/download-folder', [DownloadController::class, 'downloadFolder']);
 });
 
 Route::group(['middleware'=>'CustomerAuth'], function(){
