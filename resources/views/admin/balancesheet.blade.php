@@ -39,7 +39,7 @@
             {{ $tod = $tobd - $tobc }}
             {{ $toc = 0 }}
             {{ $runb = $tod }}
-        @elseif($tobd < $tobc)
+        @elseif ($tobd < $tobc)
             {{ $tod = 0 }}
             {{ $toc = $tobc - $tobd }}
             {{ $runb = $tobd - $tobc }}
