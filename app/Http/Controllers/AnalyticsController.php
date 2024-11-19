@@ -145,6 +145,7 @@ class AnalyticsController extends Controller
         $date2 = date('Y-m-d', strtotime($date2. ' +1 day'));
 
         $result['oldorders'] = DB::table('orders')
+        ->where(['deleted_at'=>NULL])
         ->where('date', '<', $date)
         ->where('user_id',$id)
         ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
@@ -171,6 +172,7 @@ class AnalyticsController extends Controller
 
            $result['cuorsum'] = DB::table('orders')
            ->where(['save'=>NULL])
+           ->where(['deleted_at'=>NULL])
            ->where('user_id', $id)
            ->where('date', '>=', $date)
            ->where('date', '<=', $date2)
@@ -201,6 +203,7 @@ class AnalyticsController extends Controller
 
         $orders = DB::table('orders')
         ->where(['save'=>null])
+        ->where(['deleted_at'=>NULL])
         ->where('date', '>=', $date)
         ->where('date', '<=', $date2)
         ->where('status','approved')
