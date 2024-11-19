@@ -14,22 +14,22 @@
         @if ($oldorders->isEmpty())
             {{ $oo = 0 }}
         @else
-            {{ $oo = $oldorders['0']->sum}}
+            {{ $oo = $oldorders[0]->sum}}
         @endif
         @if ($oldpayments->isEmpty())
             {{ $op = 0 }}
         @else
-            {{ $op = $oldpayments['0']->sum }}
+            {{ $op = $oldpayments[0]->sum }}
         @endif
         @if ($oldslr->isEmpty())
             {{ $os = 0 }}
         @else
-            {{ $os = $oldslr['0']->sum }}
+            {{ $os = $oldslr[0]->sum }}
         @endif
         @if ($oldexp->isEmpty())
             {{ $oe = 0 }}
         @else
-            {{ $oe = $oldexp['0']->sum }}
+            {{ $oe = $oldexp[0]->sum }}
         @endif
 
         {{ $tobd = $oo + $obd + $oe }}

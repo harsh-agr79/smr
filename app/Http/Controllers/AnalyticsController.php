@@ -176,7 +176,9 @@ class AnalyticsController extends Controller
            ->where('user_id', $id)
            ->where('date', '>=', $date)
            ->where('date', '<=', $date2)
-           ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name')->where('status','approved') 
+           ->selectRaw('*, SUM(approvedquantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')
+           ->groupBy('user_id')
+           ->where('status','approved') 
            ->get();
 
            $result['cupysum'] = DB::table('payments')
@@ -184,21 +186,21 @@ class AnalyticsController extends Controller
            ->where('user_id', $id)
            ->where('date', '>=', $date)
            ->where('date', '<=', $date2)
-           ->selectRaw('*, SUM(amount) as sum')->groupBy('name') 
+           ->selectRaw('*, SUM(amount) as sum')->groupBy('user_id') 
            ->get();
 
            $result['cuslrsum'] = DB::table('salesreturns')
            ->where('user_id', $id)
            ->where('date', '>=', $date)
            ->where('date', '<=', $date2)
-           ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('name') 
+           ->selectRaw('*, SUM(quantity * price * (1-discount * 0.01) * (1-0.01*sdis)) as sum')->groupBy('user_id') 
            ->get();
            
             $result['cuexsum'] = DB::table('expenses')
            ->where('user_id', $id)
            ->where('date', '>=', $date)
            ->where('date', '<=', $date2)
-           ->selectRaw('*, SUM(amount) as sum')->groupBy('name') 
+           ->selectRaw('*, SUM(amount) as sum')->groupBy('user_id') 
            ->get();
 
         $orders = DB::table('orders')
